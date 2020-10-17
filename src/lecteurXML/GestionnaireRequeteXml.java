@@ -37,6 +37,7 @@ public class GestionnaireRequeteXml extends DefaultHandler{
 					   Integer minute = Integer.parseInt(moment.split("[:]")[1]);
 					   Integer heure = Integer.parseInt(moment.split("[:]")[0]);
 					   
+					   //Cette méthode est plus simple, malgré le warning ...
 					   Time heureDepart = new Time(heure, minute, seconde);
 					   nouveauDepot.setHeureDepart(heureDepart);
 				   }

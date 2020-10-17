@@ -4,7 +4,6 @@
 
 package modele;
 
-import modele.Intersection;
 
 /************************************************************/
 /**
