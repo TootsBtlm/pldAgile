@@ -4,21 +4,39 @@
 
 package modele;
 
-import modele.Intersection;
-
 /************************************************************/
 /**
  * 
  */
 public class Requete {
+
 	/**  
 	 * 
 	 */
-	public Intersection pointDeRecuperation;
+	private Intersection pointDeRecuperation;
 	/**
 	 * 
 	 */
-	public Intersection pointDeLivraison;
+	private Intersection pointDeLivraison;
+	/**
+	 * 
+	 */
+	private Long dureeRecuperation;
+	/**
+	 * 
+	 */
+	private Long dureeLivraison;
+	public Requete(Intersection pointDeRecuperation, Intersection pointDeLivraison, Long dureeRecuperation,
+			Long dureeLivraison) {
+		super();
+		this.pointDeRecuperation = pointDeRecuperation;
+		this.pointDeLivraison = pointDeLivraison;
+		this.dureeRecuperation = dureeRecuperation;
+		this.dureeLivraison = dureeLivraison;
+	}
+	public Requete() {
+		super();
+	}
 	public Intersection getPointDeRecuperation() {
 		return pointDeRecuperation;
 	}
@@ -31,16 +49,26 @@ public class Requete {
 	public void setPointDeLivraison(Intersection pointDeLivraison) {
 		this.pointDeLivraison = pointDeLivraison;
 	}
-	public Requete(Intersection pointDeRecuperation, Intersection pointDeLivraison) {
-		super();
-		this.pointDeRecuperation = pointDeRecuperation;
-		this.pointDeLivraison = pointDeLivraison;
+	public Long getDureeRecuperation() {
+		return dureeRecuperation;
 	}
-	public Requete() {
-		super();
+	public void setDureeRecuperation(Long dureeRecuperation) {
+		this.dureeRecuperation = dureeRecuperation;
+	}
+	public Long getDureeLivraison() {
+		return dureeLivraison;
+	}
+	public void setDureeLivraison(Long dureeLivraison) {
+		this.dureeLivraison = dureeLivraison;
 	}
 	
+	@Override
+	public String toString() {
+		return "Requete [pointDeRecuperation=" + pointDeRecuperation + ", pointDeLivraison=" + pointDeLivraison
+				+ ", dureeRecuperation=" + dureeRecuperation + ", dureeLivraison=" + dureeLivraison + "]";
+	}
 	
+
 	
 	
 };

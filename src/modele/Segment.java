@@ -23,12 +23,14 @@ public class Segment {
 	/**
 	 * 
 	 */
-	private int longueur;
+	private Double longueur;
 	/**
 	 * 
-	 */
+	 */	
 	private String nom;
-	public Segment(Intersection origine, Intersection fin, int longueur, String nom) {
+	
+	
+	public Segment(Intersection origine, Intersection fin, Double longueur, String nom) {
 		super();
 		this.origine = origine;
 		this.fin = fin;
@@ -37,6 +39,34 @@ public class Segment {
 	}
 	public Segment() {
 		super();
+	}
+	public Intersection getOrigine() {
+		return origine;
+	}
+	public void setOrigine(Intersection origine) {
+		this.origine = origine;
+	}
+	public Intersection getFin() {
+		return fin;
+	}
+	public void setFin(Intersection fin) {
+		this.fin = fin;
+	}
+	public Double getLongueur() {
+		return longueur;
+	}
+	public void setLongueur(Double longueur) {
+		this.longueur = longueur;
+	}
+	public String getNom() {
+		return nom;
+	}
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+	@Override
+	public String toString() {
+		return "Segment [origine=" + origine + ", fin=" + fin + ", longueur=" + longueur + ", nom=" + nom + "]";
 	}
 	
 	

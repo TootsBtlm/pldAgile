@@ -8,52 +8,66 @@ package modele;
  * 
  */
 
-public class Intersection<String, Long> {
+public class Intersection {
 	
 	
+
 	
 	/**   
 	 * 
 	 */
-	private Long longitude;
+	private Long id;
+	/**   
+	 * 
+	 */
+	private Double longitude;
 	/**
 	 * 
 	 */
-	private Long latitude;
+	private Double latitude;
 	/**
 	 * 
 	 */
 	
 	
-	
-	private String nom;
-	public Long getLongitude() {
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public Double getLongitude() {
 		return longitude;
 	}
-	public void setLongitude(Long longitude) {
+	public void setLongitude(Double longitude) {
 		this.longitude = longitude;
 	}
-	public Long getLatitude() {
+	public Double getLatitude() {
 		return latitude;
 	}
-	public void setLatitude(Long latitude) {
+	public void setLatitude(Double latitude) {
 		this.latitude = latitude;
 	}
-	public String getNom() {
-		return nom;
-	}
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
-	public Intersection(Long longitude, Long latitude, String nom) {
+
+	public Intersection(Long id, Double longitude, Double latitude, String nom) {
 		super();
+		this.id = id;
 		this.longitude = longitude;
 		this.latitude = latitude;
-		this.nom = nom;
 	}
 	public Intersection() {
 		super();
 	}
+	
+	
+	@Override
+	public java.lang.String toString() {
+		return "Intersection [id=" + id + ", longitude=" + longitude + ", latitude=" + latitude + "]";
+	}
+
+	
+	
+	
 	
 
 	
