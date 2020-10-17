@@ -13,6 +13,7 @@ import modele.Intersection;
 public class Segment {
 	/**
 	 * 
+	 * 
 	 */
 	public Intersection origine;
 	/**
@@ -27,4 +28,17 @@ public class Segment {
 	 * 
 	 */
 	private String nom;
+	public Segment(Intersection origine, Intersection fin, int longueur, String nom) {
+		super();
+		this.origine = origine;
+		this.fin = fin;
+		this.longueur = longueur;
+		this.nom = nom;
+	}
+	public Segment() {
+		super();
+	}
+	
+	
+	
 };

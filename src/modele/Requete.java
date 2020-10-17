@@ -11,7 +11,7 @@ import modele.Intersection;
  * 
  */
 public class Requete {
-	/**
+	/**  
 	 * 
 	 */
 	public Intersection pointDeRecuperation;
@@ -19,4 +19,28 @@ public class Requete {
 	 * 
 	 */
 	public Intersection pointDeLivraison;
+	public Intersection getPointDeRecuperation() {
+		return pointDeRecuperation;
+	}
+	public void setPointDeRecuperation(Intersection pointDeRecuperation) {
+		this.pointDeRecuperation = pointDeRecuperation;
+	}
+	public Intersection getPointDeLivraison() {
+		return pointDeLivraison;
+	}
+	public void setPointDeLivraison(Intersection pointDeLivraison) {
+		this.pointDeLivraison = pointDeLivraison;
+	}
+	public Requete(Intersection pointDeRecuperation, Intersection pointDeLivraison) {
+		super();
+		this.pointDeRecuperation = pointDeRecuperation;
+		this.pointDeLivraison = pointDeLivraison;
+	}
+	public Requete() {
+		super();
+	}
+	
+	
+	
+	
 };
