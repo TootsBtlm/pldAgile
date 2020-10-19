@@ -29,7 +29,6 @@ public class Lecteur {
 	 * 
 	 * @param nomDeFichier
 	 * @return Plan
-	 * @return
 	 */
 	
 	public Plan LirePlan(String nomDeFichier) {
