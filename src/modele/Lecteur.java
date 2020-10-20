@@ -11,6 +11,8 @@ import org.w3c.dom.DOMException;
 import org.xml.sax.SAXException;
 
 
+
+
 	/**
 	 * 
 	 * Cette classe est l'interface de lecture des fichiers xml.
@@ -37,10 +39,8 @@ public class Lecteur {
 	         GestionnairePlanXml nouveauGestionnaireDePlan = new GestionnairePlanXml();
 	         
 	         parser.parse(nomDeFichier, nouveauGestionnaireDePlan );
-	         
-	         nouveauPlan.setIntersectionId(nouveauGestionnaireDePlan.getListeIntersectionId());
-	         nouveauPlan.setIntersection(nouveauGestionnaireDePlan.getListeIntersection());
-	         nouveauPlan.setSegment(nouveauGestionnaireDePlan.getListeSegment());
+	         Plan PlanLu = new Plan(nouveauGestionnaireDePlan.getListeIntersectionId(),nouveauGestionnaireDePlan.getListeIntersection(),nouveauGestionnaireDePlan.getListeSegment());
+	         nouveauPlan = PlanLu;
 	         
 	    } catch (DOMException e) {
 	       e.printStackTrace();
