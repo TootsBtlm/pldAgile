@@ -1,4 +1,4 @@
-package lecteurXML;
+package modele;
 
 import java.sql.Time;
 import java.util.ArrayList;
@@ -6,11 +6,6 @@ import java.util.ArrayList;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
-
-import modele.Depot;
-import modele.Intersection;
-import modele.Plan;
-import modele.Requete;
 
 public class GestionnaireRequeteXml extends DefaultHandler{
 

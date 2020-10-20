@@ -1,4 +1,4 @@
-package lecteurXML;
+package modele;
 
 import java.io.IOException;
 
@@ -10,9 +10,6 @@ import javax.xml.transform.TransformerFactoryConfigurationError;
 import org.w3c.dom.DOMException;
 import org.xml.sax.SAXException;
 
-import modele.Plan;
-import modele.EnsembleRequete;
-
 
 	/**
 	 * 
@@ -20,7 +17,6 @@ import modele.EnsembleRequete;
 	 * @author rfonc
 	 *
 	 */
-
 
 public class Lecteur {
 	

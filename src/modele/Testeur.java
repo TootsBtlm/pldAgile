@@ -1,7 +1,4 @@
-package lecteurXML;
-
-import modele.Plan;
-import modele.EnsembleRequete;
+package modele;
 
 public class Testeur {
 
