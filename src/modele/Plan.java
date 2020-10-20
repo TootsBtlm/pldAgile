@@ -8,10 +8,12 @@ import java.util.ArrayList;
 
 
 
-/************************************************************/
 /**
  * 
+ * Représente le plan de la ville
+ *
  */
+
 public class Plan {
 	/**
 	 * 
@@ -25,6 +27,13 @@ public class Plan {
 	 * 
 	 */
 	public ArrayList<Segment> segment;
+	
+	
+	/**
+	 * Retourne la liste d'id des intersections
+	 * 
+	 * @return ArrayList d'id
+	 */
 	public ArrayList<Long> getIntersectionId() {
 		return intersectionId;
 	}

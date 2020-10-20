@@ -28,8 +28,9 @@ public class Lecteur {
 	 * Cette méthode lit les plans contenus dans un fichier xml.
 	 * 
 	 * @param nomDeFichier
-	 * @return Plan
-	 * @return
+	 * Le nom du fichier qui contient le plan
+	 * @return Retourne un objet Plan correspondant au fichier
+	 * @see modele.Plan
 	 */
 	
 	public Plan LirePlan(String nomDeFichier) {
@@ -68,7 +69,9 @@ public class Lecteur {
 	 * renvoie l'ensemble des ces requetes ainsi que le point de départ/arrivée
 	 * 
 	 * @param nomDeFichier
+	 * Le nom du fichier qui contient les requêtes
 	 * @param planCourant
+	 * Le Plan en cours d'utilisation
 	 * @return EnsembleRequete
 	 */
 	public EnsembleRequete LireRequete(String nomDeFichier, Plan planCourant) {
