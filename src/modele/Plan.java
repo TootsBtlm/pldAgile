@@ -106,5 +106,44 @@ public class Plan {
 		return matriceCouts;
 	}
 	
+	public Double longitudeMax(){
+		Double max = this.intersection.get(0).getLongitude();
+		for(int i = 0; i < this.intersectionId.size(); i++) {
+			if(max < this.intersection.get(i).getLongitude()) {
+				max = this.intersection.get(i).getLongitude();
+			}
+		}
+		return max;
+	}
+	
+	public Double latitudeMax(){
+		Double max = this.intersection.get(0).getLatitude();
+		for(int i = 0; i < this.intersectionId.size(); i++) {
+			if(max < this.intersection.get(i).getLatitude()) {
+				max = this.intersection.get(i).getLatitude();
+			}
+		}
+		return max;
+	}
+	
+	public Double longitudeMin(){
+		Double max = this.intersection.get(0).getLongitude();
+		for(int i = 0; i > this.intersectionId.size(); i++) {
+			if(max < this.intersection.get(i).getLongitude()) {
+				max = this.intersection.get(i).getLongitude();
+			}
+		}
+		return max;
+	}
+	
+	public Double latitudeMin(){
+		Double max = this.intersection.get(0).getLatitude();
+		for(int i = 0; i > this.intersectionId.size(); i++) {
+			if(max < this.intersection.get(i).getLatitude()) {
+				max = this.intersection.get(i).getLatitude();
+			}
+		}
+		return max;
+	}
 	
 };
