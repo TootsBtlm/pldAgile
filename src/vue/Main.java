@@ -1,4 +1,4 @@
-package ihm;
+package vue;
 
 import javafx.application.Application;
 import javafx.scene.Scene;

@@ -1,4 +1,4 @@
-package ihm;
+package vue;
 
 public class TestClass {
 
