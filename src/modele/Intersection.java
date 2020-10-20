@@ -1,35 +1,26 @@
 
 package modele;
 
-/************************************************************/
-/**
- * @param <String>
- * @param <Long>
- * 
- */
-
 public class Intersection {
-	
-	
 
-	
 	/**   
-	 * 
+	 * Id unique de l'intersection
 	 */
 	private Long id;
+	
 	/**   
-	 * 
+	 * Longitude de l'intersection 
 	 */
 	private Double longitude;
+	
 	/**
-	 * 
+	 * Latitude de l'intersection
 	 */
 	private Double latitude;
+	
 	/**
-	 * 
-	 */
-	
-	
+	 * @return Retourne l'id unique de l'intersection
+	 */	
 	public Long getId() {
 		return id;
 	}

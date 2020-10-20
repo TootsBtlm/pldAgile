@@ -6,6 +6,7 @@ public class Depot {
 	
 	private Intersection pointDeDepart;
 	private Time heureDepart;
+	
 	public Intersection getPointDeDepart() {
 		return pointDeDepart;
 	}

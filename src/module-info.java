@@ -4,6 +4,7 @@ module pldAgile {
 	requires javafx.graphics;
 	requires javafx.fxml;
 	requires javafx.controls;
-	exports ihm;
-	opens ihm;
+	opens vue;
+	exports vue;
+
 }

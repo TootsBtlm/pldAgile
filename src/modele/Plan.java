@@ -5,6 +5,7 @@
 package modele;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 
@@ -20,11 +21,18 @@ public class Plan {
 	/**
 	 * 
 	 */
+	public HashMap<Long,Integer> intersectionIdRetourne = new HashMap<Long, Integer>();;	
+	/**
+	 * 
+	 */
 	public ArrayList<Intersection> intersection;
 	/**
 	 * 
 	 */
 	public ArrayList<Segment> segment;
+	
+	
+	
 	public ArrayList<Long> getIntersectionId() {
 		return intersectionId;
 	}
@@ -43,11 +51,25 @@ public class Plan {
 	public void setSegment(ArrayList<Segment> segment) {
 		this.segment = segment;
 	}
+
+	
+	public HashMap<Long, Integer> getIntersectionIdRetourne() {
+		return intersectionIdRetourne;
+	}
+	public void setIntersectionIdRetourne(HashMap<Long, Integer> intersectionIdRetourne) {
+		this.intersectionIdRetourne = intersectionIdRetourne;
+	}
 	public Plan(ArrayList<Long> intersectionId, ArrayList<Intersection> intersection, ArrayList<Segment> segment) {
 		super();
+
 		this.intersectionId = intersectionId;
 		this.intersection = intersection;
 		this.segment = segment;
+		for(int i = 0; i < this.intersectionId.size(); i++) {
+			if(342873658 == intersectionId.get(i)) {
+			}
+			this.intersectionIdRetourne.put(intersectionId.get(i), i);
+		}
 	} 
 	public Plan() {
 		super();
@@ -61,10 +83,28 @@ public class Plan {
 	
 	
 	public Intersection getIntersectionById(Long id){
-		return this.intersection.get(2);
+
+		return this.intersection.get(this.intersectionIdRetourne.get(id));
 	}
 	
-	
+	public Double[][] getMatrice(){
+		int nbIntersection = this.intersectionId.size();
+		int nbSegment = this.segment.size();
+		Double[][] matriceCouts = new Double[nbIntersection+1][nbIntersection+1];
+		
+		for(int i = 0 ; i < nbIntersection ; i++) {
+			for(int j = 0 ; j < nbIntersection ; j++) {
+				matriceCouts[i][j] = 1000000.;
+			}
+			
+		}
+		
+		for(int i = 0 ; i < nbSegment ; i++) {
+			Segment segmentCourant = this.segment.get(i);
+			matriceCouts[intersectionIdRetourne.get(segmentCourant.getOrigine().getId())][intersectionIdRetourne.get(segmentCourant.getFin().getId())] = segmentCourant.getLongueur();
+		}
+		return matriceCouts;
+	}
 	
 	
 };
