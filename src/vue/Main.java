@@ -14,7 +14,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/ihm/ScenePlan.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/vue/ScenePlan.fxml"));
 			Parent root = loader.load();
 			Lecteur l = new Lecteur();
 			Plan nouveauPlan = l.LirePlan("ressources/largeMap.xml");
