@@ -24,7 +24,7 @@ public class GestionnaireRequeteXml extends DefaultHandler{
 				   String aname = attrs.getLocalName(i);
 				   //Et nous affichons sa valeur
 				   if(aname.equals("address")) {
-					   System.out.println(Long.parseLong(attrs.getValue(i)));
+
 					   nouveauDepot.setPointDeDepart(planCourant.getIntersectionById(Long.parseLong(attrs.getValue(i))));
 			       }	
 				   else if (aname.equals("departureTime")) {
