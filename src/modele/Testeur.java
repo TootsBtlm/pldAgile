@@ -30,7 +30,8 @@ public class Testeur {
 		   
 		   //Pour lire un fichier de requêtes, il faut invoquer la méthode LireRequete avec comme attribut le chemin vers le fichier xml et le Plan courant
 		   EnsembleRequete recap = nouveauLecteur.LireRequete("ressources/requestsSmall1.xml", nouveauPlan);
-		   System.out.println(recap.toString());
+		   System.out.println(recap.listePairesIntersections().toString());
+		   
 		   
 		   
 	   }

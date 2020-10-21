@@ -21,7 +21,7 @@ public class Plan {
 	/**
 	 * 
 	 */
-	public HashMap<Long,Integer> intersectionIdRetourne = new HashMap<Long, Integer>();;	
+	public HashMap<Long,Integer> intersectionIdRetourne = new HashMap<Long, Integer>();
 	/**
 	 * 
 	 */
@@ -30,8 +30,6 @@ public class Plan {
 	 * 
 	 */
 	public ArrayList<Segment> segment;
-	
-	
 	
 	public ArrayList<Long> getIntersectionId() {
 		return intersectionId;
@@ -71,6 +69,15 @@ public class Plan {
 			this.intersectionIdRetourne.put(intersectionId.get(i), i);
 		}
 	} 
+	
+	public Plan(ArrayList<Long> intersectionId, HashMap<Long, Integer> intersectionIdRetourne,
+			ArrayList<Intersection> intersection, ArrayList<Segment> segment) {
+		super();
+		this.intersectionId = intersectionId;
+		this.intersectionIdRetourne = intersectionIdRetourne;
+		this.intersection = intersection;
+		this.segment = segment;
+	}
 	public Plan() {
 		super();
 	}

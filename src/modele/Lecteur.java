@@ -1,6 +1,8 @@
 package modele;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -68,7 +70,7 @@ public class Lecteur {
 	 */
 	public EnsembleRequete LireRequete(String nomDeFichier, Plan planCourant) {
 		
-		EnsembleRequete NouveauRecapDemande = new EnsembleRequete();
+		EnsembleRequete RecapDemande = new EnsembleRequete();
 		
 		try {
 	         SAXParserFactory factory = SAXParserFactory.newInstance();
@@ -78,8 +80,8 @@ public class Lecteur {
 	         nouveauGestionnaireDeRequetes.setPlanCourant(planCourant);
 	         parser.parse(nomDeFichier, nouveauGestionnaireDeRequetes );
 	         
-	         NouveauRecapDemande.setLieuDepart(nouveauGestionnaireDeRequetes.getPointDepart());
-	         NouveauRecapDemande.setListeRequete(nouveauGestionnaireDeRequetes.getListeRequest());
+	         EnsembleRequete NouveauRecapDemande = new EnsembleRequete(planCourant.getIntersectionIdRetourne(), nouveauGestionnaireDeRequetes.getListeRequest(), nouveauGestionnaireDeRequetes.getPointDepart());
+	         RecapDemande = NouveauRecapDemande;
 	         
 	    } catch (DOMException e) {
 	       e.printStackTrace();
@@ -93,7 +95,7 @@ public class Lecteur {
 	       // TODO Auto-generated catch block
 	       e.printStackTrace();
 	    }
-		return NouveauRecapDemande;
+		return RecapDemande;
 	}
 	
 	
