@@ -10,6 +10,8 @@ import javafx.stage.Stage;
 import modele.EnsembleRequete;
 import modele.Lecteur;
 import modele.Plan;
+import tsp.TSP;
+import tsp.TSP1;
 import vue.VueGraphique;
 
 public class InterfaceController {
@@ -23,11 +25,14 @@ public class InterfaceController {
 	
 	private Stage stage;
 	private Plan plan;
+	private EnsembleRequete ensembleRequete = null;
 	private VueGraphique vueGraphique;
+	private TSP tsp;
 
 
 	@FXML
 	public void initialize() {
+		tsp = new TSP1();
 	}
 	
 	@FXML
@@ -57,12 +62,32 @@ public class InterfaceController {
 			String path = file.getPath();
 			System.out.println(path);
 			Lecteur lecteur = new Lecteur();
-			EnsembleRequete er = lecteur.LireRequete(path, this.plan);
-			this.vueGraphique.drawRequests(er, this.plan, this.planCanvas);
+			this.ensembleRequete = lecteur.LireRequete(path, this.plan);
+			this.vueGraphique.drawRequests(this.ensembleRequete, this.plan, this.planCanvas);
 		}
 	}
 
 
+	@FXML
+	public void calculerItineraire() {
+		if(this.vueGraphique == null) {
+			System.out.println("Charger d'abord un plan");
+		} 
+		else if(this.ensembleRequete == null) {
+			System.out.println("Charger d'abord une requête");
+		}
+		else {
+			int timeLimit = 30;
+			/*
+			tsp.searchSolution(timeLimit, cout, paires, depart);
+			System.out.print("Solution of cost "+tsp.getSolutionCost()+" found in "
+	                +(System.currentTimeMillis() - startTime)+"ms : ");
+	        for (int i=0; i<nbVertices; i++)
+	            System.out.print(tsp.getSolution(i)+" ");
+	        System.out.println(depart);*/
+		}
+	}
+	
 	public void drawLine() {
 		var gc = this.planCanvas.getGraphicsContext2D();
 

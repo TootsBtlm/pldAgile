@@ -31,6 +31,7 @@ public class Plan {
 	 */
 	public ArrayList<Segment> segment;
 	
+	/* Method */
 	public ArrayList<Long> getIntersectionId() {
 		return intersectionId;
 	}

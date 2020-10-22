@@ -15,6 +15,10 @@ public class EnsembleRequete {
 	ArrayList<Requete> listeRequete ;
 	Depot LieuDepart;
 
+	
+	
+	
+	/* Method */
 	public HashMap<Long, Integer> getIntersectionIdRetourne() {
 		return intersectionIdRetourne;
 	}
