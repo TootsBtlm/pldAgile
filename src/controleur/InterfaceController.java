@@ -1,4 +1,4 @@
-package vue;
+package controleur;
 
 import java.io.File;
 
@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import modele.EnsembleRequete;
 import modele.Lecteur;
 import modele.Plan;
+import vue.VueGraphique;
 
 public class InterfaceController {
 
