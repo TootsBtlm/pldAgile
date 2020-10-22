@@ -2,6 +2,8 @@ package tsp;
 
 import java.util.*;
 
+import javafx.util.Pair;
+
 
 public class SeqIter implements Iterator<Integer> {
 	ArrayList<Integer> candidates;
@@ -15,12 +17,24 @@ public class SeqIter implements Iterator<Integer> {
 	 * @param currentVertex
 	 * @param g
 	 */
-	public SeqIter(Collection<Integer> unvisited, int currentVertex, Graph g){
+	public SeqIter(Collection<Integer> unvisited, Collection<Integer> visited, int currentVertex, Graph g, ArrayList<Pair<Integer, Integer>> paires){
 		this.g = g;
 		this.candidates = new ArrayList<Integer>(unvisited.size()+1);
 		for (Integer s : unvisited){
 			if (g.isArc(currentVertex, s))
-				candidates.add(s);
+				for(Pair<Integer, Integer> p : paires) {
+					Integer key = p.getKey();
+					Integer value = p.getValue();
+					if(s == key) {
+						candidates.add(s);
+						break;
+					}else if(s == value) {
+						if(visited.contains(key) || currentVertex == key) {
+							candidates.add(s);
+							break;
+						}
+					}
+				}
 		}
 	}
 	
@@ -34,15 +48,15 @@ public class SeqIter implements Iterator<Integer> {
 		return candidates.remove(candidates.size()-1); //return and remove last element
 	}
 	
-	protected Integer bestNext(Integer origin) { //origin can be or not part of the unvisited
-		int min = Integer.MAX_VALUE;
+	protected Integer bestNext(Integer origin, ArrayList<Pair<Integer, Integer>> paires, Collection<Integer> visited) { //origin can be or not part of the unvisited
+		double min = Integer.MAX_VALUE;
 		int minVertex = -1; //id of cheapest neighbour
 		
-		Iterator<Integer> it = new SeqIter(candidates, origin, g);
+		Iterator<Integer> it = new SeqIter(candidates, visited, origin, g, paires);
 		 
 		while(it.hasNext()) {
 			int dest = it.next();
-			int c = g.getCost(origin, dest);
+			double c = g.getCost(origin, dest);
 			if(c != -1 && c < min) {
 				min = c;
 				minVertex = dest;
@@ -50,6 +64,43 @@ public class SeqIter implements Iterator<Integer> {
 		}
 		return candidates.remove(candidates.indexOf(minVertex));
 	}
+	
+	/*protected Integer bestNext(Integer origin, ArrayList<Pair<Integer, Integer>> paires, Collection<Integer> visited) { //origin can be or not part of the unvisited
+		double min = (double)Integer.MAX_VALUE;
+		Integer minVertex = -1; //id of cheapest neighbor
+		
+		Iterator<Integer> it = new SeqIter(candidates, visited, origin, g, paires);
+		//System.out.println("Candidates for "+origin+": "+ candidates +", visited: "+visited);
+		while(it.hasNext()) {
+			Integer dest = it.next();
+			//System.out.println("Dest: "+dest);
+			double c = g.getCost(origin, dest);
+			if(c != -1.0 && c < min) {
+				for(Pair<Integer, Integer> p : paires) {
+					Integer key = p.getKey();
+					Integer value = p.getValue();
+					if(dest == key) {
+						//System.out.println("New pickup visited: "+key+" from: "+origin);
+						min = c;
+						minVertex = dest;
+						break;
+					}else if(dest == value) {
+						if(visited.contains(key) || origin == key) {
+							//System.out.println("New delivery visited: "+value+" from: "+origin);
+							min = c;
+							minVertex = dest;
+							break;
+						}
+					}
+				}
+				
+			}
+		}
+		//System.out.println("Chosen: "+minVertex);
+		if(minVertex!=-1)
+			candidates.remove(candidates.indexOf(minVertex));
+		return minVertex;
+	}*/
 	
 
 	@Override
