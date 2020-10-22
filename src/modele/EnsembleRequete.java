@@ -68,4 +68,9 @@ public class EnsembleRequete {
 		
 	}
 	
+	public int indexLieuDepart() {
+		
+		return intersectionIdRetourne.get(this.getLieuDepart().getPointDeDepart().getId());
+	}
+	
 }
