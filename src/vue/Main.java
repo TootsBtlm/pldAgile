@@ -1,5 +1,6 @@
 package vue;
 
+import controleur.InterfaceController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

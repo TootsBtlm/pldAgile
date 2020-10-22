@@ -8,4 +8,6 @@ module pldAgile {
 	opens vue;
 	exports vue;
 	exports modele;
+	exports controleur;
+	opens controleur;
 }
