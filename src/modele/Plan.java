@@ -134,23 +134,23 @@ public class Plan {
 	}
 	
 	public Double longitudeMin(){
-		Double max = this.intersection.get(0).getLongitude();
-		for(int i = 0; i > this.intersectionId.size(); i++) {
-			if(max < this.intersection.get(i).getLongitude()) {
-				max = this.intersection.get(i).getLongitude();
+		Double min = this.intersection.get(0).getLongitude();
+		for(int i = 0; i < this.intersectionId.size(); i++) {
+			if(min > this.intersection.get(i).getLongitude()) {
+				min = this.intersection.get(i).getLongitude();
 			}
 		}
-		return max;
+		return min;
 	}
 	
 	public Double latitudeMin(){
-		Double max = this.intersection.get(0).getLatitude();
-		for(int i = 0; i > this.intersectionId.size(); i++) {
-			if(max < this.intersection.get(i).getLatitude()) {
-				max = this.intersection.get(i).getLatitude();
+		Double min = this.intersection.get(0).getLatitude();
+		for(int i = 0; i < this.intersectionId.size(); i++) {
+			if(min > this.intersection.get(i).getLatitude()) {
+				min = this.intersection.get(i).getLatitude();
 			}
 		}
-		return max;
+		return min;
 	}
 	
 };

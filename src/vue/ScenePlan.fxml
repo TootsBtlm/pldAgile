@@ -4,10 +4,10 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vue.UiController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vue.InterfaceController">
    <children>
       <Canvas fx:id="planCanvas" height="713.0" width="900.0" />
       <Button fx:id="btnOuvrirPlan" layoutX="907.0" layoutY="10.0" mnemonicParsing="false" onAction="#choisirFichierPlan" prefHeight="77.0" prefWidth="363.0" text="Charger un nouveau plan" />
-      <Button layoutX="907.0" layoutY="96.0" mnemonicParsing="false" prefHeight="77.0" prefWidth="363.0" text="Charger une liste de requêtes" />
+      <Button layoutX="907.0" layoutY="96.0" mnemonicParsing="false" onAction="#choisirFichierRequetes" prefHeight="77.0" prefWidth="363.0" text="Charger une liste de requêtes" />
    </children>
 </AnchorPane>
