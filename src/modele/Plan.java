@@ -30,8 +30,16 @@ public class Plan {
 	 * 
 	 */
 	public ArrayList<Segment> segment;
+	
+	public HashMap<Intersection, ArrayList<Segment>> listeAdjacence = new HashMap<Intersection, ArrayList<Segment>>();
 	 
 	
+	public HashMap<Intersection, ArrayList<Segment>> getListeAdjacence() {
+		return listeAdjacence;
+	}
+	public void setListeAdjacence(HashMap<Intersection, ArrayList<Segment>> listeAdjacence) {
+		this.listeAdjacence = listeAdjacence;
+	}
 	/* Method */
 	public ArrayList<Long> getIntersectionId() {
 		return intersectionId;
@@ -66,9 +74,18 @@ public class Plan {
 		this.intersection = intersection;
 		this.segment = segment;
 		for(int i = 0; i < this.intersectionId.size(); i++) {
-			if(342873658 == intersectionId.get(i)) {
-			}
-			this.intersectionIdRetourne.put(intersectionId.get(i), i);
+			this.intersectionIdRetourne.put(intersectionId.get(i), i);	
+		}
+		ArrayList<Segment> vide = new ArrayList<Segment>();
+		for(int i = 0; i < this.intersectionId.size(); i++) {
+			this.listeAdjacence.put(this.intersection.get(i), vide);
+		}
+		
+		for(int j = 0 ; j < this.segment.size(); j ++)
+		{
+			ArrayList<Segment> listeSegmentsAssocies = this.listeAdjacence.get(this.segment.get(j).getOrigine());
+			listeSegmentsAssocies.add(this.segment.get(j));
+			this.listeAdjacence.put(this.segment.get(j).getOrigine(), listeSegmentsAssocies );
 		}
 	} 
 	
