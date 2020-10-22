@@ -4,11 +4,36 @@
 
 package modele;
 
+import java.util.ArrayList;
+
 /************************************************************/
 /**
  * 
  */
 public class Itineraire {
+	
+	ArrayList<Intersection> listeIntersections = new ArrayList<Intersection>();
+
+	public ArrayList<Intersection> getListeIntersections() {
+		return listeIntersections;
+	}
+
+	public void setListeIntersections(ArrayList<Intersection> listeIntersections) {
+		this.listeIntersections = listeIntersections;
+	}
+
+	public Itineraire(ArrayList<Intersection> listeIntersections) {
+		super();
+		this.listeIntersections = listeIntersections;
+	}
+	
+	public Itineraire() {
+		super();
+	}
+
+	public void addIntersection(Intersection intersection) {
+		this.listeIntersections.add(intersection);
+	}
 	
 	
 	
