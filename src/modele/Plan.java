@@ -30,6 +30,7 @@ public class Plan {
 	 * 
 	 */
 	public ArrayList<Segment> segment;
+	 
 	
 	public ArrayList<Long> getIntersectionId() {
 		return intersectionId;
@@ -132,6 +133,7 @@ public class Plan {
 		}
 		return max;
 	}
+	
 	
 	public Double longitudeMin(){
 		Double min = this.intersection.get(0).getLongitude();
