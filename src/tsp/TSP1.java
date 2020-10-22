@@ -39,5 +39,4 @@ public class TSP1 extends TemplateTSP {
 		}
 		return min;
 	}
-
 }

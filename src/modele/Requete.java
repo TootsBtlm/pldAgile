@@ -26,6 +26,11 @@ public class Requete {
 	 * 
 	 */
 	private Long dureeLivraison;
+	
+	
+	
+	
+	/* Method */
 	public Requete(Intersection pointDeRecuperation, Intersection pointDeLivraison, Long dureeRecuperation,
 			Long dureeLivraison) {
 		super();
