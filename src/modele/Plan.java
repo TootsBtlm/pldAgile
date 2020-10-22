@@ -153,4 +153,19 @@ public class Plan {
 		return min;
 	}
 	
+	public Itineraire getItineraire(ArrayList<Integer> listeSommets){
+		Itineraire itineraire = new Itineraire();
+		
+		for (int i= 0; i < listeSommets.size() ; i++) {
+			itineraire.addIntersection(this.intersection.get(listeSommets.get(i)));
+		}
+		
+		
+		return itineraire;
+	}
+	
 };
+
+
+
+
