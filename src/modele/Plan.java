@@ -31,6 +31,50 @@ public class Plan {
 	 */
 	public ArrayList<Segment> segment;
 	
+	public HashMap<Intersection, ArrayList<Segment>> listeAdjacence = new HashMap<Intersection, ArrayList<Segment>>();
+	
+	public HashMap<Intersection, ArrayList<Segment>> listeAdjacenceInverse = new HashMap<Intersection, ArrayList<Segment>>();
+	 
+	
+	public HashMap<Intersection, ArrayList<Segment>> getListeAdjacence() {
+		return listeAdjacence;
+	}
+	public void setListeAdjacence(HashMap<Intersection, ArrayList<Segment>> listeAdjacence) {
+		this.listeAdjacence = listeAdjacence;
+	}
+	/* Method */
+	
+	public ArrayList<Segment> calcDijsktra(Intersection depart, Intersection arrivee){
+		HashMap<Intersection,Double> tab = new HashMap<Intersection,Double>();
+		ArrayList<Intersection> visitee = new ArrayList<Intersection>();
+		ArrayList<Intersection> voisinArrivee = new ArrayList<Intersection>();
+		ArrayList<Segment> voisins = this.listeAdjacenceInverse.get(arrivee);
+		for(int i=0;i<voisins.size();i++) {
+			voisinArrivee.add(voisins.get(i).getOrigine());
+		}
+		for(int i=0;i<this.intersection.size();i++) {
+			tab.put(this.intersection.get(i),100000.0);
+		}
+		tab.put(depart, 0.0);
+		for(int i=0;i<this.listeAdjacence.get(depart).size();i++) {
+			Segment s = this.listeAdjacence.get(depart).get(i);
+			tab.put(s.getFin(),s.getLongueur());
+		}
+		visitee.add(depart);
+		while(!visitee.containsAll(voisinArrivee)) { // Tant que tous les voisins de l'intersection d'arrivée ne sont pas visitée
+			Double min = 100000.;
+			int index;
+			for(int i=0;i<tab.size();i++) {
+				if(tab.get(this.intersection.get(i)) < min && !visitee.contains(this.intersection.get(i))){
+					min = tab.get(this.intersection.get(i));
+					index = i;
+				}
+				
+			}
+		}
+		return new ArrayList<Segment>();
+	}
+	
 	public ArrayList<Long> getIntersectionId() {
 		return intersectionId;
 	}
@@ -64,9 +108,30 @@ public class Plan {
 		this.intersection = intersection;
 		this.segment = segment;
 		for(int i = 0; i < this.intersectionId.size(); i++) {
-			if(342873658 == intersectionId.get(i)) {
-			}
-			this.intersectionIdRetourne.put(intersectionId.get(i), i);
+			this.intersectionIdRetourne.put(intersectionId.get(i), i);	
+		}
+		ArrayList<Segment> vide = new ArrayList<Segment>();
+		for(int i = 0; i < this.intersectionId.size(); i++) {
+			this.listeAdjacence.put(this.intersection.get(i), vide);
+		}
+		
+		for(int j = 0 ; j < this.segment.size(); j ++)
+		{
+			ArrayList<Segment> listeSegmentsAssocies = this.listeAdjacence.get(this.segment.get(j).getOrigine());
+			listeSegmentsAssocies.add(this.segment.get(j));
+			this.listeAdjacence.put(this.segment.get(j).getOrigine(), listeSegmentsAssocies );
+		}
+		
+		ArrayList<Segment> videDeux = new ArrayList<Segment>();
+		for(int i = 0; i < this.intersectionId.size(); i++) {
+			this.listeAdjacenceInverse.put(this.intersection.get(i), videDeux);
+		}
+		
+		for(int j = 0 ; j < this.segment.size(); j ++)
+		{
+			ArrayList<Segment> listeSegmentsAssocies = this.listeAdjacenceInverse.get(this.segment.get(j).getFin());
+			listeSegmentsAssocies.add(this.segment.get(j));
+			this.listeAdjacenceInverse.put(this.segment.get(j).getFin(), listeSegmentsAssocies );
 		}
 	} 
 	
@@ -132,6 +197,7 @@ public class Plan {
 		}
 		return max;
 	}
+	
 	
 	public Double longitudeMin(){
 		Double min = this.intersection.get(0).getLongitude();
