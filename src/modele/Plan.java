@@ -57,16 +57,19 @@ public class Plan {
         }
         double[][] matriceCout = new double[listeIntersection.size()][listeIntersection.size()];
         
-        Pair<Double,ArrayList<Intersection>> itineraire;
-        Pair<Double,ArrayList<Intersection>> itineraireDeux[][]  = new Pair<Double,ArrayList<Intersection>>[listeIntersection.size()][listeIntersection.size()];
+        HashMap<Pair<Intersection, Intersection>, Itineraire> matriceItineraire = new HashMap<Pair<Intersection, Intersection>, Itineraire>();
+
+        
+        
         for(int i=0;i<listeIntersection.size();i++) {
             for(int j=0;j<listeIntersection.size();j++) {
                 if(i==j)
                     matriceCout[i][j] = -1;
                 else {
-                    itineraire = calcDijsktra(listeIntersection.get(i),listeIntersection.get(j));
-                    itineraireDeux.add(itineraire);
-                    matriceCout[i][j] = itineraire.getKey()+1;
+                	Itineraire itineraire = calcDijsktra(listeIntersection.get(i),listeIntersection.get(j));
+                	Pair<Intersection, Intersection> cle = new Pair<Intersection,Intersection>(listeIntersection.get(i),listeIntersection.get(j));
+                	matriceItineraire.put(cle, itineraire);
+                    matriceCout[i][j] = itineraire.getCout();
                 }
             }
         }
@@ -76,19 +79,25 @@ public class Plan {
         	System.out.println(i);
         	System.out.println(resultat[i]);
         }
+        
         Itineraire itineraireOpti = new Itineraire();
+        
         for(int i=0;i<resultat.length;i++) {
         	itineraireOpti.addIntersection(listeIntersection.get(resultat[i]));	
-        	
         }
+        
         itineraireOpti.addIntersection(requetes.getLieuDepart().getPointDeDepart());
-        for(int i=0;i<itineraireOpti.listeIntersections.size();i++) {
-        	
+        
+        Itineraire itineraireComplet = new Itineraire();
+        
+        for(int i=0;i<itineraireOpti.getListeIntersections().size()-1;i++) {
+        	Pair<Intersection, Intersection> cle = new Pair<Intersection, Intersection>(itineraireOpti.getListeIntersections().get(i), itineraireOpti.getListeIntersections().get(i+1));
+        	itineraireComplet.addItineraire(matriceItineraire.get(cle));
         }
-        return(itineraireOpti);
+        return(itineraireComplet);
     }
 	
-	public Pair<Double, ArrayList<Intersection>> calcDijsktra(Intersection depart, Intersection arrivee){
+	public Itineraire calcDijsktra(Intersection depart, Intersection arrivee){
 		
 		
 		HashMap<Intersection,Double> tab = new HashMap<Intersection,Double>();
@@ -176,10 +185,10 @@ public class Plan {
 			nonVisitee.remove(nouveauDepart);
 			voisinArrivee.remove(nouveauDepart);
 		}
-		Pair<Double, ArrayList<Intersection>> ret = new Pair<Double, ArrayList<Intersection>>(tab.get(arrivee),tabIntersection.get(arrivee));
+		//Pair<Double, ArrayList<Intersection>> ret = new Pair<Double, ArrayList<Intersection>>(tab.get(arrivee),tabIntersection.get(arrivee));
+		Itineraire itineraire = new Itineraire(tabIntersection.get(arrivee), tab.get(arrivee));
 		
-		
-		return ret;
+		return itineraire;
 	}
 	
 	public ArrayList<Long> getIntersectionId() {
