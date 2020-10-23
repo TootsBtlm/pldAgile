@@ -58,12 +58,14 @@ public class Plan {
         double[][] matriceCout = new double[listeIntersection.size()][listeIntersection.size()];
         
         Pair<Double,ArrayList<Intersection>> itineraire;
+        Pair<Double,ArrayList<Intersection>> itineraireDeux[][]  = new Pair<Double,ArrayList<Intersection>>[listeIntersection.size()][listeIntersection.size()];
         for(int i=0;i<listeIntersection.size();i++) {
             for(int j=0;j<listeIntersection.size();j++) {
                 if(i==j)
                     matriceCout[i][j] = -1;
                 else {
                     itineraire = calcDijsktra(listeIntersection.get(i),listeIntersection.get(j));
+                    itineraireDeux.add(itineraire);
                     matriceCout[i][j] = itineraire.getKey()+1;
                 }
             }
@@ -77,11 +79,9 @@ public class Plan {
         Itineraire itineraireOpti = new Itineraire();
         for(int i=0;i<resultat.length;i++) {
         	itineraireOpti.addIntersection(listeIntersection.get(resultat[i]));	
-        	//for(int j=0)
+        	
         }
         itineraireOpti.addIntersection(requetes.getLieuDepart().getPointDeDepart());
-        System.out.println("ITINERAIRE OPTI");
-        System.out.println(itineraireOpti.listeIntersections);
         for(int i=0;i<itineraireOpti.listeIntersections.size();i++) {
         	
         }
