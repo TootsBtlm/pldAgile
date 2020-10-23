@@ -44,14 +44,23 @@ public class Plan {
 	}
 	/* Method */
 	
-	public ArrayList<Segment> calcDijsktra(Intersection depart, Intersection arrivee){
+	public Double calcDijsktra(Intersection depart, Intersection arrivee){
+		
+		
 		HashMap<Intersection,Double> tab = new HashMap<Intersection,Double>();
 		ArrayList<Intersection> visitee = new ArrayList<Intersection>();
+		ArrayList<Intersection> nonVisitee = (ArrayList<Intersection>) this.intersection.clone();
 		ArrayList<Intersection> voisinArrivee = new ArrayList<Intersection>();
-		ArrayList<Segment> voisins = this.listeAdjacenceInverse.get(arrivee);
-		for(int i=0;i<voisins.size();i++) {
-			voisinArrivee.add(voisins.get(i).getOrigine());
+		ArrayList<Segment> voisins = new ArrayList<Segment>();
+		
+
+		for(int i=0;i<this.segment.size();i++) {	
+			if(this.segment.get(i).getFin().getId() == arrivee.getId()) {
+				voisinArrivee.add(segment.get(i).getOrigine());
+			}
+			
 		}
+		
 		for(int i=0;i<this.intersection.size();i++) {
 			tab.put(this.intersection.get(i),100000.0);
 		}
@@ -61,18 +70,39 @@ public class Plan {
 			tab.put(s.getFin(),s.getLongueur());
 		}
 		visitee.add(depart);
-		while(!visitee.containsAll(voisinArrivee)) { // Tant que tous les voisins de l'intersection d'arrivée ne sont pas visitée
-			Double min = 100000.;
-			int index;
-			for(int i=0;i<tab.size();i++) {
-				if(tab.get(this.intersection.get(i)) < min && !visitee.contains(this.intersection.get(i))){
-					min = tab.get(this.intersection.get(i));
+		nonVisitee.remove(depart);
+		voisinArrivee.remove(depart);
+
+		while(voisinArrivee.size()!=0) { // Tant que tous les voisins de l'intersection d'arrivée ne sont pas visitée
+			System.out.println(voisinArrivee.size());
+			Double mino = 100000.;
+			Integer index = 0;
+			System.out.println(index);
+			for(int i=0;i<nonVisitee.size();i++) {
+				Intersection intersectionAVisiter = nonVisitee.get(i);
+				if(tab.get(intersectionAVisiter) < mino && !visitee.contains(this.intersection.get(i))){
+					mino = tab.get(this.intersection.get(i));
 					index = i;
 				}
-				
 			}
+			Intersection nouveauDepart = this.intersection.get(index);
+			
+			for(int i=0;i<this.listeAdjacence.get(nouveauDepart).size();i++) {
+				
+				Segment s = this.listeAdjacence.get(nouveauDepart).get(i);
+				if(visitee.contains(s.getFin())) {
+					//System.out.println(s.toString());
+					//System.out.println(tab.get(arrivee));
+					tab.put(s.getFin(),Math.min(tab.get(nouveauDepart) + s.getLongueur(), tab.get(s.getFin())));	
+					
+				}
+			}
+
+			visitee.add(nouveauDepart);
+			nonVisitee.remove(nouveauDepart);
+			voisinArrivee.remove(nouveauDepart);
 		}
-		return new ArrayList<Segment>();
+		return tab.get(arrivee);
 	}
 	
 	public ArrayList<Long> getIntersectionId() {
@@ -110,8 +140,9 @@ public class Plan {
 		for(int i = 0; i < this.intersectionId.size(); i++) {
 			this.intersectionIdRetourne.put(intersectionId.get(i), i);	
 		}
-		ArrayList<Segment> vide = new ArrayList<Segment>();
+		
 		for(int i = 0; i < this.intersectionId.size(); i++) {
+			ArrayList<Segment> vide = new ArrayList<Segment>();
 			this.listeAdjacence.put(this.intersection.get(i), vide);
 		}
 		
@@ -122,8 +153,9 @@ public class Plan {
 			this.listeAdjacence.put(this.segment.get(j).getOrigine(), listeSegmentsAssocies );
 		}
 		
-		ArrayList<Segment> videDeux = new ArrayList<Segment>();
+		
 		for(int i = 0; i < this.intersectionId.size(); i++) {
+			ArrayList<Segment> videDeux = new ArrayList<Segment>();
 			this.listeAdjacenceInverse.put(this.intersection.get(i), videDeux);
 		}
 		
