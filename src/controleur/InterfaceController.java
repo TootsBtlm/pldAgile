@@ -9,6 +9,7 @@ import javafx.scene.control.ListView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import modele.EnsembleRequete;
+import modele.Itineraire;
 import modele.Lecteur;
 import modele.Plan;
 import tsp.TSP;
@@ -98,8 +99,8 @@ public class InterfaceController {
 	        for (int i=0; i<nbVertices; i++)
 	            System.out.print(tsp.getSolution(i)+" ");
 	        System.out.println(depart);*/
-			
-//			this.vueGraphique.drawItineraire(this.plan, this.planCanvas, itineraire);
+			Itineraire itineraire = plan.getMatriceCout(this.ensembleRequete);
+			this.vueGraphique.drawItineraire(this.plan, this.planCanvas, itineraire);
 		}
 	}
 	
