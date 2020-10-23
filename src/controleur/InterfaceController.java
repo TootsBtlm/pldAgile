@@ -90,7 +90,7 @@ public class InterfaceController {
 			System.out.println("Charger d'abord une requête");
 		}
 		else {
-			int timeLimit = 30;
+//			int timeLimit = 30;
 			/*
 			tsp.searchSolution(timeLimit, cout, paires, depart);
 			System.out.print("Solution of cost "+tsp.getSolutionCost()+" found in "
@@ -98,6 +98,8 @@ public class InterfaceController {
 	        for (int i=0; i<nbVertices; i++)
 	            System.out.print(tsp.getSolution(i)+" ");
 	        System.out.println(depart);*/
+			
+			this.vueGraphique.drawItineraire(this.plan, this.planCanvas, itineraire);
 		}
 	}
 	
