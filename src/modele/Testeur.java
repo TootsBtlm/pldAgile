@@ -34,11 +34,11 @@ public class Testeur {
 		   
 		   Intersection fin = nouveauPlan.getIntersectionById(Long.parseLong("26086114"));
 		   Intersection depart = nouveauPlan.getIntersectionById(Long.parseLong("25468041"));
-		   		   
-		   System.out.println(nouveauPlan.calcDijsktra(depart, fin));
 		
 		   
 		   System.out.println(recap.listePairesIntersections().toString());
+		   
+		   nouveauPlan.getMatriceCout(recap);
 	   }
 		   
 }

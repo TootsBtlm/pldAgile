@@ -7,6 +7,8 @@ package modele;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javafx.util.Pair;
+import tsp.TSP;
+import tsp.TSP1;
 
 
 /************************************************************/
@@ -44,14 +46,16 @@ public class Plan {
 	}
 	/* Method */
 	
-	public double[][] getMatriceCout(EnsembleRequete requetes) {
+	public Itineraire getMatriceCout(EnsembleRequete requetes) {
         ArrayList<Intersection> listeIntersection = new ArrayList<Intersection>();
+        ArrayList<Pair<Integer,Integer>> listePaires = new ArrayList<Pair<Integer,Integer>>();
         listeIntersection.add(requetes.getLieuDepart().getPointDeDepart());
-        double[][] matriceCout = new double[listeIntersection.size()][listeIntersection.size()];
         for(int i=0; i<requetes.listeRequete.size();i++) {
+            listeIntersection.add(requetes.listeRequete.get(i).getPointDeRecuperation());
             listeIntersection.add(requetes.listeRequete.get(i).getPointDeLivraison());
-            listeIntersection.add(requetes.listeRequete.get(i).getPointDeLivraison());
+            listePaires.add(new Pair<Integer,Integer>(listeIntersection.indexOf(requetes.listeRequete.get(i).getPointDeRecuperation()),listeIntersection.indexOf(requetes.listeRequete.get(i).getPointDeLivraison())));
         }
+        double[][] matriceCout = new double[listeIntersection.size()][listeIntersection.size()];
         Pair<Double,ArrayList<Intersection>> itineraire;
         for(int i=0;i<listeIntersection.size();i++) {
             for(int j=0;j<listeIntersection.size();j++) {
@@ -59,10 +63,28 @@ public class Plan {
                     matriceCout[i][j] = -1;
                 else {
                     itineraire = calcDijsktra(listeIntersection.get(i),listeIntersection.get(j));
-                    matriceCout[i][j] = itineraire.getKey();
+                    matriceCout[i][j] = itineraire.getKey()+1;
                 }
             }
         }
+        TSP tsp = new TSP1();
+        Integer[] resultat = tsp.searchSolution(30000, matriceCout, listePaires, 0);
+        for(int i=0;i<resultat.length;i++){
+        	System.out.println(i);
+        	System.out.println(resultat[i]);
+        }
+        Itineraire itineraireOpti = new Itineraire();
+        for(int i=0;i<resultat.length;i++) {
+        	itineraireOpti.addIntersection(listeIntersection.get(resultat[i]));	
+        	//for(int j=0)
+        }
+        itineraireOpti.addIntersection(requetes.getLieuDepart().getPointDeDepart());
+        System.out.println("ITINERAIRE OPTI");
+        System.out.println(itineraireOpti.listeIntersections);
+        for(int i=0;i<itineraireOpti.listeIntersections.size();i++) {
+        	
+        }
+        return(itineraireOpti);
     }
 	
 	public Pair<Double, ArrayList<Intersection>> calcDijsktra(Intersection depart, Intersection arrivee){
@@ -105,7 +127,7 @@ public class Plan {
 		
 		while(voisinArrivee.size() != 0 ) { // Tant que tous les voisins de l'intersection d'arrivée ne sont pas visitée
 			
-			System.out.println("sizeVoisin : " + voisinArrivee.size());
+			//System.out.println("sizeVoisin : " + voisinArrivee.size());
 			//System.out.println(voisinArrivee.size());
 			Double mino = 1000000000.;
 			Integer index = 0;
@@ -123,14 +145,14 @@ public class Plan {
 			}
 			
 			
-			System.out.println(mino);
+			//System.out.println(mino);
 			for(int i  = 0 ;  i < tab.size(); i++) {
 				if(tab.get(this.intersection.get(i)) < 100000) {
-					System.out.println(this.intersection.get(i)+" : " + tab.get(this.intersection.get(i)));
+					//System.out.println(this.intersection.get(i)+" : " + tab.get(this.intersection.get(i)));
 				}
 			}
 			
-			System.out.println(tab);
+			//System.out.println(tab);
 			Intersection nouveauDepart = this.intersection.get(index);
 			
 			for(int i=0;i<this.listeAdjacence.get(nouveauDepart).size();i++) {
