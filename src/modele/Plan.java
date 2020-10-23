@@ -44,6 +44,27 @@ public class Plan {
 	}
 	/* Method */
 	
+	public double[][] getMatriceCout(EnsembleRequete requetes) {
+        ArrayList<Intersection> listeIntersection = new ArrayList<Intersection>();
+        listeIntersection.add(requetes.getLieuDepart().getPointDeDepart());
+        double[][] matriceCout = new double[listeIntersection.size()][listeIntersection.size()];
+        for(int i=0; i<requetes.listeRequete.size();i++) {
+            listeIntersection.add(requetes.listeRequete.get(i).getPointDeLivraison());
+            listeIntersection.add(requetes.listeRequete.get(i).getPointDeLivraison());
+        }
+        Pair<Double,ArrayList<Intersection>> itineraire;
+        for(int i=0;i<listeIntersection.size();i++) {
+            for(int j=0;j<listeIntersection.size();j++) {
+                if(i==j)
+                    matriceCout[i][j] = -1;
+                else {
+                    itineraire = calcDijsktra(listeIntersection.get(i),listeIntersection.get(j));
+                    matriceCout[i][j] = itineraire.getKey();
+                }
+            }
+        }
+    }
+	
 	public Pair<Double, ArrayList<Intersection>> calcDijsktra(Intersection depart, Intersection arrivee){
 		
 		
