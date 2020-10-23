@@ -5,12 +5,14 @@ import java.io.File;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import modele.EnsembleRequete;
 import modele.Lecteur;
 import modele.Plan;
 import vue.VueGraphique;
+import vue.VueTextuelle;
 
 public class InterfaceController {
 
@@ -21,9 +23,13 @@ public class InterfaceController {
 	@FXML
 	private Button btnOuvrirPlan;
 	
+	@FXML
+	private ListView<String> listViewRequest;
+	
 	private Stage stage;
 	private Plan plan;
 	private VueGraphique vueGraphique;
+	private VueTextuelle vueTextuelle;
 
 
 	@FXML
@@ -58,6 +64,8 @@ public class InterfaceController {
 			System.out.println(path);
 			Lecteur lecteur = new Lecteur();
 			EnsembleRequete er = lecteur.LireRequete(path, this.plan);
+			this.vueTextuelle = new VueTextuelle();
+			this.vueTextuelle.drawText(er, this.listViewRequest);
 			this.vueGraphique.drawRequests(er, this.plan, this.planCanvas);
 		}
 	}

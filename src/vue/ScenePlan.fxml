@@ -10,6 +10,6 @@
       <Canvas fx:id="planCanvas" height="713.0" width="900.0" />
       <Button fx:id="btnOuvrirPlan" layoutX="907.0" layoutY="10.0" mnemonicParsing="false" onAction="#choisirFichierPlan" prefHeight="77.0" prefWidth="363.0" text="Charger un nouveau plan" />
       <Button layoutX="907.0" layoutY="96.0" mnemonicParsing="false" onAction="#choisirFichierRequetes" prefHeight="77.0" prefWidth="363.0" text="Charger une liste de requêtes" />
-      <ListView fx:id="vueTextuelle" layoutX="907.0" layoutY="283.0" prefHeight="431.0" prefWidth="363.0" style="-fx-border-width: 2;" />
+      <ListView fx:id="listViewRequest" layoutX="907.0" layoutY="283.0" prefHeight="431.0" prefWidth="363.0" style="-fx-border-width: 2;" />
    </children>
 </AnchorPane>
