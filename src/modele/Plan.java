@@ -6,7 +6,7 @@ package modele;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
+import javafx.util.Pair;
 
 
 /************************************************************/
@@ -44,7 +44,7 @@ public class Plan {
 	}
 	/* Method */
 	
-	public Double calcDijsktra(Intersection depart, Intersection arrivee){
+	public Pair<Double, ArrayList<Intersection>> calcDijsktra(Intersection depart, Intersection arrivee){
 		
 		
 		HashMap<Intersection,Double> tab = new HashMap<Intersection,Double>();
@@ -62,7 +62,9 @@ public class Plan {
 		}
 		
 		for(int i=0;i<this.intersection.size();i++) {
+			ArrayList<Intersection> vide = new ArrayList<Intersection>();
 			tab.put(this.intersection.get(i),100000.0);
+			tabIntersection.put(this.intersection.get(i), vide);
 		}
 		
 		tab.put(depart, 0.0);
@@ -70,7 +72,10 @@ public class Plan {
 		
 		for(int i=0;i<this.listeAdjacence.get(depart).size();i++) {
 			Segment s = this.listeAdjacence.get(depart).get(i);
+			ArrayList<Intersection> vide = new ArrayList<Intersection>();
 			tab.put(s.getFin(),s.getLongueur());
+			vide.add(depart);
+			tabIntersection.put(s.getFin(), vide);
 		}
 
 		visitee.add(depart);
@@ -102,8 +107,8 @@ public class Plan {
 				if(tab.get(this.intersection.get(i)) < 100000) {
 					System.out.println(this.intersection.get(i)+" : " + tab.get(this.intersection.get(i)));
 				}
-				
 			}
+			
 			System.out.println(tab);
 			Intersection nouveauDepart = this.intersection.get(index);
 			
@@ -113,8 +118,16 @@ public class Plan {
 
 					//System.out.println(s.toString());
 					//System.out.println(tab.get(arrivee));
-					
-					tab.put(s.getFin(),Math.min(tab.get(nouveauDepart) + s.getLongueur(), tab.get(s.getFin())));	
+					if(tab.get(nouveauDepart) + s.getLongueur() < tab.get(s.getFin())) {
+						
+						
+						tab.put(s.getFin(),tab.get(nouveauDepart) + s.getLongueur());	
+						ArrayList<Intersection> liste = (ArrayList<Intersection>) tabIntersection.get(nouveauDepart).clone();
+						liste.add(s.getFin());
+						tabIntersection.put(s.getFin(), liste);
+						
+					}
+
 				
 			}
 			
@@ -122,7 +135,10 @@ public class Plan {
 			nonVisitee.remove(nouveauDepart);
 			voisinArrivee.remove(nouveauDepart);
 		}
-		return tab.get(arrivee);
+		Pair<Double, ArrayList<Intersection>> ret = new Pair<Double, ArrayList<Intersection>>(tab.get(arrivee),tabIntersection.get(arrivee));
+		
+		
+		return ret;
 	}
 	
 	public ArrayList<Long> getIntersectionId() {
