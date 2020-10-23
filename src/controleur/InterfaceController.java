@@ -99,7 +99,7 @@ public class InterfaceController {
 	            System.out.print(tsp.getSolution(i)+" ");
 	        System.out.println(depart);*/
 			
-			this.vueGraphique.drawItineraire(this.plan, this.planCanvas, itineraire);
+//			this.vueGraphique.drawItineraire(this.plan, this.planCanvas, itineraire);
 		}
 	}
 	

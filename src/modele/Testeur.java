@@ -32,8 +32,8 @@ public class Testeur {
 		   EnsembleRequete recap = nouveauLecteur.LireRequete("ressources/requestsSmall1.xml", nouveauPlan);
 		   System.out.println(recap.listePairesIntersections().toString());
 		   
-		   Intersection fin = nouveauPlan.getIntersectionById(Long.parseLong("26086114"));
-		   Intersection depart = nouveauPlan.getIntersectionById(Long.parseLong("25468041"));
+		   Intersection fin = nouveauPlan.getIntersectionById(Long.parseLong("26576953"));
+		   Intersection depart = nouveauPlan.getIntersectionById(Long.parseLong("26576955"));
 		   		   
 		   System.out.println(nouveauPlan.calcDijsktra(depart, fin));
 		
