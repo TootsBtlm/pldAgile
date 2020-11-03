@@ -50,16 +50,31 @@ public class Livraison {
 		this.heureDepart = requetes.LieuDepart.getHeureDepart();
 	}
 	
+	/**
+	 * Cette fonction calcule les temps associés aux intersections principales du parcours.
+	 */
+	
 	private void calculArrivees() {
 		HashMap<Intersection,Long>tempsAssocieIntersection = new HashMap<Intersection,Long>();
 		for(int i=0;i<this.requetes.getListeRequete().size();i++) {
 			tempsAssocieIntersection.put(this.requetes.listeRequete.get(i).getPointDeRecuperation(), this.requetes.listeRequete.get(i).getDureeRecuperation());
 			tempsAssocieIntersection.put(this.requetes.listeRequete.get(i).getPointDeLivraison(), this.requetes.listeRequete.get(i).getDureeLivraison());
 		}
-		//this.dictionnaireArriveesItineraires.put(this.listeItineraires.get(0), new Time(this.heureDepart.getTime()+Long.parseLong((this.listeItineraires.get(0).getTemps().toString())));
-		/*for(int i=0;i<this.listeItineraires.size();i++) {
-			this.dictionnaireArriveesItineraires.put(this.listeItineraires.get(i).getListeIntersections(), value)
-		}*/
+		this.dictionnaireArriveesItineraires.put(this.listeItineraires.get(0), new Time(this.heureDepart.getTime()+this.listeItineraires.get(0).getTemps().longValue()));
+		
+		if(this.listeItineraires.size() > 0) {
+			
+
+			for(int i=1;i<this.listeItineraires.size()-1;i++) {
+				Time temps = new Time(
+						this.dictionnaireArriveesItineraires.get(this.listeItineraires.get(i-1)).getTime()+
+						this.listeItineraires.get(i).getTemps().longValue() + 
+						tempsAssocieIntersection.get(listeItineraires.get(i).getListeIntersections().get(0))				
+						);
+				
+				this.dictionnaireArriveesItineraires.put(this.listeItineraires.get(i),temps );
+			}
+		}
 		
 	}
 };
