@@ -68,7 +68,7 @@ public class InterfaceController {
 			System.out.println(path);
 			Lecteur lecteur = new Lecteur();
 			this.plan = lecteur.LirePlan(path);
-			this.vueGraphique = new VueGraphique(this.plan, this.planCanvas, this.requeteCanvas);
+			this.vueGraphique = new VueGraphique(this.plan, this.planCanvas, this.requetePane);
 			this.vueGraphique.drawPlan();
 		} else {
 			System.out.println("Fichier incorrect");
