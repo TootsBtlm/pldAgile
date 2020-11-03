@@ -16,6 +16,7 @@ public class EtatListeRequeteChargee extends Etat{
 	public void selectionFichierPlan(Canvas planCanvas, Pane requetePane, Canvas requeteCanvas) {
 		super.selectionFichierPlan(planCanvas, requetePane, requeteCanvas);
 	}
+
 	
 	public void calculerItineraire() {
 		//super.calculerItineraire();
@@ -26,4 +27,5 @@ public class EtatListeRequeteChargee extends Etat{
 	public void choisirFichierRequetes() {
 		//super.choisirFichierRequetes();
 	}
+
 }

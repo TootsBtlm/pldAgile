@@ -1,5 +1,6 @@
 package controleur;
 
+
 import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.Pane;
 
@@ -9,6 +10,7 @@ import javafx.scene.layout.Pane;
  * Représente l'état de l'application dans lequel l'utilisateur doit ajouter une étape, qui hérite de l'état général
  * 
  */
+
 
 public class EtatAjouterEtape extends Etat{
 
