@@ -22,6 +22,10 @@ public class InterfaceController {
 
 	@FXML
 	private Canvas planCanvas;
+	
+	@FXML
+	private Canvas requeteCanvas;
+	
 
 	@FXML
 	private Button btnOuvrirPlan;
@@ -53,8 +57,8 @@ public class InterfaceController {
 			System.out.println(path);
 			Lecteur lecteur = new Lecteur();
 			this.plan = lecteur.LirePlan(path);
-			this.vueGraphique = new VueGraphique();
-			this.vueGraphique.drawPlan(this.plan, this.planCanvas);
+			this.vueGraphique = new VueGraphique(this.plan, this.planCanvas, this.requeteCanvas);
+			this.vueGraphique.drawPlan();
 		} else {
 			System.out.println("Fichier incorrect");
 		}
@@ -71,13 +75,10 @@ public class InterfaceController {
 			String path = file.getPath();
 			System.out.println(path);
 			Lecteur lecteur = new Lecteur();
-			EnsembleRequete er = lecteur.LireRequete(path, this.plan);
-			this.vueTextuelle = new VueTextuelle();
-			this.vueTextuelle.drawText(er, this.listViewRequest);
-			this.vueGraphique.drawRequests(er, this.plan, this.planCanvas);
-
 			this.ensembleRequete = lecteur.LireRequete(path, this.plan);
-			this.vueGraphique.drawRequests(this.ensembleRequete, this.plan, this.planCanvas);
+			this.vueTextuelle = new VueTextuelle();
+			this.vueTextuelle.drawText(this.ensembleRequete, this.listViewRequest);
+			this.vueGraphique.drawRequests(this.ensembleRequete);
 		}
 	}
 
@@ -100,21 +101,9 @@ public class InterfaceController {
 	            System.out.print(tsp.getSolution(i)+" ");
 	        System.out.println(depart);*/
 			Itineraire itineraire = plan.getMatriceCout(this.ensembleRequete);
-			this.vueGraphique.drawItineraire(this.plan, this.planCanvas, itineraire);
+			this.vueGraphique.drawItineraire(itineraire);
 		}
 	}
-	
-	public void drawLine() {
-		var gc = this.planCanvas.getGraphicsContext2D();
-
-		gc.beginPath();
-		gc.moveTo(this.planCanvas.getWidth(), 0);
-		gc.lineTo(30.5, 30.5);
-		gc.stroke();
-	}
-
-	
-	
 	
 	public void setStage(Stage stage) {
 		this.stage = stage;
