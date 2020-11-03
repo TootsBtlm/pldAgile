@@ -23,10 +23,26 @@ public class Itineraire {
 	 */
 	private Double cout = 0. ;
 	
+	/**
+	 * Temps nécessaire au livreur pour aller de la première à la denière intersection (vitesse de 15km/h)
+	 */
+	private Double temps = 0. ;
+	
+	/**
+	 * Vitesse du livreur en mètres par seconde
+	 */
+	final private Double VITESSE = 4.17; 
+	
+	/**
+	 * 
+	 * @param listeIntersections composant l'itinéraire
+	 * @param cout total de l'itinéraire
+	 */
 	public Itineraire(ArrayList<Intersection> listeIntersections, Double cout) {
 		super();
 		this.listeIntersections = listeIntersections;
 		this.cout = cout;
+		this.temps = cout / VITESSE;
 	}
 
 	public ArrayList<Intersection> getListeIntersections() {
