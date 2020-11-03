@@ -1,5 +1,5 @@
 package controleur;
 
-public class EtatSix {
+public class EtatSupprimerEtape {
 
 }

@@ -1,7 +1,11 @@
 package vue;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.scene.canvas.Canvas;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import modele.Depot;
 import modele.EnsembleRequete;
 import modele.Intersection;
@@ -15,6 +19,7 @@ public class VueGraphique {
 	Plan plan;
 	Canvas planCanvas;
 	Canvas requeteCanvas;
+	List<Circle> requetes = new ArrayList<>();
 	
 	public VueGraphique(Plan plan, Canvas planCanvas, Canvas requeteCanvas) {
 		this.plan = plan;

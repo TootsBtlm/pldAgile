@@ -1,5 +1,5 @@
 package controleur;
 
-public class EtatQuatre {
+public class EtatItineraireCalcule {
 
 }

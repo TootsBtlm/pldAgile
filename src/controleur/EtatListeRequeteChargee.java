@@ -1,5 +1,5 @@
 package controleur;
 
-public class EtatTrois {
+public class EtatListeRequeteChargee {
 
 }

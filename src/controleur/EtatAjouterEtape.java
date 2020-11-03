@@ -1,5 +1,5 @@
 package controleur;
 
-public class EtatCinq {
+public class EtatAjouterEtape {
 
 }

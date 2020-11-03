@@ -1,5 +1,5 @@
 package controleur;
 
-public class EtatDeux {
+public class EtatPlanCharge {
 
 }

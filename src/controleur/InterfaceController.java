@@ -6,6 +6,8 @@ import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.Pane;
+import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import modele.EnsembleRequete;
@@ -25,6 +27,9 @@ public class InterfaceController {
 	
 	@FXML
 	private Canvas requeteCanvas;
+	
+	@FXML
+	private Pane requetePane;
 	
 
 	@FXML
@@ -52,6 +57,11 @@ public class InterfaceController {
 	public void choisirFichierPlan() {
 		FileChooser fileChooser = new FileChooser();
 		File file = fileChooser.showOpenDialog(this.stage);
+		Circle c1 = new Circle();
+		c1.setCenterX(1000);
+		c1.setCenterY(1000);
+		c1.setRadius(20);
+		requetePane.getChildren().add(c1);
 		if(file != null) {
 			String path = file.getPath();
 			System.out.println(path);

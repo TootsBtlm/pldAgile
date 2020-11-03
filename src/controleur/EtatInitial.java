@@ -1,6 +1,6 @@
 package controleur;
 
-public class EtatUn {
+public class EtatInitial {
 
 
 }
