@@ -17,6 +17,7 @@ import tsp.TSP1;
 import vue.VueGraphique;
 import vue.VueTextuelle;
 
+
 public class InterfaceController {
 
 
@@ -59,6 +60,8 @@ public class InterfaceController {
 			System.out.println("Fichier incorrect");
 		}
 		
+		//appel au constructeur test
+		EtatListeRequeteChargee etattrois = new EtatListeRequeteChargee();
 	}
 	
 	@FXML
