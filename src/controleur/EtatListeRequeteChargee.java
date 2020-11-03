@@ -1,5 +1,10 @@
 package controleur;
 
-public class EtatTrois {
-
+public class EtatListeRequeteChargee extends Etat{
+	
+	public void choisirFichierPlan() {
+		super.choisirFichierPlan();
+		
+	}
+	
 }

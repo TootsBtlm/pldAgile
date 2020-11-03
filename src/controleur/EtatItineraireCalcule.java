@@ -1,5 +1,10 @@
 package controleur;
 
-public class EtatQuatre {
+public class EtatItineraireCalcule extends Etat{
 
+	public void choisirFichierPlan() {
+		super.choisirFichierPlan();
+		
+	}
+	
 }
