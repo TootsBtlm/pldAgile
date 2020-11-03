@@ -23,18 +23,18 @@ public class Etat {
 
 	public void choisirFichierPlan() {
 		FileChooser fileChooser = new FileChooser();
-		File file = fileChooser.showOpenDialog(this.stage);
-		if(file != null) {
-			String path = file.getPath();
-			System.out.println(path);
-			Lecteur lecteur = new Lecteur();
-			this.plan = lecteur.LirePlan(path);
-			this.vueGraphique = new VueGraphique();
-			this.vueGraphique.drawPlan(this.plan, this.planCanvas);
-		} else {
-			System.out.println("Fichier incorrect");
-		}
-		
+		//File file = fileChooser.showOpenDialog(this.stage);
+//		if(file != null) {
+//			String path = file.getPath();
+//			System.out.println(path);
+//			Lecteur lecteur = new Lecteur();
+////			this.plan = lecteur.LirePlan(path);
+////			this.vueGraphique = new VueGraphique();
+////			this.vueGraphique.drawPlan(this.plan, this.planCanvas);
+//		} else {
+//			System.out.println("Fichier incorrect");
+//		}
+//		
 		//appel au constructeur test
 		EtatListeRequeteChargee etattrois = new EtatListeRequeteChargee();
 	}

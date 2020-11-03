@@ -5,26 +5,27 @@
 package modele;
 
 
-/************************************************************/
 /**
  * 
+ * Cette classe représente un segment.
+ * @author romain
  */
 public class Segment {
 	/**
 	 * 
-	 * 
+	 * Intersection d'origine du segment
 	 */
 	public Intersection origine;
 	/**
-	 * 
+	 * Intersection finale du segment
 	 */
 	public Intersection fin;
 	/**
-	 * 
+	 * Longueur du segment (en mètres)
 	 */
 	private Double longueur;
 	/**
-	 * 
+	 * Nom du segment lorsqu'il existe
 	 */	
 	private String nom;
 	

@@ -9,11 +9,18 @@ import java.util.ArrayList;
 /************************************************************/
 /**
  * 
+ * Cette classe représente un itinéraire.
+ * @author romain
  */
 public class Itineraire {
 	
+	/**   
+	 * Liste des intersections composant l'itineraire
+	 */
 	private ArrayList<Intersection> listeIntersections = new ArrayList<Intersection>();
-
+	/**   
+	 * Cout de l'itinéraire (distance en mètres)
+	 */
 	private Double cout = 0. ;
 	
 	public Itineraire(ArrayList<Intersection> listeIntersections, Double cout) {

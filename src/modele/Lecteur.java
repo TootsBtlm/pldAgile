@@ -17,15 +17,15 @@ import org.xml.sax.SAXException;
 
 	/**
 	 * 
-	 * Cette classe est l'interface de lecture des fichiers xml.
-	 * @author rfonc
+	 * Cette classe est l'interface de lecture des fichiers xml. 
+	 * @author romain
 	 *
 	 */
 
 public class Lecteur {
 	
 	/**
-	 * Cette méthode lit les plans contenus dans un fichier xml.
+	 * Cette méthode lit le plan contenus dans un fichier xml. Elle renvoie un Plan rempli avec toutes les intersections.
 	 * 
 	 * @param nomDeFichier
 	 * @return Plan
@@ -61,7 +61,7 @@ public class Lecteur {
 
 	
 	/**
-	 * Cette méthode lit les requetes contneues dans un fichier et 
+	 * Cette méthode lit les requetes contnues dans un fichier et 
 	 * renvoie l'ensemble des ces requetes ainsi que le point de départ/arrivée
 	 * 
 	 * @param nomDeFichier
