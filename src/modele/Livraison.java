@@ -4,9 +4,62 @@
 
 package modele;
 
-/************************************************************/
+
+import java.sql.Time;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 /**
  * 
+ * @author Bastien
+ * Représente l'itinéraire de livraison final
+ *
  */
 public class Livraison {
+	
+	/**
+	 * Liste d'itinéraires
+	 */
+	private ArrayList<Itineraire>listeItineraires;
+	
+	/**
+	 * Heure de départ de la livraison
+	 */
+	private Time heureDepart;
+	
+	/**
+	 * Dictionnaire des heures d'arrivée (valeur) pour chaque itinéraire (clé)
+	 */
+	HashMap<Itineraire,Time>dictionnaireArriveesItineraires = new HashMap<Itineraire,Time>();
+
+	/**
+	 * Ensemble des requêtes de la livraison
+	 */
+	EnsembleRequete requetes;
+	
+	/**
+	 * Constructeur de livraison
+	 * @param listeItineraires
+	 * @param requetes
+	 * @param heureDepart
+	 */
+	public Livraison(ArrayList<Itineraire> listeItineraires, EnsembleRequete requetes) {
+		super();
+		this.listeItineraires = listeItineraires;
+		this.requetes = requetes;
+		this.heureDepart = requetes.LieuDepart.getHeureDepart();
+	}
+	
+	private void calculArrivees() {
+		HashMap<Intersection,Long>tempsAssocieIntersection = new HashMap<Intersection,Long>();
+		for(int i=0;i<this.requetes.getListeRequete().size();i++) {
+			tempsAssocieIntersection.put(this.requetes.listeRequete.get(i).getPointDeRecuperation(), this.requetes.listeRequete.get(i).getDureeRecuperation());
+			tempsAssocieIntersection.put(this.requetes.listeRequete.get(i).getPointDeLivraison(), this.requetes.listeRequete.get(i).getDureeLivraison());
+		}
+		//this.dictionnaireArriveesItineraires.put(this.listeItineraires.get(0), new Time(this.heureDepart.getTime()+Long.parseLong((this.listeItineraires.get(0).getTemps().toString())));
+		/*for(int i=0;i<this.listeItineraires.size();i++) {
+			this.dictionnaireArriveesItineraires.put(this.listeItineraires.get(i).getListeIntersections(), value)
+		}*/
+		
+	}
 };
