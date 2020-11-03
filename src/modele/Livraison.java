@@ -65,7 +65,7 @@ public class Livraison {
 		if(this.listeItineraires.size() > 0) {
 			
 
-			for(int i=1;i<this.listeItineraires.size()-1;i++) {
+			for(int i=1;i<this.listeItineraires.size();i++) {
 				Time temps = new Time(
 						this.dictionnaireArriveesItineraires.get(this.listeItineraires.get(i-1)).getTime()+
 						this.listeItineraires.get(i).getTemps().longValue() + 
