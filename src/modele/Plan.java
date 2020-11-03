@@ -35,6 +35,7 @@ public class Plan {
 	
 	public HashMap<Intersection, ArrayList<Segment>> listeAdjacenceInverse = new HashMap<Intersection, ArrayList<Segment>>();
 	 
+	public HashMap<Intersection, Integer> indexIdInteger = new HashMap<Intersection, Integer>();
 	
 	public HashMap<Intersection, ArrayList<Segment>> getListeAdjacence() {
 		return listeAdjacence;
@@ -44,66 +45,6 @@ public class Plan {
 	}
 	/* Method */
 	
-	public Double calcDijsktra(Intersection depart, Intersection arrivee){
-		
-		
-		HashMap<Intersection,Double> tab = new HashMap<Intersection,Double>();
-		ArrayList<Intersection> visitee = new ArrayList<Intersection>();
-		ArrayList<Intersection> nonVisitee = (ArrayList<Intersection>) this.intersection.clone();
-		ArrayList<Intersection> voisinArrivee = new ArrayList<Intersection>();
-		ArrayList<Segment> voisins = new ArrayList<Segment>();
-		
-
-		for(int i=0;i<this.segment.size();i++) {	
-			if(this.segment.get(i).getFin().getId() == arrivee.getId()) {
-				voisinArrivee.add(segment.get(i).getOrigine());
-			}
-			
-		}
-		
-		for(int i=0;i<this.intersection.size();i++) {
-			tab.put(this.intersection.get(i),100000.0);
-		}
-		tab.put(depart, 0.0);
-		for(int i=0;i<this.listeAdjacence.get(depart).size();i++) {
-			Segment s = this.listeAdjacence.get(depart).get(i);
-			tab.put(s.getFin(),s.getLongueur());
-		}
-		visitee.add(depart);
-		nonVisitee.remove(depart);
-		voisinArrivee.remove(depart);
-
-		while(voisinArrivee.size()!=0) { // Tant que tous les voisins de l'intersection d'arrivée ne sont pas visitée
-			System.out.println(voisinArrivee.size());
-			Double mino = 100000.;
-			Integer index = 0;
-			System.out.println(index);
-			for(int i=0;i<nonVisitee.size();i++) {
-				Intersection intersectionAVisiter = nonVisitee.get(i);
-				if(tab.get(intersectionAVisiter) < mino && !visitee.contains(this.intersection.get(i))){
-					mino = tab.get(this.intersection.get(i));
-					index = i;
-				}
-			}
-			Intersection nouveauDepart = this.intersection.get(index);
-			
-			for(int i=0;i<this.listeAdjacence.get(nouveauDepart).size();i++) {
-				
-				Segment s = this.listeAdjacence.get(nouveauDepart).get(i);
-				if(visitee.contains(s.getFin())) {
-					//System.out.println(s.toString());
-					//System.out.println(tab.get(arrivee));
-					tab.put(s.getFin(),Math.min(tab.get(nouveauDepart) + s.getLongueur(), tab.get(s.getFin())));	
-					
-				}
-			}
-
-			visitee.add(nouveauDepart);
-			nonVisitee.remove(nouveauDepart);
-			voisinArrivee.remove(nouveauDepart);
-		}
-		return tab.get(arrivee);
-	}
 	
 	public ArrayList<Long> getIntersectionId() {
 		return intersectionId;
@@ -260,6 +201,14 @@ public class Plan {
 		
 		
 		return itineraire;
+	}
+	
+	public void remplirIndex(ArrayList<Intersection> requetes, Intersection depart) {
+		this.indexIdInteger.put(depart, 0);
+		Integer entier = 1;
+		for(Intersection i : requetes) {
+			this.indexIdInteger.put(i, entier++);
+		}
 	}
 	
 };
