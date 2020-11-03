@@ -1,6 +1,10 @@
 package controleur;
 
-public class EtatInitial {
+public class EtatInitial extends Etat {
 
+	public void choisirFichierPlan() {
+		super.choisirFichierPlan();
+		
+	}
 
 }

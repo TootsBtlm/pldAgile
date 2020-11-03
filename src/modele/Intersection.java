@@ -1,6 +1,13 @@
 
 package modele;
 
+/************************************************************/
+/**
+ * 
+ * Cette classe représente une intersection.
+ * @author romain
+ */
+
 public class Intersection {
 
 	/**   

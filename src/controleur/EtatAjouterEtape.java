@@ -1,5 +1,11 @@
 package controleur;
 
-public class EtatAjouterEtape {
 
+public class EtatAjouterEtape extends Etat{
+
+	public void choisirFichierPlan() {
+		super.choisirFichierPlan();
+		
+	}
+	
 }
