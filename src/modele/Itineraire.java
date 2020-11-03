@@ -12,10 +12,26 @@ import java.util.ArrayList;
  */
 public class Itineraire {
 	
-	ArrayList<Intersection> listeIntersections = new ArrayList<Intersection>();
+	private ArrayList<Intersection> listeIntersections = new ArrayList<Intersection>();
+
+	private Double cout = 0. ;
+	
+	public Itineraire(ArrayList<Intersection> listeIntersections, Double cout) {
+		super();
+		this.listeIntersections = listeIntersections;
+		this.cout = cout;
+	}
 
 	public ArrayList<Intersection> getListeIntersections() {
 		return listeIntersections;
+	}
+
+	public Double getCout() {
+		return cout;
+	}
+
+	public void setCout(Double cout) {
+		this.cout = cout;
 	}
 
 	public void setListeIntersections(ArrayList<Intersection> listeIntersections) {
@@ -35,6 +51,10 @@ public class Itineraire {
 		this.listeIntersections.add(intersection);
 	}
 	
+	public void addItineraire(Itineraire itineraire) {
+		this.listeIntersections.addAll(itineraire.getListeIntersections());
+		this.cout = this.cout + itineraire.getCout();
+	}
 	
 	
 };

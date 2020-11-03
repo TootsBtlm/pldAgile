@@ -5,6 +5,7 @@ import javafx.scene.paint.Color;
 import modele.Depot;
 import modele.EnsembleRequete;
 import modele.Intersection;
+import modele.Itineraire;
 import modele.Plan;
 import modele.Requete;
 import modele.Segment;
@@ -99,6 +100,36 @@ public class VueGraphique {
 
 			gc.setFill(Color.YELLOW);
 			gc.fillOval(livX - rayonCercle/2, livY - rayonCercle/2, rayonCercle, rayonCercle);
+		}
+	}
+	
+	public void drawItineraire(Plan plan, Canvas planCanvas, Itineraire itineraire) {
+		var gc = planCanvas.getGraphicsContext2D();
+		gc.setFill(Color.RED);
+		
+		double latitudeMin = plan.latitudeMin();
+		double latitudeMax = plan.latitudeMax();
+
+		double longitudeMin = plan.longitudeMin();
+		double longitudeMax = plan.longitudeMax();
+		
+		for(int i = 0; i < itineraire.getListeIntersections().size() - 1; i++) {
+			
+			Intersection i1 = itineraire.getListeIntersections().get(i);
+			Intersection i2 = itineraire.getListeIntersections().get(i + 1);
+			
+			double x1 = planCanvas.getWidth() * (i1.getLongitude() - longitudeMin) / (longitudeMax - longitudeMin); 
+			double y1 = planCanvas.getHeight() - (planCanvas.getHeight() * (i1.getLatitude() - latitudeMin) / (latitudeMax - latitudeMin)); 
+
+			double x2 = planCanvas.getWidth() * (i2.getLongitude() - longitudeMin) / (longitudeMax - longitudeMin); 
+			double y2 = planCanvas.getHeight() - (planCanvas.getHeight() * (i2.getLatitude() - latitudeMin) / (latitudeMax - latitudeMin)); 
+			
+			
+			gc.beginPath();
+			gc.moveTo(x1, y1);
+			gc.lineTo(x2, y2);
+			gc.setStroke(Color.RED);
+			gc.stroke();
 		}
 	}
 

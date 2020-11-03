@@ -31,14 +31,16 @@ public class Testeur {
 		   //Pour lire un fichier de requêtes, il faut invoquer la méthode LireRequete avec comme attribut le chemin vers le fichier xml et le Plan courant
 		   EnsembleRequete recap = nouveauLecteur.LireRequete("ressources/requestsSmall1.xml", nouveauPlan);
 		   System.out.println(recap.listePairesIntersections().toString());
-		   
-		   Intersection fin = nouveauPlan.getIntersectionById(Long.parseLong("25321433"));
-		   Intersection depart = nouveauPlan.getIntersectionById(Long.parseLong("2129259180"));
+		      
+
+		   Intersection fin = nouveauPlan.getIntersectionById(Long.parseLong("26576953"));
+		   Intersection depart = nouveauPlan.getIntersectionById(Long.parseLong("26576955"));
 		   		   
 		   System.out.println(nouveauPlan.calcDijsktra(depart, fin));
-		
-		   
+
 		   System.out.println(recap.listePairesIntersections().toString());
+		   
+		   nouveauPlan.getMatriceCout(recap);
 	   }
 		   
 }

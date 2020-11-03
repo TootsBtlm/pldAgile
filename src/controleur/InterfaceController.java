@@ -9,6 +9,7 @@ import javafx.scene.control.ListView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import modele.EnsembleRequete;
+import modele.Itineraire;
 import modele.Lecteur;
 import modele.Plan;
 import tsp.TSP;
@@ -90,7 +91,7 @@ public class InterfaceController {
 			System.out.println("Charger d'abord une requête");
 		}
 		else {
-			int timeLimit = 30;
+//			int timeLimit = 30;
 			/*
 			tsp.searchSolution(timeLimit, cout, paires, depart);
 			System.out.print("Solution of cost "+tsp.getSolutionCost()+" found in "
@@ -98,6 +99,8 @@ public class InterfaceController {
 	        for (int i=0; i<nbVertices; i++)
 	            System.out.print(tsp.getSolution(i)+" ");
 	        System.out.println(depart);*/
+			Itineraire itineraire = plan.getMatriceCout(this.ensembleRequete);
+			this.vueGraphique.drawItineraire(this.plan, this.planCanvas, itineraire);
 		}
 	}
 	
