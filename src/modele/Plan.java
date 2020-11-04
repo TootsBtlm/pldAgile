@@ -88,6 +88,8 @@ public class Plan {
         
         itineraireOpti.addIntersection(requetes.getLieuDepart().getPointDeDepart());
         
+        //Livraison livraison = new Livraison(listeItineraire, heureDepart);
+        
         Itineraire itineraireComplet = new Itineraire();
         
         for(int i=0;i<itineraireOpti.getListeIntersections().size()-1;i++) {

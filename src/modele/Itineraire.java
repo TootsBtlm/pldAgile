@@ -26,7 +26,7 @@ public class Itineraire {
 	/**
 	 * Temps nécessaire au livreur pour aller de la première à la denière intersection (vitesse de 15km/h)
 	 */
-	private Double temps = 0. ;
+	private Double temps;
 	
 	/**
 	 * Vitesse du livreur en mètres par seconde
@@ -55,6 +55,15 @@ public class Itineraire {
 
 	public void setCout(Double cout) {
 		this.cout = cout;
+	}
+	
+
+	public Double getTemps() {
+		return temps;
+	}
+
+	public void setTemps(Double temps) {
+		this.temps = temps;
 	}
 
 	public void setListeIntersections(ArrayList<Intersection> listeIntersections) {
