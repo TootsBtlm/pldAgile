@@ -14,8 +14,8 @@ import javafx.scene.layout.Pane;
 
 public class EtatAjouterEtape extends Etat{
 
-	public void selectionFichierPlan(Canvas planCanvas, Pane requetePane, Canvas requeteCanvas) {
-		super.selectionFichierPlan(planCanvas, requetePane, requeteCanvas);
+	public void choisirFichierPlan(Canvas planCanvas, Pane requetePane, Canvas requeteCanvas) {
+		super.choisirFichierPlan(planCanvas, requetePane, requeteCanvas);
 	}
 	
 	public void calculerItineraire() {

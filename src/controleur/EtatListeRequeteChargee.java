@@ -13,8 +13,8 @@ import modele.Itineraire;
 
 public class EtatListeRequeteChargee extends Etat{
 	
-	public void selectionFichierPlan(Canvas planCanvas, Pane requetePane, Canvas requeteCanvas) {
-		super.selectionFichierPlan(planCanvas, requetePane, requeteCanvas);
+	public void choisirFichierPlan(Canvas planCanvas, Pane requetePane, Canvas requeteCanvas) {
+		super.choisirFichierPlan(planCanvas, requetePane, requeteCanvas);
 	}
 
 	
