@@ -27,6 +27,10 @@ public class VueGraphique {
 		this.requeteCanvas = requeteCanvas;
 	}
 
+	public Plan getPlan() {
+		return(this.plan);
+	}
+	
 	public void drawPlan() {
 		var gc = this.planCanvas.getGraphicsContext2D();
 		var gc2 = this.requeteCanvas.getGraphicsContext2D();
@@ -145,5 +149,7 @@ public class VueGraphique {
 			gc.stroke();
 		}
 	}
+	
+	
 
 }

@@ -3,6 +3,8 @@ package controleur;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.Pane;
 import modele.Itineraire;
+import modele.Plan;
+import vue.VueGraphique;
 
 /**
  * 
@@ -13,8 +15,9 @@ import modele.Itineraire;
 
 public class EtatListeRequeteChargee extends Etat{
 	
-	public void choisirFichierPlan(Canvas planCanvas, Pane requetePane, Canvas requeteCanvas) {
+	public VueGraphique choisirFichierPlan(Canvas planCanvas, Pane requetePane, Canvas requeteCanvas) {
 		super.choisirFichierPlan(planCanvas, requetePane, requeteCanvas);
+		return(super.vue);
 	}
 
 	

@@ -56,7 +56,7 @@ public class InterfaceController {
 	
 	@FXML
 	public void choisirFichierPlan() {
-		FileChooser fileChooser = new FileChooser();
+/*		FileChooser fileChooser = new FileChooser();
 		File file = fileChooser.showOpenDialog(this.stage);
 		Circle c1 = new Circle();
 		c1.setCenterX(1000);
@@ -73,9 +73,12 @@ public class InterfaceController {
 		} else {
 			System.out.println("Fichier incorrect");
 		}
+		*/
+		//Première version pour étudier la manière dont les données vont aller d'une classe à l'autre
+		EtatInitial etat1 = new EtatInitial();
+		this.vueGraphique = etat1.choisirFichierPlan(this.planCanvas, this.requetePane, this.requeteCanvas);
+		this.plan = this.vueGraphique.getPlan();
 		
-		//appel au constructeur test
-		EtatListeRequeteChargee etattrois = new EtatListeRequeteChargee();
 	}
 	
 	@FXML

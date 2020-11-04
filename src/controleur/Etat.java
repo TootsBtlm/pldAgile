@@ -25,8 +25,8 @@ public class Etat {
 	private Stage stage;
 	private Plan plan;
 	private EnsembleRequete ensembleRequete = null;
-	private VueGraphique vueGraphique;
-
+	protected VueGraphique vue;
+	
 	private VueTextuelle vueTextuelle;
 	
 	/**
@@ -36,7 +36,7 @@ public class Etat {
 	 */
 	
 
-	public void choisirFichierPlan(Canvas planCanvas, Pane requetePane, Canvas requeteCanvas) {
+	public VueGraphique choisirFichierPlan(Canvas planCanvas, Pane requetePane, Canvas requeteCanvas) {
 		FileChooser fileChooser = new FileChooser();
 		File file = fileChooser.showOpenDialog(this.stage);
 		Circle c1 = new Circle();
@@ -49,11 +49,13 @@ public class Etat {
 			System.out.println(path);
 			Lecteur lecteur = new Lecteur();
 			this.plan = lecteur.LirePlan(path);
-			this.vueGraphique = new VueGraphique(this.plan, planCanvas, requeteCanvas);
-			this.vueGraphique.drawPlan();
+			this.vue = new VueGraphique(plan, planCanvas, requeteCanvas);
+			vue.drawPlan();
+			
 		} else {
 			System.out.println("Fichier incorrect");
 		}
+		return (this.vue);
 		
 	}
 	
