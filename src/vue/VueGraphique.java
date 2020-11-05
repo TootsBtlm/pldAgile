@@ -101,7 +101,6 @@ public class VueGraphique {
 		depotC.setCenterX(depotX);
 		depotC.setCenterY(depotY);
 		depotC.setFill(Color.ORANGE);
-		mettreCliquable(depotC);
 		this.requetes.add(depotC);
 		
 		for(int i = 0; i < er.getListeRequete().size(); i++) {
@@ -118,7 +117,6 @@ public class VueGraphique {
 			recupC.setCenterX(recupX);
 			recupC.setCenterY(recupY);
 			recupC.setFill(Color.YELLOW);
-			mettreCliquable(recupC);
 			this.requetes.add(recupC);
 			
 			double livX = this.requetePane.getWidth() * (pLiv.getLongitude() - longitudeMin) / (longitudeMax - longitudeMin); 
@@ -128,7 +126,6 @@ public class VueGraphique {
 			livC.setCenterX(livX);
 			livC.setCenterY(livY);
 			livC.setFill(Color.BLUE);
-			mettreCliquable(livC);
 			this.requetes.add(livC);
 		}
 		requetePane.getChildren().addAll(requetes);
@@ -164,20 +161,11 @@ public class VueGraphique {
 		}
 	}
 	
-	public void mettreCliquable(Node node) {
-		node.setOnMousePressed(clickRequete);
+	public Pane getRequetePane() {
+		return requetePane;
 	}
 	
-	EventHandler<MouseEvent> clickRequete = new EventHandler<MouseEvent>() {
-		
-		@Override
-		public void handle(MouseEvent event) {
-			if(event.getSource() instanceof Circle) {
-				Circle p = ((Circle)(event.getSource()));
-				System.out.println(p);
-			}
-			
-		}
-	};
-
+	public List<Node> getRequetes() {
+		return requetes;
+	}
 }
