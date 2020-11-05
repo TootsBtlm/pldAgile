@@ -7,15 +7,19 @@ import modele.EnsembleRequete;
 
 
 public class VueTextuelle {
-	
+
 	public VueTextuelle() {
-		
+
 	}
-	
+
 	public void drawText(EnsembleRequete ense, ListView<String> listViewRequest) {
 		ObservableList<String> items = FXCollections.observableArrayList();
+		items.add("Depot :" + ense.getLieuDepart().getPointDeDepart().getId().toString() + 
+				"Lat :" + ense.getLieuDepart().getPointDeDepart().getLatitude().toString() + 
+				"Long :" + ense.getLieuDepart().getPointDeDepart().getLongitude().toString());
+
 		for (int i = 0; i< ense.getListeRequete().size(); i++) {
-			
+
 			items.add("Point de recup :" + ense.getListeRequete().get(i).getPointDeLivraison().getId().toString() + 
 					"Lat :" + ense.getListeRequete().get(i).getPointDeLivraison().getLatitude().toString() + 
 					"Long :" + ense.getListeRequete().get(i).getPointDeLivraison().getLongitude().toString());
@@ -24,7 +28,6 @@ public class VueTextuelle {
 					"Long :" + ense.getListeRequete().get(i).getPointDeRecuperation().getLongitude().toString());
 		}
 		listViewRequest.setItems(items);
-			
 	}
 
 }

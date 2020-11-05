@@ -7,23 +7,25 @@ package modele;
 /************************************************************/
 /**
  * 
+ * Cette classe représente une requête.
+ * @author romain
  */
 public class Requete {
 
 	/**  
-	 * 
+	 * Intersection où le livreur va récupérer son colis 
 	 */
 	private Intersection pointDeRecuperation;
 	/**
-	 * 
+	 * Intersection où le livreur va livrer son colis
 	 */
 	private Intersection pointDeLivraison;
 	/**
-	 * 
+	 * Durée minimale que le livreur doit passer au point de recupération
 	 */
 	private Long dureeRecuperation;
 	/**
-	 * 
+	 * Durée minimale que le livreur doit passer au point de livraison
 	 */
 	private Long dureeLivraison;
 	

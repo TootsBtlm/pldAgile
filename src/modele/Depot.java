@@ -1,10 +1,22 @@
 package modele;
 
 import java.sql.Time;
-
+/************************************************************/
+/**
+ * 
+ * Cette classe représente un dépôt.
+ * @author romain
+ */
 public class Depot {
 	
+	
+	/**   
+	 * Intersection correspondant au point de départ/ d'arrivée
+	 */
 	private Intersection pointDeDepart;
+	/**   
+	 * Heure du départ du liveur
+	 */
 	private Time heureDepart;
 	
 	public Intersection getPointDeDepart() {

@@ -9,17 +9,40 @@ import java.util.ArrayList;
 /************************************************************/
 /**
  * 
+ * Cette classe représente un itinéraire.
+ * @author romain
  */
 public class Itineraire {
 	
+	/**   
+	 * Liste des intersections composant l'itineraire
+	 */
 	private ArrayList<Intersection> listeIntersections = new ArrayList<Intersection>();
-
+	/**   
+	 * Cout de l'itinéraire (distance en mètres)
+	 */
 	private Double cout = 0. ;
 	
+	/**
+	 * Temps nécessaire au livreur pour aller de la première à la denière intersection (vitesse de 15km/h)
+	 */
+	private Double temps;
+	
+	/**
+	 * Vitesse du livreur en mètres par seconde
+	 */
+	final private Double VITESSE = 4.17; 
+	
+	/**
+	 * 
+	 * @param listeIntersections composant l'itinéraire
+	 * @param cout total de l'itinéraire
+	 */
 	public Itineraire(ArrayList<Intersection> listeIntersections, Double cout) {
 		super();
 		this.listeIntersections = listeIntersections;
 		this.cout = cout;
+		this.temps = cout / VITESSE;
 	}
 
 	public ArrayList<Intersection> getListeIntersections() {
@@ -32,6 +55,15 @@ public class Itineraire {
 
 	public void setCout(Double cout) {
 		this.cout = cout;
+	}
+	
+
+	public Double getTemps() {
+		return temps;
+	}
+
+	public void setTemps(Double temps) {
+		this.temps = temps;
 	}
 
 	public void setListeIntersections(ArrayList<Intersection> listeIntersections) {

@@ -1,11 +1,17 @@
 package controleur;
 
 import java.io.File;
+import java.util.List;
+
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
 
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import modele.EnsembleRequete;
@@ -17,11 +23,19 @@ import tsp.TSP1;
 import vue.VueGraphique;
 import vue.VueTextuelle;
 
+
 public class InterfaceController {
 
 
 	@FXML
 	private Canvas planCanvas;
+	
+	@FXML
+	private Canvas requeteCanvas;
+	
+	@FXML
+	private Pane requetePane;
+	
 
 	@FXML
 	private Button btnOuvrirPlan;
@@ -32,32 +46,42 @@ public class InterfaceController {
 	private Stage stage;
 	private Plan plan;
 	private EnsembleRequete ensembleRequete = null;
+	private List<Node> requeteNodes = null;
 	private VueGraphique vueGraphique;
+	private BiMap<Node, String> requeteNodeListView = HashBiMap.create();
 
 	private VueTextuelle vueTextuelle;
 	
 	private TSP tsp;
+	
+	private MouseEvents mouseEvents;
 
 
 	@FXML
 	public void initialize() {
 		tsp = new TSP1();
+		
 	}
 	
 	@FXML
 	public void choisirFichierPlan() {
-		FileChooser fileChooser = new FileChooser();
+/*		FileChooser fileChooser = new FileChooser();
 		File file = fileChooser.showOpenDialog(this.stage);
 		if(file != null) {
 			String path = file.getPath();
 			System.out.println(path);
 			Lecteur lecteur = new Lecteur();
 			this.plan = lecteur.LirePlan(path);
-			this.vueGraphique = new VueGraphique();
-			this.vueGraphique.drawPlan(this.plan, this.planCanvas);
+			this.vueGraphique = new VueGraphique(this.plan, this.planCanvas, this.requetePane);
+			this.vueGraphique.drawPlan();
 		} else {
 			System.out.println("Fichier incorrect");
 		}
+		*/
+		//Première version pour étudier la manière dont les données vont aller d'une classe à l'autre
+		EtatInitial etat1 = new EtatInitial();
+		this.vueGraphique = etat1.choisirFichierPlan(this.planCanvas, this.requetePane, this.requeteCanvas);
+		this.plan = this.vueGraphique.getPlan();
 		
 	}
 	
@@ -71,13 +95,23 @@ public class InterfaceController {
 			String path = file.getPath();
 			System.out.println(path);
 			Lecteur lecteur = new Lecteur();
-			EnsembleRequete er = lecteur.LireRequete(path, this.plan);
-			this.vueTextuelle = new VueTextuelle();
-			this.vueTextuelle.drawText(er, this.listViewRequest);
-			this.vueGraphique.drawRequests(er, this.plan, this.planCanvas);
-
 			this.ensembleRequete = lecteur.LireRequete(path, this.plan);
-			this.vueGraphique.drawRequests(this.ensembleRequete, this.plan, this.planCanvas);
+			this.vueTextuelle = new VueTextuelle();
+			this.vueTextuelle.drawText(this.ensembleRequete, this.listViewRequest);
+			this.vueGraphique.drawRequests(this.ensembleRequete);
+			this.requeteNodes = this.vueGraphique.getRequetePane().getChildren();
+			
+			for(int i = 0; i < this.vueGraphique.getRequetes().size(); i++) {
+				requeteNodeListView.put(this.requeteNodes.get(i), listViewRequest.getItems().get(i));
+			}
+			
+			mouseEvents = new MouseEvents(requeteNodeListView, this.listViewRequest);
+			// Ajout d'un event handler sur les nodes correspondant aux requêtes sur la carte
+			for(int i = 0; i < this.vueGraphique.getRequetes().size(); i++) {
+				 mouseEvents.requeteCliquable(this.vueGraphique.getRequetePane().getChildren().get(i));
+			}
+			
+			mouseEvents.setListeCliquable();
 		}
 	}
 
@@ -100,21 +134,9 @@ public class InterfaceController {
 	            System.out.print(tsp.getSolution(i)+" ");
 	        System.out.println(depart);*/
 			Itineraire itineraire = plan.getMatriceCout(this.ensembleRequete);
-			this.vueGraphique.drawItineraire(this.plan, this.planCanvas, itineraire);
+			this.vueGraphique.drawItineraire(itineraire);
 		}
 	}
-	
-	public void drawLine() {
-		var gc = this.planCanvas.getGraphicsContext2D();
-
-		gc.beginPath();
-		gc.moveTo(this.planCanvas.getWidth(), 0);
-		gc.lineTo(30.5, 30.5);
-		gc.stroke();
-	}
-
-	
-	
 	
 	public void setStage(Stage stage) {
 		this.stage = stage;
