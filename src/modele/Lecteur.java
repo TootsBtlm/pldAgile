@@ -18,11 +18,13 @@ import org.xml.sax.SAXException;
 	/**
 	 * 
 	 * Cette classe est l'interface de lecture des fichiers xml. 
-	 * @author romain
+	 * @author Romain
 	 *
 	 */
 
 public class Lecteur {
+
+	
 	
 	/**
 	 * Cette méthode lit le plan contenus dans un fichier xml. Elle renvoie un Plan rempli avec toutes les intersections.
@@ -41,8 +43,14 @@ public class Lecteur {
 	         GestionnairePlanXml nouveauGestionnaireDePlan = new GestionnairePlanXml();
 	         
 	         parser.parse(nomDeFichier, nouveauGestionnaireDePlan );
-	         Plan PlanLu = new Plan(nouveauGestionnaireDePlan.getListeIntersectionId(),nouveauGestionnaireDePlan.getListeIntersection(),nouveauGestionnaireDePlan.getListeSegment());
+	         
+	         ArrayList<Intersection> ListeIntersections = nouveauGestionnaireDePlan.getListeIntersection();
+	         ArrayList<Long> ListeIntersectionsid = nouveauGestionnaireDePlan.getListeIntersectionId();
+	         ArrayList<Segment> ListeSegments = nouveauGestionnaireDePlan.getListeSegment();
+
+	         Plan PlanLu = new Plan(ListeIntersectionsid, ListeIntersections, ListeSegments);
 	         nouveauPlan = PlanLu;
+	         
 	         
 	    } catch (DOMException e) {
 	       e.printStackTrace();
@@ -53,7 +61,6 @@ public class Lecteur {
 	    } catch (SAXException e) {
 	       e.printStackTrace();
 	    } catch (IOException e) {
-	       // TODO Auto-generated catch block
 	       e.printStackTrace();
 	    }
 		return nouveauPlan;
@@ -92,7 +99,6 @@ public class Lecteur {
 	    } catch (SAXException e) {
 	       e.printStackTrace();
 	    } catch (IOException e) {
-	       // TODO Auto-generated catch block
 	       e.printStackTrace();
 	    }
 		return RecapDemande;
