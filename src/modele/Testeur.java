@@ -15,7 +15,10 @@ public class Testeur {
 		   
 		   //Pour lire un plan il faut invoquer la méthode LirePlan avec comme attribut le chemin vers le fichier
 		   Plan nouveauPlan = nouveauLecteur.LirePlan("ressources/smallMap.xml");
-		   
+		   EnsembleRequete recap = nouveauLecteur.LireRequete("ressources/requestsSmall1.xml", nouveauPlan);
+
+		   System.out.println("coucou");
+		   /**
 		   //Méthode pour récupérer la matrice
 		   Double[][] matrice = nouveauPlan.getMatrice();
 
@@ -40,7 +43,7 @@ public class Testeur {
 
 		   System.out.println(recap.listePairesIntersections().toString());
 		   
-		   nouveauPlan.getMatriceCout(recap);
+		   nouveauPlan.getMatriceCout(recap);*/
 	   }
 		   
 }
