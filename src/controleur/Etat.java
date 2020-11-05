@@ -49,9 +49,8 @@ public class Etat {
 			System.out.println(path);
 			Lecteur lecteur = new Lecteur();
 			this.plan = lecteur.LirePlan(path);
-			this.vue = new VueGraphique(plan, planCanvas, requeteCanvas);
+			this.vue = new VueGraphique(plan, planCanvas, requetePane);
 			vue.drawPlan();
-			
 		} else {
 			System.out.println("Fichier incorrect");
 		}

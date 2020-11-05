@@ -1,13 +1,17 @@
 package controleur;
 
 import java.io.File;
+import java.util.List;
+
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
 
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import modele.EnsembleRequete;
@@ -42,33 +46,33 @@ public class InterfaceController {
 	private Stage stage;
 	private Plan plan;
 	private EnsembleRequete ensembleRequete = null;
+	private List<Node> requeteNodes = null;
 	private VueGraphique vueGraphique;
+	private BiMap<Node, String> requeteNodeListView = HashBiMap.create();
 
 	private VueTextuelle vueTextuelle;
 	
 	private TSP tsp;
+	
+	private MouseEvents mouseEvents;
 
 
 	@FXML
 	public void initialize() {
 		tsp = new TSP1();
+		
 	}
 	
 	@FXML
 	public void choisirFichierPlan() {
 /*		FileChooser fileChooser = new FileChooser();
 		File file = fileChooser.showOpenDialog(this.stage);
-		Circle c1 = new Circle();
-		c1.setCenterX(1000);
-		c1.setCenterY(1000);
-		c1.setRadius(20);
-		requetePane.getChildren().add(c1);
 		if(file != null) {
 			String path = file.getPath();
 			System.out.println(path);
 			Lecteur lecteur = new Lecteur();
 			this.plan = lecteur.LirePlan(path);
-			this.vueGraphique = new VueGraphique(this.plan, this.planCanvas, this.requeteCanvas);
+			this.vueGraphique = new VueGraphique(this.plan, this.planCanvas, this.requetePane);
 			this.vueGraphique.drawPlan();
 		} else {
 			System.out.println("Fichier incorrect");
@@ -95,6 +99,19 @@ public class InterfaceController {
 			this.vueTextuelle = new VueTextuelle();
 			this.vueTextuelle.drawText(this.ensembleRequete, this.listViewRequest);
 			this.vueGraphique.drawRequests(this.ensembleRequete);
+			this.requeteNodes = this.vueGraphique.getRequetePane().getChildren();
+			
+			for(int i = 0; i < this.vueGraphique.getRequetes().size(); i++) {
+				requeteNodeListView.put(this.requeteNodes.get(i), listViewRequest.getItems().get(i));
+			}
+			
+			mouseEvents = new MouseEvents(requeteNodeListView, this.listViewRequest);
+			// Ajout d'un event handler sur les nodes correspondant aux requêtes sur la carte
+			for(int i = 0; i < this.vueGraphique.getRequetes().size(); i++) {
+				 mouseEvents.requeteCliquable(this.vueGraphique.getRequetePane().getChildren().get(i));
+			}
+			
+			mouseEvents.setListeCliquable();
 		}
 	}
 

@@ -1,9 +1,13 @@
 package vue;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import modele.Depot;
@@ -18,13 +22,16 @@ public class VueGraphique {
 
 	Plan plan;
 	Canvas planCanvas;
-	Canvas requeteCanvas;
-	List<Circle> requetes = new ArrayList<>();
 	
-	public VueGraphique(Plan plan, Canvas planCanvas, Canvas requeteCanvas) {
+	Pane requetePane;
+	
+	List<Node> requetes = new ArrayList<>();
+	Map<Node, Intersection> nodeLinkedToIntersection = new HashMap<>();
+	
+	public VueGraphique(Plan plan, Canvas planCanvas, Pane requetePane) {
 		this.plan = plan;
 		this.planCanvas = planCanvas;
-		this.requeteCanvas = requeteCanvas;
+		this.requetePane = requetePane;
 	}
 
 	public Plan getPlan() {
@@ -33,9 +40,7 @@ public class VueGraphique {
 	
 	public void drawPlan() {
 		var gc = this.planCanvas.getGraphicsContext2D();
-		var gc2 = this.requeteCanvas.getGraphicsContext2D();
 		gc.clearRect(0, 0, this.planCanvas.getWidth(), this.planCanvas.getHeight());
-		gc2.clearRect(0, 0, this.requeteCanvas.getWidth(), this.requeteCanvas.getHeight());
 		//		gc.beginPath();
 		//		gc.moveTo(this.this.planCanvas.getWidth(), 0);
 		//		gc.lineTo(30.5, 30.5);
@@ -78,6 +83,8 @@ public class VueGraphique {
 	}
 
 	public void drawRequests(EnsembleRequete er) {
+		requetes.clear();
+		requetePane.getChildren().clear();
 
 		double latitudeMin = this.plan.latitudeMin();
 		double latitudeMax = this.plan.latitudeMax();
@@ -85,18 +92,19 @@ public class VueGraphique {
 		double longitudeMin = this.plan.longitudeMin();
 		double longitudeMax = this.plan.longitudeMax();
 
-		double rayonCercle = 20.0;
+		double rayonCercle = 6.0;
 
-		var gc = this.requeteCanvas.getGraphicsContext2D();
-		gc.clearRect(0, 0, this.requeteCanvas.getWidth(), this.requeteCanvas.getHeight());
 //		drawPlan();
 		Depot depot = er.getLieuDepart();
 
-		double depotX = this.requeteCanvas.getWidth() * (depot.getPointDeDepart().getLongitude() - longitudeMin) / (longitudeMax - longitudeMin); 
-		double depotY = this.requeteCanvas.getHeight() - (this.requeteCanvas.getHeight() * (depot.getPointDeDepart().getLatitude() - latitudeMin) / (latitudeMax - latitudeMin));
-		gc.setFill(Color.ORANGE);
-		gc.fillOval(depotX - rayonCercle/2, depotY - rayonCercle/2, rayonCercle, rayonCercle);
-
+		double depotX = this.requetePane.getWidth() * (depot.getPointDeDepart().getLongitude() - longitudeMin) / (longitudeMax - longitudeMin); 
+		double depotY = this.requetePane.getHeight() - (this.requetePane.getHeight() * (depot.getPointDeDepart().getLatitude() - latitudeMin) / (latitudeMax - latitudeMin));
+		Circle depotC = new Circle(rayonCercle);
+		depotC.setCenterX(depotX);
+		depotC.setCenterY(depotY);
+		depotC.setFill(Color.ORANGE);
+		this.requetes.add(depotC);
+		
 		for(int i = 0; i < er.getListeRequete().size(); i++) {
 			Requete req = er.getListeRequete().get(i);
 			Intersection pRecup = req.getPointDeRecuperation();
@@ -104,20 +112,25 @@ public class VueGraphique {
 
 			System.out.println(pLiv);
 
-			double recupX = this.requeteCanvas.getWidth() * (pRecup.getLongitude() - longitudeMin) / (longitudeMax - longitudeMin); 
-			double recupY = this.requeteCanvas.getHeight() - (this.requeteCanvas.getHeight() * (pRecup.getLatitude() - latitudeMin) / (latitudeMax - latitudeMin));
+			double recupX = this.requetePane.getWidth() * (pRecup.getLongitude() - longitudeMin) / (longitudeMax - longitudeMin); 
+			double recupY = this.requetePane.getHeight() - (this.requetePane.getHeight() * (pRecup.getLatitude() - latitudeMin) / (latitudeMax - latitudeMin));
 
-			double livX = this.requeteCanvas.getWidth() * (pLiv.getLongitude() - longitudeMin) / (longitudeMax - longitudeMin); 
-			double livY = this.requeteCanvas.getHeight() - (this.requeteCanvas.getHeight() * (pLiv.getLatitude() - latitudeMin) / (latitudeMax - latitudeMin));
-
-
-
-			gc.setFill(Color.BLUE);
-			gc.fillOval(recupX - rayonCercle/2, recupY - rayonCercle/2, rayonCercle, rayonCercle);
-
-			gc.setFill(Color.YELLOW);
-			gc.fillOval(livX - rayonCercle/2, livY - rayonCercle/2, rayonCercle, rayonCercle);
+			Circle recupC = new Circle(rayonCercle);
+			recupC.setCenterX(recupX);
+			recupC.setCenterY(recupY);
+			recupC.setFill(Color.YELLOW);
+			this.requetes.add(recupC);
+			
+			double livX = this.requetePane.getWidth() * (pLiv.getLongitude() - longitudeMin) / (longitudeMax - longitudeMin); 
+			double livY = this.requetePane.getHeight() - (this.requetePane.getHeight() * (pLiv.getLatitude() - latitudeMin) / (latitudeMax - latitudeMin));
+			
+			Circle livC = new Circle(rayonCercle);
+			livC.setCenterX(livX);
+			livC.setCenterY(livY);
+			livC.setFill(Color.BLUE);
+			this.requetes.add(livC);
 		}
+		requetePane.getChildren().addAll(requetes);
 	}
 	
 	public void drawItineraire(Itineraire itineraire) {
@@ -150,6 +163,11 @@ public class VueGraphique {
 		}
 	}
 	
+	public Pane getRequetePane() {
+		return requetePane;
+	}
 	
-
+	public List<Node> getRequetes() {
+		return requetes;
+	}
 }
