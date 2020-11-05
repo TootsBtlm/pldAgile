@@ -98,6 +98,7 @@ public class Plan {
         return(itineraireComplet);
     }
 	
+	@SuppressWarnings("unchecked")
 	public Itineraire calcDijsktra(Intersection depart, Intersection arrivee){
 		
 		
@@ -152,18 +153,8 @@ public class Plan {
 					mino = tab.get(this.intersection.get(i));
 					index = i;
 				}
-				
 			}
 			
-			
-			//System.out.println(mino);
-			for(int i  = 0 ;  i < tab.size(); i++) {
-				if(tab.get(this.intersection.get(i)) < 100000) {
-					//System.out.println(this.intersection.get(i)+" : " + tab.get(this.intersection.get(i)));
-				}
-			}
-			
-			//System.out.println(tab);
 			Intersection nouveauDepart = this.intersection.get(index);
 			
 			for(int i=0;i<this.listeAdjacence.get(nouveauDepart).size();i++) {
