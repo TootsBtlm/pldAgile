@@ -39,6 +39,9 @@ public class VueGraphique {
 	}
 	
 	public void drawPlan() {
+		requetes.clear();
+		requetePane.getChildren().clear();
+		nodeLinkedToIntersection.clear();
 		var gc = this.planCanvas.getGraphicsContext2D();
 		gc.clearRect(0, 0, this.planCanvas.getWidth(), this.planCanvas.getHeight());
 		//		gc.beginPath();
@@ -85,14 +88,15 @@ public class VueGraphique {
 	public void drawRequests(EnsembleRequete er) {
 		requetes.clear();
 		requetePane.getChildren().clear();
-
+		nodeLinkedToIntersection.clear();
+		
 		double latitudeMin = this.plan.latitudeMin();
 		double latitudeMax = this.plan.latitudeMax();
 
 		double longitudeMin = this.plan.longitudeMin();
 		double longitudeMax = this.plan.longitudeMax();
 
-		double rayonCercle = 6.0;
+		double rayonCercle = 8.0;
 
 //		drawPlan();
 		Depot depot = er.getLieuDepart();
