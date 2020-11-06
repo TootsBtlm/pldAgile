@@ -4,6 +4,7 @@
 
 package modele;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javafx.util.Pair;
@@ -88,7 +89,6 @@ public class Plan {
         
         itineraireOpti.addIntersection(requetes.getLieuDepart().getPointDeDepart());
         
-        //Livraison livraison = new Livraison(listeItineraire, heureDepart);
         
         ArrayList<Itineraire> itineraireComplet = new ArrayList<Itineraire>();
         
@@ -96,6 +96,10 @@ public class Plan {
         	Pair<Intersection, Intersection> cle = new Pair<Intersection, Intersection>(itineraireOpti.getListeIntersections().get(i), itineraireOpti.getListeIntersections().get(i+1));
         	itineraireComplet.add(matriceItineraire.get(cle));
         }
+        
+        
+        
+        
         Livraison ret = new Livraison(itineraireComplet,requetes);
         ret.calculArrivees();
         return(ret);
@@ -211,12 +215,53 @@ public class Plan {
 	 * Cette fonction va permettre d'ajouter un sommet au graphe parcourus par le cycliste
 	 * @return Livraison
 	 */
-	//public Livraison ajouterSommet(Livraison ancienneLivraison, Intersection nouveauSommet, Intersection intersectionPrecedente) {
+	public Livraison ajouterSommet(Livraison ancienneLivraison, Intersection nouveauSommet, Intersection intersectionPrecedente, Long duree) {
 		
+		ArrayList<Itineraire> nouvelleListeItineraire = new ArrayList<Itineraire>();
+		EnsembleRequete requetes = ancienneLivraison.getRequetes();
+		Time heureDepart = requetes.LieuDepart.getHeureDepart();
+		HashMap<Itineraire,Time>dictionnaireArriveesItineraires = new HashMap<Itineraire,Time>();
 		
+		for(int i = 0 ; i < ancienneLivraison.getListeItineraires().size() ; i++) {
+			if(ancienneLivraison.getListeItineraires().get(i).getListeIntersections().get(0).getId() == intersectionPrecedente.getId()) {
+				Intersection depart = ancienneLivraison.getListeItineraires().get(i).getListeIntersections().get(0);
+				Intersection arrivee = ancienneLivraison.getListeItineraires().get(i).getListeIntersections().get(ancienneLivraison.getListeItineraires().get(i).getListeIntersections().size()-1);
+				Itineraire nouvelItineraire1 = this.calcDijsktra(depart, nouveauSommet);
+				Itineraire nouvelItineraire2 = this.calcDijsktra(nouveauSommet, arrivee);
+				nouvelleListeItineraire.add(nouvelItineraire1);
+				nouvelleListeItineraire.add(nouvelItineraire2);
+			}
+			else {
+				nouvelleListeItineraire.add(ancienneLivraison.getListeItineraires().get(i));
+			}
+		}
 		
-		//return new Livraison();
-	//}
+		HashMap<Intersection,Long>tempsAssocieIntersection = new HashMap<Intersection,Long>();
+		
+		for(int i=0;i<requetes.getListeRequete().size();i++) {
+			tempsAssocieIntersection.put(requetes.listeRequete.get(i).getPointDeRecuperation(), requetes.listeRequete.get(i).getDureeRecuperation());
+			tempsAssocieIntersection.put(requetes.listeRequete.get(i).getPointDeLivraison(), requetes.listeRequete.get(i).getDureeLivraison());
+		}
+		dictionnaireArriveesItineraires.put(nouvelleListeItineraire.get(0), new Time(heureDepart.getTime()+nouvelleListeItineraire.get(0).getTemps().longValue()));
+		
+		if(nouvelleListeItineraire.size() > 0) {
+			
+
+			for(int i=1;i<nouvelleListeItineraire.size();i++) {
+				Time temps = new Time(
+						dictionnaireArriveesItineraires.get(nouvelleListeItineraire.get(i-1)).getTime()+
+						nouvelleListeItineraire.get(i).getTemps().longValue() + 
+						tempsAssocieIntersection.get(nouvelleListeItineraire.get(i).getListeIntersections().get(0))				
+						);
+				
+				dictionnaireArriveesItineraires.put(nouvelleListeItineraire.get(i),temps);
+			}
+		
+		}
+
+		return new Livraison(nouvelleListeItineraire, heureDepart, dictionnaireArriveesItineraires, requetes);
+		
+	}
 	
 	public ArrayList<Long> getIntersectionId() {
 		return intersectionId;
