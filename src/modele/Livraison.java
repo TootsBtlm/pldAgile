@@ -38,6 +38,29 @@ public class Livraison {
 	EnsembleRequete requetes;
 	
 	/**
+	 * 
+	 */
+	public Livraison() {
+		super();
+	}
+
+	/**
+	 * 
+	 * @param listeItineraires
+	 * @param heureDepart
+	 * @param dictionnaireArriveesItineraires
+	 * @param requetes
+	 */
+	public Livraison(ArrayList<Itineraire> listeItineraires, Time heureDepart,
+			HashMap<Itineraire, Time> dictionnaireArriveesItineraires, EnsembleRequete requetes) {
+		super();
+		this.listeItineraires = listeItineraires;
+		this.heureDepart = heureDepart;
+		this.dictionnaireArriveesItineraires = dictionnaireArriveesItineraires;
+		this.requetes = requetes;
+	}
+
+	/**
 	 * Constructeur de livraison
 	 * @param listeItineraires
 	 * @param requetes
