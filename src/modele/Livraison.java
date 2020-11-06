@@ -106,18 +106,7 @@ public class Livraison {
 		this.heureDepart = requetes.LieuDepart.getHeureDepart();
 	}
 	
-	public Livraison(ArrayList<Itineraire> listeItineraires, Time heureDepart,
-			HashMap<Itineraire, Time> dictionnaireArriveesItineraires, EnsembleRequete requetes) {
-		super();
-		this.listeItineraires = listeItineraires;
-		this.heureDepart = heureDepart;
-		this.dictionnaireArriveesItineraires = dictionnaireArriveesItineraires;
-		this.requetes = requetes;
-	}
 
-	public Livraison() {
-		super();
-	}
 
 	/**
 	 * Cette fonction calcule les temps associés aux intersections principales du parcours.
@@ -148,19 +137,5 @@ public class Livraison {
 		
 	}
 
-	public ArrayList<Itineraire> getListeItineraires() {
-		return listeItineraires;
-	}
 
-	public Time getHeureDepart() {
-		return heureDepart;
-	}
-
-	public HashMap<Itineraire, Time> getDictionnaireArriveesItineraires() {
-		return dictionnaireArriveesItineraires;
-	}
-
-	public EnsembleRequete getRequetes() {
-		return requetes;
-	}
 };
