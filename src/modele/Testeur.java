@@ -18,7 +18,7 @@ public class Testeur {
 		   EnsembleRequete recap = nouveauLecteur.LireRequete("ressources/requestsSmall1.xml", nouveauPlan);
 
 		   System.out.println(recap.toString());
-
+		   
 		   /**
 		   //Méthode pour récupérer la matrice
 		   Double[][] matrice = nouveauPlan.getMatrice();

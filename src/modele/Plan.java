@@ -46,7 +46,7 @@ public class Plan {
 	}
 	/* Method */
 	
-	public Itineraire getMatriceCout(EnsembleRequete requetes) {
+	public Livraison getMatriceCout(EnsembleRequete requetes) {
         ArrayList<Intersection> listeIntersection = new ArrayList<Intersection>();
         ArrayList<Pair<Integer,Integer>> listePaires = new ArrayList<Pair<Integer,Integer>>();
         listeIntersection.add(requetes.getLieuDepart().getPointDeDepart());
@@ -90,15 +90,30 @@ public class Plan {
         
         //Livraison livraison = new Livraison(listeItineraire, heureDepart);
         
-        Itineraire itineraireComplet = new Itineraire();
+        ArrayList<Itineraire> itineraireComplet = new ArrayList<Itineraire>();
         
         for(int i=0;i<itineraireOpti.getListeIntersections().size()-1;i++) {
         	Pair<Intersection, Intersection> cle = new Pair<Intersection, Intersection>(itineraireOpti.getListeIntersections().get(i), itineraireOpti.getListeIntersections().get(i+1));
-        	itineraireComplet.addItineraire(matriceItineraire.get(cle));
+        	itineraireComplet.add(matriceItineraire.get(cle));
         }
-        return(itineraireComplet);
+        Livraison ret = new Livraison(itineraireComplet,requetes);
+        ret.calculArrivees();
+        return(ret);
     }
 	
+	public String getNomRue(Intersection intersections) {
+		
+		String nomRue = new String();
+		for(int i = 0; i< this.getSegment().size() ; i++) {
+			Segment segment = this.getSegment().get(i);
+			if(segment.getOrigine().getId() == intersections.getId() || segment.getFin().getId() == intersections.getId()  ) {
+				nomRue = segment.getNom();
+			}
+		}
+		 
+		
+		return nomRue;
+	}
 	public Itineraire calcDijsktra(Intersection depart, Intersection arrivee){
 		
 		

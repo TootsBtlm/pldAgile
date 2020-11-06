@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 import modele.EnsembleRequete;
 import modele.Itineraire;
 import modele.Lecteur;
+import modele.Livraison;
 import modele.Plan;
 import tsp.TSP;
 import tsp.TSP1;
@@ -124,7 +125,7 @@ public class InterfaceController {
 			System.out.println(path);
 			Lecteur lecteur = new Lecteur();
 			this.ensembleRequete = lecteur.LireRequete(path, this.plan);
-			this.vueTextuelle = new VueTextuelle();
+			this.vueTextuelle = new VueTextuelle(this.plan, this.listViewRequest);
 			this.vueTextuelle.drawText(this.ensembleRequete, this.listViewRequest);
 			this.vueGraphique.drawRequests(this.ensembleRequete);
 			this.requeteNodes = this.vueGraphique.getRequetePane().getChildren();
@@ -161,9 +162,11 @@ public class InterfaceController {
 	        for (int i=0; i<nbVertices; i++)
 	            System.out.print(tsp.getSolution(i)+" ");
 	        System.out.println(depart);*/
-			Itineraire itineraire = plan.getMatriceCout(this.ensembleRequete);
-			this.vueGraphique.drawItineraire(itineraire);
-			//this.vueTextuelle.drawText(itineraire.getListeIntersections(), listViewRequest);
+			Livraison livraison = plan.getMatriceCout(this.ensembleRequete);
+			System.out.println("Size itineraire : " + livraison.getListeItineraires().get(0).getListeIntersections().get(0).getId());
+			this.vueGraphique.drawItineraire(livraison);
+			this.vueTextuelle.drawItineraire(livraison, this.requeteNodeListView);
+
 		}
 	}
 	
