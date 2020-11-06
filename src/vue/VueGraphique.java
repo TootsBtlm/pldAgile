@@ -79,6 +79,9 @@ public class VueGraphique {
 
 			gc.beginPath();
 			gc.moveTo(x1, y1);
+			gc.setLineWidth(1.0);
+			gc.setFill(Color.BLACK);
+			gc.setStroke(Color.BLACK);
 			gc.lineTo(x2, y2);
 			gc.stroke();
 
@@ -163,6 +166,7 @@ public class VueGraphique {
 			gc.moveTo(x1, y1);
 			gc.lineTo(x2, y2);
 			gc.setStroke(Color.RED);
+			gc.setLineWidth(4.0);
 			gc.stroke();
 		}
 	}

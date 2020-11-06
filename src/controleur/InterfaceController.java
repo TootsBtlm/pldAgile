@@ -163,6 +163,7 @@ public class InterfaceController {
 	        System.out.println(depart);*/
 			Itineraire itineraire = plan.getMatriceCout(this.ensembleRequete);
 			this.vueGraphique.drawItineraire(itineraire);
+			//this.vueTextuelle.drawText(itineraire.getListeIntersections(), listViewRequest);
 		}
 	}
 	
