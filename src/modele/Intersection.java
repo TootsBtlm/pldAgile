@@ -16,8 +16,12 @@ public class Intersection {
 	private Long id;
 	
 	/**   
-	 * Longitude de l'intersection 
+	 * Id à afficher sur le plan
 	 */
+	private Long idVisible;
+	/**   
+	 * Longitude de l'intersection 
+	 */	
 	private Double longitude;
 	
 	/**
@@ -33,6 +37,12 @@ public class Intersection {
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	public Long getIdVisible() {
+		return idVisible;
+	}
+	public void setIdVisible(Long idVisible) {
+		this.idVisible = idVisible;
 	}
 	public Double getLongitude() {
 		return longitude;
