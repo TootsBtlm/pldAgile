@@ -38,4 +38,13 @@ public class EtatItineraireCalcule extends Etat{
 	
 	}
 	
+	public void ajouterEtape() {
+		this.interfaceController.ajouterEtape();
+	}
+	
+	public void supprimerEtape() {
+		this.interfaceController.supprimerEtape();
+	}
+	
+	
 }

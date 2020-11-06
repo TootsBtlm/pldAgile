@@ -37,4 +37,12 @@ public class EtatListeRequeteChargee extends Etat{
 	
 	}
 
+	public void ajouterEtape() {
+		System.out.println("Calculer d'abord l'itinéraire");
+	}
+	
+	public void supprimerEtape() {
+		System.out.println("Charger d'abord l'itinéraire");
+	}
+	
 }

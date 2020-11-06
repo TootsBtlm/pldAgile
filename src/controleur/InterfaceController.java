@@ -165,6 +165,26 @@ public class InterfaceController {
 		etat = new EtatItineraireCalcule(this);
 	}
 	
+	@FXML
+	public void actionAjouterEtape() {
+		etat.ajouterEtape();
+	}
+	
+	public void ajouterEtape() {
+		System.out.println("tout marche");
+	// mettre le code pour ajouter une etape (appel a une fonction dans modele ?)	
+	}
+	
+	@FXML
+	public void actionSupprimerEtape() {
+		etat.supprimerEtape();
+	}
+	
+	public void supprimerEtape() {
+		System.out.println("tout marche");
+		// mettre le code pour supprimer une etape (appel a une fonction dans modele ?)	
+	}
+	
 	public void setStage(Stage stage) {
 		this.stage = stage;
 	}
