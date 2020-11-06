@@ -55,7 +55,7 @@ public class Livraison {
 	 * Cette fonction calcule les temps associés aux intersections principales du parcours.
 	 */
 	
-	private void calculArrivees() {
+	public void calculArrivees() {
 		HashMap<Intersection,Long>tempsAssocieIntersection = new HashMap<Intersection,Long>();
 		for(int i=0;i<this.requetes.getListeRequete().size();i++) {
 			tempsAssocieIntersection.put(this.requetes.listeRequete.get(i).getPointDeRecuperation(), this.requetes.listeRequete.get(i).getDureeRecuperation());
