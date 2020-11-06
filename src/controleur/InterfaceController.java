@@ -58,6 +58,8 @@ public class InterfaceController {
 	private MouseEvents mouseEvents;
 
 	private Etat etat;
+	
+	private Livraison livraison;
 
 	@FXML
 	public void initialize() {
@@ -157,10 +159,10 @@ public class InterfaceController {
 	        for (int i=0; i<nbVertices; i++)
 	            System.out.print(tsp.getSolution(i)+" ");
 	        System.out.println(depart);*/
-		Livraison livraison = plan.getMatriceCout(this.ensembleRequete);
-		System.out.println("Size itineraire : " + livraison.getListeItineraires().get(0).getListeIntersections().get(0).getId());
-		this.vueGraphique.drawItineraire(livraison);
-		this.vueTextuelle.drawItineraire(livraison, this.requeteNodeListView);
+		this.livraison = plan.getMatriceCout(this.ensembleRequete);
+		System.out.println("Size itineraire : " + this.livraison.getListeItineraires().get(0).getListeIntersections().get(0).getId());
+		this.vueGraphique.drawItineraire(this.livraison);
+		this.vueTextuelle.drawItineraire(this.livraison, this.requeteNodeListView);
 
 		etat = new EtatItineraireCalcule(this);
 
@@ -173,7 +175,9 @@ public class InterfaceController {
 	
 	public void ajouterEtape() {
 		System.out.println("tout marche");
-	// mettre le code pour ajouter une etape (appel a une fonction dans modele ?)	
+		// a faire mario et jj
+		//this.livraison = plan.ajouterSommet(this.livraison, "nouvelle intersection", "intersection precedente", LONG "demander la durée")
+		// mettre le code pour ajouter une etape (appel a une fonction dans plan)	
 	}
 	
 	@FXML
@@ -183,7 +187,9 @@ public class InterfaceController {
 	
 	public void supprimerEtape() {
 		System.out.println("tout marche");
-		// mettre le code pour supprimer une etape (appel a une fonction dans modele ?)	
+		// à faire mario et jj
+		// this.livraison = plan.supprimerSommet(this.livraison, "intersection à supprimer")
+		// mettre le code pour supprimer une etape (appel a une fonction dans plan)	
 	}
 	
 	public void setStage(Stage stage) {
