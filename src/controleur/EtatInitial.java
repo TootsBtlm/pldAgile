@@ -33,4 +33,12 @@ public class EtatInitial extends Etat {
 		System.out.println("Charger d'abord un plan");
 	}
 	
+	public void ajouterEtape() {
+		System.out.println("Charger d'abord un plan");
+	}
+	
+	public void supprimerEtape() {
+		System.out.println("Charger d'abord un plan");
+	}
+	
 }

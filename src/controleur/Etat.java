@@ -49,6 +49,12 @@ public class Etat {
 		
 	}
 	
+	public void ajouterEtape() {
+		
+	}
 	
+	public void supprimerEtape() {
+		
+	}
 	
 }

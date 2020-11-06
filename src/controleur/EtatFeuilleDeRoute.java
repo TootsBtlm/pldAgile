@@ -36,4 +36,12 @@ public class EtatFeuilleDeRoute extends Etat{
 	
 	}
 	
+	public void ajouterEtape() {
+		this.interfaceController.ajouterEtape();
+	}
+	
+	public void supprimerEtape() {
+		this.interfaceController.supprimerEtape();
+	}
+	
 }
