@@ -48,6 +48,7 @@ public class Livraison {
 		this.listeItineraires = listeItineraires;
 		this.requetes = requetes;
 		this.heureDepart = requetes.LieuDepart.getHeureDepart();
+		
 	}
 	
 	/**

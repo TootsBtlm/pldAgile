@@ -17,7 +17,8 @@ public class Testeur {
 		   Plan nouveauPlan = nouveauLecteur.LirePlan("ressources/smallMap.xml");
 		   EnsembleRequete recap = nouveauLecteur.LireRequete("ressources/requestsSmall1.xml", nouveauPlan);
 
-		   System.out.println("coucou");
+		   System.out.println(recap.toString());
+
 		   /**
 		   //Méthode pour récupérer la matrice
 		   Double[][] matrice = nouveauPlan.getMatrice();
@@ -45,5 +46,5 @@ public class Testeur {
 		   
 		   nouveauPlan.getMatriceCout(recap);*/
 	   }
-		   
+
 }
