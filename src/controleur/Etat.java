@@ -36,15 +36,18 @@ public class Etat {
 	}
 	
 
-	public void choisirFichierPlan() {
+	public void chargerFichierPlan() {
 		
 		
 	}
 	
-	public void choisirFichierRequetes() {
+	public void chargerFichierRequetes() {
 		
 	}
 	
+	public void calculerItineraire() {
+		
+	}
 	
 	
 	

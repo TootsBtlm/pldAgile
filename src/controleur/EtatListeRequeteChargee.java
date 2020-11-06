@@ -18,21 +18,23 @@ public class EtatListeRequeteChargee extends Etat{
 	}
 
 
-	public void choisirFichierPlan() {
+	public void chargerFichierPlan() {
 		
-
+		this.interfaceController.chargerFichierPlan();
 		
 	}
 
 	
-	public void calculerItineraire() {
-		//super.calculerItineraire();
-		//Itineraire itineraire = plan.getMatriceCout(this.ensembleRequete);
-		//this.vueGraphique.drawItineraire(this.plan, this.planCanvas, itineraire);
+	public void chargerFichierRequetes() {
+		
+		this.interfaceController.chargerFichierRequete();
+		
 	}
 
-	public void choisirFichierRequetes() {
-		//super.choisirFichierRequetes();
+	public void calculerItineraire() {
+		
+		this.interfaceController.calculerItineraire();
+	
 	}
 
 }
