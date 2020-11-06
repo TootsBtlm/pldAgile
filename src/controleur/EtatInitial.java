@@ -1,8 +1,6 @@
 package controleur;
 
 
-import javafx.scene.canvas.Canvas;
-import javafx.scene.layout.Pane;
 import modele.Itineraire;
 import modele.Plan;
 import vue.VueGraphique;
@@ -16,19 +14,31 @@ import vue.VueGraphique;
 
 public class EtatInitial extends Etat {
 
-	public VueGraphique choisirFichierPlan(Canvas planCanvas, Pane requetePane, Canvas requeteCanvas) {
-		
-		return(super.choisirFichierPlan(planCanvas, requetePane, requeteCanvas));
+	public EtatInitial(InterfaceController interfaceController) {
+		super(interfaceController);
 	}
 
+	public void chargerFichierPlan() {
+		
+		this.interfaceController.chargerFichierPlan();
+		
+	}
+
+	
+	public void chargerFichierRequetes() {
+		System.out.println("Charger d'abord un plan");
+	}
 
 	public void calculerItineraire() {
-		//super.calculerItineraire();
 		System.out.println("Charger d'abord un plan");
 	}
 	
-	public void choisirFichierRequetes() {
-		//super.choisirFichierRequetes();
+	public void ajouterEtape() {
+		System.out.println("Charger d'abord un plan");
+	}
+	
+	public void supprimerEtape() {
+		System.out.println("Charger d'abord un plan");
 	}
 	
 }

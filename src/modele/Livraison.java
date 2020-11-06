@@ -124,4 +124,20 @@ public class Livraison {
 		}
 		
 	}
+
+	public ArrayList<Itineraire> getListeItineraires() {
+		return listeItineraires;
+	}
+
+	public Time getHeureDepart() {
+		return heureDepart;
+	}
+
+	public HashMap<Itineraire, Time> getDictionnaireArriveesItineraires() {
+		return dictionnaireArriveesItineraires;
+	}
+
+	public EnsembleRequete getRequetes() {
+		return requetes;
+	}
 };

@@ -52,8 +52,6 @@ public class MouseEvents {
 		}
 	};
 
-
-
 	public void requeteCliquable(Node node) {
 		node.setOnMousePressed(this.clickRequeteNode);
 	}
