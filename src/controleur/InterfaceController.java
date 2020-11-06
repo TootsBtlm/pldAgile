@@ -82,11 +82,11 @@ public class InterfaceController {
 		*/
 		//Première version pour étudier la manière dont les données vont aller d'une classe à l'autre
 		
-		etat.choisirFichierPlan();
+		etat.chargerFichierPlan();
 		
 	}
 	
-	public void choisirFichierPlan() {
+	public void chargerFichierPlan() {
 		FileChooser fileChooser = new FileChooser();
 		File file = fileChooser.showOpenDialog(this.stage);
 		if(file != null) {
@@ -106,7 +106,7 @@ public class InterfaceController {
 	
 	@FXML
 	public void actionChargerFichierRequete() {
-		etat.choisirFichierRequetes();
+		etat.chargerFichierRequetes();
 	}
 	
 	public void chargerFichierRequete() {
@@ -139,29 +139,30 @@ public class InterfaceController {
 		etat = new EtatListeRequeteChargee(this);
 	}
 
-
 	@FXML
+	public void actionCalculerItineraire() {
+		etat.calculerItineraire();
+	}
+	
+
 	public void calculerItineraire() {
-		if(this.vueGraphique == null) {
-			System.out.println("Charger d'abord un plan");
-		} 
-		else if(this.ensembleRequete == null) {
-			System.out.println("Charger d'abord une requête");
-		}
-		else {
-//			int timeLimit = 30;
-			/*
+		
+			
+			/*int timeLimit = 30;
+			
 			tsp.searchSolution(timeLimit, cout, paires, depart);
 			System.out.print("Solution of cost "+tsp.getSolutionCost()+" found in "
 	                +(System.currentTimeMillis() - startTime)+"ms : ");
 	        for (int i=0; i<nbVertices; i++)
 	            System.out.print(tsp.getSolution(i)+" ");
-	        System.out.println(depart);*/
+	        System.out.println(depart);
 			
-			//ici ça va buguer
-			//Itineraire itineraire = plan.getMatriceCout(this.ensembleRequete);
-			//this.vueGraphique.drawItineraire(itineraire);
-		}
+			ici ça va buguer
+			Itineraire itineraire = plan.getMatriceCout(this.ensembleRequete);
+			this.vueGraphique.drawItineraire(itineraire);*/
+			
+		
+		etat = new EtatItineraireCalcule(this);
 	}
 	
 	public void setStage(Stage stage) {

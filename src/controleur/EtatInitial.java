@@ -18,20 +18,19 @@ public class EtatInitial extends Etat {
 		super(interfaceController);
 	}
 
-	public void choisirFichierPlan() {
+	public void chargerFichierPlan() {
 		
-		this.interfaceController.choisirFichierPlan();
+		this.interfaceController.chargerFichierPlan();
 		
 	}
 
-
-	public void calculerItineraire() {
-		//super.calculerItineraire();
+	
+	public void chargerFichierRequetes() {
 		System.out.println("Charger d'abord un plan");
 	}
-	
-	public void choisirFichierRequetes() {
-		//super.choisirFichierRequetes();
+
+	public void calculerItineraire() {
+		System.out.println("Charger d'abord un plan");
 	}
 	
 }

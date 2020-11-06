@@ -19,22 +19,20 @@ public class EtatPlanCharge extends Etat {
 	}
 
 
-	public void choisirFichierPlan() {
+	public void chargerFichierPlan() {
 		
-	
+		this.interfaceController.chargerFichierPlan();
 		
 	}
 
-	public void choisirFichierRequetes() {
+	public void chargerFichierRequetes() {
 		
 		this.interfaceController.chargerFichierRequete();
-	
+		
 	}
-	
+
 	public void calculerItineraire() {
-		//super.calculerItineraire();
-		System.out.println("Charger d'abord un plan");
+		System.out.println("Charger d'abord un fichier de requêtes");
 	}
-	
 	
 }
