@@ -157,8 +157,10 @@ public class InterfaceController {
 	        for (int i=0; i<nbVertices; i++)
 	            System.out.print(tsp.getSolution(i)+" ");
 	        System.out.println(depart);*/
-			Itineraire itineraire = plan.getMatriceCout(this.ensembleRequete);
-			this.vueGraphique.drawItineraire(itineraire);
+			
+			//ici ça va buguer
+			//Itineraire itineraire = plan.getMatriceCout(this.ensembleRequete);
+			//this.vueGraphique.drawItineraire(itineraire);
 		}
 	}
 	
