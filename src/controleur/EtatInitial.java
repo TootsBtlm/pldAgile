@@ -1,8 +1,6 @@
 package controleur;
 
 
-import javafx.scene.canvas.Canvas;
-import javafx.scene.layout.Pane;
 import modele.Itineraire;
 import modele.Plan;
 import vue.VueGraphique;
@@ -16,9 +14,14 @@ import vue.VueGraphique;
 
 public class EtatInitial extends Etat {
 
-	public VueGraphique choisirFichierPlan(Canvas planCanvas, Pane requetePane, Canvas requeteCanvas) {
+	public EtatInitial(InterfaceController interfaceController) {
+		super(interfaceController);
+	}
+
+	public void choisirFichierPlan() {
 		
-		return(super.choisirFichierPlan(planCanvas, requetePane, requeteCanvas));
+		this.interfaceController.choisirFichierPlan();
+		
 	}
 
 

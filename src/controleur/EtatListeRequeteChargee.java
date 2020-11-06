@@ -1,10 +1,7 @@
 package controleur;
 
-import javafx.scene.canvas.Canvas;
-import javafx.scene.layout.Pane;
 import modele.Itineraire;
 import modele.Plan;
-import vue.VueGraphique;
 
 /**
  * 
@@ -15,9 +12,16 @@ import vue.VueGraphique;
 
 public class EtatListeRequeteChargee extends Etat{
 	
-	public VueGraphique choisirFichierPlan(Canvas planCanvas, Pane requetePane, Canvas requeteCanvas) {
-		super.choisirFichierPlan(planCanvas, requetePane, requeteCanvas);
-		return(super.vue);
+	public EtatListeRequeteChargee(InterfaceController interfaceController) {
+		super(interfaceController);
+		// TODO Auto-generated constructor stub
+	}
+
+
+	public void choisirFichierPlan() {
+		
+
+		
 	}
 
 	

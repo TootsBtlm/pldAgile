@@ -56,16 +56,17 @@ public class InterfaceController {
 	
 	private MouseEvents mouseEvents;
 
-	private int numéroEtat = 0;
+	private Etat etat;
 
 	@FXML
 	public void initialize() {
 		tsp = new TSP1();
+		etat = new EtatInitial(this);
 		
 	}
 	
 	@FXML
-	public void choisirFichierPlan() {
+	public void actionChargerFichierPlan() {
 /*		FileChooser fileChooser = new FileChooser();
 		File file = fileChooser.showOpenDialog(this.stage);
 		if(file != null) {
@@ -81,40 +82,34 @@ public class InterfaceController {
 		*/
 		//Première version pour étudier la manière dont les données vont aller d'une classe à l'autre
 		
-		if (this.numéroEtat == 0) {
-			EtatInitial etat1 = new EtatInitial();
-			this.vueGraphique = etat1.choisirFichierPlan(this.planCanvas, this.requetePane, this.requeteCanvas);
-			this.plan = this.vueGraphique.getPlan();
-		} else if (this.numéroEtat == 1) {
-			EtatListeRequeteChargee etat1 = new EtatListeRequeteChargee();
-			this.vueGraphique = etat1.choisirFichierPlan(this.planCanvas, this.requetePane, this.requeteCanvas);
-			this.plan = this.vueGraphique.getPlan();
-		} else if (this.numéroEtat == 2) {
-			EtatItineraireCalcule etat1 = new EtatItineraireCalcule();
-			this.vueGraphique = etat1.choisirFichierPlan(this.planCanvas, this.requetePane, this.requeteCanvas);
-			this.plan = this.vueGraphique.getPlan();
-		} else if (this.numéroEtat == 3) {
-			EtatListeRequeteChargee etat1 = new EtatListeRequeteChargee();
-			this.vueGraphique = etat1.choisirFichierPlan(this.planCanvas, this.requetePane, this.requeteCanvas);
-			this.plan = this.vueGraphique.getPlan();
-		} else if (this.numéroEtat == 4) {
-			EtatAjouterEtape etat1 = new EtatAjouterEtape();
-			this.vueGraphique = etat1.choisirFichierPlan(this.planCanvas, this.requetePane, this.requeteCanvas);
-			this.plan = this.vueGraphique.getPlan();
-		} else if (this.numéroEtat == 5) {
-			EtatSupprimerEtape etat1 = new EtatSupprimerEtape();
-			this.vueGraphique = etat1.choisirFichierPlan(this.planCanvas, this.requetePane, this.requeteCanvas);
-			this.plan = this.vueGraphique.getPlan();
-		} else if (this.numéroEtat == 6) {
-			EtatFeuilleDeRoute etat1 = new EtatFeuilleDeRoute();
-			this.vueGraphique = etat1.choisirFichierPlan(this.planCanvas, this.requetePane, this.requeteCanvas);
-			this.plan = this.vueGraphique.getPlan();
-		}
+		etat.choisirFichierPlan();
 		
 	}
 	
+	public void choisirFichierPlan() {
+		FileChooser fileChooser = new FileChooser();
+		File file = fileChooser.showOpenDialog(this.stage);
+		if(file != null) {
+			String path = file.getPath();
+			System.out.println(path);
+			Lecteur lecteur = new Lecteur();
+			this.plan = lecteur.LirePlan(path);
+			System.out.println(requetePane);
+			this.vueGraphique = new VueGraphique(this.plan, this.planCanvas, this.requetePane);
+			this.vueGraphique.drawPlan();
+		} else {
+			System.out.println("Fichier incorrect");
+		}
+		etat = new EtatPlanCharge(this);
+				
+	}
+	
 	@FXML
-	public void choisirFichierRequetes() {
+	public void actionChargerFichierRequete() {
+		etat.choisirFichierRequetes();
+	}
+	
+	public void chargerFichierRequete() {
 		if(this.vueGraphique == null) {
 			System.out.println("Charger d'abord un plan");
 		} else {
@@ -141,6 +136,7 @@ public class InterfaceController {
 			
 			mouseEvents.setListeCliquable();
 		}
+		etat = new EtatListeRequeteChargee(this);
 	}
 
 
