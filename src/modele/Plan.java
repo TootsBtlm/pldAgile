@@ -207,6 +207,16 @@ public class Plan {
 		
 		return itineraire;
 	}
+	/**
+	 * Cette fonction va permettre d'ajouter un sommet au graphe parcourus par le cycliste
+	 * @return Livraison
+	 */
+	//public Livraison ajouterSommet(Livraison ancienneLivraison, Intersection nouveauSommet, Intersection intersectionPrecedente) {
+		
+		
+		
+		//return new Livraison();
+	//}
 	
 	public ArrayList<Long> getIntersectionId() {
 		return intersectionId;
