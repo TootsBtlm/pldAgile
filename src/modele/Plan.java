@@ -46,10 +46,33 @@ public class Plan {
 		this.listeAdjacence = listeAdjacence;
 	}
 	/* Method */
+	public void modifierIntersectionsPertinentes(EnsembleRequete requetes) {
+		ArrayList<Requete> listeRequetes = requetes.getListeRequete();
+		for(int i = 0 ; i < requetes.getListeRequete().size() ; i++) {
+			Intersection pointRecuperation  = listeRequetes.get(i).getPointDeRecuperation();
+			Intersection pointLivraison  = listeRequetes.get(i).getPointDeRecuperation();
+			
+			Integer positionPointRecuperation = this.intersectionIdRetourne.get(pointRecuperation.getId());
+			Integer positionPointLivraison = this.intersectionIdRetourne.get(pointLivraison.getId());
+			
+			this.intersection.set(positionPointRecuperation, pointRecuperation);
+			this.intersection.set(positionPointLivraison, pointLivraison);
+			
+		}
 	
+	Intersection pointDeDepart = requetes.getLieuDepart().getPointDeDepart();
+	
+	Integer positionPointDeDepart =this.intersectionIdRetourne.get(pointDeDepart.getId());
+	
+	this.intersection.set(positionPointDeDepart, pointDeDepart);
+	
+	}
 
 	public Livraison getMatriceCout(EnsembleRequete requetes) {
-        ArrayList<Intersection> listeIntersection = new ArrayList<Intersection>();
+		
+		this.modifierIntersectionsPertinentes(requetes);
+        
+		ArrayList<Intersection> listeIntersection = new ArrayList<Intersection>();
         ArrayList<Pair<Integer,Integer>> listePaires = new ArrayList<Pair<Integer,Integer>>();
         listeIntersection.add(requetes.getLieuDepart().getPointDeDepart());
         for(int i=0; i<requetes.listeRequete.size();i++) {
