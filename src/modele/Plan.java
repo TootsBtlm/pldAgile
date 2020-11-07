@@ -286,6 +286,48 @@ public class Plan {
 		return new Livraison(nouvelleListeItineraire, heureDepart, dictionnaireArriveesItineraires, requetes);
 		
 	}
+
+	
+	
+	public Livraison supprimerSommet(Livraison ancienneLivraison, Intersection sommetASupprimer) {
+		
+		EnsembleRequete requetes = ancienneLivraison.getRequetes();
+		Requete requete = new Requete();
+		for(int i = 0; i < requetes.getListeRequete().size() ; i ++) {
+			requete = requetes.getListeRequete().get(i);
+			if(requete.getPointDeLivraison().getId() == sommetASupprimer.getId()) {
+				requetes.getListeRequete().remove(requete);
+				break;
+			}
+			else if (requete.getPointDeRecuperation().getId() == sommetASupprimer.getId()) {
+				requetes.getListeRequete().remove(requete);
+				break;
+			}
+		}
+		ArrayList<Itineraire> ancienneListeItineraire = ancienneLivraison.getListeItineraires();
+		ArrayList<Itineraire> nouvelleListeItineraire = new ArrayList<Itineraire>();
+		int i = 0;
+		while(i < ancienneLivraison.getListeItineraires().size()) {
+			
+			if(requete.getPointDeLivraison().getId() == ancienneListeItineraire.get(i).getListeIntersections().get(0).getId()) {
+				Intersection intersectionPrecedente = ancienneListeItineraire.get(i-1).getListeIntersections().get(0);
+				Intersection intersectionSuivante = ancienneListeItineraire.get(i).getListeIntersections().get(ancienneListeItineraire.get(i).getListeIntersections().size()-1);
+				nouvelleListeItineraire.add(this.calcDijsktra(intersectionPrecedente, intersectionSuivante));
+				i++;
+				i++;
+			}
+			else {
+				nouvelleListeItineraire.add(ancienneListeItineraire.get(i));
+				i++;
+			}
+		}
+
+
+		Livraison nouvelleLivraison = new Livraison( nouvelleListeItineraire , requetes);
+		nouvelleLivraison.calculArrivees();
+		return nouvelleLivraison;
+		
+	}
 	
 public Itineraire aEtoile(Intersection depart, Intersection arrivee){
 		
