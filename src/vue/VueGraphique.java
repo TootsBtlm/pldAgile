@@ -1,5 +1,6 @@
 package vue;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -7,6 +8,8 @@ import java.util.Map;
 
 import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -108,6 +111,14 @@ public class VueGraphique {
 		double depotX = this.requetePane.getWidth() * (depot.getPointDeDepart().getLongitude() - longitudeMin) / (longitudeMax - longitudeMin); 
 		double depotY = this.requetePane.getHeight() - (this.requetePane.getHeight() * (depot.getPointDeDepart().getLatitude() - latitudeMin) / (latitudeMax - latitudeMin));
 		Circle depotC = new Circle(rayonCercle);
+//		File imgDepot = new File("ressources/img/warehouse.png");
+//		ImageView warehouse = new ImageView();
+//		warehouse.setImage(new Image(imgDepot.toURI().toString()));
+//		
+//		warehouse.setFitWidth(32);
+//		warehouse.setX(depotX - 16);
+//		warehouse.setY(depotY - 16);
+//		warehouse.setPreserveRatio(true);
 		depotC.setCenterX(depotX);
 		depotC.setCenterY(depotY);
 		depotC.setFill(Color.ORANGE);
@@ -139,6 +150,7 @@ public class VueGraphique {
 			this.requetes.add(livC);
 		}
 		requetePane.getChildren().addAll(requetes);
+//		requetePane.getChildren().add(warehouse);
 	}
 
 	public void drawItineraire(Livraison livraison) {
