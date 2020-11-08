@@ -58,11 +58,10 @@ public class Plan {
         }
         double[][] matriceCout = new double[listeIntersection.size()][listeIntersection.size()];
         
-        HashMap<Pair<Intersection, Intersection>, Itineraire> matriceItineraire = new HashMap<Pair<Intersection, Intersection>, Itineraire>();
 
+        //HashMap<Pair<Intersection, Intersection>, Itineraire> matriceItineraire = new HashMap<Pair<Intersection, Intersection>, Itineraire>();
         
-        
-        for(int i=0;i<listeIntersection.size();i++) {
+        /*for(int i=0;i<listeIntersection.size();i++) {
             for(int j=0;j<listeIntersection.size();j++) {
                 if(i==j)
                     matriceCout[i][j] = -1;
@@ -73,7 +72,10 @@ public class Plan {
                     matriceCout[i][j] = itineraire.getCout();
                 }
             }
-        }
+        }*/
+        
+        HashMap<Pair<Intersection, Intersection>, Itineraire> matriceItineraire = FloydWarshall(listeIntersection, matriceCout);
+        
         TSP tsp = new TSP1();
         Integer[] resultat = tsp.searchSolution(30000, matriceCout, listePaires, 0);
         for(int i=0;i<resultat.length;i++){
@@ -100,61 +102,86 @@ public class Plan {
         return(itineraireComplet);
     }
 	
-	public HashMap<Pair<Intersection, Intersection>, Itineraire> FloydWarshall(ArrayList<Intersection> listeIntersection){
+	public HashMap<Pair<Intersection, Intersection>, Itineraire> FloydWarshall(ArrayList<Intersection> listeIntersection, double[][] matriceCout){
 		HashMap<Pair<Intersection, Intersection>, Itineraire> matriceItineraire = new HashMap<Pair<Intersection, Intersection>, Itineraire>();
-		int n = intersection.size();
-		int planSize = listeIntersection.size();
-		double[][][] d = new double[planSize][planSize][planSize]; //cout de touts les chemins
-		double[][] matriceCout = new double[n][n]; //couts des requetes
-		int[][][] pi = new int[planSize][planSize][planSize]; //matrice de liaison
+		int planSize = intersection.size();
+		double[][][] d = new double[planSize+1][planSize+1][planSize+1]; //cout de touts les chemins
+		int[][][] pi = new int[planSize+1][planSize+1][planSize+1]; //matrice de liaison
 		
 		for(int i = 0; i < planSize; ++i) { //initialisation d et pi (pi[0] est la matrice d'adjacence du plan
 			for(int j = 0; j < planSize; ++j) {
-				for(Segment s : segment) {
-					if(s.isSegment(intersection.get(i), intersection.get(j))) {
-						d[0][i][j] = s.getLongueur();
-						pi[0][i][j] = 1;
-						break;
-					}else {
-						d[0][i][j] = 1000000.0;
-						pi[0][i][j] = 0;
+				if(i==j) {
+					d[0][i][j] = 1000000.0;
+					pi[0][i][j] = -1;
+				}else {
+					for(Segment s : segment) {
+						if(s.isSegment(intersection.get(i), intersection.get(j))) {
+							d[0][i][j] = s.getLongueur();
+							pi[0][i][j] = i;
+							break;
+						}else {
+							d[0][i][j] = 1000000.0;
+							pi[0][i][j] = -1;
+						}
 					}
 				}
 			}
 		}
+		
 		
 		for(int k = 1; k <= planSize; ++k) {
 			for(int i = 0; i < planSize; ++i) {
 				for(int j = 0; j < planSize; ++j) {
-					if(d[k-1][i][j] < d[k-1][i][k] + d[k-1][k][j]) {
+					if(i==j) {
+						pi[k][i][j]=-1;
+						d[k][i][j]=1000000.0;
+						continue;
+					}
+					if(d[k-1][i][j] < d[k-1][i][k-1] + d[k-1][k-1][j]) {
 						d[k][i][j] = d[k-1][i][j];
 						pi[k][i][j] = pi[k-1][i][j]; //antecedant de j est le meme que pour k-1
 					}
 					else {
-						d[k][i][j] = d[k-1][i][k] + d[k-1][k][j];
-						pi[k][i][j] = pi[k-1][k][j]; //antecedant de j est l'antecedent de j dans le plus court chemin de k a j
+						d[k][i][j] = d[k-1][i][k-1] + d[k-1][k-1][j];
+						pi[k][i][j] = pi[k-1][k-1][j]; //antecedant de j est l'antecedent de j dans le plus court chemin de k a j
 					}
 				}
 			}
 		}
+		for(int i =0; i<10; ++i) {
+			for(int j = 0; j<10; ++j) {
+				System.out.print(pi[1][i][j]+", ");
+			}
+			System.out.print("\n");
+		}
+		
+		
+				
 		
 		for(int i = 0; i < planSize; ++i) {
 			Intersection depart = intersection.get(i);
 			if(listeIntersection.contains(depart)) {
 				for(int j = 0; j < planSize; ++j) {
-					Intersection arrivee = intersection.get(j);
-					if(listeIntersection.contains(arrivee)) { // si les deux appartiennent a la liste des intersections qui nous interessent
-	                	Pair<Intersection, Intersection> cle = new Pair<Intersection,Intersection>(depart, arrivee);
-	                	ArrayList<Intersection> chemin = new ArrayList<Intersection>(planSize);
-	                	Intersection pivot = arrivee;
-	                	while(pivot!=depart) {
-	                		chemin.add(0, pivot);
-	                		pivot = intersection.get(pi[planSize][i][intersection.indexOf(pivot)]);
-	                	}
-	                	chemin.add(0, depart);
-	                	Itineraire itineraire = new Itineraire(chemin, d[planSize][i][j]);
-	                	matriceItineraire.put(cle, itineraire);
-	                	matriceCout[listeIntersection.indexOf(depart)][listeIntersection.indexOf(arrivee)] = d[planSize][i][j];
+					if(i == j) {
+						matriceCout[listeIntersection.indexOf(depart)][listeIntersection.indexOf(depart)]=-1;
+						continue;
+					}else {
+						Intersection arrivee = intersection.get(j);
+						if(listeIntersection.contains(arrivee)) { // si les deux appartiennent a la liste des intersections qui nous interessent
+		                	Pair<Intersection, Intersection> cle = new Pair<Intersection,Intersection>(depart, arrivee);
+		                	ArrayList<Intersection> chemin = new ArrayList<Intersection>(planSize);
+		                	Intersection pivot = arrivee;
+		                	while(pivot!=depart) {
+		                		//System.out.println(intersection.indexOf(pivot) +"--"+ i);
+		                		//System.out.println(d[planSize][i][intersection.indexOf(pivot)]);
+		                		chemin.add(0, pivot);
+		                		pivot = intersection.get(pi[planSize][i][intersection.indexOf(pivot)]);
+		                	}
+		                	chemin.add(0, depart);
+		                	Itineraire itineraire = new Itineraire(chemin, d[planSize][i][j]);
+		                	matriceItineraire.put(cle, itineraire);
+		                	matriceCout[listeIntersection.indexOf(depart)][listeIntersection.indexOf(arrivee)] = d[planSize][i][j];
+						}
 					}
 				}
 			}
