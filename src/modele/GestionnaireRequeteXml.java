@@ -24,8 +24,14 @@ public class GestionnaireRequeteXml extends DefaultHandler{
 				   String aname = attrs.getLocalName(i);
 				   //Et nous affichons sa valeur
 				   if(aname.equals("address")) {
+					   if(planCourant.getIntersectionId().contains(Long.parseLong(attrs.getValue(i)))) {
+						   nouveauDepot.setPointDeDepart(planCourant.getIntersectionById(Long.parseLong(attrs.getValue(i))));	
+					   }
+					   else {
+						   throw new SAXException("requête non intègre");
+					   }
+						
 
-					   nouveauDepot.setPointDeDepart(planCourant.getIntersectionById(Long.parseLong(attrs.getValue(i))));
 			       }	
 				   else if (aname.equals("departureTime")) {
 					   String moment = attrs.getValue(i);
@@ -55,16 +61,29 @@ public class GestionnaireRequeteXml extends DefaultHandler{
 				   if(aname.equals("pickupAddress")) {
 
 					   Long idOrigine = Long.parseLong((attrs.getValue(i)));
-					   Intersection lieuRecuperation = this.planCourant.getIntersectionById(idOrigine);
-					   nouvelleRequete.setPointDeRecuperation(lieuRecuperation);
+					   if(this.planCourant.getIntersectionId().contains(idOrigine)) {
+						   Intersection lieuRecuperation = this.planCourant.getIntersectionById(idOrigine); 
+						   nouvelleRequete.setPointDeRecuperation(lieuRecuperation);
+					   }
+					   else {
+						   throw new SAXException("requête non intègre");						   
+					   }
+
 					   
 				   }
 				   else if(aname.equals("deliveryAddress")) {
 
 					   
 					   Long idDestination = Long.parseLong((attrs.getValue(i)));
-					   Intersection lieuLivraison = this.planCourant.getIntersectionById(idDestination);
-					   nouvelleRequete.setPointDeLivraison(lieuLivraison);
+					   if(this.planCourant.getIntersectionId().contains(idDestination)) {
+						   Intersection lieuLivraison = this.planCourant.getIntersectionById(idDestination);
+						   nouvelleRequete.setPointDeLivraison(lieuLivraison);
+					   }
+					   else {
+						   throw new SAXException("requête non intègre");						   
+					   }
+					   
+
 				   }
 				   else if(aname.equals("pickupDuration")) {
 					   nouvelleRequete.setDureeRecuperation(Long.parseLong(attrs.getValue(i)));

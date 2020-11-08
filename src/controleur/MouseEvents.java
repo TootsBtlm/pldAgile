@@ -43,7 +43,7 @@ public class MouseEvents {
 		public void handle(MouseEvent event) {
 			for(Node key : requeteNodeListView.keySet()) {
 				Circle nodeC = (Circle)(key);
-				nodeC.setRadius(6.0);
+				nodeC.setRadius(8.0);
 			}
 			String clickedString = listViewRequest.getSelectionModel().getSelectedItem();
 			Node n = requeteNodeListView.inverse().get(clickedString);
@@ -51,8 +51,6 @@ public class MouseEvents {
 			p.setRadius(12.0);
 		}
 	};
-
-
 
 	public void requeteCliquable(Node node) {
 		node.setOnMousePressed(this.clickRequeteNode);

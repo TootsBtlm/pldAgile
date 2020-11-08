@@ -50,6 +50,26 @@ public class EnsembleRequete {
 		this.intersectionIdRetourne = intersectionIdRetourne;
 		this.listeRequete = listeRequete;
 		LieuDepart = lieuDepart;
+		this.modifierIntersections();
+	}
+	/**
+	 * Cette fonction attribut un identifiant aux intersections mentionnées dans une liste de requête 
+	 * et leur donne un type (1 : non renseigné, 2 : depot, 3 : point de recuperation, 4 point de livraison)
+	 */
+	
+	public void modifierIntersections(){
+		Long compteur = new Long(1);
+		this.LieuDepart.getPointDeDepart().setIdVisible(compteur);
+		this.LieuDepart.getPointDeDepart().setTypeIntersection(2);
+		compteur ++;
+		for(int i = 0; i< this.listeRequete.size();i++) {
+			this.listeRequete.get(i).getPointDeRecuperation().setIdVisible(compteur);
+			this.listeRequete.get(i).getPointDeRecuperation().setTypeIntersection(3);
+			compteur ++;
+			this.listeRequete.get(i).getPointDeLivraison().setIdVisible(compteur);
+			this.listeRequete.get(i).getPointDeLivraison().setTypeIntersection(4);
+			compteur ++;
+		}
 	}
 	public EnsembleRequete() {
 		super();
@@ -77,7 +97,7 @@ public class EnsembleRequete {
 		return intersectionIdRetourne.get(this.getLieuDepart().getPointDeDepart().getId());
 	}
 	
-	
+	// à priori cette fonction ne sert à rien mais je préfère la garder au cas ou ...
 	public Double[][] matriceCout() {
 		
 		int nbIntersection = this.listeRequete.size()*2 + 1;
