@@ -8,8 +8,6 @@ import java.sql.Time;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javafx.util.Pair;
-import tsp.TSP;
-import tsp.TSP1;
 
 
 /************************************************************/
