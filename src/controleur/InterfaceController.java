@@ -70,21 +70,6 @@ public class InterfaceController {
 
 	@FXML
 	public void actionChargerFichierPlan() {
-		/*		FileChooser fileChooser = new FileChooser();
-		File file = fileChooser.showOpenDialog(this.stage);
-		if(file != null) {
-			String path = file.getPath();
-			System.out.println(path);
-			Lecteur lecteur = new Lecteur();
-			this.plan = lecteur.LirePlan(path);
-			this.vueGraphique = new VueGraphique(this.plan, this.planCanvas, this.requetePane);
-			this.vueGraphique.drawPlan();
-		} else {
-			System.out.println("Fichier incorrect");
-		}
-		 */
-		//Première version pour étudier la manière dont les données vont aller d'une classe à l'autre
-
 		etat.chargerFichierPlan();
 
 	}
