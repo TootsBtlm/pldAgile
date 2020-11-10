@@ -6,16 +6,19 @@ import java.util.List;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import modele.EnsembleRequete;
+import modele.Intersection;
 import modele.Itineraire;
 import modele.Lecteur;
 import modele.Livraison;
@@ -164,7 +167,6 @@ public class InterfaceController {
 
 
 		this.livraison = plan.getMatriceCout(this.ensembleRequete);
-		System.out.println("Size itineraire : " + this.livraison.getListeItineraires().get(0).getListeIntersections().get(0).getId());
 		this.vueGraphique.drawItineraire(this.livraison);
 		this.vueTextuelle.drawItineraire(this.livraison, this.requeteNodeListView);
 
@@ -178,14 +180,16 @@ public class InterfaceController {
 	}
 
 	public void ajouterEtape() {
-		System.out.println("tout marche");
 
-		//this.intersection = mouseEvents.clickIntersection
-		// a faire mario et jj
-		//this.livraison = plan.ajouterSommet(this.livraison, "nouvelle intersection", "intersection precedente", LONG "demander la durï¿½e")
-		// this.livraison = plan.ajouterSommet(this.livraison, "nouvelle intersection", "intersection precedente", LONG "demander la durï¿½e")
-		// this.livraison = plan.ajouterSommet(this.livraison, "nouvelle intersection", "intersection precedente", LONG "demander la durï¿½e")
-		// mettre le code pour ajouter une etape (appel a une fonction dans plan)	
+		// demander a aurel comment obtenir les bonnes intersections et la bonne durée juste en dessous la
+
+		Long duree = (long) 10;
+		Intersection intersection = this.livraison.getListeItineraires().get(0).getListeIntersections().get(1);
+
+		this.livraison = plan.ajouterSommet(this.livraison, intersection, this.livraison.getListeItineraires().get(0).getListeIntersections().get(0) , duree); 
+		this.livraison = plan.ajouterSommet(this.livraison,  intersection , intersection , duree); 
+
+		etat = new EtatAjouterEtape(this);
 	}
 
 	@FXML
@@ -194,10 +198,17 @@ public class InterfaceController {
 	}
 
 	public void supprimerEtape() {
-		System.out.println("tout marche");
-		// ï¿½ faire mario et jj
-		// this.livraison = plan.supprimerSommet(this.livraison, "intersection ï¿½ supprimer")
-		// mettre le code pour supprimer une etape (appel a une fonction dans plan)	
+
+		// demander a aurel comment obtenir la bonne intersection juste en dessous la
+		
+		this.livraison = plan.supprimerSommet(this.livraison, this.livraison.getListeItineraires().get(0).getListeIntersections().get(0));
+			
+
+		this.vueGraphique.drawItineraire(this.livraison);
+		this.vueTextuelle.drawItineraire(this.livraison, this.requeteNodeListView);
+
+		etat = new EtatSupprimerEtape(this);
+
 	}
 
 	@FXML
@@ -208,6 +219,9 @@ public class InterfaceController {
 	public void feuilleDeRoute() {
 		System.out.println("tout marche");
 		// creer feuille de route au bon format
+		
+		etat = new EtatFeuilleDeRoute(this);
+
 	}
 
 	public void setStage(Stage stage) {
