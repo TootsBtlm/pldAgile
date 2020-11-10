@@ -104,12 +104,15 @@ public class Plan {
         	System.out.println(resultat[i]);
         }
         
+        
+        
         Itineraire itineraireOpti = new Itineraire();
         
         for(int i=0;i<resultat.length;i++) {
         	itineraireOpti.addIntersection(listeIntersection.get(resultat[i]));	
         }
         
+        // La liste des sommets à parcourir dans l'ordre 
         itineraireOpti.addIntersection(requetes.getLieuDepart().getPointDeDepart());
         
         
@@ -119,9 +122,6 @@ public class Plan {
         	Pair<Intersection, Intersection> cle = new Pair<Intersection, Intersection>(itineraireOpti.getListeIntersections().get(i), itineraireOpti.getListeIntersections().get(i+1));
         	itineraireComplet.add(matriceItineraire.get(cle));
         }
-        
-        
-        
         
         Livraison ret = new Livraison(itineraireComplet,requetes);
         ret.calculArrivees();
@@ -388,6 +388,13 @@ public class Plan {
 		while(i < ancienneLivraison.getListeItineraires().size()) {
 			
 			if(requete.getPointDeLivraison().getId() == ancienneListeItineraire.get(i).getListeIntersections().get(0).getId()) {
+				Intersection intersectionPrecedente = ancienneListeItineraire.get(i-1).getListeIntersections().get(0);
+				Intersection intersectionSuivante = ancienneListeItineraire.get(i).getListeIntersections().get(ancienneListeItineraire.get(i).getListeIntersections().size()-1);
+				nouvelleListeItineraire.add(this.calcDijsktra(intersectionPrecedente, intersectionSuivante));
+				i++;
+				i++;
+			}
+			else if (requete.getPointDeRecuperation().getId() == ancienneListeItineraire.get(i).getListeIntersections().get(0).getId()) {
 				Intersection intersectionPrecedente = ancienneListeItineraire.get(i-1).getListeIntersections().get(0);
 				Intersection intersectionSuivante = ancienneListeItineraire.get(i).getListeIntersections().get(ancienneListeItineraire.get(i).getListeIntersections().size()-1);
 				nouvelleListeItineraire.add(this.calcDijsktra(intersectionPrecedente, intersectionSuivante));
