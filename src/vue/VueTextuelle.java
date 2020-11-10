@@ -49,6 +49,9 @@ public class VueTextuelle {
 
 		int sizeLivraison = livraison.getListeItineraires().size();
 		
+		newItems.add("Depot :" + livraison.getListeItineraires().get(0).getListeIntersections().get(0).getId().toString() + 
+				", Adresse : " + plan.getNomRue(livraison.getListeItineraires().get(0).getListeIntersections().get(0)));
+		
 		for(int i = 0; i < livraison.getListeItineraires().size(); i++) {
 			Itineraire itineraire = livraison.getListeItineraires().get(i);
 
@@ -59,11 +62,9 @@ public class VueTextuelle {
 				} else if(str.equals("Point de livraison :" + itineraire.getListeIntersections().get(0).getId().toString() + 
 						", Adresse : " + plan.getNomRue(itineraire.getListeIntersections().get(0)))) {
 					newItems.add(str);
-				} else if(str.equals("Depot :" + itineraire.getListeIntersections().get(0).getId().toString() + 
-						", Adresse : " + plan.getNomRue(itineraire.getListeIntersections().get(0)))) {
-					newItems.add(str);
 				}
 			}
+			
 
 			//				if(requeteNodeListView.containsValue("Point de recup :" + itineraire.getListeIntersections().get(0).getId().toString() + 
 			//						", Adresse : " + plan.getNomRue(itineraire.getListeIntersections().get(0)))) {
