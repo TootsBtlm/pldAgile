@@ -25,7 +25,12 @@ import tsp.TSP1;
 import vue.VueGraphique;
 import vue.VueTextuelle;
 
-
+/**
+ * 
+ * @author Aurélien, Mario et Jean-Jacques
+ * Représente 
+ *
+ */
 public class InterfaceController {
 
 
@@ -109,6 +114,8 @@ public class InterfaceController {
 		} else {
 			FileChooser fileChooser = new FileChooser();
 			File file = fileChooser.showOpenDialog(this.stage);
+			this.vueGraphique.getRequetePane().getChildren().clear();
+			this.vueGraphique.drawPlan();
 			String path = file.getPath();
 			System.out.println(path);
 			Lecteur lecteur = new Lecteur();
@@ -117,20 +124,24 @@ public class InterfaceController {
 			this.vueTextuelle.drawText(this.ensembleRequete, this.listViewRequest);
 			this.vueGraphique.drawRequests(this.ensembleRequete);
 			this.requeteNodes = this.vueGraphique.getRequetePane().getChildren();
-
+			
+			this.requeteNodeListView.clear();
+			
 			for(int i = 0; i < this.vueGraphique.getRequetes().size(); i++) {
-				requeteNodeListView.put(this.requeteNodes.get(i), listViewRequest.getItems().get(i));
+					
+				this.requeteNodeListView.put(this.requeteNodes.get(i), listViewRequest.getItems().get(i));
 			}
 
-			mouseEvents = new MouseEvents(requeteNodeListView, this.listViewRequest);
+			mouseEvents = new MouseEvents(this.requeteNodeListView, this.listViewRequest);
 			// Ajout d'un event handler sur les nodes correspondant aux requêtes sur la carte
 			for(int i = 0; i < this.vueGraphique.getRequetes().size(); i++) {
 				mouseEvents.requeteCliquable(this.vueGraphique.getRequetePane().getChildren().get(i));
 			}
-
+			
 			mouseEvents.setListeCliquable();
 			this.textChargerFichierRequete.setVisible(false);;
 		}
+		System.out.println("test");
 		etat = new EtatListeRequeteChargee(this);
 	}
 
