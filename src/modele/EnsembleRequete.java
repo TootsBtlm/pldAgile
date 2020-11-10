@@ -65,7 +65,6 @@ public class EnsembleRequete {
 		for(int i = 0; i< this.listeRequete.size();i++) {
 			this.listeRequete.get(i).getPointDeRecuperation().setIdVisible(compteur);
 			this.listeRequete.get(i).getPointDeRecuperation().setTypeIntersection(3);
-			compteur ++;
 			this.listeRequete.get(i).getPointDeLivraison().setIdVisible(compteur);
 			this.listeRequete.get(i).getPointDeLivraison().setTypeIntersection(4);
 			compteur ++;
