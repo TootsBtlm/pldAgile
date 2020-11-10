@@ -84,9 +84,9 @@ public class Plan {
         double[][] matriceCout = new double[listeIntersection.size()][listeIntersection.size()];
         
 
-        //HashMap<Pair<Intersection, Intersection>, Itineraire> matriceItineraire = new HashMap<Pair<Intersection, Intersection>, Itineraire>();
+        HashMap<Pair<Intersection, Intersection>, Itineraire> matriceItineraire = new HashMap<Pair<Intersection, Intersection>, Itineraire>();
         
-        /*for(int i=0;i<listeIntersection.size();i++) {
+        for(int i=0;i<listeIntersection.size();i++) {
             for(int j=0;j<listeIntersection.size();j++) {
                 if(i==j)
                     matriceCout[i][j] = -1;
@@ -97,10 +97,8 @@ public class Plan {
                     matriceCout[i][j] = itineraire.getCout();
                 }
             }
-        }*/
-        
-        HashMap<Pair<Intersection, Intersection>, Itineraire> matriceItineraire = FloydWarshall(listeIntersection, matriceCout);
-        
+        }
+                
         TSP tsp = new TSP1();
         Integer[] resultat = tsp.searchSolution(30000, matriceCout, listePaires, 0);
         for(int i=0;i<resultat.length;i++){
@@ -422,9 +420,14 @@ public Itineraire aEtoile(Intersection depart, Intersection arrivee){
 		ArrayList<Intersection> voisinArrivee = new ArrayList<Intersection>();
 		ArrayList<Segment> voisins = new ArrayList<Segment>();
 		
+		double latitudeArrivee = arrivee.getLatitude();
+		double longitudeArrivee = arrivee.getLongitude();
+		
 		for(int i = 0 ; i < this.intersection.size(); i++) {
 			Intersection intersectionCourante = this.intersection.get(i);
-			Double distanceArrivee = 5000000*((intersectionCourante.getLatitude() - arrivee.getLatitude())*(intersectionCourante.getLatitude() - arrivee.getLatitude()) + (intersectionCourante.getLongitude() - arrivee.getLongitude())*(intersectionCourante.getLongitude() - arrivee.getLongitude()));
+			double latitudeCourante = intersectionCourante.getLatitude();
+			double longitudeCourante = intersectionCourante.getLongitude();
+			Double distanceArrivee = 5000000*((latitudeCourante - latitudeArrivee)*(latitudeCourante - latitudeArrivee) + (longitudeCourante - longitudeArrivee)*(longitudeCourante - longitudeArrivee));
 			//System.out.println(intersectionCourante.getLatitude());
 			//System.out.println(intersectionCourante.getLongitude());
 			//System.out.println(distanceArrivee);
