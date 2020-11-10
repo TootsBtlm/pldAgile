@@ -155,7 +155,6 @@ public class InterfaceController {
 	public void calculerItineraire() {
 
 
-	
 		this.livraison = plan.getMatriceCout(this.ensembleRequete);
 		System.out.println("Size itineraire : " + this.livraison.getListeItineraires().get(0).getListeIntersections().get(0).getId());
 		this.vueGraphique.drawItineraire(this.livraison);
