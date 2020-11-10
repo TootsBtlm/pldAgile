@@ -22,6 +22,10 @@ public class Intersection {
 	/**   
 	 * Longitude de l'intersection 
 	 */	
+	private Integer typeIntersection = 1;
+	/**   
+	 * Longitude de l'intersection 
+	 */	
 	private Double longitude;
 	
 	/**
@@ -56,7 +60,12 @@ public class Intersection {
 	public void setLatitude(Double latitude) {
 		this.latitude = latitude;
 	}
-
+	public Integer getTypeIntersection() {
+		return typeIntersection;
+	}
+	public void setTypeIntersection(Integer typeIntersection) {
+		this.typeIntersection = typeIntersection;
+	}
 	public Intersection(Long id, Double longitude, Double latitude, String nom) {
 		super();
 		this.id = id;
@@ -66,12 +75,16 @@ public class Intersection {
 	public Intersection() {
 		super();
 	}
-	
-	
 	@Override
-	public java.lang.String toString() {
-		return "Intersection [id=" + id + ", longitude=" + longitude + ", latitude=" + latitude + "]";
+	public String toString() {
+		return "Intersection [id=" + id + ", idVisible=" + idVisible + ", typeIntersection=" + typeIntersection
+				+ ", longitude=" + longitude + ", latitude=" + latitude + "]";
 	}
+
+	
+	
+	
+
 
 	
 	

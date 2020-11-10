@@ -35,4 +35,12 @@ public class EtatPlanCharge extends Etat {
 		System.out.println("Charger d'abord un fichier de requêtes");
 	}
 	
+	public void ajouterEtape() {
+		System.out.println("Charger d'abord un fichier de requêtes");
+	}
+	
+	public void supprimerEtape() {
+		System.out.println("Charger d'abord un fichier de requêtes");
+	}
+	
 }

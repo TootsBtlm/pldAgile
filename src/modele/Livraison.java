@@ -30,27 +30,84 @@ public class Livraison {
 	/**
 	 * Dictionnaire des heures d'arrivée (valeur) pour chaque itinéraire (clé)
 	 */
-	HashMap<Itineraire,Time>dictionnaireArriveesItineraires = new HashMap<Itineraire,Time>();
+	private HashMap<Itineraire,Time>dictionnaireArriveesItineraires = new HashMap<Itineraire,Time>();
 
 	/**
 	 * Ensemble des requêtes de la livraison
 	 */
-	EnsembleRequete requetes;
+	private EnsembleRequete requetes;
 	
+	public ArrayList<Itineraire> getListeItineraires() {
+		return listeItineraires;
+	}
+
+	public void setListeItineraires(ArrayList<Itineraire> listeItineraires) {
+		this.listeItineraires = listeItineraires;
+	}
+
+	public Time getHeureDepart() {
+		return heureDepart;
+	}
+
+	public void setHeureDepart(Time heureDepart) {
+		this.heureDepart = heureDepart;
+	}
+
+	public HashMap<Itineraire, Time> getDictionnaireArriveesItineraires() {
+		return dictionnaireArriveesItineraires;
+	}
+
+	public void setDictionnaireArriveesItineraires(HashMap<Itineraire, Time> dictionnaireArriveesItineraires) {
+		this.dictionnaireArriveesItineraires = dictionnaireArriveesItineraires;
+	}
+
+	public EnsembleRequete getRequetes() {
+		return requetes;
+	}
+
+	public void setRequetes(EnsembleRequete requetes) {
+		this.requetes = requetes;
+	}
+
+	/**
+	 * 
+	 */
+	public Livraison() {
+		super();
+	}
+
+	/**
+	 * 
+	 * @param listeItineraires
+	 * @param heureDepart
+	 * @param dictionnaireArriveesItineraires
+	 * @param requetes
+	 */
+	public Livraison(ArrayList<Itineraire> listeItineraires, Time heureDepart,
+			HashMap<Itineraire, Time> dictionnaireArriveesItineraires, EnsembleRequete requetes) {
+		super();
+		this.listeItineraires = listeItineraires;
+		this.heureDepart = heureDepart;
+		this.dictionnaireArriveesItineraires = dictionnaireArriveesItineraires;
+		this.requetes = requetes;
+	}
+
 	/**
 	 * Constructeur de livraison
 	 * @param listeItineraires
 	 * @param requetes
 	 * @param heureDepart
 	 */
+	
 	public Livraison(ArrayList<Itineraire> listeItineraires, EnsembleRequete requetes) {
 		super();
 		this.listeItineraires = listeItineraires;
 		this.requetes = requetes;
 		this.heureDepart = requetes.LieuDepart.getHeureDepart();
-		
 	}
 	
+
+
 	/**
 	 * Cette fonction calcule les temps associés aux intersections principales du parcours.
 	 */
@@ -75,7 +132,10 @@ public class Livraison {
 				
 				this.dictionnaireArriveesItineraires.put(this.listeItineraires.get(i),temps );
 			}
+		
 		}
 		
 	}
+
+
 };
