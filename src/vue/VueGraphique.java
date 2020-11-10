@@ -1,15 +1,16 @@
 package vue;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
+
+import controleur.MouseEvents;
 import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -27,15 +28,17 @@ public class VueGraphique {
 	Plan plan;
 	Canvas planCanvas;
 
-	Pane requetePane;
+	Pane intersectionPane;
 
 	List<Node> requetes = new ArrayList<>();
-	Map<Node, Intersection> nodeLinkedToIntersection = new HashMap<>();
+	BiMap<Node, Intersection> nodeLinkedToIntersection = HashBiMap.create();
+	private MouseEvents mouseEvents;
 
-	public VueGraphique(Plan plan, Canvas planCanvas, Pane requetePane) {
+	public VueGraphique(Plan plan, Canvas planCanvas, Pane intersectionPane, MouseEvents mouseEvents) {
 		this.plan = plan;
 		this.planCanvas = planCanvas;
-		this.requetePane = requetePane;
+		this.intersectionPane = intersectionPane;
+		this.mouseEvents = mouseEvents;
 	}
 
 	public Plan getPlan() {
@@ -44,7 +47,7 @@ public class VueGraphique {
 
 	public void drawPlan() {
 		requetes.clear();
-		requetePane.getChildren().clear();
+		intersectionPane.getChildren().clear();
 		nodeLinkedToIntersection.clear();
 		var gc = this.planCanvas.getGraphicsContext2D();
 		gc.clearRect(0, 0, this.planCanvas.getWidth(), this.planCanvas.getHeight());
@@ -81,6 +84,28 @@ public class VueGraphique {
 			double x2 = this.planCanvas.getWidth() * (i2.getLongitude() - longitudeMin) / (longitudeMax - longitudeMin); 
 			double y2 = this.planCanvas.getHeight() - (this.planCanvas.getHeight() * (i2.getLatitude() - latitudeMin) / (latitudeMax - latitudeMin)); 
 
+			Circle c1 = new Circle(8.0);
+			c1.setCenterX(x1);
+			c1.setCenterY(y1);
+			c1.setFill(Color.rgb(0, 0, 0, 0));
+
+			if(!nodeLinkedToIntersection.containsValue(i1)) {
+				nodeLinkedToIntersection.put(c1, i1);
+				this.intersectionPane.getChildren().add(c1);
+			}
+
+
+			Circle c2 = new Circle(8.0);
+			c2.setCenterX(x2);
+			c2.setCenterY(y2);
+			c2.setFill(Color.rgb(0, 0, 0, 0));
+
+			if(!nodeLinkedToIntersection.containsValue(i2)) {
+				nodeLinkedToIntersection.put(c2, i2);
+				this.intersectionPane.getChildren().add(c2);
+			}
+			mouseEvents.setNodeLinkedToIntersection(nodeLinkedToIntersection);
+
 			gc.beginPath();
 			gc.moveTo(x1, y1);
 			gc.setLineWidth(1.0);
@@ -88,14 +113,22 @@ public class VueGraphique {
 			gc.setStroke(Color.BLACK);
 			gc.lineTo(x2, y2);
 			gc.stroke();
-
 		}
 	}
 
 	public void drawRequests(EnsembleRequete er) {
-		requetes.clear();
-		requetePane.getChildren().clear();
-		nodeLinkedToIntersection.clear();
+
+		if(requetes.size() > 0) {
+			for(int i = 0; i < requetes.size(); i++) {
+
+				Circle node = (Circle)(requetes.get(i));
+				node.setFill(Color.rgb(0,0,0,0));
+				//intersectionPane.getChildren().remove(requetes.get(i));
+			}
+			requetes.clear();
+		}
+		//		requetePane.getChildren().clear();
+		//		nodeLinkedToIntersection.clear();
 
 		double latitudeMin = this.plan.latitudeMin();
 		double latitudeMax = this.plan.latitudeMax();
@@ -108,20 +141,21 @@ public class VueGraphique {
 		//		drawPlan();
 		Depot depot = er.getLieuDepart();
 
-		double depotX = this.requetePane.getWidth() * (depot.getPointDeDepart().getLongitude() - longitudeMin) / (longitudeMax - longitudeMin); 
-		double depotY = this.requetePane.getHeight() - (this.requetePane.getHeight() * (depot.getPointDeDepart().getLatitude() - latitudeMin) / (latitudeMax - latitudeMin));
-		Circle depotC = new Circle(rayonCercle);
-//		File imgDepot = new File("ressources/img/warehouse.png");
-//		ImageView warehouse = new ImageView();
-//		warehouse.setImage(new Image(imgDepot.toURI().toString()));
-//		
-//		warehouse.setFitWidth(32);
-//		warehouse.setX(depotX - 16);
-//		warehouse.setY(depotY - 16);
-//		warehouse.setPreserveRatio(true);
-		depotC.setCenterX(depotX);
-		depotC.setCenterY(depotY);
+		double depotX = this.intersectionPane.getWidth() * (depot.getPointDeDepart().getLongitude() - longitudeMin) / (longitudeMax - longitudeMin); 
+		double depotY = this.intersectionPane.getHeight() - (this.intersectionPane.getHeight() * (depot.getPointDeDepart().getLatitude() - latitudeMin) / (latitudeMax - latitudeMin));
+		Circle depotC = (Circle)(nodeLinkedToIntersection.inverse().get(depot.getPointDeDepart()));
+		//		File imgDepot = new File("ressources/img/warehouse.png");
+		//		ImageView warehouse = new ImageView();
+		//		warehouse.setImage(new Image(imgDepot.toURI().toString()));
+		//		
+		//		warehouse.setFitWidth(32);
+		//		warehouse.setX(depotX - 16);
+		//		warehouse.setY(depotY - 16);
+		//		warehouse.setPreserveRatio(true);
+		//		depotC.setCenterX(depotX);
+		//		depotC.setCenterY(depotY);
 		depotC.setFill(Color.ORANGE);
+		depotC.toFront();
 		this.requetes.add(depotC);
 
 		for(int i = 0; i < er.getListeRequete().size(); i++) {
@@ -131,26 +165,31 @@ public class VueGraphique {
 
 			System.out.println(pLiv);
 
-			double recupX = this.requetePane.getWidth() * (pRecup.getLongitude() - longitudeMin) / (longitudeMax - longitudeMin); 
-			double recupY = this.requetePane.getHeight() - (this.requetePane.getHeight() * (pRecup.getLatitude() - latitudeMin) / (latitudeMax - latitudeMin));
+			double recupX = this.intersectionPane.getWidth() * (pRecup.getLongitude() - longitudeMin) / (longitudeMax - longitudeMin); 
+			double recupY = this.intersectionPane.getHeight() - (this.intersectionPane.getHeight() * (pRecup.getLatitude() - latitudeMin) / (latitudeMax - latitudeMin));
 
-			Circle recupC = new Circle(rayonCercle);
-			recupC.setCenterX(recupX);
-			recupC.setCenterY(recupY);
+			Circle recupC = (Circle)(nodeLinkedToIntersection.inverse().get(pRecup));
+			//			recupC.setCenterX(recupX);
+			//			recupC.setCenterY(recupY);
 			recupC.setFill(Color.YELLOW);
+			recupC.toFront();
 			this.requetes.add(recupC);
 
-			double livX = this.requetePane.getWidth() * (pLiv.getLongitude() - longitudeMin) / (longitudeMax - longitudeMin); 
-			double livY = this.requetePane.getHeight() - (this.requetePane.getHeight() * (pLiv.getLatitude() - latitudeMin) / (latitudeMax - latitudeMin));
+			double livX = this.intersectionPane.getWidth() * (pLiv.getLongitude() - longitudeMin) / (longitudeMax - longitudeMin); 
+			double livY = this.intersectionPane.getHeight() - (this.intersectionPane.getHeight() * (pLiv.getLatitude() - latitudeMin) / (latitudeMax - latitudeMin));
 
-			Circle livC = new Circle(rayonCercle);
-			livC.setCenterX(livX);
-			livC.setCenterY(livY);
+			Circle livC = (Circle)(nodeLinkedToIntersection.inverse().get(pLiv));
+			//			livC.setCenterX(livX);
+			//			livC.setCenterY(livY);
 			livC.setFill(Color.BLUE);
+			livC.toFront();
 			this.requetes.add(livC);
 		}
-		requetePane.getChildren().addAll(requetes);
-//		requetePane.getChildren().add(warehouse);
+		//intersectionPane.getChildren().addAll(requetes);
+		//		requetePane.getChildren().add(warehouse);
+		for(int i = 0; i < this.requetes.size(); i++) {
+			mouseEvents.requeteCliquable(requetes.get(i));
+		}
 	}
 
 	public void drawItineraire(Livraison livraison) {
@@ -186,8 +225,8 @@ public class VueGraphique {
 		}
 	}
 
-	public Pane getRequetePane() {
-		return requetePane;
+	public Pane getIntersectionPane() {
+		return intersectionPane;
 	}
 
 	public List<Node> getRequetes() {

@@ -1,4 +1,4 @@
-package tsp;
+package modele;
 
 import java.util.*;
 import javafx.util.*;
@@ -95,5 +95,4 @@ public abstract class TemplateTSP implements TSP {
 	        }	    
 	    }
 	}
-
 }

@@ -57,4 +57,8 @@ public class Etat {
 		
 	}
 	
+	public void feuilleDeRoute() {
+		
+	}
+	
 }

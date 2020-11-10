@@ -8,8 +8,6 @@ import java.sql.Time;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javafx.util.Pair;
-import tsp.TSP;
-import tsp.TSP1;
 
 
 /************************************************************/
@@ -38,6 +36,7 @@ public class Plan {
 	
 	public HashMap<Intersection, ArrayList<Segment>> listeAdjacenceInverse = new HashMap<Intersection, ArrayList<Segment>>();
 	 
+	public HashMap<Intersection, Integer> indexIdInteger = new HashMap<Intersection, Integer>();
 	
 	public HashMap<Intersection, ArrayList<Segment>> getListeAdjacence() {
 		return listeAdjacence;
@@ -82,9 +81,8 @@ public class Plan {
         }
         double[][] matriceCout = new double[listeIntersection.size()][listeIntersection.size()];
         
-        HashMap<Pair<Intersection, Intersection>, Itineraire> matriceItineraire = new HashMap<Pair<Intersection, Intersection>, Itineraire>();
 
-        
+        HashMap<Pair<Intersection, Intersection>, Itineraire> matriceItineraire = new HashMap<Pair<Intersection, Intersection>, Itineraire>();
         
         for(int i=0;i<listeIntersection.size();i++) {
             for(int j=0;j<listeIntersection.size();j++) {
@@ -98,6 +96,7 @@ public class Plan {
                 }
             }
         }
+                
         TSP tsp = new TSP1();
         Integer[] resultat = tsp.searchSolution(30000, matriceCout, listePaires, 0);
         for(int i=0;i<resultat.length;i++){
@@ -129,6 +128,95 @@ public class Plan {
         return(ret);
     }
 	
+	public HashMap<Pair<Intersection, Intersection>, Itineraire> FloydWarshall(ArrayList<Intersection> listeIntersection, double[][] matriceCout){
+		HashMap<Pair<Intersection, Intersection>, Itineraire> matriceItineraire = new HashMap<Pair<Intersection, Intersection>, Itineraire>();
+		int planSize = intersection.size();
+		double[][][] d = new double[planSize+1][planSize+1][planSize+1]; //cout de touts les chemins
+		int[][][] pi = new int[planSize+1][planSize+1][planSize+1]; //matrice de liaison
+		
+		for(int i = 0; i < planSize; ++i) { //initialisation d et pi (pi[0] est la matrice d'adjacence du plan
+			for(int j = 0; j < planSize; ++j) {
+				if(i==j) {
+					d[0][i][j] = 1000000.0;
+					pi[0][i][j] = -1;
+				}else {
+					for(Segment s : segment) {
+						if(s.isSegment(intersection.get(i), intersection.get(j))) {
+							d[0][i][j] = s.getLongueur();
+							pi[0][i][j] = i;
+							break;
+						}else {
+							d[0][i][j] = 1000000.0;
+							pi[0][i][j] = -1;
+						}
+					}
+				}
+			}
+		}
+		
+		
+		for(int k = 1; k <= planSize; ++k) {
+			for(int i = 0; i < planSize; ++i) {
+				for(int j = 0; j < planSize; ++j) {
+					if(i==j) {
+						pi[k][i][j]=-1;
+						d[k][i][j]=1000000.0;
+						continue;
+					}
+					if(d[k-1][i][j] < d[k-1][i][k-1] + d[k-1][k-1][j]) {
+						d[k][i][j] = d[k-1][i][j];
+						pi[k][i][j] = pi[k-1][i][j]; //antecedant de j est le meme que pour k-1
+					}
+					else {
+						d[k][i][j] = d[k-1][i][k-1] + d[k-1][k-1][j];
+						pi[k][i][j] = pi[k-1][k-1][j]; //antecedant de j est l'antecedent de j dans le plus court chemin de k a j
+					}
+				}
+			}
+		}
+		for(int i =0; i<10; ++i) {
+			for(int j = 0; j<10; ++j) {
+				System.out.print(pi[1][i][j]+", ");
+			}
+			System.out.print("\n");
+		}
+		
+		
+				
+		
+		for(int i = 0; i < planSize; ++i) {
+			Intersection depart = intersection.get(i);
+			if(listeIntersection.contains(depart)) {
+				for(int j = 0; j < planSize; ++j) {
+					if(i == j) {
+						matriceCout[listeIntersection.indexOf(depart)][listeIntersection.indexOf(depart)]=-1;
+						continue;
+					}else {
+						Intersection arrivee = intersection.get(j);
+						if(listeIntersection.contains(arrivee)) { // si les deux appartiennent a la liste des intersections qui nous interessent
+		                	Pair<Intersection, Intersection> cle = new Pair<Intersection,Intersection>(depart, arrivee);
+		                	ArrayList<Intersection> chemin = new ArrayList<Intersection>(planSize);
+		                	Intersection pivot = arrivee;
+		                	while(pivot!=depart) {
+		                		//System.out.println(intersection.indexOf(pivot) +"--"+ i);
+		                		//System.out.println(d[planSize][i][intersection.indexOf(pivot)]);
+		                		chemin.add(0, pivot);
+		                		pivot = intersection.get(pi[planSize][i][intersection.indexOf(pivot)]);
+		                	}
+		                	chemin.add(0, depart);
+		                	Itineraire itineraire = new Itineraire(chemin, d[planSize][i][j]);
+		                	matriceItineraire.put(cle, itineraire);
+		                	matriceCout[listeIntersection.indexOf(depart)][listeIntersection.indexOf(arrivee)] = d[planSize][i][j];
+						}
+					}
+				}
+			}
+		}
+		
+		return matriceItineraire;
+	}
+	
+	@SuppressWarnings("unchecked")
 	public String getNomRue(Intersection intersections) {
 		
 		String nomRue = new String();
@@ -180,7 +268,7 @@ public class Plan {
 		nonVisitee.remove(depart);
 		voisinArrivee.remove(depart);
 		
-		while(voisinArrivee.size() != 0 ) { // Tant que tous les voisins de l'intersection d'arrivée ne sont pas visitée
+		while(voisinArrivee.size() != 0 ) { // Tant que tous les voisins de l'intersection d'arrivï¿½e ne sont pas visitï¿½e
 			
 			//System.out.println("sizeVoisin : " + voisinArrivee.size());
 			//System.out.println(voisinArrivee.size());
@@ -196,18 +284,8 @@ public class Plan {
 					mino = tab.get(this.intersection.get(i));
 					index = i;
 				}
-				
 			}
 			
-			
-			//System.out.println(mino);
-			for(int i  = 0 ;  i < tab.size(); i++) {
-				if(tab.get(this.intersection.get(i)) < 100000) {
-					//System.out.println(this.intersection.get(i)+" : " + tab.get(this.intersection.get(i)));
-				}
-			}
-			
-			//System.out.println(tab);
 			Intersection nouveauDepart = this.intersection.get(index);
 			
 			for(int i=0;i<this.listeAdjacence.get(nouveauDepart).size();i++) {
@@ -340,9 +418,14 @@ public Itineraire aEtoile(Intersection depart, Intersection arrivee){
 		ArrayList<Intersection> voisinArrivee = new ArrayList<Intersection>();
 		ArrayList<Segment> voisins = new ArrayList<Segment>();
 		
+		double latitudeArrivee = arrivee.getLatitude();
+		double longitudeArrivee = arrivee.getLongitude();
+		
 		for(int i = 0 ; i < this.intersection.size(); i++) {
 			Intersection intersectionCourante = this.intersection.get(i);
-			Double distanceArrivee = 5000000*((intersectionCourante.getLatitude() - arrivee.getLatitude())*(intersectionCourante.getLatitude() - arrivee.getLatitude()) + (intersectionCourante.getLongitude() - arrivee.getLongitude())*(intersectionCourante.getLongitude() - arrivee.getLongitude()));
+			double latitudeCourante = intersectionCourante.getLatitude();
+			double longitudeCourante = intersectionCourante.getLongitude();
+			Double distanceArrivee = 5000000*((latitudeCourante - latitudeArrivee)*(latitudeCourante - latitudeArrivee) + (longitudeCourante - longitudeArrivee)*(longitudeCourante - longitudeArrivee));
 			//System.out.println(intersectionCourante.getLatitude());
 			//System.out.println(intersectionCourante.getLongitude());
 			//System.out.println(distanceArrivee);
@@ -378,7 +461,7 @@ public Itineraire aEtoile(Intersection depart, Intersection arrivee){
 		nonVisitee.remove(depart);
 		voisinArrivee.remove(depart);
 		
-		while(voisinArrivee.size() != 0 ) { // Tant que tous les voisins de l'intersection d'arrivée ne sont pas visitée
+		while(voisinArrivee.size() != 0 ) { // Tant que tous les voisins de l'intersection d'arrivï¿½e ne sont pas visitï¿½e
 			//System.out.println("sizeVoisin : " + voisinArrivee.size());
 			//System.out.println(voisinArrivee.size());
 			Double mino = 100000000.;
@@ -432,6 +515,7 @@ public Itineraire aEtoile(Intersection depart, Intersection arrivee){
 		
 		return itineraire;
 	}
+	
 	
 	public ArrayList<Long> getIntersectionId() {
 		return intersectionId;
@@ -588,6 +672,14 @@ public Itineraire aEtoile(Intersection depart, Intersection arrivee){
 		
 		
 		return itineraire;
+	}
+	
+	public void remplirIndex(ArrayList<Intersection> requetes, Intersection depart) {
+		this.indexIdInteger.put(depart, 0);
+		Integer entier = 1;
+		for(Intersection i : requetes) {
+			this.indexIdInteger.put(i, entier++);
+		}
 	}
 	
 };

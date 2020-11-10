@@ -51,4 +51,8 @@ public class EtatInitial extends Etat {
 		System.out.println("Charger d'abord un plan");
 	}
 	
+	public void feuilleDeRoute() {
+		System.out.println("Charger d'abord un plan");
+	}
+	
 }

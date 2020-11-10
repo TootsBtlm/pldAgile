@@ -7,7 +7,7 @@ package modele;
 
 /**
  * 
- * Cette classe représente un segment.
+ * Cette classe reprï¿½sente un segment.
  * @author romain
  */
 public class Segment {
@@ -21,7 +21,7 @@ public class Segment {
 	 */
 	public Intersection fin;
 	/**
-	 * Longueur du segment (en mètres)
+	 * Longueur du segment (en mï¿½tres)
 	 */
 	private Double longueur;
 	/**
@@ -63,6 +63,11 @@ public class Segment {
 	}
 	public void setNom(String nom) {
 		this.nom = nom;
+	}
+	public boolean isSegment(Intersection depart, Intersection arrivee) { //regarde si une paire d'untersections est un segment
+		if(this.origine == depart && this.fin == arrivee)
+			return true;
+		return false;
 	}
 	@Override
 	public String toString() {
