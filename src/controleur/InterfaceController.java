@@ -12,6 +12,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import modele.EnsembleRequete;
@@ -33,7 +34,10 @@ public class InterfaceController {
 
 	@FXML
 	private Canvas requeteCanvas;
-
+	
+	@FXML
+	private Text textChargerFichierRequete;
+	
 	@FXML
 	private Pane requetePane;
 
@@ -85,6 +89,8 @@ public class InterfaceController {
 			System.out.println(requetePane);
 			this.vueGraphique = new VueGraphique(this.plan, this.planCanvas, this.requetePane);
 			this.vueGraphique.drawPlan();
+			this.listViewRequest.getItems().clear();
+			this.textChargerFichierRequete.setVisible(true);;
 		} else {
 			System.out.println("Fichier incorrect");
 		}
@@ -123,6 +129,7 @@ public class InterfaceController {
 			}
 
 			mouseEvents.setListeCliquable();
+			this.textChargerFichierRequete.setVisible(false);;
 		}
 		etat = new EtatListeRequeteChargee(this);
 	}
@@ -136,14 +143,7 @@ public class InterfaceController {
 	public void calculerItineraire() {
 
 
-		/*int timeLimit = 30;
-
-			tsp.searchSolution(timeLimit, cout, paires, depart);
-			System.out.print("Solution of cost "+tsp.getSolutionCost()+" found in "
-	                +(System.currentTimeMillis() - startTime)+"ms : ");
-	        for (int i=0; i<nbVertices; i++)
-	            System.out.print(tsp.getSolution(i)+" ");
-	        System.out.println(depart);*/
+	
 		this.livraison = plan.getMatriceCout(this.ensembleRequete);
 		System.out.println("Size itineraire : " + this.livraison.getListeItineraires().get(0).getListeIntersections().get(0).getId());
 		this.vueGraphique.drawItineraire(this.livraison);
@@ -160,8 +160,11 @@ public class InterfaceController {
 	
 	public void ajouterEtape() {
 		System.out.println("tout marche");
+		
+		//this.intersection = mouseEvents.clickIntersection
 		// a faire mario et jj
-		//this.livraison = plan.ajouterSommet(this.livraison, "nouvelle intersection", "intersection precedente", LONG "demander la durée")
+		// this.livraison = plan.ajouterSommet(this.livraison, "nouvelle intersection", "intersection precedente", LONG "demander la durée")
+		// this.livraison = plan.ajouterSommet(this.livraison, "nouvelle intersection", "intersection precedente", LONG "demander la durée")
 		// mettre le code pour ajouter une etape (appel a une fonction dans plan)	
 	}
 	
@@ -175,6 +178,16 @@ public class InterfaceController {
 		// à faire mario et jj
 		// this.livraison = plan.supprimerSommet(this.livraison, "intersection à supprimer")
 		// mettre le code pour supprimer une etape (appel a une fonction dans plan)	
+	}
+	
+	@FXML
+	public void actionCreerFeuilleDeRoute() {
+		etat.feuilleDeRoute();
+	}
+	
+	public void feuilleDeRoute() {
+		System.out.println("tout marche");
+		// creer feuille de route au bon format
 	}
 	
 	public void setStage(Stage stage) {

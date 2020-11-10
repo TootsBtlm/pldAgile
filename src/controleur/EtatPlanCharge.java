@@ -43,4 +43,8 @@ public class EtatPlanCharge extends Etat {
 		System.out.println("Charger d'abord un fichier de requêtes");
 	}
 	
+	public void feuilleDeRoute() {
+		System.out.println("Charger d'abord un fichier de requêtes");
+	}
+	
 }
