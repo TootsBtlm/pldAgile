@@ -35,7 +35,7 @@ public class InterfaceController {
 	private Canvas requeteCanvas;
 
 	@FXML
-	private Pane requetePane;
+	private Pane intersectionPane;
 
 
 	@FXML
@@ -65,7 +65,7 @@ public class InterfaceController {
 	public void initialize() {
 		tsp = new TSP1();
 		etat = new EtatInitial(this);
-
+		mouseEvents = new MouseEvents(requeteNodeListView, this.listViewRequest);
 	}
 
 	@FXML
@@ -97,9 +97,13 @@ public class InterfaceController {
 			System.out.println(path);
 			Lecteur lecteur = new Lecteur();
 			this.plan = lecteur.LirePlan(path);
-			System.out.println(requetePane);
-			this.vueGraphique = new VueGraphique(this.plan, this.planCanvas, this.requetePane);
+			System.out.println(intersectionPane);
+			this.vueGraphique = new VueGraphique(this.plan, this.planCanvas, this.intersectionPane, mouseEvents);
 			this.vueGraphique.drawPlan();
+			for(int i = 0; i < this.vueGraphique.getIntersectionPane().getChildren().size(); i++) {
+				mouseEvents.setIntersectionCliquable(this.vueGraphique.getIntersectionPane().getChildren().get(i));
+			}
+			
 		} else {
 			System.out.println("Fichier incorrect");
 		}
@@ -125,17 +129,17 @@ public class InterfaceController {
 			this.vueTextuelle = new VueTextuelle(this.plan, this.listViewRequest);
 			this.vueTextuelle.drawText(this.ensembleRequete, this.listViewRequest);
 			this.vueGraphique.drawRequests(this.ensembleRequete);
-			this.requeteNodes = this.vueGraphique.getRequetePane().getChildren();
+			this.requeteNodes = this.vueGraphique.getIntersectionPane().getChildren();
 
 			for(int i = 0; i < this.vueGraphique.getRequetes().size(); i++) {
-				requeteNodeListView.put(this.requeteNodes.get(i), listViewRequest.getItems().get(i));
+				requeteNodeListView.put(this.vueGraphique.getRequetes().get(i), listViewRequest.getItems().get(i));
 			}
 
 			mouseEvents = new MouseEvents(requeteNodeListView, this.listViewRequest);
 			// Ajout d'un event handler sur les nodes correspondant aux requêtes sur la carte
-			for(int i = 0; i < this.vueGraphique.getRequetes().size(); i++) {
-				mouseEvents.requeteCliquable(this.vueGraphique.getRequetePane().getChildren().get(i));
-			}
+//			for(int i = 0; i < this.vueGraphique.getRequetes().size(); i++) {
+//				mouseEvents.requeteCliquable(this.vueGraphique.getRequetePane().getChildren().get(i));
+//			}
 
 			mouseEvents.setListeCliquable();
 		}

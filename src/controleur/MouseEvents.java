@@ -1,6 +1,7 @@
 package controleur;
 
-import java.util.Iterator;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.google.common.collect.BiMap;
 
@@ -9,11 +10,13 @@ import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Circle;
+import modele.Intersection;
 
 public class MouseEvents {
 
 	private BiMap<Node, String> requeteNodeListView;
 	private ListView<String> listViewRequest;
+	private Map<Node, Intersection> nodeLinkedToIntersection;
 
 	public MouseEvents(BiMap<Node, String> requeteNodeListView, ListView<String> listViewRequest) {
 		this.requeteNodeListView = requeteNodeListView;
@@ -28,7 +31,7 @@ public class MouseEvents {
 
 				for(Node key : requeteNodeListView.keySet()) {
 					Circle nodeC = (Circle)(key);
-					nodeC.setRadius(6.0);
+					nodeC.setRadius(8.0);
 				}
 				p.setRadius(12.0);
 				listViewRequest.getSelectionModel().select(requeteNodeListView.get(p));
@@ -51,6 +54,18 @@ public class MouseEvents {
 			p.setRadius(12.0);
 		}
 	};
+	
+	EventHandler<MouseEvent> clickIntersection = new EventHandler<MouseEvent>() {
+		@Override
+		public void handle(MouseEvent event) {
+			if(event.getSource() instanceof Circle) {
+				Circle p = ((Circle)(event.getSource()));
+				Intersection inter = nodeLinkedToIntersection.get(p);
+				System.out.println(inter);
+			}
+
+		}
+	};
 
 	public void requeteCliquable(Node node) {
 		node.setOnMousePressed(this.clickRequeteNode);
@@ -58,5 +73,13 @@ public class MouseEvents {
 	
 	public void setListeCliquable() {
 		listViewRequest.setOnMouseClicked(clickRequeteListeTextuelle);
+	}
+	
+	public void setIntersectionCliquable(Node node) {
+		node.setOnMousePressed(this.clickIntersection);
+	}
+
+	public void setNodeLinkedToIntersection(Map<Node, Intersection> nodeLinkedToIntersection) {
+		this.nodeLinkedToIntersection = nodeLinkedToIntersection;
 	}
 }
