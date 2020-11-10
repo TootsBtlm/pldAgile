@@ -6,6 +6,7 @@ module pldAgile {
 	requires javafx.controls;
 	requires java.base;
 	requires com.google.common;
+	requires junit;
 	opens vue;
 	exports vue;
 	exports modele;

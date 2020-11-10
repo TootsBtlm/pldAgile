@@ -95,5 +95,4 @@ public abstract class TemplateTSP implements TSP {
 	        }	    
 	    }
 	}
-
 }

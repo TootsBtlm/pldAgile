@@ -27,6 +27,14 @@ public class TSP1 extends TemplateTSP {
 		return new SeqIter(unvisited, visited, currentVertex, g, paires);
 	}
 	
+	/**
+	 * 
+	 * @param origin
+	 * @param unvisited
+	 * @param visited
+	 * @param paires
+	 * @return Cost of the cheapest neighbor available in visited
+	 */
 	protected double cheapestNeighbour(Integer origin, Collection<Integer> unvisited, Collection<Integer> visited, ArrayList<Pair<Integer, Integer>> paires) { //origin can be or not part of the unvisited
 		Iterator<Integer> it = iterator(origin, unvisited, visited, g, paires);
 		double min = Integer.MAX_VALUE;
