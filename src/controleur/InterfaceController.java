@@ -20,8 +20,8 @@ import modele.Itineraire;
 import modele.Lecteur;
 import modele.Livraison;
 import modele.Plan;
-import tsp.TSP;
-import tsp.TSP1;
+import modele.TSP;
+import modele.TSP1;
 import vue.VueGraphique;
 import vue.VueTextuelle;
 
@@ -134,6 +134,7 @@ public class InterfaceController {
 
 			mouseEvents = new MouseEvents(this.requeteNodeListView, this.listViewRequest);
 			// Ajout d'un event handler sur les nodes correspondant aux requêtes sur la carte
+
 			for(int i = 0; i < this.vueGraphique.getRequetes().size(); i++) {
 				mouseEvents.requeteCliquable(this.vueGraphique.getRequetePane().getChildren().get(i));
 			}
@@ -174,8 +175,9 @@ public class InterfaceController {
 		
 		//this.intersection = mouseEvents.clickIntersection
 		// a faire mario et jj
-		// this.livraison = plan.ajouterSommet(this.livraison, "nouvelle intersection", "intersection precedente", LONG "demander la durée")
-		// this.livraison = plan.ajouterSommet(this.livraison, "nouvelle intersection", "intersection precedente", LONG "demander la durée")
+		//this.livraison = plan.ajouterSommet(this.livraison, "nouvelle intersection", "intersection precedente", LONG "demander la durï¿½e")
+		// this.livraison = plan.ajouterSommet(this.livraison, "nouvelle intersection", "intersection precedente", LONG "demander la durï¿½e")
+		// this.livraison = plan.ajouterSommet(this.livraison, "nouvelle intersection", "intersection precedente", LONG "demander la durï¿½e")
 		// mettre le code pour ajouter une etape (appel a une fonction dans plan)	
 	}
 	
@@ -186,8 +188,8 @@ public class InterfaceController {
 	
 	public void supprimerEtape() {
 		System.out.println("tout marche");
-		// à faire mario et jj
-		// this.livraison = plan.supprimerSommet(this.livraison, "intersection à supprimer")
+		// ï¿½ faire mario et jj
+		// this.livraison = plan.supprimerSommet(this.livraison, "intersection ï¿½ supprimer")
 		// mettre le code pour supprimer une etape (appel a une fonction dans plan)	
 	}
 	
