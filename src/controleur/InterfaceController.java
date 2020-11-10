@@ -12,6 +12,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import modele.EnsembleRequete;
@@ -19,12 +20,17 @@ import modele.Itineraire;
 import modele.Lecteur;
 import modele.Livraison;
 import modele.Plan;
-import tsp.TSP;
-import tsp.TSP1;
+import modele.TSP;
+import modele.TSP1;
 import vue.VueGraphique;
 import vue.VueTextuelle;
 
-
+/**
+ * 
+ * @author Aurélien, Mario et Jean-Jacques
+ * Représente 
+ *
+ */
 public class InterfaceController {
 
 
@@ -33,6 +39,9 @@ public class InterfaceController {
 
 	@FXML
 	private Canvas requeteCanvas;
+
+	@FXML
+	private Text textChargerFichierRequete;
 
 	@FXML
 	private Pane intersectionPane;
@@ -58,7 +67,7 @@ public class InterfaceController {
 	private MouseEvents mouseEvents;
 
 	private Etat etat;
-	
+
 	private Livraison livraison;
 
 	@FXML
@@ -70,21 +79,6 @@ public class InterfaceController {
 
 	@FXML
 	public void actionChargerFichierPlan() {
-		/*		FileChooser fileChooser = new FileChooser();
-		File file = fileChooser.showOpenDialog(this.stage);
-		if(file != null) {
-			String path = file.getPath();
-			System.out.println(path);
-			Lecteur lecteur = new Lecteur();
-			this.plan = lecteur.LirePlan(path);
-			this.vueGraphique = new VueGraphique(this.plan, this.planCanvas, this.requetePane);
-			this.vueGraphique.drawPlan();
-		} else {
-			System.out.println("Fichier incorrect");
-		}
-		 */
-		//Première version pour étudier la manière dont les données vont aller d'une classe à l'autre
-
 		etat.chargerFichierPlan();
 
 	}
@@ -103,7 +97,9 @@ public class InterfaceController {
 			for(int i = 0; i < this.vueGraphique.getIntersectionPane().getChildren().size(); i++) {
 				mouseEvents.setIntersectionCliquable(this.vueGraphique.getIntersectionPane().getChildren().get(i));
 			}
-			
+
+			this.listViewRequest.getItems().clear();
+			this.textChargerFichierRequete.setVisible(true);;
 		} else {
 			System.out.println("Fichier incorrect");
 		}
@@ -122,6 +118,8 @@ public class InterfaceController {
 		} else {
 			FileChooser fileChooser = new FileChooser();
 			File file = fileChooser.showOpenDialog(this.stage);
+			this.vueGraphique.getIntersectionPane().getChildren().clear();
+			this.vueGraphique.drawPlan();
 			String path = file.getPath();
 			System.out.println(path);
 			Lecteur lecteur = new Lecteur();
@@ -129,21 +127,30 @@ public class InterfaceController {
 			this.vueTextuelle = new VueTextuelle(this.plan, this.listViewRequest);
 			this.vueTextuelle.drawText(this.ensembleRequete, this.listViewRequest);
 			this.vueGraphique.drawRequests(this.ensembleRequete);
+			
 			this.requeteNodes = this.vueGraphique.getIntersectionPane().getChildren();
 
+			this.requeteNodeListView.clear();
 			for(int i = 0; i < this.vueGraphique.getRequetes().size(); i++) {
 				requeteNodeListView.put(this.vueGraphique.getRequetes().get(i), listViewRequest.getItems().get(i));
+				this.requeteNodes = this.vueGraphique.getIntersectionPane().getChildren();
 			}
 
-			mouseEvents = new MouseEvents(requeteNodeListView, this.listViewRequest);
+
+			mouseEvents = new MouseEvents(this.requeteNodeListView, this.listViewRequest);
 			// Ajout d'un event handler sur les nodes correspondant aux requêtes sur la carte
-//			for(int i = 0; i < this.vueGraphique.getRequetes().size(); i++) {
-//				mouseEvents.requeteCliquable(this.vueGraphique.getRequetePane().getChildren().get(i));
-//			}
+
+			//			for(int i = 0; i < this.vueGraphique.getRequetes().size(); i++) {
+			//				mouseEvents.requeteCliquable(this.vueGraphique.getRequetePane().getChildren().get(i));
+			//			}
+
 
 			mouseEvents.setListeCliquable();
+			this.textChargerFichierRequete.setVisible(false);;
+
+			System.out.println("test");
+			etat = new EtatListeRequeteChargee(this);
 		}
-		etat = new EtatListeRequeteChargee(this);
 	}
 
 	@FXML
@@ -155,14 +162,7 @@ public class InterfaceController {
 	public void calculerItineraire() {
 
 
-		/*int timeLimit = 30;
 
-			tsp.searchSolution(timeLimit, cout, paires, depart);
-			System.out.print("Solution of cost "+tsp.getSolutionCost()+" found in "
-	                +(System.currentTimeMillis() - startTime)+"ms : ");
-	        for (int i=0; i<nbVertices; i++)
-	            System.out.print(tsp.getSolution(i)+" ");
-	        System.out.println(depart);*/
 		this.livraison = plan.getMatriceCout(this.ensembleRequete);
 		System.out.println("Size itineraire : " + this.livraison.getListeItineraires().get(0).getListeIntersections().get(0).getId());
 		this.vueGraphique.drawItineraire(this.livraison);
@@ -171,31 +171,45 @@ public class InterfaceController {
 		etat = new EtatItineraireCalcule(this);
 
 	}
-	
+
 	@FXML
 	public void actionAjouterEtape() {
 		etat.ajouterEtape();
 	}
-	
+
 	public void ajouterEtape() {
 		System.out.println("tout marche");
+
+		//this.intersection = mouseEvents.clickIntersection
 		// a faire mario et jj
-		//this.livraison = plan.ajouterSommet(this.livraison, "nouvelle intersection", "intersection precedente", LONG "demander la durée")
+		//this.livraison = plan.ajouterSommet(this.livraison, "nouvelle intersection", "intersection precedente", LONG "demander la durï¿½e")
+		// this.livraison = plan.ajouterSommet(this.livraison, "nouvelle intersection", "intersection precedente", LONG "demander la durï¿½e")
+		// this.livraison = plan.ajouterSommet(this.livraison, "nouvelle intersection", "intersection precedente", LONG "demander la durï¿½e")
 		// mettre le code pour ajouter une etape (appel a une fonction dans plan)	
 	}
-	
+
 	@FXML
 	public void actionSupprimerEtape() {
 		etat.supprimerEtape();
 	}
-	
+
 	public void supprimerEtape() {
 		System.out.println("tout marche");
-		// à faire mario et jj
-		// this.livraison = plan.supprimerSommet(this.livraison, "intersection à supprimer")
+		// ï¿½ faire mario et jj
+		// this.livraison = plan.supprimerSommet(this.livraison, "intersection ï¿½ supprimer")
 		// mettre le code pour supprimer une etape (appel a une fonction dans plan)	
 	}
-	
+
+	@FXML
+	public void actionCreerFeuilleDeRoute() {
+		etat.feuilleDeRoute();
+	}
+
+	public void feuilleDeRoute() {
+		System.out.println("tout marche");
+		// creer feuille de route au bon format
+	}
+
 	public void setStage(Stage stage) {
 		this.stage = stage;
 	}

@@ -46,5 +46,8 @@ public class EtatItineraireCalcule extends Etat{
 		this.interfaceController.supprimerEtape();
 	}
 	
+	public void feuilleDeRoute() {
+		
+	}
 	
 }

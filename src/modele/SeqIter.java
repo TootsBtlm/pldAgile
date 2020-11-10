@@ -1,4 +1,4 @@
-package tsp;
+package modele;
 
 import java.util.*;
 

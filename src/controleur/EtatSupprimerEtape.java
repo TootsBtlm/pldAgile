@@ -45,4 +45,8 @@ public class EtatSupprimerEtape extends Etat{
 		this.interfaceController.supprimerEtape();
 	}
 	
+	public void feuilleDeRoute() {
+		
+	}
+	
 }
