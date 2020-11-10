@@ -122,13 +122,13 @@ public class VueGraphique {
 			for(int i = 0; i < requetes.size(); i++) {
 
 				Circle node = (Circle)(requetes.get(i));
-				node.setFill(Color.BLACK);
+				node.setFill(Color.rgb(0,0,0,0));
 				//intersectionPane.getChildren().remove(requetes.get(i));
 			}
 			requetes.clear();
 		}
-//		requetePane.getChildren().clear();
-//		nodeLinkedToIntersection.clear();
+		//		requetePane.getChildren().clear();
+		//		nodeLinkedToIntersection.clear();
 
 		double latitudeMin = this.plan.latitudeMin();
 		double latitudeMax = this.plan.latitudeMax();
@@ -152,8 +152,8 @@ public class VueGraphique {
 		//		warehouse.setX(depotX - 16);
 		//		warehouse.setY(depotY - 16);
 		//		warehouse.setPreserveRatio(true);
-//		depotC.setCenterX(depotX);
-//		depotC.setCenterY(depotY);
+		//		depotC.setCenterX(depotX);
+		//		depotC.setCenterY(depotY);
 		depotC.setFill(Color.ORANGE);
 		depotC.toFront();
 		this.requetes.add(depotC);
@@ -169,8 +169,8 @@ public class VueGraphique {
 			double recupY = this.intersectionPane.getHeight() - (this.intersectionPane.getHeight() * (pRecup.getLatitude() - latitudeMin) / (latitudeMax - latitudeMin));
 
 			Circle recupC = (Circle)(nodeLinkedToIntersection.inverse().get(pRecup));
-//			recupC.setCenterX(recupX);
-//			recupC.setCenterY(recupY);
+			//			recupC.setCenterX(recupX);
+			//			recupC.setCenterY(recupY);
 			recupC.setFill(Color.YELLOW);
 			recupC.toFront();
 			this.requetes.add(recupC);
@@ -179,8 +179,8 @@ public class VueGraphique {
 			double livY = this.intersectionPane.getHeight() - (this.intersectionPane.getHeight() * (pLiv.getLatitude() - latitudeMin) / (latitudeMax - latitudeMin));
 
 			Circle livC = (Circle)(nodeLinkedToIntersection.inverse().get(pLiv));
-//			livC.setCenterX(livX);
-//			livC.setCenterY(livY);
+			//			livC.setCenterX(livX);
+			//			livC.setCenterY(livY);
 			livC.setFill(Color.BLUE);
 			livC.toFront();
 			this.requetes.add(livC);
