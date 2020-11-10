@@ -44,4 +44,9 @@ public class EtatAjouterEtape extends Etat{
 	public void supprimerEtape() {
 		this.interfaceController.supprimerEtape();
 	}
+	
+	public void feuilleDeRoute() {
+		
+	}
+	
 }

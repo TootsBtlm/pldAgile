@@ -45,4 +45,8 @@ public class EtatListeRequeteChargee extends Etat{
 		System.out.println("Charger d'abord l'itinéraire");
 	}
 	
+	public void feuilleDeRoute() {
+		System.out.println("Charger d'abord l'itinéraire");
+	}
+	
 }
