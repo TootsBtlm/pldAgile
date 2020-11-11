@@ -1,6 +1,7 @@
 package controleur;
 
 
+import modele.Intersection;
 import modele.Plan;
 
 /**
@@ -42,8 +43,8 @@ public class EtatItineraireCalcule extends Etat{
 		this.interfaceController.ajouterEtape();
 	}
 	
-	public void supprimerEtape() {
-		this.interfaceController.supprimerEtape();
+	public void supprimerEtape(Intersection inter) {
+		this.interfaceController.supprimerEtape(inter);
 	}
 	
 	public void feuilleDeRoute() {

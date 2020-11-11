@@ -27,6 +27,7 @@ public class VueGraphique {
 
 	Plan plan;
 	Canvas planCanvas;
+	Canvas itineraireCanvas;
 
 	Pane intersectionPane;
 
@@ -34,10 +35,11 @@ public class VueGraphique {
 	BiMap<Node, Intersection> nodeLinkedToIntersection = HashBiMap.create();
 	private MouseEvents mouseEvents;
 
-	public VueGraphique(Plan plan, Canvas planCanvas, Pane intersectionPane, MouseEvents mouseEvents) {
+	public VueGraphique(Plan plan, Canvas planCanvas, Pane intersectionPane, Canvas itineraireCanvas, MouseEvents mouseEvents) {
 		this.plan = plan;
 		this.planCanvas = planCanvas;
 		this.intersectionPane = intersectionPane;
+		this.itineraireCanvas = itineraireCanvas;
 		this.mouseEvents = mouseEvents;
 	}
 
@@ -51,6 +53,8 @@ public class VueGraphique {
 		nodeLinkedToIntersection.clear();
 		var gc = this.planCanvas.getGraphicsContext2D();
 		gc.clearRect(0, 0, this.planCanvas.getWidth(), this.planCanvas.getHeight());
+		var gc2 = this.itineraireCanvas.getGraphicsContext2D();
+		gc2.clearRect(0, 0, this.itineraireCanvas.getWidth(), this.itineraireCanvas.getHeight());
 		//		gc.beginPath();
 		//		gc.moveTo(this.this.planCanvas.getWidth(), 0);
 		//		gc.lineTo(30.5, 30.5);
@@ -129,6 +133,8 @@ public class VueGraphique {
 		}
 		//		requetePane.getChildren().clear();
 		//		nodeLinkedToIntersection.clear();
+		var gc2 = this.itineraireCanvas.getGraphicsContext2D();
+		gc2.clearRect(0, 0, this.itineraireCanvas.getWidth(), this.itineraireCanvas.getHeight());
 
 		double latitudeMin = this.plan.latitudeMin();
 		double latitudeMax = this.plan.latitudeMax();
@@ -193,9 +199,12 @@ public class VueGraphique {
 	}
 
 	public void drawItineraire(Livraison livraison) {
-		var gc = this.planCanvas.getGraphicsContext2D();
+		var gc = this.itineraireCanvas.getGraphicsContext2D();
+
 //		gc.setFill(Color.RED);
 		
+		gc.clearRect(0, 0, this.itineraireCanvas.getWidth(), this.itineraireCanvas.getHeight());
+
 
 		double latitudeMin = this.plan.latitudeMin();
 		double latitudeMax = this.plan.latitudeMax();

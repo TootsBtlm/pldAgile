@@ -1,5 +1,6 @@
 package controleur;
 
+import modele.Intersection;
 import modele.Itineraire;
 import modele.Plan;
 
@@ -41,7 +42,7 @@ public class EtatListeRequeteChargee extends Etat{
 		System.out.println("Calculer d'abord l'itinéraire");
 	}
 	
-	public void supprimerEtape() {
+	public void supprimerEtape(Intersection inter) {
 		System.out.println("Charger d'abord l'itinéraire");
 	}
 	
