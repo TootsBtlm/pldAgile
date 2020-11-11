@@ -39,6 +39,6 @@
       <Circle fill="#004dff" layoutX="1031.0" layoutY="28.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle fill="#ff8900" layoutX="1121.0" layoutY="29.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
       <Text layoutX="1141.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Depot" />
-      <Button layoutX="905.0" layoutY="199.0" mnemonicParsing="false" prefHeight="60.0" onAction="#actionCreerFeuilleDeRoute" prefWidth="363.0" text="Générer feuille de route" />
+      <Button layoutX="905.0" layoutY="199.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="363.0" text="Générer feuille de route" />
    </children>
 </AnchorPane>
