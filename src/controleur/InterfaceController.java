@@ -226,11 +226,11 @@ public class InterfaceController {
 
 		
 		this.livraison = plan.supprimerSommet(this.livraison,  inter);
-
+		
 		this.vueGraphique.drawItineraire(this.livraison);
 		this.vueTextuelle.drawItineraire(this.livraison, this.requeteNodeListView);
 
-		etat = new EtatSupprimerEtape(this);
+		etat = new EtatItineraireCalcule(this);
 
 	}
 
