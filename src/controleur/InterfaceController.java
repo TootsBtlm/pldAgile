@@ -141,7 +141,9 @@ public class InterfaceController {
 
 
 
+
 			mouseEvents = new MouseEvents(this.requeteNodeListView, this.listViewRequest, this);
+
 
 			// Ajout d'un event handler sur les nodes correspondant aux requêtes sur la carte
 
