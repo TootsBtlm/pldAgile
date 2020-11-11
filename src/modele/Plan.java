@@ -398,15 +398,43 @@ public class Plan {
 		
 		ArrayList<Itineraire> ancienneListeItineraire = ancienneLivraison.getListeItineraires();
 		ArrayList<Itineraire> nouvelleListeItineraire = new ArrayList<Itineraire>();
-		int i = 0;
+		int i = 1;
 		
-		
+		nouvelleListeItineraire.add(ancienneListeItineraire.get(0));
 // || requete.getPointDeRecuperation().getId() == ancienneListeItineraire.get(i).getListeIntersections().get(0).getId()		
-		while(i < ancienneLivraison.getListeItineraires().size()) {
+		while(i < ancienneLivraison.getListeItineraires().size()-1) {
 			
-			if(requete.getPointDeLivraison().getId() == ancienneListeItineraire.get(i).getListeIntersections().get(0).getId()) {
-				Intersection intersectionPrecedente = ancienneListeItineraire.get(i-1).getListeIntersections().get(0);
-				Intersection intersectionSuivante = ancienneListeItineraire.get(i).getListeIntersections().get(ancienneListeItineraire.get(i).getListeIntersections().size()-1);
+			if(requete.getPointDeLivraison().getId() == ancienneListeItineraire.get(i).getListeIntersections().get(ancienneListeItineraire.get(i).getListeIntersections().size()-1).getId()) {
+				Intersection intersectionPrecedente = ancienneListeItineraire.get(i).getListeIntersections().get(0);
+				Intersection intersectionSuivante = ancienneListeItineraire.get(i+1).getListeIntersections().get(ancienneListeItineraire.get(i+1).getListeIntersections().size()-1);
+				nouvelleListeItineraire.add(this.aEtoile(intersectionPrecedente, intersectionSuivante));
+				i++;
+				i++;
+			}
+			else {
+				nouvelleListeItineraire.add(ancienneListeItineraire.get(i));
+				i++;
+			}
+		}
+		nouvelleListeItineraire.add(ancienneListeItineraire.get(i));
+		
+		
+		// on supprime ensuite le point de récupérations
+		
+		
+		ancienneListeItineraire = (ArrayList<Itineraire>) nouvelleListeItineraire.clone();
+		nouvelleListeItineraire = new ArrayList<Itineraire>();
+		
+		i = 1;
+		
+		nouvelleListeItineraire.add(ancienneListeItineraire.get(0));
+		while(i < ancienneLivraison.getListeItineraires().size()-1) {
+			
+			if(requete.getPointDeRecuperation().getId() == ancienneListeItineraire.get(i).getListeIntersections().get(ancienneListeItineraire.get(i).getListeIntersections().size()-1).getId()	) {
+				
+				Intersection intersectionPrecedente = ancienneListeItineraire.get(i).getListeIntersections().get(0);
+				Intersection intersectionSuivante = ancienneListeItineraire.get(i+1).getListeIntersections().get(ancienneListeItineraire.get(i+1).getListeIntersections().size()-1);
+				
 				nouvelleListeItineraire.add(this.aEtoile(intersectionPrecedente, intersectionSuivante));
 				i++;
 				i++;
@@ -417,30 +445,7 @@ public class Plan {
 			}
 		}
 		
-		
-		// on supprime ensuite le point de récupérations
-		
-		
-//		ancienneListeItineraire = nouvelleListeItineraire;
-//		nouvelleListeItineraire = new ArrayList<Itineraire>();
-//		i = 0;
-//		
-//		
-//		while(i < ancienneLivraison.getListeItineraires().size()) {
-//			
-//			if(requete.getPointDeRecuperation().getId() == ancienneListeItineraire.get(i).getListeIntersections().get(0).getId()	) {
-//				Intersection intersectionPrecedente = ancienneListeItineraire.get(i-1).getListeIntersections().get(0);
-//				Intersection intersectionSuivante = ancienneListeItineraire.get(i).getListeIntersections().get(ancienneListeItineraire.get(i).getListeIntersections().size()-1);
-//				nouvelleListeItineraire.add(this.aEtoile(intersectionPrecedente, intersectionSuivante));
-//				i++;
-//				i++;
-//			}
-//			else {
-//				nouvelleListeItineraire.add(ancienneListeItineraire.get(i));
-//				i++;
-//			}
-//		}
-		
+		//nouvelleListeItineraire.add(ancienneListeItineraire.get(i));
 		
 
 		
