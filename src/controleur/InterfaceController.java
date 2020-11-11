@@ -227,6 +227,8 @@ public class InterfaceController {
 		
 		this.livraison = plan.supprimerSommet(this.livraison,  inter);
 		
+		this.ensembleRequete = this.livraison.getRequetes();
+		this.vueGraphique.drawRequests(this.ensembleRequete);
 		this.vueGraphique.drawItineraire(this.livraison);
 		this.vueTextuelle.drawItineraire(this.livraison, this.requeteNodeListView);
 
