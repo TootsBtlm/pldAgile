@@ -30,6 +30,12 @@ public class MouseEvents {
 		public void handle(MouseEvent event) {
 			if(event.getSource() instanceof Circle) {
 				Circle p = ((Circle)(event.getSource()));
+				p.setRadius(12.0);
+				listViewRequest.getSelectionModel().select(requeteNodeListView.get(p));
+				for(Node key : requeteNodeListView.keySet()) {
+					Circle nodeC = (Circle)(key);
+					nodeC.setRadius(8.0);
+				}
 				
 				Intersection inter = nodeLinkedToIntersection.get(p);
 				
@@ -42,12 +48,8 @@ public class MouseEvents {
 				else if (interfaceController.getEtat() instanceof EtatAjouterPointPrecedentLivraison) {
 					interfaceController.ajouterPointPrecedentLivraison(inter);
 				}
-				for(Node key : requeteNodeListView.keySet()) {
-					Circle nodeC = (Circle)(key);
-					nodeC.setRadius(8.0);
-				}
-				p.setRadius(12.0);
-				listViewRequest.getSelectionModel().select(requeteNodeListView.get(p));
+				
+				
 				//System.out.println(p);
 			}
 

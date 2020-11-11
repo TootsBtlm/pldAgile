@@ -34,7 +34,7 @@ public class Lecteur {
 	 */
 	
 	public Plan LirePlan(String nomDeFichier) {
-		Plan nouveauPlan = new Plan();
+		Plan nouveauPlan = null;
 		
 		try {
 	         SAXParserFactory factory = SAXParserFactory.newInstance();
@@ -50,6 +50,11 @@ public class Lecteur {
 
 	         Plan PlanLu = new Plan(ListeIntersectionsid, ListeIntersections, ListeSegments);
 	         nouveauPlan = PlanLu;
+	         
+	         if(ListeIntersections.size() <= 0) {
+	        	 nouveauPlan = null;
+	         }
+	         
 	         
 	         
 	    } catch (DOMException e) {
@@ -86,6 +91,10 @@ public class Lecteur {
 	         GestionnaireRequeteXml nouveauGestionnaireDeRequetes = new GestionnaireRequeteXml();
 	         nouveauGestionnaireDeRequetes.setPlanCourant(planCourant);
 	         parser.parse(nomDeFichier, nouveauGestionnaireDeRequetes );
+	         
+	         if(nouveauGestionnaireDeRequetes.getListeRequest().size() <= 0) {
+	        	 return null;
+	         }
 	         
 	         EnsembleRequete NouveauRecapDemande = new EnsembleRequete(planCourant.getIntersectionIdRetourne(), nouveauGestionnaireDeRequetes.getListeRequest(), nouveauGestionnaireDeRequetes.getPointDepart());
 	         RecapDemande = NouveauRecapDemande;
