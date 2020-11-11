@@ -43,6 +43,7 @@ public class MouseEvents {
 				Intersection inter = nodeLinkedToIntersection.get(p);
 				
 				if (interfaceController.getEtat() instanceof EtatSupprimerEtape) {
+					System.out.println("Inter : " + inter);
 					interfaceController.supprimerEtape(inter);
 				}
 				else if (interfaceController.getEtat() instanceof EtatAjouterPointPrecedentRecuperation) {

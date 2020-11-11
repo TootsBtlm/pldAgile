@@ -14,4 +14,8 @@ public class EtatAjouterPointPrecedentLivraison extends Etat{
 		// TODO Auto-generated constructor stub
 	}
 	
+	public void validerAjouterEtape() {
+		interfaceController.validerAjouterEtape();
+	}
+	
 }
