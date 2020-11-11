@@ -39,6 +39,9 @@ public class InterfaceController {
 
 	@FXML
 	private Canvas planCanvas;
+	
+	@FXML
+	private Canvas itineraireCanvas;
 
 	@FXML
 	private Canvas requeteCanvas;
@@ -91,6 +94,8 @@ public class InterfaceController {
 	}
 	
 	public void chargerFichierPlan() {
+		this.plan = null;
+		this.vueGraphique = null;
 		FileChooser fileChooser = new FileChooser();
 		File file = fileChooser.showOpenDialog(this.stage);
 		if(file != null) {
@@ -99,7 +104,7 @@ public class InterfaceController {
 			Lecteur lecteur = new Lecteur();
 			this.plan = lecteur.LirePlan(path);
 			System.out.println(intersectionPane);
-			this.vueGraphique = new VueGraphique(this.plan, this.planCanvas, this.intersectionPane, mouseEvents);
+			this.vueGraphique = new VueGraphique(this.plan, this.planCanvas, this.intersectionPane, this.itineraireCanvas, mouseEvents);
 			this.vueGraphique.drawPlan();
 			for(int i = 0; i < this.vueGraphique.getIntersectionPane().getChildren().size(); i++) {
 				mouseEvents.setIntersectionCliquable(this.vueGraphique.getIntersectionPane().getChildren().get(i));
@@ -125,8 +130,6 @@ public class InterfaceController {
 		} else {
 			FileChooser fileChooser = new FileChooser();
 			File file = fileChooser.showOpenDialog(this.stage);
-			this.vueGraphique.getIntersectionPane().getChildren().clear();
-			this.vueGraphique.drawPlan();
 			String path = file.getPath();
 			System.out.println(path);
 			Lecteur lecteur = new Lecteur();
