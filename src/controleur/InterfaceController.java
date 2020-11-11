@@ -34,10 +34,11 @@ import vue.VueTextuelle;
 
 /**
  * 
- * @author Aurélien, Mario et Jean-Jacques
+ * @author Hexanome4103
  * Représente 
  *
  */
+
 public class InterfaceController {
 
 
@@ -95,6 +96,11 @@ public class InterfaceController {
 	private Intersection nouveauPointLivraison;
 	private Intersection pointPrecedent;
 
+	/**
+	 * 
+	 * Créer une instance de la classe InterfaceController. Initialise les attributs tsp, etat, ajouterStage et mouseEvents de l'instance.
+	 * 
+	 */
 	
 	public InterfaceController() {
 		tsp = new TSP1();
@@ -103,6 +109,12 @@ public class InterfaceController {
 		mouseEvents = new MouseEvents(requeteNodeListView, this.listViewRequest, this);
 	}
 
+	/**
+	 * 
+	 * Fait appel à la fonction polymorphe chargerFichierPlan de la classe Etat 
+	 * 
+	 */
+	
 	@FXML
 	public void actionChargerFichierPlan() {
 		System.out.println("called actionChargerFichierPlan");
@@ -111,9 +123,21 @@ public class InterfaceController {
 
 	}
 	
+	/**
+	 * 
+	 *  
+	 * 
+	 */
+	
 	public Etat getEtat() {
 		return this.etat;
 	}
+	
+	/**
+	 * 
+	 * Permet de charger le plan en faisant appel à la classe Lecteur
+	 * 
+	 */
 	
 	public void chargerFichierPlan() {
 		this.plan = null;
@@ -141,6 +165,12 @@ public class InterfaceController {
 
 	}
 
+	/**
+	 * 
+	 * Fait appel à la fonction polymorphe chargerFichierRequetes de la classe Etat 
+	 * 
+	 */
+	
 	@FXML
 	public void actionChargerFichierRequete() {
 		System.out.println("called actionChargerFichierRequete");
@@ -148,6 +178,12 @@ public class InterfaceController {
 		etat.chargerFichierRequetes();
 	}
 
+	/**
+	 * 
+	 * Permet de charger le fichier de requêtes en faisant appel à la classe Lecteur
+	 * 
+	 */
+	
 	public void chargerFichierRequete() {
 		if(this.vueGraphique == null) {
 			System.out.println("Charger d'abord un plan");
@@ -191,6 +227,12 @@ public class InterfaceController {
 		}
 	}
 
+	/**
+	 * 
+	 * Fait appel à la fonction polymorphe calculerItineraire de la classe Etat 
+	 * 
+	 */
+	
 	@FXML
 	public void actionCalculerItineraire() {
 		System.out.println("called actionCalculerItineraire");
@@ -199,6 +241,12 @@ public class InterfaceController {
 	}
 
 
+	/**
+	 * 
+	 * Permet de charger l'itinéraire calculé en faisant appel à la méthode getMatriceCout de la classe Plan
+	 * 
+	 */
+	
 	public void calculerItineraire() {
 
 		this.livraison = plan.getMatriceCout(this.ensembleRequete);
@@ -225,6 +273,12 @@ public class InterfaceController {
 
 	}
 
+	/**
+	 * 
+	 * Fait appel à la fonction polymorphe ajouterEtape de la classe Etat ce qui lance une autre fenêtre de gestion de l'ajout d'une étape
+	 * 
+	 */
+	
 	@FXML
 	public void actionAjouterEtape() {
 		System.out.println("called actionAjouterEtape");
@@ -232,6 +286,12 @@ public class InterfaceController {
 		etat = new EtatAjouterEtape(this);
 		etat.ajouterEtape();
 	}
+	
+	/**
+	 * 
+	 * Déclenchée lorsque l'utilisateur appuie sur le bouton ajouter un point de récupération. Permet à l'utilisateur de sélectionner le point de récupération à ajouter
+	 * 
+	 */
 	
 	@FXML
 	public void actionAjouterPointRecuperation() {
@@ -241,6 +301,12 @@ public class InterfaceController {
 		etat = new EtatAjouterPointRecuperation(this);
 	}
 
+	/**
+	 * 
+	 * Déclenchée lorsque l'utilisateur appuie sur le bouton ajouter le point précédent. Permet à l'utilisateur de sélectionner le point précédent à ajouter
+	 * 
+	 */
+	
 	@FXML
 	public void actionAjouterPointPrecedent() {
 		System.out.println("called actionAjouterPointPrecedent");
@@ -249,6 +315,12 @@ public class InterfaceController {
 		etat = new EtatAjouterPointPrecedent(this);
 	}
 	
+	/**
+	 * 
+	 * Déclenchée lorsque l'utilisateur appuie sur le bouton ajouter le point de livraison. Permet à l'utilisateur de sélectionner le point de livraison à ajouter
+	 * 
+	 */
+	
 	@FXML
 	public void actionAjouterPointLivraison() {
 		System.out.println("called actionAjouterPointLivraison");
@@ -256,6 +328,12 @@ public class InterfaceController {
 
 		etat = new EtatAjouterPointLivraison(this);
 	}
+	
+	/**
+	 * 
+	 * Lance une nouvelle fenêtre qui permet à l'utilisateur de gérer l'ajout d'une nouvelle étape
+	 * 
+	 */
 	
 	public void ajouterEtape() {
 		
@@ -275,16 +353,33 @@ public class InterfaceController {
 		
 	}
 	
-
+	/**
+	 * 
+	 * Valide l'ajout de l'étape en calculant le nouvel itinéraire
+	 * 
+	 */
+	
 	public void validerAjouterEtape() {
 		Long duree = (long) 10;
 		//this.livraison = plan.ajouterRequete(this.livraison, this.pointPrecedent, this.pointRecuperation, this.pointLivraison, duree);
 	}
 	
+	/**
+	 * 
+	 * Permet à l'utilisateur de valider l'ajout d'une étape en faisant appel à la fonction polymorphe validerAjouterEtape de la classe Etat
+	 * 
+	 */
+	
 	@FXML
 	public void actionValiderAjouterEtape() {
 		etat.validerAjouterEtape();
 	}
+	
+	/**
+	 * 
+	 * Ajoute le point de récupération dans la fenêtre de gestion d'ajout d'une étape
+	 * 
+	 */
 	
 	public void ajouterNouveauPointRecuperation(Intersection inter) {
 		System.out.println("called ajouterNouveauPointRecuperation");
@@ -295,6 +390,12 @@ public class InterfaceController {
 		System.out.println(this.plan.getNomRue(inter));
 	}
 	
+	/**
+	 * 
+	 * Ajoute le point précédent dans la fenêtre de gestion d'ajout d'une étape
+	 * 
+	 */
+	
 	public void ajouterPointPrecedent(Intersection inter) {
 		System.out.println("called ajouterPointPrecedent");
 		System.out.println("ETAT au call : " + this.etat);
@@ -302,6 +403,12 @@ public class InterfaceController {
 		this.textPointPrecedent.setText(this.plan.getNomRue(inter));
 		System.out.println(this.plan.getNomRue(inter));
 	}
+	
+	/**
+	 * 
+	 * Ajoute le point de livraison dans la fenêtre de gestion d'ajout d'une étape
+	 * 
+	 */
 	
 	public void ajouterNouveauPointLivraison(Intersection inter) {
 		System.out.println("called ajouterNouveauPointLivraison");
@@ -312,12 +419,23 @@ public class InterfaceController {
 		System.out.println(this.plan.getNomRue(inter));
 	}
 	
-
+	/**
+	 * 
+	 * 
+	 * 
+	 */
+	
 	@FXML
 	public void actionSupprimerEtape() {
 		etat = new EtatSupprimerEtape(this);
 	}
 
+	/**
+	 * 
+	 * 
+	 * 
+	 */
+	
 	public void supprimerEtape(Intersection inter) {
 
 		
