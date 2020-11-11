@@ -87,6 +87,8 @@ public class InterfaceController {
 	}
 
 	public void chargerFichierPlan() {
+		this.plan = null;
+		this.vueGraphique = null;
 		FileChooser fileChooser = new FileChooser();
 		File file = fileChooser.showOpenDialog(this.stage);
 		if(file != null) {
@@ -121,8 +123,6 @@ public class InterfaceController {
 		} else {
 			FileChooser fileChooser = new FileChooser();
 			File file = fileChooser.showOpenDialog(this.stage);
-			this.vueGraphique.getIntersectionPane().getChildren().clear();
-			this.vueGraphique.drawPlan();
 			String path = file.getPath();
 			System.out.println(path);
 			Lecteur lecteur = new Lecteur();

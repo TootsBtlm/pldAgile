@@ -194,15 +194,23 @@ public class VueGraphique {
 
 	public void drawItineraire(Livraison livraison) {
 		var gc = this.planCanvas.getGraphicsContext2D();
-		gc.setFill(Color.RED);
+//		gc.setFill(Color.RED);
+		
 
 		double latitudeMin = this.plan.latitudeMin();
 		double latitudeMax = this.plan.latitudeMax();
 
 		double longitudeMin = this.plan.longitudeMin();
 		double longitudeMax = this.plan.longitudeMax();
+		
+		int sizeItineraire = livraison.getListeItineraires().size();
+		
 
-		for(int i = 0; i < livraison.getListeItineraires().size(); i++) {
+		for(int i = 0; i < sizeItineraire; i++) {
+			
+			double luminosite = (double)i / (double)sizeItineraire;
+			double color = (double)i / (double)sizeItineraire;
+			gc.setFill(Color.hsb(240, 1.0, luminosite));
 			Itineraire itineraire = livraison.getListeItineraires().get(i);
 			for(int j = 0; j < itineraire.getListeIntersections().size() - 1; j++) {
 				Intersection i1 = itineraire.getListeIntersections().get(j);
@@ -218,7 +226,7 @@ public class VueGraphique {
 				gc.beginPath();
 				gc.moveTo(x1, y1);
 				gc.lineTo(x2, y2);
-				gc.setStroke(Color.RED);
+				gc.setStroke(Color.hsb(0, 1.0, luminosite));
 				gc.setLineWidth(4.0);
 				gc.stroke();
 			}
