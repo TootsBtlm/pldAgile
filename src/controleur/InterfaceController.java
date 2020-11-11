@@ -6,16 +6,19 @@ import java.util.List;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import modele.EnsembleRequete;
+import modele.Intersection;
 import modele.Itineraire;
 import modele.Lecteur;
 import modele.Livraison;
@@ -36,6 +39,9 @@ public class InterfaceController {
 
 	@FXML
 	private Canvas planCanvas;
+	
+	@FXML
+	private Canvas itineraireCanvas;
 
 	@FXML
 	private Canvas requeteCanvas;
@@ -74,7 +80,7 @@ public class InterfaceController {
 	public void initialize() {
 		tsp = new TSP1();
 		etat = new EtatInitial(this);
-		mouseEvents = new MouseEvents(requeteNodeListView, this.listViewRequest);
+		mouseEvents = new MouseEvents(requeteNodeListView, this.listViewRequest, this);
 	}
 
 	@FXML
@@ -82,8 +88,14 @@ public class InterfaceController {
 		etat.chargerFichierPlan();
 
 	}
-
+	
+	public Etat getEtat() {
+		return this.etat;
+	}
+	
 	public void chargerFichierPlan() {
+		this.plan = null;
+		this.vueGraphique = null;
 		FileChooser fileChooser = new FileChooser();
 		File file = fileChooser.showOpenDialog(this.stage);
 		if(file != null) {
@@ -92,7 +104,7 @@ public class InterfaceController {
 			Lecteur lecteur = new Lecteur();
 			this.plan = lecteur.LirePlan(path);
 			System.out.println(intersectionPane);
-			this.vueGraphique = new VueGraphique(this.plan, this.planCanvas, this.intersectionPane, mouseEvents);
+			this.vueGraphique = new VueGraphique(this.plan, this.planCanvas, this.intersectionPane, this.itineraireCanvas, mouseEvents);
 			this.vueGraphique.drawPlan();
 			for(int i = 0; i < this.vueGraphique.getIntersectionPane().getChildren().size(); i++) {
 				mouseEvents.setIntersectionCliquable(this.vueGraphique.getIntersectionPane().getChildren().get(i));
@@ -118,13 +130,11 @@ public class InterfaceController {
 		} else {
 			FileChooser fileChooser = new FileChooser();
 			File file = fileChooser.showOpenDialog(this.stage);
-			this.vueGraphique.getIntersectionPane().getChildren().clear();
-			this.vueGraphique.drawPlan();
 			String path = file.getPath();
 			System.out.println(path);
 			Lecteur lecteur = new Lecteur();
 			this.ensembleRequete = lecteur.LireRequete(path, this.plan);
-			this.vueTextuelle = new VueTextuelle(this.plan, this.listViewRequest);
+			this.vueTextuelle = new VueTextuelle(this.plan, this.listViewRequest, this.mouseEvents);
 			this.vueTextuelle.drawText(this.ensembleRequete, this.listViewRequest);
 			this.vueGraphique.drawRequests(this.ensembleRequete);
 			
@@ -133,11 +143,15 @@ public class InterfaceController {
 			this.requeteNodeListView.clear();
 			for(int i = 0; i < this.vueGraphique.getRequetes().size(); i++) {
 				requeteNodeListView.put(this.vueGraphique.getRequetes().get(i), listViewRequest.getItems().get(i));
-				this.requeteNodes = this.vueGraphique.getIntersectionPane().getChildren();
+				//this.requeteNodes = this.vueGraphique.getIntersectionPane().getChildren();
 			}
 
 
-			mouseEvents = new MouseEvents(this.requeteNodeListView, this.listViewRequest);
+
+
+			mouseEvents = new MouseEvents(this.requeteNodeListView, this.listViewRequest, this);
+
+
 			// Ajout d'un event handler sur les nodes correspondant aux requêtes sur la carte
 
 			//			for(int i = 0; i < this.vueGraphique.getRequetes().size(); i++) {
@@ -145,7 +159,7 @@ public class InterfaceController {
 			//			}
 
 
-			mouseEvents.setListeCliquable();
+			this.mouseEvents.setListeCliquable();
 			this.textChargerFichierRequete.setVisible(false);;
 
 			System.out.println("test");
@@ -161,12 +175,25 @@ public class InterfaceController {
 
 	public void calculerItineraire() {
 
-
-
 		this.livraison = plan.getMatriceCout(this.ensembleRequete);
+//		for(int i = 0; i < livraison.getListeItineraires().size(); i++) {
+//			Itineraire iti = livraison.getListeItineraires().get(i);
+//			System.out.println("itineraire " + i);
+//			System.out.println(iti.getListeIntersections().get(0));
+//			System.out.println(iti.getListeIntersections().get(iti.getListeIntersections().size()-1));
+//			System.out.println(" ");
+//		}
+		
 		System.out.println("Size itineraire : " + this.livraison.getListeItineraires().get(0).getListeIntersections().get(0).getId());
+
 		this.vueGraphique.drawItineraire(this.livraison);
+		
+		System.out.println("BEFORE : " + listViewRequest.getItems());
 		this.vueTextuelle.drawItineraire(this.livraison, this.requeteNodeListView);
+		System.out.println("AFTER : " + listViewRequest.getItems());
+		
+		//mouseEvents.setListeCliquable();
+		//System.out.println(this.requeteNodeListView);
 
 		etat = new EtatItineraireCalcule(this);
 
@@ -178,26 +205,37 @@ public class InterfaceController {
 	}
 
 	public void ajouterEtape() {
-		System.out.println("tout marche");
 
-		//this.intersection = mouseEvents.clickIntersection
-		// a faire mario et jj
-		//this.livraison = plan.ajouterSommet(this.livraison, "nouvelle intersection", "intersection precedente", LONG "demander la durï¿½e")
-		// this.livraison = plan.ajouterSommet(this.livraison, "nouvelle intersection", "intersection precedente", LONG "demander la durï¿½e")
-		// this.livraison = plan.ajouterSommet(this.livraison, "nouvelle intersection", "intersection precedente", LONG "demander la durï¿½e")
-		// mettre le code pour ajouter une etape (appel a une fonction dans plan)	
+		// demander a aurel comment obtenir les bonnes intersections et la bonne durée juste en dessous la
+
+		Long duree = (long) 10;
+		Intersection intersection = this.livraison.getListeItineraires().get(0).getListeIntersections().get(1);
+
+		this.livraison = plan.ajouterSommet(this.livraison, intersection, this.livraison.getListeItineraires().get(0).getListeIntersections().get(0) , duree); 
+		this.livraison = plan.ajouterSommet(this.livraison,  intersection , intersection , duree); 
+
+		etat = new EtatAjouterEtape(this);
 	}
 
 	@FXML
 	public void actionSupprimerEtape() {
-		etat.supprimerEtape();
+		etat = new EtatSupprimerEtape(this);
 	}
 
-	public void supprimerEtape() {
-		System.out.println("tout marche");
-		// ï¿½ faire mario et jj
-		// this.livraison = plan.supprimerSommet(this.livraison, "intersection ï¿½ supprimer")
-		// mettre le code pour supprimer une etape (appel a une fonction dans plan)	
+	public void supprimerEtape(Intersection inter) {
+				
+		System.out.println(inter);
+		
+		this.livraison = plan.supprimerSommet(this.livraison,  inter);
+		for (int i=0; i<this.livraison.getListeItineraires().size(); i++) {
+			System.out.println(this.livraison.getListeItineraires().get(i).getListeIntersections().get(0));
+			System.out.println(this.livraison.getListeItineraires().get(i).getListeIntersections().get(this.livraison.getListeItineraires().get(i).getListeIntersections().size()-1));
+		}
+		this.vueGraphique.drawItineraire(this.livraison);
+		this.vueTextuelle.drawItineraire(this.livraison, this.requeteNodeListView);
+
+		etat = new EtatSupprimerEtape(this);
+
 	}
 
 	@FXML
@@ -208,6 +246,9 @@ public class InterfaceController {
 	public void feuilleDeRoute() {
 		System.out.println("tout marche");
 		// creer feuille de route au bon format
+		
+		etat = new EtatFeuilleDeRoute(this);
+
 	}
 
 	public void setStage(Stage stage) {

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<map>
+<intersection id="1" latitude="45.754" longitude="4.865"/>
+<intersection id="2" latitude="45.750" longitude="4.865"/>
+<intersection id="3" latitude="45.754" longitude="4.87"/>
+<intersection id="4" latitude="45.750" longitude="4.87"/>
+<segment destination="2" length="445" name="Rue Danton" origin="1"/>
+<segment destination="3" length="590" name="Rue de l'Abondance" origin="2"/>
+<segment destination="4" length="590" name="" origin="1"/>
+<segment destination="4" length="445" name="Avenue Lacassagne" origin="3"/>
+<segment destination="3" length="445" name="Avenue Lacassagne" origin="4"/>
+<segment destination="1" length="590" name="Rue Sainte-Anne de Baraban" origin="4"/>
+</map>
