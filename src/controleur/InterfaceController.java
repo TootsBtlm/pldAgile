@@ -94,6 +94,7 @@ public class InterfaceController {
 	private Intersection nouveauPointRecuperation;
 	private Intersection nouveauPointLivraison;
 	private Intersection pointPrecedent;
+
 	
 	public InterfaceController() {
 		tsp = new TSP1();
@@ -270,6 +271,7 @@ public class InterfaceController {
 			e.printStackTrace();
 			
 		}
+
 		
 	}
 	
