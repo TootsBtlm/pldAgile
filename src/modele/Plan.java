@@ -373,6 +373,7 @@ public class Plan {
 		Livraison livraison = this.ajouterSommet(ancienneLivraison, pointRecuperation, precedentRecuperation, dureeRecuperation);
 		
 		livraison.calculArrivees();
+		System.out.println(livraison.getListeItineraires().size());
 		return livraison;
 	}
 	
