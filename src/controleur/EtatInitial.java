@@ -2,9 +2,6 @@ package controleur;
 
 
 import modele.Intersection;
-import modele.Itineraire;
-import modele.Plan;
-import vue.VueGraphique;
 
 /**
  * 
@@ -42,6 +39,7 @@ public class EtatInitial extends Etat {
 	 * 
 	 */
 	public void chargerFichierRequetes() {
+		interfaceController.afficherPopupErreur("Charger d'abord un plan");
 		System.out.println("Charger d'abord un plan");
 	}
 
@@ -51,6 +49,7 @@ public class EtatInitial extends Etat {
 	 * 
 	 */
 	public void calculerItineraire() {
+		interfaceController.afficherPopupErreur("Charger d'abord un plan");
 		System.out.println("Charger d'abord un plan");
 	}
 	
@@ -60,6 +59,7 @@ public class EtatInitial extends Etat {
 	 * 
 	 */
 	public void ajouterEtape() {
+		interfaceController.afficherPopupErreur("Charger d'abord un plan");
 		System.out.println("Charger d'abord un plan");
 	}
 	
@@ -69,6 +69,7 @@ public class EtatInitial extends Etat {
 	 * 
 	 */
 	public void supprimerEtape(Intersection inter) {
+		interfaceController.afficherPopupErreur("Charger d'abord un plan");
 		System.out.println("Charger d'abord un plan");
 	}
 	
@@ -78,6 +79,7 @@ public class EtatInitial extends Etat {
 	 * 
 	 */
 	public void feuilleDeRoute() {
+		interfaceController.afficherPopupErreur("Charger d'abord un plan");
 		System.out.println("Charger d'abord un plan");
 	}
 	

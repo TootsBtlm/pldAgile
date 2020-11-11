@@ -29,11 +29,21 @@ public class MouseEvents {
 		@Override
 		public void handle(MouseEvent event) {
 			if(event.getSource() instanceof Circle) {
+				System.out.println("click requetenode");
 				Circle p = ((Circle)(event.getSource()));
+				System.out.println(listViewRequest);
+				listViewRequest.getSelectionModel().select(requeteNodeListView.get(p));
+				for(Node key : requeteNodeListView.keySet()) {
+					Circle nodeC = (Circle)(key);
+					nodeC.setRadius(8.0);
+				}
+				p.setRadius(12.0);
 				
+				System.out.println(nodeLinkedToIntersection);
 				Intersection inter = nodeLinkedToIntersection.get(p);
 				
 				if (interfaceController.getEtat() instanceof EtatSupprimerEtape) {
+					System.out.println("Inter : " + inter);
 					interfaceController.supprimerEtape(inter);
 				}
 				else if (interfaceController.getEtat() instanceof EtatAjouterPointPrecedentRecuperation) {
@@ -42,13 +52,6 @@ public class MouseEvents {
 				else if (interfaceController.getEtat() instanceof EtatAjouterPointPrecedentLivraison) {
 					interfaceController.ajouterPointPrecedentLivraison(inter);
 				}
-				for(Node key : requeteNodeListView.keySet()) {
-					Circle nodeC = (Circle)(key);
-					nodeC.setRadius(8.0);
-				}
-				p.setRadius(12.0);
-				listViewRequest.getSelectionModel().select(requeteNodeListView.get(p));
-				//System.out.println(p);
 			}
 
 		}
@@ -104,6 +107,7 @@ public class MouseEvents {
 	}
 
 	public void setNodeLinkedToIntersection(Map<Node, Intersection> nodeLinkedToIntersection) {
+		System.out.println(nodeLinkedToIntersection);
 		this.nodeLinkedToIntersection = nodeLinkedToIntersection;
 	}
 	

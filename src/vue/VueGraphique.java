@@ -25,14 +25,14 @@ import modele.Segment;
 
 public class VueGraphique {
 
-	Plan plan;
-	Canvas planCanvas;
-	Canvas itineraireCanvas;
+	private Plan plan;
+	private Canvas planCanvas;
+	private Canvas itineraireCanvas;
 
-	Pane intersectionPane;
+	private Pane intersectionPane;
 
-	List<Node> requetes = new ArrayList<>();
-	BiMap<Node, Intersection> nodeLinkedToIntersection = HashBiMap.create();
+	private List<Node> requetes = new ArrayList<>();
+	private BiMap<Node, Intersection> nodeLinkedToIntersection = HashBiMap.create();
 	private MouseEvents mouseEvents;
 
 	public VueGraphique(Plan plan, Canvas planCanvas, Pane intersectionPane, Canvas itineraireCanvas, MouseEvents mouseEvents) {
@@ -108,7 +108,8 @@ public class VueGraphique {
 				nodeLinkedToIntersection.put(c2, i2);
 				this.intersectionPane.getChildren().add(c2);
 			}
-			mouseEvents.setNodeLinkedToIntersection(nodeLinkedToIntersection);
+			
+			
 
 			gc.beginPath();
 			gc.moveTo(x1, y1);
@@ -118,6 +119,8 @@ public class VueGraphique {
 			gc.lineTo(x2, y2);
 			gc.stroke();
 		}
+		//System.out.println("NODE : " + nodeLinkedToIntersection);
+		mouseEvents.setNodeLinkedToIntersection(nodeLinkedToIntersection);
 	}
 
 	public void drawRequests(EnsembleRequete er) {
