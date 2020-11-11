@@ -221,8 +221,13 @@ public class InterfaceController {
 
 	public void supprimerEtape(Intersection inter) {
 				
+		System.out.println(inter);
+		
 		this.livraison = plan.supprimerSommet(this.livraison,  inter);
-			
+		for (int i=0; i<this.livraison.getListeItineraires().size(); i++) {
+			System.out.println(this.livraison.getListeItineraires().get(i).getListeIntersections().get(0));
+			System.out.println(this.livraison.getListeItineraires().get(i).getListeIntersections().get(this.livraison.getListeItineraires().get(i).getListeIntersections().size()-1));
+		}
 		this.vueGraphique.drawItineraire(this.livraison);
 		this.vueTextuelle.drawItineraire(this.livraison, this.requeteNodeListView);
 
