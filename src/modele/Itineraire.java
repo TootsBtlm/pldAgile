@@ -18,6 +18,12 @@ public class Itineraire {
 	 * Liste des intersections composant l'itineraire
 	 */
 	private ArrayList<Intersection> listeIntersections = new ArrayList<Intersection>();
+	
+	/**   
+	 * Liste des noms de rue composant l'itinéraire
+	 */
+	private ArrayList<String> listeNomsRue = new ArrayList<String>();
+	
 	/**   
 	 * Cout de l'itinéraire (distance en mètres)
 	 */
@@ -44,6 +50,18 @@ public class Itineraire {
 		this.cout = cout;
 		this.temps = cout / VITESSE;
 	}
+	
+	
+
+	public Itineraire(ArrayList<Intersection> listeIntersections, ArrayList<String> listeNomsRue, Double cout) {
+		super();
+		this.listeIntersections = listeIntersections;
+		this.listeNomsRue = listeNomsRue;
+		this.cout = cout;
+		this.temps = cout / VITESSE;
+	}
+
+
 
 	public ArrayList<Intersection> getListeIntersections() {
 		return listeIntersections;
@@ -75,9 +93,22 @@ public class Itineraire {
 		this.listeIntersections = listeIntersections;
 	}
 	
+	public ArrayList<String> getListeNomsRue() {
+		return listeNomsRue;
+	}
+
+	public void setListeNomsRue(ArrayList<String> listeNomsRue) {
+		this.listeNomsRue = listeNomsRue;
+	}
+
 	public Itineraire() {
 		super();
 	}
+
+	public void addStep(Intersection intersection, String nomRue) {
+		this.listeIntersections.add(intersection);
+		this.listeNomsRue.add(nomRue);
+	}	
 
 	public void addIntersection(Intersection intersection) {
 		this.listeIntersections.add(intersection);

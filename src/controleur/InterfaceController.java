@@ -93,6 +93,8 @@ public class InterfaceController {
 
 	@FXML
 	public void actionChargerFichierPlan() {
+		System.out.println("called actionChargerFichierPlan");
+		System.out.println("ETAT au call : " + this.etat);
 		etat.chargerFichierPlan();
 
 	}
@@ -129,6 +131,8 @@ public class InterfaceController {
 
 	@FXML
 	public void actionChargerFichierRequete() {
+		System.out.println("called actionChargerFichierRequete");
+		System.out.println("ETAT au call : " + this.etat);
 		etat.chargerFichierRequetes();
 	}
 
@@ -170,7 +174,7 @@ public class InterfaceController {
 			this.mouseEvents.setListeCliquable();
 			this.textChargerFichierRequete.setVisible(false);;
 
-			System.out.println("test");
+			//System.out.println("test");
 			etat = new EtatListeRequeteChargee(this);
 		}
 	}
@@ -194,13 +198,13 @@ public class InterfaceController {
 //			System.out.println(" ");
 //		}
 		
-		System.out.println("Size itineraire : " + this.livraison.getListeItineraires().get(0).getListeIntersections().get(0).getId());
+		//System.out.println("Size itineraire : " + this.livraison.getListeItineraires().get(0).getListeIntersections().get(0).getId());
 
 		this.vueGraphique.drawItineraire(this.livraison);
 		
-		System.out.println("BEFORE : " + listViewRequest.getItems());
+		//System.out.println("BEFORE : " + listViewRequest.getItems());
 		this.vueTextuelle.drawItineraire(this.livraison, this.requeteNodeListView);
-		System.out.println("AFTER : " + listViewRequest.getItems());
+		//System.out.println("AFTER : " + listViewRequest.getItems());
 		
 		//mouseEvents.setListeCliquable();
 		//System.out.println(this.requeteNodeListView);
@@ -212,7 +216,7 @@ public class InterfaceController {
 	@FXML
 	public void actionAjouterEtape() {
 		System.out.println("called actionAjouterEtape");
-		System.out.println("ETAT au actionAjouterEtape : " + this.etat);
+		System.out.println("ETAT au call : " + this.etat);
 		etat.ajouterEtape();
 	}
 	
@@ -268,7 +272,8 @@ public class InterfaceController {
 	public void supprimerEtape(Intersection inter) {
 
 		
-		this.livraison = plan.supprimerSommet(this.livraison,  inter);
+
+		this.livraison = plan.supprimerRequete(this.livraison,  inter);
 		
 		this.ensembleRequete = this.livraison.getRequetes();
 		this.vueGraphique.drawRequests(this.ensembleRequete);

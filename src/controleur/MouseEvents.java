@@ -43,7 +43,7 @@ public class MouseEvents {
 				}
 				p.setRadius(12.0);
 				listViewRequest.getSelectionModel().select(requeteNodeListView.get(p));
-				System.out.println(p);
+				//System.out.println(p);
 			}
 
 		}
