@@ -218,7 +218,7 @@ public class VueGraphique {
 		for(int i = 0; i < sizeItineraire; i++) {
 			
 			double luminosite = (double)i / (double)sizeItineraire;
-			double color = (double)i / (double)sizeItineraire;
+//			double color = (double)i / (double)sizeItineraire;
 			gc.setFill(Color.hsb(240, 1.0, luminosite));
 			Itineraire itineraire = livraison.getListeItineraires().get(i);
 			for(int j = 0; j < itineraire.getListeIntersections().size() - 1; j++) {

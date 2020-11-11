@@ -378,7 +378,7 @@ public class Plan {
 
 	//public ArrayList<Itineraire> supprimer
 	
-	public Livraison supprimerSommet(Livraison ancienneLivraison, Intersection sommetASupprimer) {
+	public Livraison supprimerRequete(Livraison ancienneLivraison, Intersection sommetASupprimer) {
 		
 		Requete requeteASupprimer = new Requete();
 		boolean requeteTrouvee = false;
