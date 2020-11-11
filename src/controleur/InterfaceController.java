@@ -7,6 +7,8 @@ import java.util.List;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -67,8 +69,10 @@ public class InterfaceController {
 
 	@FXML
 	private Text textPointLivraison;
-
-
+	
+	@FXML
+	private ListView<String> feuilleDeRoute;
+	
 	@FXML
 	private Pane intersectionPane;
 
@@ -533,8 +537,6 @@ public class InterfaceController {
 	}
 
 	public void feuilleDeRoute() {
-
-		etat = new EtatFeuilleDeRoute(this);
 		
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/vue/feuilleDeRoutePopup.fxml"));
 		loader.setController(this);
@@ -548,7 +550,20 @@ public class InterfaceController {
 			e.printStackTrace();
 		}
 		
+		this.ensembleRequete = this.livraison.getRequetes();
+		ObservableList<String> items = FXCollections.observableArrayList();
+		items.add(ensembleRequete.getLieuDepart().getPointDeDepart().getIdVisible().toString() + " Depot" + 
+				", Adresse : " + plan.getNomRue(ensembleRequete.getLieuDepart().getPointDeDepart()));
+
+		for (int i = 0; i< ensembleRequete.getListeRequete().size(); i++) {
+
+			items.add(ensembleRequete.getListeRequete().get(i).getPointDeLivraison().getIdVisible().toString() + " Point de recup" + ", Adresse : " + plan.getNomRue(ensembleRequete.getListeRequete().get(i).getPointDeRecuperation()).toString());
+			items.add(ensembleRequete.getListeRequete().get(i).getPointDeRecuperation().getIdVisible().toString() + " Point de livraison" + ", Adresse : " + plan.getNomRue(ensembleRequete.getListeRequete().get(i).getPointDeLivraison()).toString());
+		}
 		
+		this.feuilleDeRoute.setItems(items);
+		
+		this.etat = new EtatItineraireCalcule(this);
 
 	}
 
