@@ -83,9 +83,8 @@ public class InterfaceController {
 	
 	private Intersection nouveauPointRecuperation;
 	private Intersection nouveauPointLivraison;
-
-	@FXML
-	public void initialize() {
+	
+	public InterfaceController() {
 		tsp = new TSP1();
 		etat = new EtatInitial(this);
 		ajouterStage = new Stage();
@@ -226,17 +225,18 @@ public class InterfaceController {
 
 	public void ajouterEtape() {
 		etat = new EtatAjouterEtape(this);
-//		FXMLLoader loader = new FXMLLoader(getClass().getResource("/vue/ajouterPopup.fxml"));
-//		Parent root;
-//		try {
-//			root = loader.load();
-//			this.ajouterStage.setScene(new Scene(root));
-//			this.ajouterStage.setResizable(false);
-//			this.ajouterStage.show();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//			
-//		}
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/vue/ajouterPopup.fxml"));
+		loader.setController(this);
+		Parent root;
+		try {
+			root = loader.load();
+			this.ajouterStage.setScene(new Scene(root));
+			this.ajouterStage.setResizable(false);
+			this.ajouterStage.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+			
+		}
 
 //		Long duree = (long) 10;
 //		Intersection intersection = this.livraison.getListeItineraires().get(0).getListeIntersections().get(1);
