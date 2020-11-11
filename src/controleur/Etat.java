@@ -6,6 +6,7 @@ import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import modele.EnsembleRequete;
+import modele.Intersection;
 import modele.Lecteur;
 import modele.Plan;
 import vue.VueGraphique;
@@ -53,7 +54,7 @@ public class Etat {
 		
 	}
 	
-	public void supprimerEtape() {
+	public void supprimerEtape(Intersection inter) {
 		
 	}
 	

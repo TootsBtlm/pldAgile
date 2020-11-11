@@ -30,7 +30,14 @@ public class MouseEvents {
 		public void handle(MouseEvent event) {
 			if(event.getSource() instanceof Circle) {
 				Circle p = ((Circle)(event.getSource()));
-
+				
+				Intersection inter = nodeLinkedToIntersection.get(p);
+				
+				if (interfaceController.getEtat() instanceof EtatSupprimerEtape) {
+					System.out.println("stylé");
+					interfaceController.supprimerEtape(inter);
+				}
+				
 				for(Node key : requeteNodeListView.keySet()) {
 					Circle nodeC = (Circle)(key);
 					nodeC.setRadius(8.0);
@@ -65,12 +72,13 @@ public class MouseEvents {
 			if(event.getSource() instanceof Circle) {
 				Circle p = ((Circle)(event.getSource()));
 				Intersection inter = nodeLinkedToIntersection.get(p);
-				//if(interfaceController.etat instanceof EtatAjouterEtape) {
-				//	interfaceController.ajouterEtape(inter);
-				//}
-				//else if (interfaceController.etat instanceof EtatSupprimerEtape) {
-					//interfaceController.supprimerEtape(inter);
-				//}
+				if(interfaceController.getEtat() instanceof EtatAjouterEtape) {
+					//interfaceController.ajouterEtape(inter);
+				}
+				else if (interfaceController.getEtat() instanceof EtatSupprimerEtape) {
+					System.out.println("stylé");
+					interfaceController.supprimerEtape(inter);
+				}
 				System.out.println(inter);
 			}
 

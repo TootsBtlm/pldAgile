@@ -85,7 +85,11 @@ public class InterfaceController {
 		etat.chargerFichierPlan();
 
 	}
-
+	
+	public Etat getEtat() {
+		return this.etat;
+	}
+	
 	public void chargerFichierPlan() {
 		FileChooser fileChooser = new FileChooser();
 		File file = fileChooser.showOpenDialog(this.stage);
@@ -212,12 +216,12 @@ public class InterfaceController {
 
 	@FXML
 	public void actionSupprimerEtape() {
-		etat.supprimerEtape();
+		etat = new EtatSupprimerEtape(this);
 	}
 
-	public void supprimerEtape(){//Intersection inter) {
+	public void supprimerEtape(Intersection inter) {
 				
-		this.livraison = plan.supprimerSommet(this.livraison,  this.livraison.getListeItineraires().get(0).getListeIntersections().get(3));
+		this.livraison = plan.supprimerSommet(this.livraison,  inter);
 			
 		this.vueGraphique.drawItineraire(this.livraison);
 		this.vueTextuelle.drawItineraire(this.livraison, this.requeteNodeListView);
