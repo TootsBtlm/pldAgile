@@ -239,7 +239,6 @@ public class InterfaceController {
 			this.ajouterStage.show();
 		} catch (IOException e) {
 			e.printStackTrace();
-			
 		}
 
 //		Long duree = (long) 10;
@@ -271,10 +270,7 @@ public class InterfaceController {
 
 	public void supprimerEtape(Intersection inter) {
 
-		
-
-		this.livraison = plan.supprimerRequete(this.livraison,  inter);
-		
+//		this.livraison = plan.supprimerRequete(this.livraison,  inter);
 		this.ensembleRequete = this.livraison.getRequetes();
 		this.vueGraphique.drawRequests(this.ensembleRequete);
 		this.vueGraphique.drawItineraire(this.livraison);
