@@ -43,7 +43,7 @@ public class MouseEvents {
 				}
 				p.setRadius(12.0);
 				listViewRequest.getSelectionModel().select(requeteNodeListView.get(p));
-				System.out.println(p);
+				//System.out.println(p);
 			}
 
 		}
@@ -71,11 +71,15 @@ public class MouseEvents {
 			if(event.getSource() instanceof Circle) {
 				Circle p = ((Circle)(event.getSource()));
 				Intersection inter = nodeLinkedToIntersection.get(p);
+				System.out.println("MOUSE EVENTS : " + interfaceController.getEtat());
 				if(interfaceController.getEtat() instanceof EtatAjouterEtape) {
 					//interfaceController.ajouterEtape(inter);
 				}
 				else if (interfaceController.getEtat() instanceof EtatSupprimerEtape) {
 					interfaceController.supprimerEtape(inter);
+				} else if(interfaceController.getEtat() instanceof EtatAjouterPointRecuperation) {
+					System.out.println("clique pendant etat point recuperation");
+					interfaceController.ajouterNouveauPointRecuperation(inter);
 				}
 				System.out.println(inter);
 			}

@@ -10,10 +10,10 @@ import javafx.util.Pair;
 public class EnsembleRequete {
 
 	
-	public HashMap<Long,Integer> intersectionIdRetourne = new HashMap<Long, Integer>();
+	private HashMap<Long,Integer> intersectionIdRetourne = new HashMap<Long, Integer>();
 	
-	ArrayList<Requete> listeRequete ;
-	Depot LieuDepart;
+	private ArrayList<Requete> listeRequete ;
+	private Depot LieuDepart;
 
 	
 	
