@@ -35,6 +35,11 @@ public class EtatPlanCharge extends Etat {
 		
 	}
 
+	/**
+	 * 
+	 * Fait appel à la méthode chargerFichierRequete de l'objet interface controleur 
+	 * 
+	 */
 	public void chargerFichierRequetes() {
 		
 		this.interfaceController.chargerFichierRequete();

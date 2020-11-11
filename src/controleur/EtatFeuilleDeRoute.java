@@ -33,27 +33,51 @@ public class EtatFeuilleDeRoute extends Etat{
 		
 	}
 
-	
+	/**
+	 * 
+	 * Fait appel à la méthode chargerFichierRequetes de l'objet interface controleur 
+	 * 
+	 */
 	public void chargerFichierRequetes() {
 		
 		this.interfaceController.chargerFichierRequete();
 		
 	}
 
+	/**
+	 * 
+	 * Fait appel à la méthode calculerItineraire de l'objet interface controleur 
+	 * 
+	 */
 	public void calculerItineraire() {
 		
 		this.interfaceController.calculerItineraire();
 	
 	}
 	
+	/**
+	 * 
+	 * Dans l'état de la feuille de route générée, la méthode ajouterEtape ne fait aucune action 
+	 * 
+	 */
 	public void ajouterEtape() {
-		this.interfaceController.ajouterEtape();
+		
 	}
 	
+	/**
+	 * 
+	 * Dans l'état de la feuille de route générée, la méthode supprimerEtape ne fait aucune action 
+	 * 
+	 */
 	public void supprimerEtape(Intersection inter) {
-		this.interfaceController.supprimerEtape(inter);
+		
 	}
 	
+	/**
+	 * 
+	 * Fait appel à la méthode feuilleDeRoute de l'objet interface controleur 
+	 * 
+	 */
 	public void feuilleDeRoute() {
 		
 	}

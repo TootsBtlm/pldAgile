@@ -7,7 +7,7 @@ import modele.Plan;
 /**
  * 
  * @author Mario
- * Représente l'éta de l'application dans lequel la liste des requêtes vient d'être chargée, qui hérite de la classe Etat
+ * Représente l'état de l'application dans lequel la liste des requêtes vient d'être chargée, qui hérite de la classe Etat
  * 
  */
 
@@ -34,13 +34,22 @@ public class EtatListeRequeteChargee extends Etat{
 		
 	}
 
-	
+	/**
+	 * 
+	 * Fait appel à la méthode chargerFichierRequete de l'objet interface controleur 
+	 * 
+	 */
 	public void chargerFichierRequetes() {
 		
 		this.interfaceController.chargerFichierRequete();
 		
 	}
 
+	/**
+	 * 
+	 * Fait appel à la méthode calculerItineraire de l'objet interface controleur 
+	 * 
+	 */
 	public void calculerItineraire() {
 		
 		this.interfaceController.calculerItineraire();

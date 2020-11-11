@@ -35,27 +35,51 @@ public class EtatItineraireCalcule extends Etat{
 		
 	}
 
-	
+	/**
+	 * 
+	 * Fait appel à la méthode chargerFichierRequete de l'objet interface controleur 
+	 * 
+	 */
 	public void chargerFichierRequetes() {
 		
 		this.interfaceController.chargerFichierRequete();
 		
 	}
 
+	/**
+	 * 
+	 * Fait appel à la méthode calculerItineraire de l'objet interface controleur 
+	 * 
+	 */
 	public void calculerItineraire() {
 		
 		this.interfaceController.calculerItineraire();
 	
 	}
 	
+	/**
+	 * 
+	 * Dans l'état itinéraire calculé, la méthode ajouterEtape ne fait aucune action 
+	 * 
+	 */
 	public void ajouterEtape() {
-		this.interfaceController.ajouterEtape();
+		
 	}
 	
+	/**
+	 * 
+	 * Dans l'état itinéraire calculé, la méthode supprimerEtape ne fait aucune action 
+	 * 
+	 */
 	public void supprimerEtape(Intersection inter) {
-		this.interfaceController.supprimerEtape(inter);
+		
 	}
 	
+	/**
+	 * 
+	 * Fait appel à la méthode feuilleDeRoute de l'objet interface controleur 
+	 * 
+	 */
 	public void feuilleDeRoute() {
 		
 	}

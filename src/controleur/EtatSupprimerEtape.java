@@ -59,6 +59,11 @@ public class EtatSupprimerEtape extends Etat{
 		
 	}
 	
+	/**
+	 * 
+	 * Dans l'état supprimer étape, la méthode supprimerEtape fait appel à la méthode supprimerEtape de l'interface controleur
+	 * 
+	 */
 	public void supprimerEtape(Intersection inter) {
 		this.interfaceController.supprimerEtape(inter);
 	}
