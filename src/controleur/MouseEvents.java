@@ -36,8 +36,11 @@ public class MouseEvents {
 				if (interfaceController.getEtat() instanceof EtatSupprimerEtape) {
 					interfaceController.supprimerEtape(inter);
 				}
-				else if (interfaceController.getEtat() instanceof EtatAjouterPointPrecedent) {
-					interfaceController.ajouterPointPrecedent(inter);
+				else if (interfaceController.getEtat() instanceof EtatAjouterPointPrecedentRecuperation) {
+					interfaceController.ajouterPointPrecedentRecuperation(inter);
+				}
+				else if (interfaceController.getEtat() instanceof EtatAjouterPointPrecedentLivraison) {
+					interfaceController.ajouterPointPrecedentLivraison(inter);
 				}
 				for(Node key : requeteNodeListView.keySet()) {
 					Circle nodeC = (Circle)(key);

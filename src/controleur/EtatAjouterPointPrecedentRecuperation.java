@@ -7,9 +7,9 @@ package controleur;
  * 
  */
 
-public class EtatAjouterPointPrecedent extends Etat{
+public class EtatAjouterPointPrecedentRecuperation extends Etat{
 
-	public EtatAjouterPointPrecedent(InterfaceController interfaceController) {
+	public EtatAjouterPointPrecedentRecuperation(InterfaceController interfaceController) {
 		super(interfaceController);
 		// TODO Auto-generated constructor stub
 	}

@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Text?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="375.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
 
    <children>
       <Text layoutX="219.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ajouter une requete">
@@ -14,7 +14,7 @@
             <Font size="20.0" />
          </font>
       </Text>
-      <Button layoutX="14.0" layoutY="211.0" mnemonicParsing="false" onAction="#actionAjouterPointPrecedent" prefHeight="31.0" prefWidth="271.0" text="SÃ©lectionner le point prÃ©cÃ©dent">
+      <Button layoutX="14.0" layoutY="211.0" mnemonicParsing="false" onAction="#actionAjouterPointPrecedentRecuperation" prefHeight="31.0" prefWidth="271.0" text="SÃ©lectionner le point qui précède le point de récupération">
          <font>
             <Font size="15.0" />
          </font>
@@ -29,6 +29,11 @@
             <Font size="15.0" />
          </font>
       </Button>
+      <Button layoutX="14.0" layoutY="280.0" mnemonicParsing="false" onAction="#actionAjouterPointPrecedentLivraison" prefHeight="31.0" prefWidth="271.0" text="SÃ©lectionner le point qui précède le point de livraison">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
       <Text fx:id="textPointRecuperation" layoutX="308.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Aucun point de rÃ©cupÃ©ration">
          <font>
             <Font size="15.0" />
@@ -39,12 +44,17 @@
             <Font size="15.0" />
          </font>
       </Text>
-      <Text fx:id="textPointPrecedent" layoutX="308.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Aucun point prÃ©cÃ©dent">
+      <Text fx:id="textPointPrecedentRecuperation" layoutX="308.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Aucun point qui prÃ©cÃ©de le point de récupération">
          <font>
             <Font size="15.0" />
          </font>
       </Text>
-      <Button layoutX="274.0" layoutY="250.0" mnemonicParsing="false" onAction="#actionValiderAjouterEtape" text="Valider">
+      <Text fx:id="textPointPrecedentLivraison" layoutX="308.0" layoutY="300.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Aucun point qui prÃ©cÃ©de le point de livraison">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <Button layoutX="274.0" layoutY="350.0" mnemonicParsing="false" onAction="#actionValiderAjouterEtape" text="Valider">
          <font>
             <Font size="15.0" />
          </font>

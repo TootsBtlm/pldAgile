@@ -55,7 +55,10 @@ public class InterfaceController {
 	private Text textChargerFichierRequete;
 
 	@FXML
-	private Text textPointPrecedent;
+	private Text textPointPrecedentRecuperation;
+	
+	@FXML
+	private Text textPointPrecedentLivraison;
 	
 	@FXML
 	private Text textPointRecuperation;
@@ -94,8 +97,9 @@ public class InterfaceController {
 	
 	private Intersection nouveauPointRecuperation;
 	private Intersection nouveauPointLivraison;
-	private Intersection pointPrecedent;
-
+	private Intersection pointPrecedentRecuperation;
+	private Intersection pointPrecedentLivraison;
+	
 	/**
 	 * 
 	 * Créer une instance de la classe InterfaceController. Initialise les attributs tsp, etat, ajouterStage et mouseEvents de l'instance.
@@ -303,16 +307,30 @@ public class InterfaceController {
 
 	/**
 	 * 
-	 * Déclenchée lorsque l'utilisateur appuie sur le bouton ajouter le point précédent. Permet à l'utilisateur de sélectionner le point précédent à ajouter
+	 * Déclenchée lorsque l'utilisateur appuie sur le bouton ajouter le point qui précède le point de récupération. Permet à l'utilisateur de sélectionner le point précédent à ajouter
 	 * 
 	 */
 	
 	@FXML
-	public void actionAjouterPointPrecedent() {
-		System.out.println("called actionAjouterPointPrecedent");
+	public void actionAjouterPointPrecedentRecuperation() {
+		System.out.println("called actionAjouterPointPrecedentRecuperation");
 		System.out.println("ETAT au call : " + this.etat);
 
-		etat = new EtatAjouterPointPrecedent(this);
+		etat = new EtatAjouterPointPrecedentRecuperation(this);
+	}
+	
+	/**
+	 * 
+	 * Déclenchée lorsque l'utilisateur appuie sur le bouton ajouter le point qui précède le point de livraison. Permet à l'utilisateur de sélectionner le point précédent à ajouter
+	 * 
+	 */
+	
+	@FXML
+	public void actionAjouterPointPrecedentLivraison() {
+		System.out.println("called actionAjouterPointPrecedentLivraison");
+		System.out.println("ETAT au call : " + this.etat);
+
+		etat = new EtatAjouterPointPrecedentLivraison(this);
 	}
 	
 	/**
@@ -361,7 +379,7 @@ public class InterfaceController {
 	
 	public void validerAjouterEtape() {
 		Long duree = (long) 10;
-		//this.livraison = plan.ajouterRequete(this.livraison, this.pointPrecedent, this.pointRecuperation, this.pointLivraison, duree);
+		//this.livraison = plan.ajouterRequete(this.livraison, this.pointPrecedentRecuperation, this.pointPrecedentLivraison, this.pointRecuperation, this.pointLivraison, duree, duree);
 	}
 	
 	/**
@@ -392,15 +410,29 @@ public class InterfaceController {
 	
 	/**
 	 * 
-	 * Ajoute le point précédent dans la fenêtre de gestion d'ajout d'une étape
+	 * Ajoute le point qui précède point de récupération dans la fenêtre de gestion d'ajout d'une étape
 	 * 
 	 */
 	
-	public void ajouterPointPrecedent(Intersection inter) {
-		System.out.println("called ajouterPointPrecedent");
+	public void ajouterPointPrecedentRecuperation(Intersection inter) {
+		System.out.println("called ajouterPointPrecedentRecuperation");
 		System.out.println("ETAT au call : " + this.etat);
-		setPointPrecedent(inter);
-		this.textPointPrecedent.setText(this.plan.getNomRue(inter));
+		setPointPrecedentRecuperation(inter);
+		this.textPointPrecedentRecuperation.setText(this.plan.getNomRue(inter));
+		System.out.println(this.plan.getNomRue(inter));
+	}
+	
+	/**
+	 * 
+	 * Ajoute le point qui précède point de livraison dans la fenêtre de gestion d'ajout d'une étape
+	 * 
+	 */
+	
+	public void ajouterPointPrecedentLivraison(Intersection inter) {
+		System.out.println("called ajouterPointPrecedentLivraison");
+		System.out.println("ETAT au call : " + this.etat);
+		setPointPrecedentLivraison(inter);
+		this.textPointPrecedentLivraison.setText(this.plan.getNomRue(inter));
 		System.out.println(this.plan.getNomRue(inter));
 	}
 	
@@ -482,12 +514,19 @@ public class InterfaceController {
 		this.nouveauPointLivraison = nouveauPointLivraison;
 	}
 	
-	public Intersection getPointPrecedent() {
-		return pointPrecedent;
+	public Intersection getPointPrecedentRecuperation() {
+		return pointPrecedentRecuperation;
 	}
 
-	public void setPointPrecedent(Intersection pointPrecedent) {
-		this.pointPrecedent = pointPrecedent;
+	public void setPointPrecedentRecuperation(Intersection pointPrecedentRecuperation) {
+		this.pointPrecedentRecuperation = pointPrecedentRecuperation;
 	}
 	
+	public Intersection getPointPrecedentLivraison() {
+		return pointPrecedentLivraison;
+	}
+
+	public void setPointPrecedentLivraison(Intersection pointPrecedentLivraison) {
+		this.pointPrecedentLivraison = pointPrecedentLivraison;
+	}
 }
