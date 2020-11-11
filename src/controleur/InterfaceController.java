@@ -218,7 +218,7 @@ public class InterfaceController {
 	public void actionAjouterEtape() {
 		System.out.println("called actionAjouterEtape");
 		System.out.println("ETAT au call : " + this.etat);
-		etat.ajouterEtape();
+		etat = new EtatAjouterEtape(this);
 	}
 	
 	@FXML
@@ -228,27 +228,26 @@ public class InterfaceController {
 		etat.ajouterPointRecuperation();
 	}
 
-	public void ajouterEtape() {
-		etat = new EtatAjouterEtape(this);
-//		FXMLLoader loader = new FXMLLoader(getClass().getResource("/vue/ajouterPopup.fxml"));
-//		Parent root;
-//		try {
-//			root = loader.load();
-//			this.ajouterStage.setScene(new Scene(root));
-//			this.ajouterStage.setResizable(false);
-//			this.ajouterStage.show();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//			
-//		}
+	public void ajouterEtape(Intersection intersection) {
 
-//		Long duree = (long) 10;
-//		Intersection intersection = this.livraison.getListeItineraires().get(0).getListeIntersections().get(1);
-//
-//		this.livraison = plan.ajouterSommet(this.livraison, intersection, this.livraison.getListeItineraires().get(0).getListeIntersections().get(0) , duree); 
-//		this.livraison = plan.ajouterSommet(this.livraison,  intersection , intersection , duree); 
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/vue/ajouterPopup.fxml"));
+		Parent root;
+		try {
+			root = loader.load();
+			this.ajouterStage.setScene(new Scene(root));
+			this.ajouterStage.setResizable(false);
+			this.ajouterStage.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+			
+		}
+
+		Long duree = (long) 10;
 
 
+		this.livraison = plan.ajouterSommet(this.livraison, intersection, this.livraison.getListeItineraires().get(0).getListeIntersections().get(0) , duree); 
+		this.livraison = plan.ajouterSommet(this.livraison,  intersection , intersection , duree);
+		etat = new EtatAjouterPointRecuperation(this);
 		
 	}
 	
