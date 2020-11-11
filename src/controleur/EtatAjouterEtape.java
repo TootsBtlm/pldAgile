@@ -29,12 +29,18 @@ public class EtatAjouterEtape extends Etat{
 	 * Fait appel à la méthode chargerFichierPlan de l'objet interface controleur 
 	 * 
 	 */
+	
 	public void chargerFichierPlan() {
 		
 		this.interfaceController.chargerFichierPlan();
 		
 	}
 
+	/**
+	 * 
+	 * Fait appel à la méthode chargerFichierRequetes de l'objet interface controleur 
+	 * 
+	 */
 	
 	public void chargerFichierRequetes() {
 		
@@ -42,15 +48,33 @@ public class EtatAjouterEtape extends Etat{
 		
 	}
 
+	/**
+	 * 
+	 * Fait appel à la méthode calculerItineraire de l'objet interface controleur 
+	 * 
+	 */
+	
 	public void calculerItineraire() {
 		
 		this.interfaceController.calculerItineraire();
 	
 	}
 	
+	/**
+	 * 
+	 * Fait appel à la méthode ajouterEtape de l'objet interface controleur 
+	 * 
+	 */
+	
 	public void ajouterEtape() {
 		this.interfaceController.ajouterEtape();
 	}
+	
+	/**
+	 * 
+	 * Fait appel à la méthode supprimerEtape de l'objet interface controleur 
+	 * 
+	 */
 	
 	public void supprimerEtape(Intersection inter) {
 		
@@ -60,9 +84,22 @@ public class EtatAjouterEtape extends Etat{
 		
 	}
 	
-	public void ajouterPointRecuperation() {
+	public void validerAjouterEtape() {
+		this.interfaceController.validerAjouterEtape();
+	}
+	
+	/*public void ajouterPointRecuperation() {
+		System.out.println("AJOUTER ETAPE 111111");
+		this.interfaceController.ajouterPointRecuperation();
+	}
+
+	public void ajouterPointLivraison()) {
 		System.out.println("AJOUTER ETAPE 111111");
 		this.interfaceController.ajouterPointRecuperation();
 	}
 	
+	public void ajouterPointRecuperation() {
+		System.out.println("AJOUTER ETAPE 111111");
+		this.interfaceController.ajouterPointRecuperation();
+	}*/
 }
