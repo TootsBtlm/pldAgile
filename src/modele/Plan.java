@@ -47,6 +47,19 @@ public class Plan {
 		this.listeAdjacence = listeAdjacence;
 	}
 	/* Method */
+	
+	/**
+	 * Cette fonction modifie les intersections contenues dans le plan pour leur donner les idvisibles et pour leur donner un type 
+	 * 
+	 * pour rappel un idVisible est donné par couple d'intersections composant une requête 
+	 * 
+	 * le type est donné par ;
+	 * 1 -> sommet quelconque
+	 * 2-> dépot
+	 * 3-> point de récupération
+	 * 4 -> point de récupération 
+	 * @param requetes
+	 */
 	public void modifierIntersectionsPertinentes(EnsembleRequete requetes) {
 		ArrayList<Requete> listeRequetes = requetes.getListeRequete();
 		for(int i = 0 ; i < requetes.getListeRequete().size() ; i++) {
@@ -68,7 +81,12 @@ public class Plan {
 	this.intersection.set(positionPointDeDepart, pointDeDepart);
 	
 	}
-
+	/**
+	 *  Cette fonction prend en paramètre une requête qu'elle traite, c'est à dire qu'elle calcule l'ordre dans lequel les intersections seront parcourues, par quel itinéraire, et a quel moment. 
+	 *  Elle utilise le TSP et l'algorithme A* pour établire la livraison optimale. 
+	 * @param requetes
+	 * @return Livraison
+	 */
 	public Livraison getMatriceCout(EnsembleRequete requetes) {
 		
 		this.modifierIntersectionsPertinentes(requetes);
@@ -138,7 +156,12 @@ public class Plan {
         ret.calculArrivees();
         return(ret);
     }
-	
+	/**
+	 * Algorithme de FloydWarshall 
+	 * @param listeIntersection
+	 * @param matriceCout
+	 * @return
+	 */
 	public HashMap<Pair<Intersection, Intersection>, Itineraire> FloydWarshall(ArrayList<Intersection> listeIntersection, double[][] matriceCout){
 		HashMap<Pair<Intersection, Intersection>, Itineraire> matriceItineraire = new HashMap<Pair<Intersection, Intersection>, Itineraire>();
 		int planSize = intersection.size();
@@ -227,7 +250,11 @@ public class Plan {
 		return matriceItineraire;
 	}
 	
-	@SuppressWarnings("unchecked")
+	/**
+	 * Cette fonction retourne le nom d'une rue passant par l'intersection passée en commentaire
+	 * @param intersections
+	 * @return String
+	 */
 	public String getNomRue(Intersection intersections) {
 		
 		String nomRue = new String();
@@ -241,6 +268,13 @@ public class Plan {
 		
 		return nomRue;
 	}
+	
+	/**
+	 * Cette fonction calcule grâce à un algorithme de Dijsktra le chemin optimal pour relier deux sommets.
+	 * @param Intersection depart
+	 * @param Intersection arrivee
+	 * @return Itineraire
+	 */
 	public Itineraire calcDijsktra(Intersection depart, Intersection arrivee){
 		
 		
@@ -325,9 +359,23 @@ public class Plan {
 		return itineraire;
 	}
 	/**
-	 * Cette fonction va permettre d'ajouter un sommet au graphe parcourus par le cycliste
+	 * Cette fonction va permettre d'ajouter une requete au parcours du cycliste
 	 * @return Livraison
 	 */
+	
+	public Livraison ajouterRequete(Livraison ancienneLivraison, Intersection precedentRecuperation, Intersection precedentLivraison, Intersection pointRecuperation, Intersection pointLivraison,  Long dureeRecuperation, Long dureeLivraison) {
+		EnsembleRequete requetes = ancienneLivraison.getRequetes();
+		Requete nouvelleRequete = new Requete( pointRecuperation,  pointLivraison, dureeRecuperation, dureeLivraison );
+		ArrayList<Requete> listeRequetes = requetes.getListeRequete();
+		listeRequetes.add(nouvelleRequete);
+		requetes.setListeRequete(listeRequetes);
+		this.modifierIntersectionsPertinentes(requetes);
+		Livraison livraison = this.ajouterSommet(ancienneLivraison, pointRecuperation, precedentRecuperation, dureeRecuperation);
+		
+		livraison.calculArrivees();
+		return livraison;
+	}
+	
 	public Livraison ajouterSommet(Livraison ancienneLivraison, Intersection nouveauSommet, Intersection intersectionPrecedente, Long duree) {
 		
 		ArrayList<Itineraire> nouvelleListeItineraire = new ArrayList<Itineraire>();
@@ -375,7 +423,12 @@ public class Plan {
 		return new Livraison(nouvelleListeItineraire, heureDepart, dictionnaireArriveesItineraires, requetes);
 		
 	}
-
+	/**
+	 * Cette fonction supprime un des sommets parcouru par le cycliste.
+	 * @param ancienneListeItineraire
+	 * @param sommetASupprimer
+	 * @return
+	 */
 	public ArrayList<Itineraire> supprimerSommet(ArrayList<Itineraire> ancienneListeItineraire, Intersection sommetASupprimer){
 		
 		ArrayList<Itineraire> nouvelleListeItineraire = new ArrayList<Itineraire>();
@@ -402,7 +455,12 @@ public class Plan {
 	return 	nouvelleListeItineraire;
 	}
 	
-	
+	/**
+	 * Cette fonction supprime une des requêtes traitées lors de la livraison
+	 * @param ancienneLivraison
+	 * @param sommetASupprimer
+	 * @return
+	 */
 	public Livraison supprimerRequete(Livraison ancienneLivraison, Intersection sommetASupprimer) {
 		
 		Requete requeteASupprimer = new Requete();
@@ -438,6 +496,7 @@ public class Plan {
 			
 			
 			Livraison nouvelleLivraison = new Livraison( nouvelleListeItineraire , requetes);
+			nouvelleLivraison.calculArrivees();
 			return nouvelleLivraison; 
 			
 			
@@ -447,8 +506,13 @@ public class Plan {
 		}
 		
 	}
-	
-public Itineraire aEtoile(Intersection depart, Intersection arrivee){
+	/**
+	 * Cette méthode donne le chemin optimal pour relier deux sommets grâce à l'algorithme A*
+	 * @param depart
+	 * @param arrivee
+	 * @return
+	 */
+	public Itineraire aEtoile(Intersection depart, Intersection arrivee){
 		
 		// On gère préalablemet le cas limites ou le départ et l'arrivée sont confondus
 	
@@ -625,6 +689,12 @@ public Itineraire aEtoile(Intersection depart, Intersection arrivee){
 	public void setIntersectionIdRetourne(HashMap<Long, Integer> intersectionIdRetourne) {
 		this.intersectionIdRetourne = intersectionIdRetourne;
 	}
+	/** on construit un objet plan et toutes les structures de données qui facilitent son utilisation
+	 * 
+	 * @param intersectionId
+	 * @param intersection
+	 * @param segment
+	 */
 	
 	public Plan(ArrayList<Long> intersectionId, ArrayList<Intersection> intersection, ArrayList<Segment> segment) {
 		super();
@@ -679,14 +749,21 @@ public Itineraire aEtoile(Intersection depart, Intersection arrivee){
 		return "Plan [intersectionId=" + intersectionId + ", intersection=" + intersection + " ]";
 	}
 	
-	
+	/**
+	 * Cette fonction renvoie une intersection dont l'id correspond à celui passé en commentaire
+	 * @param id
+	 * @return
+	 */
 	
 	public Intersection getIntersectionById(Long id){
 
 		return this.intersection.get(this.intersectionIdRetourne.get(id));
 	}
 	
-	
+	/**
+	 * Cette méthode renvoie la longitude maximale de tout les sommets du graphe.
+	 * @return Double 
+	 */
 	public Double longitudeMax(){
 		Double max = this.intersection.get(0).getLongitude();
 		for(int i = 0; i < this.intersectionId.size(); i++) {
@@ -696,7 +773,10 @@ public Itineraire aEtoile(Intersection depart, Intersection arrivee){
 		}
 		return max;
 	}
-	
+	/**
+	 * Cette méthode renvoie la latitude maximale de tout les sommets du graphe.
+	 * @return Double 
+	 */
 	public Double latitudeMax(){
 		Double max = this.intersection.get(0).getLatitude();
 		for(int i = 0; i < this.intersectionId.size(); i++) {
@@ -706,7 +786,10 @@ public Itineraire aEtoile(Intersection depart, Intersection arrivee){
 		}
 		return max;
 	}
-	
+	/**
+	 * Cette méthode renvoie la longitude minimale de tout les sommets du graphe.
+	 * @return Double 
+	 */
 	
 	public Double longitudeMin(){
 		Double min = this.intersection.get(0).getLongitude();
@@ -717,7 +800,10 @@ public Itineraire aEtoile(Intersection depart, Intersection arrivee){
 		}
 		return min;
 	}
-	
+	/**
+	 * Cette méthode renvoie la latitude minimale de tout les sommets du graphe.
+	 * @return Double 
+	 */
 	public Double latitudeMin(){
 		Double min = this.intersection.get(0).getLatitude();
 		for(int i = 0; i < this.intersectionId.size(); i++) {

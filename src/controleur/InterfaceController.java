@@ -379,7 +379,7 @@ public class InterfaceController {
 	
 	public void validerAjouterEtape() {
 		Long duree = (long) 10;
-		//this.livraison = plan.ajouterRequete(this.livraison, this.pointPrecedentRecuperation, this.pointPrecedentLivraison, this.pointRecuperation, this.pointLivraison, duree, duree);
+		this.livraison = plan.ajouterRequete(this.livraison, this.pointPrecedentRecuperation, this.pointPrecedentLivraison, this.nouveauPointRecuperation, this.nouveauPointLivraison, duree, duree);
 	}
 	
 	/**
