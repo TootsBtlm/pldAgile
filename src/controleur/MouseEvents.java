@@ -29,14 +29,17 @@ public class MouseEvents {
 		@Override
 		public void handle(MouseEvent event) {
 			if(event.getSource() instanceof Circle) {
+				System.out.println("click requetenode");
 				Circle p = ((Circle)(event.getSource()));
-				p.setRadius(12.0);
+				System.out.println(listViewRequest);
 				listViewRequest.getSelectionModel().select(requeteNodeListView.get(p));
 				for(Node key : requeteNodeListView.keySet()) {
 					Circle nodeC = (Circle)(key);
 					nodeC.setRadius(8.0);
 				}
+				p.setRadius(12.0);
 				
+				System.out.println(nodeLinkedToIntersection);
 				Intersection inter = nodeLinkedToIntersection.get(p);
 				
 				if (interfaceController.getEtat() instanceof EtatSupprimerEtape) {
@@ -48,9 +51,6 @@ public class MouseEvents {
 				else if (interfaceController.getEtat() instanceof EtatAjouterPointPrecedentLivraison) {
 					interfaceController.ajouterPointPrecedentLivraison(inter);
 				}
-				
-				
-				//System.out.println(p);
 			}
 
 		}
@@ -106,6 +106,7 @@ public class MouseEvents {
 	}
 
 	public void setNodeLinkedToIntersection(Map<Node, Intersection> nodeLinkedToIntersection) {
+		System.out.println(nodeLinkedToIntersection);
 		this.nodeLinkedToIntersection = nodeLinkedToIntersection;
 	}
 	

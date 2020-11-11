@@ -220,15 +220,16 @@ public class InterfaceController {
 						requeteNodeListView.put(this.vueGraphique.getRequetes().get(i), listViewRequest.getItems().get(i));
 						//this.requeteNodes = this.vueGraphique.getIntersectionPane().getChildren();
 					}
-
-					mouseEvents = new MouseEvents(this.requeteNodeListView, this.listViewRequest, this);
+					System.out.println("creation mouse event : " + this.listViewRequest);
+//					mouseEvents = new MouseEvents(this.requeteNodeListView, this.listViewRequest, this);
+					mouseEvents.setListViewRequest(this.listViewRequest);
 
 
 					// Ajout d'un event handler sur les nodes correspondant aux requêtes sur la carte
 
-					//			for(int i = 0; i < this.vueGraphique.getRequetes().size(); i++) {
-					//				mouseEvents.requeteCliquable(this.vueGraphique.getRequetePane().getChildren().get(i));
-					//			}
+					for(int i = 0; i < this.vueGraphique.getRequetes().size(); i++) {
+						mouseEvents.requeteCliquable(this.vueGraphique.getRequetes().get(i));
+					}
 
 					this.mouseEvents.setListeCliquable();
 					this.textChargerFichierRequete.setVisible(false);;
