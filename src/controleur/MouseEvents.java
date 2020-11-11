@@ -46,11 +46,13 @@ public class MouseEvents {
 	EventHandler<MouseEvent> clickRequeteListeTextuelle = new EventHandler<MouseEvent>() {
 		@Override
 		public void handle(MouseEvent event) {
+//			System.out.println(requeteNodeListView);
 			for(Node key : requeteNodeListView.keySet()) {
 				Circle nodeC = (Circle)(key);
 				nodeC.setRadius(8.0);
 			}
 			String clickedString = listViewRequest.getSelectionModel().getSelectedItem();
+			System.out.println("Clicked string : " + clickedString);
 			Node n = requeteNodeListView.inverse().get(clickedString);
 			Circle p = (Circle)(n);
 			p.setRadius(12.0);
@@ -89,5 +91,9 @@ public class MouseEvents {
 
 	public void setNodeLinkedToIntersection(Map<Node, Intersection> nodeLinkedToIntersection) {
 		this.nodeLinkedToIntersection = nodeLinkedToIntersection;
+	}
+	
+	public void setListViewRequest(ListView<String> listViewRequest) {
+		this.listViewRequest = listViewRequest;
 	}
 }
