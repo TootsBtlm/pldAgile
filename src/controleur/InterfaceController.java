@@ -124,7 +124,7 @@ public class InterfaceController {
 			System.out.println(path);
 			Lecteur lecteur = new Lecteur();
 			this.ensembleRequete = lecteur.LireRequete(path, this.plan);
-			this.vueTextuelle = new VueTextuelle(this.plan, this.listViewRequest);
+			this.vueTextuelle = new VueTextuelle(this.plan, this.listViewRequest, this.mouseEvents);
 			this.vueTextuelle.drawText(this.ensembleRequete, this.listViewRequest);
 			this.vueGraphique.drawRequests(this.ensembleRequete);
 			
@@ -133,11 +133,11 @@ public class InterfaceController {
 			this.requeteNodeListView.clear();
 			for(int i = 0; i < this.vueGraphique.getRequetes().size(); i++) {
 				requeteNodeListView.put(this.vueGraphique.getRequetes().get(i), listViewRequest.getItems().get(i));
-				this.requeteNodes = this.vueGraphique.getIntersectionPane().getChildren();
+				//this.requeteNodes = this.vueGraphique.getIntersectionPane().getChildren();
 			}
 
 
-			mouseEvents = new MouseEvents(this.requeteNodeListView, this.listViewRequest);
+			//mouseEvents = new MouseEvents(this.requeteNodeListView, this.listViewRequest);
 			// Ajout d'un event handler sur les nodes correspondant aux requêtes sur la carte
 
 			//			for(int i = 0; i < this.vueGraphique.getRequetes().size(); i++) {
@@ -145,7 +145,7 @@ public class InterfaceController {
 			//			}
 
 
-			mouseEvents.setListeCliquable();
+			this.mouseEvents.setListeCliquable();
 			this.textChargerFichierRequete.setVisible(false);;
 
 			System.out.println("test");
@@ -161,12 +161,24 @@ public class InterfaceController {
 
 	public void calculerItineraire() {
 
-
-
 		this.livraison = plan.getMatriceCout(this.ensembleRequete);
+//		for(int i = 0; i < livraison.getListeItineraires().size(); i++) {
+//			Itineraire iti = livraison.getListeItineraires().get(i);
+//			System.out.println("itineraire " + i);
+//			System.out.println(iti.getListeIntersections().get(0));
+//			System.out.println(iti.getListeIntersections().get(iti.getListeIntersections().size()-1));
+//			System.out.println(" ");
+//		}
+		
 		System.out.println("Size itineraire : " + this.livraison.getListeItineraires().get(0).getListeIntersections().get(0).getId());
 		this.vueGraphique.drawItineraire(this.livraison);
+		
+		System.out.println("BEFORE : " + listViewRequest.getItems());
 		this.vueTextuelle.drawItineraire(this.livraison, this.requeteNodeListView);
+		System.out.println("AFTER : " + listViewRequest.getItems());
+		
+		//mouseEvents.setListeCliquable();
+		//System.out.println(this.requeteNodeListView);
 
 		etat = new EtatItineraireCalcule(this);
 
