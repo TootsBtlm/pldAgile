@@ -14,17 +14,27 @@ public class Testeur {
 		   Lecteur nouveauLecteur =  new Lecteur();
 		   
 		   //Pour lire un plan il faut invoquer la méthode LirePlan avec comme attribut le chemin vers le fichier
-		   Plan nouveauPlan = nouveauLecteur.LirePlan("ressources/smallMap.xml");
-		   EnsembleRequete recap = nouveauLecteur.LireRequete("ressources/requestsSmall2.xml", nouveauPlan);
-
+		   Plan nouveauPlan = nouveauLecteur.LirePlan("ressources/testMap.xml");
+		   EnsembleRequete recap = nouveauLecteur.LireRequete("ressources/requestsTest.xml", nouveauPlan);
+		   
+//		   System.out.println("Liste des points à relier :");
+//		   for(int i = 0 ; i< recap.getListeRequete().size();i++) {
+//			   System.out.println(recap.getListeRequete().get(i).getPointDeRecuperation());
+//			   System.out.println(recap.getListeRequete().get(i).getPointDeLivraison());
+//		   }
+		   
 		   Livraison liv = nouveauPlan.getMatriceCout(recap);
 		   
 		   
-		  
-		   System.out.println(liv.getListeItineraires().get(0).getListeIntersections().get(0));
-		   System.out.println(liv.getListeItineraires().get(1).getListeIntersections().get(0));
-		   System.out.println(liv.getListeItineraires().get(4).getListeIntersections().get(0));
-		   System.out.println(liv.getListeItineraires().get(liv.getListeItineraires().size()-1).getListeIntersections().get(liv.getListeItineraires().get(liv.getListeItineraires().size()-1).getListeIntersections().size()-1));		   
+//		   System.out.println("Liste des points de l'itineraire :");
+//		   for(int i = 0 ; i< liv.getListeItineraires().size();i++) {
+//			   System.out.println(liv.getListeItineraires().get(i).getListeIntersections().get(0));
+//			   System.out.println(liv.getListeItineraires().get(i).getListeIntersections().get(liv.getListeItineraires().get(i).getListeIntersections().size()-1));
+//			    
+//		   }
+//		  System.out.println(liv.getListeItineraires().size());
+//		   System.out.println(liv.getListeItineraires().get(4).getListeIntersections().get(0));
+//		   System.out.println(liv.getListeItineraires().get(liv.getListeItineraires().size()-1).getListeIntersections().get(liv.getListeItineraires().get(liv.getListeItineraires().size()-1).getListeIntersections().size()-1));		   
 		   /**
 		   //Méthode pour récupérer la matrice
 		   Double[][] matrice = nouveauPlan.getMatrice();

@@ -18,25 +18,27 @@ public class Plan {
 	/**
 	 * 
 	 */
-	public ArrayList<Long> intersectionId;	
+	private ArrayList<Long> intersectionId;	
 	/**
 	 * 
 	 */
-	public HashMap<Long,Integer> intersectionIdRetourne = new HashMap<Long, Integer>();
+	private HashMap<Long,Integer> intersectionIdRetourne = new HashMap<Long, Integer>();
 	/**
 	 * 
 	 */
-	public ArrayList<Intersection> intersection;
+	private ArrayList<Intersection> intersection;
 	/**
 	 * 
 	 */
-	public ArrayList<Segment> segment;
+	private ArrayList<Segment> segment;
 	
-	public HashMap<Intersection, ArrayList<Segment>> listeAdjacence = new HashMap<Intersection, ArrayList<Segment>>();
+	private HashMap<Intersection, ArrayList<Segment>> listeAdjacence = new HashMap<Intersection, ArrayList<Segment>>();
 	
-	public HashMap<Intersection, ArrayList<Segment>> listeAdjacenceInverse = new HashMap<Intersection, ArrayList<Segment>>();
+	private HashMap<Intersection, ArrayList<Segment>> listeAdjacenceInverse = new HashMap<Intersection, ArrayList<Segment>>();
 	 
-	public HashMap<Intersection, Integer> indexIdInteger = new HashMap<Intersection, Integer>();
+	//public HashMap<Intersection, Integer> indexIdInteger = new HashMap<Intersection, Integer>();
+	
+	
 	
 	public HashMap<Intersection, ArrayList<Segment>> getListeAdjacence() {
 		return listeAdjacence;
@@ -74,21 +76,23 @@ public class Plan {
 		ArrayList<Intersection> listeIntersection = new ArrayList<Intersection>();
         ArrayList<Pair<Integer,Integer>> listePaires = new ArrayList<Pair<Integer,Integer>>();
         listeIntersection.add(requetes.getLieuDepart().getPointDeDepart());
-        for(int i=0; i<requetes.listeRequete.size();i++) {
-            listeIntersection.add(requetes.listeRequete.get(i).getPointDeRecuperation());
-            listeIntersection.add(requetes.listeRequete.get(i).getPointDeLivraison());
-            listePaires.add(new Pair<Integer,Integer>(listeIntersection.indexOf(requetes.listeRequete.get(i).getPointDeRecuperation()),listeIntersection.indexOf(requetes.listeRequete.get(i).getPointDeLivraison())));
+        for(int i=0; i<requetes.getListeRequete().size();i++) {
+            listeIntersection.add(requetes.getListeRequete().get(i).getPointDeRecuperation());
+            listeIntersection.add(requetes.getListeRequete().get(i).getPointDeLivraison());
+            listePaires.add(new Pair<Integer,Integer>(listeIntersection.indexOf(requetes.getListeRequete().get(i).getPointDeRecuperation()),listeIntersection.indexOf(requetes.getListeRequete().get(i).getPointDeLivraison())));
         }
         double[][] matriceCout = new double[listeIntersection.size()][listeIntersection.size()];
         
 
         HashMap<Pair<Intersection, Intersection>, Itineraire> matriceItineraire = new HashMap<Pair<Intersection, Intersection>, Itineraire>();
-        
+        //System.out.println("calculs dans A*");
         for(int i=0;i<listeIntersection.size();i++) {
             for(int j=0;j<listeIntersection.size();j++) {
                 if(i==j)
                     matriceCout[i][j] = -1;
                 else {
+                	//System.out.println(listeIntersection.get(i));
+                	//System.out.println(listeIntersection.get(j));
                 	Itineraire itineraire = aEtoile(listeIntersection.get(i),listeIntersection.get(j));
                 	Pair<Intersection, Intersection> cle = new Pair<Intersection,Intersection>(listeIntersection.get(i),listeIntersection.get(j));
                 	matriceItineraire.put(cle, itineraire);
@@ -96,15 +100,23 @@ public class Plan {
                 }
             }
         }
-                
+        //System.out.println("résultat tsp : ");    
         TSP tsp = new TSP1();
         Integer[] resultat = tsp.searchSolution(30000, matriceCout, listePaires, 0);
         for(int i=0;i<resultat.length;i++){
-        	System.out.println(i);
-        	System.out.println(resultat[i]);
+        	
+        	//System.out.println(i);
+        	//System.out.println(resultat[i]);
         }
         
+        //System.out.println("contenu matrice itineraire");
         
+        for (HashMap.Entry<Pair<Intersection, Intersection>, Itineraire> entry : matriceItineraire.entrySet()) {
+            //System.out.println("Key = " + entry.getKey());
+            //System.out.println("Value debut = " + entry.getValue().getListeIntersections().get(0));
+            //System.out.println("Value fin = " + entry.getValue().getListeIntersections().get(entry.getValue().getListeIntersections().size()-1));
+        }
+
         
         Itineraire itineraireOpti = new Itineraire();
         
@@ -122,7 +134,6 @@ public class Plan {
         	Pair<Intersection, Intersection> cle = new Pair<Intersection, Intersection>(itineraireOpti.getListeIntersections().get(i), itineraireOpti.getListeIntersections().get(i+1));
         	itineraireComplet.add(matriceItineraire.get(cle));
         }
-        
         Livraison ret = new Livraison(itineraireComplet,requetes);
         ret.calculArrivees();
         return(ret);
@@ -321,7 +332,7 @@ public class Plan {
 		
 		ArrayList<Itineraire> nouvelleListeItineraire = new ArrayList<Itineraire>();
 		EnsembleRequete requetes = ancienneLivraison.getRequetes();
-		Time heureDepart = requetes.LieuDepart.getHeureDepart();
+		Time heureDepart = requetes.getLieuDepart().getHeureDepart();
 		HashMap<Itineraire,Time>dictionnaireArriveesItineraires = new HashMap<Itineraire,Time>();
 		
 		for(int i = 0 ; i < ancienneLivraison.getListeItineraires().size() ; i++) {
@@ -341,8 +352,8 @@ public class Plan {
 		HashMap<Intersection,Long>tempsAssocieIntersection = new HashMap<Intersection,Long>();
 		
 		for(int i=0;i<requetes.getListeRequete().size();i++) {
-			tempsAssocieIntersection.put(requetes.listeRequete.get(i).getPointDeRecuperation(), requetes.listeRequete.get(i).getDureeRecuperation());
-			tempsAssocieIntersection.put(requetes.listeRequete.get(i).getPointDeLivraison(), requetes.listeRequete.get(i).getDureeLivraison());
+			tempsAssocieIntersection.put(requetes.getListeRequete().get(i).getPointDeRecuperation(), requetes.getListeRequete().get(i).getDureeRecuperation());
+			tempsAssocieIntersection.put(requetes.getListeRequete().get(i).getPointDeLivraison(), requetes.getListeRequete().get(i).getDureeLivraison());
 		}
 		dictionnaireArriveesItineraires.put(nouvelleListeItineraire.get(0), new Time(heureDepart.getTime()+nouvelleListeItineraire.get(0).getTemps().longValue()));
 		
@@ -373,30 +384,24 @@ public class Plan {
 		Requete requete = new Requete();
 		for(int i = 0; i < requetes.getListeRequete().size() ; i ++) {
 			requete = requetes.getListeRequete().get(i);
-			if(requete.getPointDeLivraison().getId() == sommetASupprimer.getId()) {
-				requetes.getListeRequete().remove(requete);
-				break;
-			}
-			else if (requete.getPointDeRecuperation().getId() == sommetASupprimer.getId()) {
-				requetes.getListeRequete().remove(requete);
+			if(requete.getPointDeLivraison().getId() == sommetASupprimer.getId() || requete.getPointDeRecuperation().getId() == sommetASupprimer.getId()) {
+				
+				ArrayList<Requete> listeRequete = requetes.getListeRequete();
+				listeRequete.remove(requete);
+				requetes.setListeRequete(listeRequete);
+				
 				break;
 			}
 		}
+		
 		ArrayList<Itineraire> ancienneListeItineraire = ancienneLivraison.getListeItineraires();
 		ArrayList<Itineraire> nouvelleListeItineraire = new ArrayList<Itineraire>();
 		int i = 0;
 		while(i < ancienneLivraison.getListeItineraires().size()) {
 			
-			if(requete.getPointDeLivraison().getId() == ancienneListeItineraire.get(i).getListeIntersections().get(0).getId()) {
-				Intersection intersectionPrecedente = ancienneListeItineraire.get(i-1).getListeIntersections().get(0);
-				Intersection intersectionSuivante = ancienneListeItineraire.get(i).getListeIntersections().get(ancienneListeItineraire.get(i).getListeIntersections().size()-1);
-				nouvelleListeItineraire.add(this.calcDijsktra(intersectionPrecedente, intersectionSuivante));
-				i++;
-				i++;
-			}
-			else if (requete.getPointDeRecuperation().getId() == ancienneListeItineraire.get(i).getListeIntersections().get(0).getId()) {
-				Intersection intersectionPrecedente = ancienneListeItineraire.get(i-1).getListeIntersections().get(0);
-				Intersection intersectionSuivante = ancienneListeItineraire.get(i).getListeIntersections().get(ancienneListeItineraire.get(i).getListeIntersections().size()-1);
+			if(requete.getPointDeLivraison().getId() == ancienneListeItineraire.get(i).getListeIntersections().get(0).getId() || requete.getPointDeRecuperation().getId() == ancienneListeItineraire.get(i).getListeIntersections().get(0).getId()) {
+				Intersection intersectionPrecedente = ancienneListeItineraire.get(i).getListeIntersections().get(0);
+				Intersection intersectionSuivante = ancienneListeItineraire.get(i+1).getListeIntersections().get(ancienneListeItineraire.get(i).getListeIntersections().size()-1);
 				nouvelleListeItineraire.add(this.calcDijsktra(intersectionPrecedente, intersectionSuivante));
 				i++;
 				i++;
@@ -407,19 +412,38 @@ public class Plan {
 			}
 		}
 
-
+		System.out.println("Liste des intersections importantes du nouvel itineraire de livraison");
+		
+		for(int i1 = 0 ; i1 < nouvelleListeItineraire.size(); i1 ++) {
+			
+			System.out.println("depart : " +nouvelleListeItineraire.get(i1).getListeIntersections().get(0));
+			System.out.println("arrivée : " +nouvelleListeItineraire.get(i1).getListeIntersections().get(nouvelleListeItineraire.get(i1).getListeIntersections().size() -1));
+		}
+		
 		Livraison nouvelleLivraison = new Livraison( nouvelleListeItineraire , requetes);
-		nouvelleLivraison.calculArrivees();
+		//nouvelleLivraison.calculArrivees();
 		return nouvelleLivraison;
 		
 	}
 	
 public Itineraire aEtoile(Intersection depart, Intersection arrivee){
 		
+		// On gère préalablemet le cas limites ou le départ et l'arrivée sont confondus
+	
+		if(depart.getId() == arrivee.getId()) {
+			ArrayList<Intersection> listeIntersections = new ArrayList<Intersection>();
+			listeIntersections.add(arrivee);
+			Double cout = 0.;
+			return new Itineraire(listeIntersections, cout);
+		}
 		
+		
+	
+	
 		HashMap<Intersection,Double> tab = new HashMap<Intersection,Double>();
 		HashMap<Intersection,Double> heuristique = new HashMap<Intersection,Double>();
 		HashMap<Intersection, ArrayList<Intersection>> tabIntersection = new HashMap<Intersection, ArrayList<Intersection>>();
+		HashMap<Intersection, ArrayList<String>> tabNomRues = new HashMap<Intersection, ArrayList<String>>();
 		ArrayList<Intersection> visitee = new ArrayList<Intersection>();
 		ArrayList<Intersection> nonVisitee = (ArrayList<Intersection>) this.intersection.clone();
 		ArrayList<Intersection> voisinArrivee = new ArrayList<Intersection>();
@@ -449,20 +473,47 @@ public Itineraire aEtoile(Intersection depart, Intersection arrivee){
 		
 		for(int i=0;i<this.intersection.size();i++) {
 			ArrayList<Intersection> vide = new ArrayList<Intersection>();
+			ArrayList<String> chaineVide = new ArrayList<String>(); 
 			tab.put(this.intersection.get(i),100000.0);
 			tabIntersection.put(this.intersection.get(i), vide);
+			tabNomRues.put(this.intersection.get(i), chaineVide);
 		}
 		
 		tab.put(depart, 0.0);
 		
 		
+		
+		boolean arriveDepartContigue = false;
+		Segment departArrivee = new Segment();
 		for(int i=0;i<this.listeAdjacence.get(depart).size();i++) {
 			Segment s = this.listeAdjacence.get(depart).get(i);
 			ArrayList<Intersection> vide = new ArrayList<Intersection>();
+			ArrayList<String> chaineVide = new ArrayList<String>();
 			tab.put(s.getFin(),s.getLongueur());
 			vide.add(depart);
+			chaineVide.add(s.getNom());
+			if(s.getFin().getId() == arrivee.getId()){
+				arriveDepartContigue = true;
+				departArrivee = s;
+			}
 			tabIntersection.put(s.getFin(), vide);
+			tabNomRues.put(s.getFin(), chaineVide);
 		}
+		
+		// Si les sommets de départ et d'arrivée sont reliés, on renvoie juste le segment qui les sépare
+		
+		if(arriveDepartContigue) {
+			ArrayList<Intersection> listeInter = new ArrayList<Intersection>();
+			listeInter.add(depart);
+			listeInter.add(arrivee);
+			
+			ArrayList<String> listeNoms = new ArrayList<String>();
+			listeNoms.add(departArrivee.getNom());
+			return new Itineraire(listeInter, listeNoms, departArrivee.getLongueur());
+		}
+		
+		
+		
 
 		visitee.add(depart);
 		nonVisitee.remove(depart);
@@ -507,9 +558,11 @@ public Itineraire aEtoile(Intersection depart, Intersection arrivee){
 						
 						tab.put(s.getFin(),tab.get(nouveauDepart) + s.getLongueur());	
 						ArrayList<Intersection> liste = (ArrayList<Intersection>) tabIntersection.get(nouveauDepart).clone();
+						ArrayList<String> listeNomRues = (ArrayList<String>) tabNomRues.get(nouveauDepart).clone();
 						liste.add(s.getFin());
+						listeNomRues.add(s.getNom());
 						tabIntersection.put(s.getFin(), liste);
-						
+						tabNomRues.put(s.getFin(), listeNomRues);
 					}
 			}
 			
@@ -518,7 +571,7 @@ public Itineraire aEtoile(Intersection depart, Intersection arrivee){
 			voisinArrivee.remove(nouveauDepart);
 		}
 		//Pair<Double, ArrayList<Intersection>> ret = new Pair<Double, ArrayList<Intersection>>(tab.get(arrivee),tabIntersection.get(arrivee));
-		Itineraire itineraire = new Itineraire(tabIntersection.get(arrivee), tab.get(arrivee));
+		Itineraire itineraire = new Itineraire(tabIntersection.get(arrivee),tabNomRues.get(arrivee) ,tab.get(arrivee));
 		
 		return itineraire;
 	}
@@ -550,6 +603,7 @@ public Itineraire aEtoile(Intersection depart, Intersection arrivee){
 	public void setIntersectionIdRetourne(HashMap<Long, Integer> intersectionIdRetourne) {
 		this.intersectionIdRetourne = intersectionIdRetourne;
 	}
+	
 	public Plan(ArrayList<Long> intersectionId, ArrayList<Intersection> intersection, ArrayList<Segment> segment) {
 		super();
 
@@ -610,24 +664,6 @@ public Itineraire aEtoile(Intersection depart, Intersection arrivee){
 		return this.intersection.get(this.intersectionIdRetourne.get(id));
 	}
 	
-	public Double[][] getMatrice(){
-		int nbIntersection = this.intersectionId.size();
-		int nbSegment = this.segment.size();
-		Double[][] matriceCouts = new Double[nbIntersection+1][nbIntersection+1];
-		
-		for(int i = 0 ; i < nbIntersection ; i++) {
-			for(int j = 0 ; j < nbIntersection ; j++) {
-				matriceCouts[i][j] = 1000000.;
-			}
-			
-		}
-		
-		for(int i = 0 ; i < nbSegment ; i++) {
-			Segment segmentCourant = this.segment.get(i);
-			matriceCouts[intersectionIdRetourne.get(segmentCourant.getOrigine().getId())][intersectionIdRetourne.get(segmentCourant.getFin().getId())] = segmentCourant.getLongueur();
-		}
-		return matriceCouts;
-	}
 	
 	public Double longitudeMax(){
 		Double max = this.intersection.get(0).getLongitude();
@@ -670,25 +706,7 @@ public Itineraire aEtoile(Intersection depart, Intersection arrivee){
 		return min;
 	}
 	
-	public Itineraire getItineraire(ArrayList<Integer> listeSommets){
-		Itineraire itineraire = new Itineraire();
-		
-		for (int i= 0; i < listeSommets.size() ; i++) {
-			itineraire.addIntersection(this.intersection.get(listeSommets.get(i)));
-		}
-		
-		
-		return itineraire;
-	}
-	
-	public void remplirIndex(ArrayList<Intersection> requetes, Intersection depart) {
-		this.indexIdInteger.put(depart, 0);
-		Integer entier = 1;
-		for(Intersection i : requetes) {
-			this.indexIdInteger.put(i, entier++);
-		}
-	}
-	
+
 };
 
 

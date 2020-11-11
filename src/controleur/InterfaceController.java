@@ -159,7 +159,7 @@ public class InterfaceController {
 			this.mouseEvents.setListeCliquable();
 			this.textChargerFichierRequete.setVisible(false);;
 
-			System.out.println("test");
+			//System.out.println("test");
 			etat = new EtatListeRequeteChargee(this);
 		}
 	}
@@ -181,13 +181,13 @@ public class InterfaceController {
 //			System.out.println(" ");
 //		}
 		
-		System.out.println("Size itineraire : " + this.livraison.getListeItineraires().get(0).getListeIntersections().get(0).getId());
+		//System.out.println("Size itineraire : " + this.livraison.getListeItineraires().get(0).getListeIntersections().get(0).getId());
 
 		this.vueGraphique.drawItineraire(this.livraison);
 		
-		System.out.println("BEFORE : " + listViewRequest.getItems());
+		//System.out.println("BEFORE : " + listViewRequest.getItems());
 		this.vueTextuelle.drawItineraire(this.livraison, this.requeteNodeListView);
-		System.out.println("AFTER : " + listViewRequest.getItems());
+		//System.out.println("AFTER : " + listViewRequest.getItems());
 		
 		//mouseEvents.setListeCliquable();
 		//System.out.println(this.requeteNodeListView);
@@ -224,10 +224,10 @@ public class InterfaceController {
 		System.out.println(inter);
 		
 		this.livraison = plan.supprimerSommet(this.livraison,  inter);
-		for (int i=0; i<this.livraison.getListeItineraires().size(); i++) {
-			System.out.println(this.livraison.getListeItineraires().get(i).getListeIntersections().get(0));
-			System.out.println(this.livraison.getListeItineraires().get(i).getListeIntersections().get(this.livraison.getListeItineraires().get(i).getListeIntersections().size()-1));
-		}
+//		for (int i=0; i<this.livraison.getListeItineraires().size(); i++) {
+//			System.out.println(this.livraison.getListeItineraires().get(i).getListeIntersections().get(0));
+//			System.out.println(this.livraison.getListeItineraires().get(i).getListeIntersections().get(this.livraison.getListeItineraires().get(i).getListeIntersections().size()-1));
+//		}
 		this.vueGraphique.drawItineraire(this.livraison);
 		this.vueTextuelle.drawItineraire(this.livraison, this.requeteNodeListView);
 
