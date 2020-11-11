@@ -94,6 +94,8 @@ public class InterfaceController {
 
 	@FXML
 	public void actionChargerFichierPlan() {
+		System.out.println("called actionChargerFichierPlan");
+		System.out.println("ETAT au call : " + this.etat);
 		etat.chargerFichierPlan();
 
 	}
@@ -130,6 +132,8 @@ public class InterfaceController {
 
 	@FXML
 	public void actionChargerFichierRequete() {
+		System.out.println("called actionChargerFichierRequete");
+		System.out.println("ETAT au call : " + this.etat);
 		etat.chargerFichierRequetes();
 	}
 
@@ -213,7 +217,7 @@ public class InterfaceController {
 	@FXML
 	public void actionAjouterEtape() {
 		System.out.println("called actionAjouterEtape");
-		System.out.println("ETAT au actionAjouterEtape : " + this.etat);
+		System.out.println("ETAT au call : " + this.etat);
 		etat.ajouterEtape();
 	}
 	
@@ -268,7 +272,7 @@ public class InterfaceController {
 	public void supprimerEtape(Intersection inter) {
 
 		
-		this.livraison = plan.supprimerSommet(this.livraison,  inter);
+		this.livraison = plan.supprimerRequete(this.livraison,  inter);
 		
 		this.ensembleRequete = this.livraison.getRequetes();
 		this.vueGraphique.drawRequests(this.ensembleRequete);
