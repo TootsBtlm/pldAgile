@@ -77,7 +77,7 @@ public class InterfaceController {
 	public void initialize() {
 		tsp = new TSP1();
 		etat = new EtatInitial(this);
-		mouseEvents = new MouseEvents(requeteNodeListView, this.listViewRequest);
+		mouseEvents = new MouseEvents(requeteNodeListView, this.listViewRequest, this);
 	}
 
 	@FXML
@@ -85,7 +85,11 @@ public class InterfaceController {
 		etat.chargerFichierPlan();
 
 	}
-
+	
+	public Etat getEtat() {
+		return this.etat;
+	}
+	
 	public void chargerFichierPlan() {
 		FileChooser fileChooser = new FileChooser();
 		File file = fileChooser.showOpenDialog(this.stage);
@@ -140,7 +144,11 @@ public class InterfaceController {
 			}
 
 
-			//mouseEvents = new MouseEvents(this.requeteNodeListView, this.listViewRequest);
+
+
+			mouseEvents = new MouseEvents(this.requeteNodeListView, this.listViewRequest, this);
+
+
 			// Ajout d'un event handler sur les nodes correspondant aux requêtes sur la carte
 
 			//			for(int i = 0; i < this.vueGraphique.getRequetes().size(); i++) {
@@ -208,16 +216,18 @@ public class InterfaceController {
 
 	@FXML
 	public void actionSupprimerEtape() {
-		etat.supprimerEtape();
+		etat = new EtatSupprimerEtape(this);
 	}
 
-	public void supprimerEtape() {
-
-		// demander a aurel comment obtenir la bonne intersection juste en dessous la
+	public void supprimerEtape(Intersection inter) {
+				
+		System.out.println(inter);
 		
-		this.livraison = plan.supprimerSommet(this.livraison, this.livraison.getListeItineraires().get(0).getListeIntersections().get(0));
-			
-
+		this.livraison = plan.supprimerSommet(this.livraison,  inter);
+		for (int i=0; i<this.livraison.getListeItineraires().size(); i++) {
+			System.out.println(this.livraison.getListeItineraires().get(i).getListeIntersections().get(0));
+			System.out.println(this.livraison.getListeItineraires().get(i).getListeIntersections().get(this.livraison.getListeItineraires().get(i).getListeIntersections().size()-1));
+		}
 		this.vueGraphique.drawItineraire(this.livraison);
 		this.vueTextuelle.drawItineraire(this.livraison, this.requeteNodeListView);
 

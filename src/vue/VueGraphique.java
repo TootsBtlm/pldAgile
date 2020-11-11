@@ -194,6 +194,8 @@ public class VueGraphique {
 
 	public void drawItineraire(Livraison livraison) {
 		var gc = this.planCanvas.getGraphicsContext2D();
+		
+		gc.clearRect(0, 0, this.planCanvas.getWidth(), this.planCanvas.getHeight());
 		gc.setFill(Color.RED);
 
 		double latitudeMin = this.plan.latitudeMin();
