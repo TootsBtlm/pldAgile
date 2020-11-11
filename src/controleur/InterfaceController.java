@@ -380,6 +380,13 @@ public class InterfaceController {
 	public void validerAjouterEtape() {
 		Long duree = (long) 10;
 		this.livraison = plan.ajouterRequete(this.livraison, this.pointPrecedentRecuperation, this.pointPrecedentLivraison, this.nouveauPointRecuperation, this.nouveauPointLivraison, duree, duree);
+		this.ensembleRequete = this.livraison.getRequetes();
+		this.vueGraphique.drawRequests(this.ensembleRequete);
+		this.vueGraphique.drawItineraire(this.livraison);
+		this.vueTextuelle.drawItineraire(this.livraison, this.requeteNodeListView);
+
+		etat = new EtatItineraireCalcule(this);
+		
 	}
 	
 	/**
@@ -485,12 +492,26 @@ public class InterfaceController {
 
 	@FXML
 	public void actionCreerFeuilleDeRoute() {
+		System.out.println("test1");
+		this.etat = new EtatFeuilleDeRoute(this);
 		etat.feuilleDeRoute();
 	}
 
 	public void feuilleDeRoute() {
 		
-		etat = new EtatFeuilleDeRoute(this);
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/vue/feuilleDeRoutePopup.fxml"));
+		loader.setController(this);
+		Parent root;
+		try {
+			root = loader.load();
+			this.ajouterStage.setScene(new Scene(root));
+			this.ajouterStage.setResizable(false);
+			this.ajouterStage.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		
 
 	}
 

@@ -79,7 +79,8 @@ public class EtatFeuilleDeRoute extends Etat{
 	 * 
 	 */
 	public void feuilleDeRoute() {
-		
+		System.out.println("test2");
+		this.interfaceController.feuilleDeRoute();
 	}
 	
 }
