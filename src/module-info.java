@@ -7,6 +7,7 @@ module pldAgile {
 	requires java.base;
 	requires com.google.common;
 	requires junit;
+	requires org.junit.jupiter.api;
 	opens vue;
 	exports vue;
 	exports modele;
