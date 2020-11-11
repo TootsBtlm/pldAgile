@@ -1,6 +1,7 @@
 package controleur;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import com.google.common.collect.BiMap;
@@ -8,7 +9,10 @@ import com.google.common.collect.HashBiMap;
 
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
@@ -60,6 +64,7 @@ public class InterfaceController {
 	private ListView<String> listViewRequest;
 
 	private Stage stage;
+	private Stage ajouterStage;
 	private Plan plan;
 	private EnsembleRequete ensembleRequete = null;
 	private List<Node> requeteNodes = null;
@@ -75,11 +80,15 @@ public class InterfaceController {
 	private Etat etat;
 
 	private Livraison livraison;
+	
+	private Intersection nouveauPointRecuperation;
+	private Intersection nouveauPointLivraison;
 
 	@FXML
 	public void initialize() {
 		tsp = new TSP1();
 		etat = new EtatInitial(this);
+		ajouterStage = new Stage();
 		mouseEvents = new MouseEvents(requeteNodeListView, this.listViewRequest, this);
 	}
 
@@ -169,6 +178,8 @@ public class InterfaceController {
 
 	@FXML
 	public void actionCalculerItineraire() {
+		System.out.println("called actionCalculerItineraire");
+		System.out.println("ETAT au actionCalculerItineraire : " + this.etat);
 		etat.calculerItineraire();
 	}
 
@@ -201,20 +212,51 @@ public class InterfaceController {
 
 	@FXML
 	public void actionAjouterEtape() {
+		System.out.println("called actionAjouterEtape");
+		System.out.println("ETAT au actionAjouterEtape : " + this.etat);
 		etat.ajouterEtape();
+	}
+	
+	@FXML
+	public void actionAjouterPointRecuperation() {
+		System.out.println("called actionAjouterPointRecuperation");
+		System.out.println("ETAT au call : " + this.etat);
+		etat.ajouterPointRecuperation();
 	}
 
 	public void ajouterEtape() {
-
-		// demander a aurel comment obtenir les bonnes intersections et la bonne durée juste en dessous la
-
-		Long duree = (long) 10;
-		Intersection intersection = this.livraison.getListeItineraires().get(0).getListeIntersections().get(1);
-
-		this.livraison = plan.ajouterSommet(this.livraison, intersection, this.livraison.getListeItineraires().get(0).getListeIntersections().get(0) , duree); 
-		this.livraison = plan.ajouterSommet(this.livraison,  intersection , intersection , duree); 
-
 		etat = new EtatAjouterEtape(this);
+//		FXMLLoader loader = new FXMLLoader(getClass().getResource("/vue/ajouterPopup.fxml"));
+//		Parent root;
+//		try {
+//			root = loader.load();
+//			this.ajouterStage.setScene(new Scene(root));
+//			this.ajouterStage.setResizable(false);
+//			this.ajouterStage.show();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//			
+//		}
+
+//		Long duree = (long) 10;
+//		Intersection intersection = this.livraison.getListeItineraires().get(0).getListeIntersections().get(1);
+//
+//		this.livraison = plan.ajouterSommet(this.livraison, intersection, this.livraison.getListeItineraires().get(0).getListeIntersections().get(0) , duree); 
+//		this.livraison = plan.ajouterSommet(this.livraison,  intersection , intersection , duree); 
+
+		
+	}
+	
+	public void ajouterPointRecuperation() {
+		System.out.println("AJOUTER ETAPE 2");
+
+		etat = new EtatAjouterPointRecuperation(this);
+		System.out.println(this.etat);
+	}
+	
+	public void ajouterNouveauPointRecuperation(Intersection inter) {
+		inter.setTypeIntersection(3);
+		System.out.println(this.plan.getNomRue(inter));
 	}
 
 	@FXML
@@ -254,4 +296,22 @@ public class InterfaceController {
 	public void setStage(Stage stage) {
 		this.stage = stage;
 	}
+
+	public Intersection getNouveauPointRecuperation() {
+		return nouveauPointRecuperation;
+	}
+
+	public void setNouveauPointRecuperation(Intersection nouveauPointRecuperation) {
+		this.nouveauPointRecuperation = nouveauPointRecuperation;
+	}
+
+	public Intersection getNouveauPointLivraison() {
+		return nouveauPointLivraison;
+	}
+
+	public void setNouveauPointLivraison(Intersection nouveauPointLivraison) {
+		this.nouveauPointLivraison = nouveauPointLivraison;
+	}
+	
+	
 }

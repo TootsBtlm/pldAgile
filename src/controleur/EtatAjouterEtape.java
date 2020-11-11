@@ -43,11 +43,16 @@ public class EtatAjouterEtape extends Etat{
 	}
 	
 	public void supprimerEtape(Intersection inter) {
-		this.interfaceController.supprimerEtape(inter);
+		
 	}
 	
 	public void feuilleDeRoute() {
 		
+	}
+	
+	public void ajouterPointRecuperation() {
+		System.out.println("AJOUTER ETAPE 111111");
+		this.interfaceController.ajouterPointRecuperation();
 	}
 	
 }

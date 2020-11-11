@@ -61,5 +61,10 @@ public class Etat {
 	public void feuilleDeRoute() {
 		
 	}
+
+
+	public void ajouterPointRecuperation() {
+		
+	}
 	
 }
