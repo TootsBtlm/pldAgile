@@ -54,6 +54,16 @@ public class InterfaceController {
 	private Text textChargerFichierRequete;
 
 	@FXML
+	private Text textPointPrecedent;
+	
+	@FXML
+	private Text textPointRecuperation;
+	
+	@FXML
+	private Text textPointLivraison;
+	
+	
+	@FXML
 	private Pane intersectionPane;
 
 
@@ -83,9 +93,9 @@ public class InterfaceController {
 	
 	private Intersection nouveauPointRecuperation;
 	private Intersection nouveauPointLivraison;
-
-	@FXML
-	public void initialize() {
+	private Intersection pointPrecedent;
+	
+	public InterfaceController() {
 		tsp = new TSP1();
 		etat = new EtatInitial(this);
 		ajouterStage = new Stage();
@@ -219,18 +229,37 @@ public class InterfaceController {
 		System.out.println("called actionAjouterEtape");
 		System.out.println("ETAT au call : " + this.etat);
 		etat = new EtatAjouterEtape(this);
+		etat.ajouterEtape();
 	}
 	
 	@FXML
 	public void actionAjouterPointRecuperation() {
 		System.out.println("called actionAjouterPointRecuperation");
 		System.out.println("ETAT au call : " + this.etat);
-		etat.ajouterPointRecuperation();
+
+		etat = new EtatAjouterPointRecuperation(this);
 	}
 
-	public void ajouterEtape(Intersection intersection) {
+	@FXML
+	public void actionAjouterPointPrecedent() {
+		System.out.println("called actionAjouterPointPrecedent");
+		System.out.println("ETAT au call : " + this.etat);
 
+		etat = new EtatAjouterPointPrecedent(this);
+	}
+	
+	@FXML
+	public void actionAjouterPointLivraison() {
+		System.out.println("called actionAjouterPointLivraison");
+		System.out.println("ETAT au call : " + this.etat);
+
+		etat = new EtatAjouterPointLivraison(this);
+	}
+	
+	public void ajouterEtape() {
+		
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/vue/ajouterPopup.fxml"));
+		loader.setController(this);
 		Parent root;
 		try {
 			root = loader.load();
@@ -241,27 +270,46 @@ public class InterfaceController {
 			e.printStackTrace();
 			
 		}
-
-		Long duree = (long) 10;
-
-
-		this.livraison = plan.ajouterSommet(this.livraison, intersection, this.livraison.getListeItineraires().get(0).getListeIntersections().get(0) , duree); 
-		this.livraison = plan.ajouterSommet(this.livraison,  intersection , intersection , duree);
-		etat = new EtatAjouterPointRecuperation(this);
 		
 	}
 	
-	public void ajouterPointRecuperation() {
-		System.out.println("AJOUTER ETAPE 2");
 
-		etat = new EtatAjouterPointRecuperation(this);
-		System.out.println(this.etat);
+	public void validerAjouterEtape() {
+		Long duree = (long) 10;
+		//this.livraison = plan.ajouterRequete(this.livraison, this.pointPrecedent, this.pointRecuperation, this.pointLivraison, duree);
+	}
+	
+	@FXML
+	public void actionValiderAjouterEtape() {
+		etat.validerAjouterEtape();
 	}
 	
 	public void ajouterNouveauPointRecuperation(Intersection inter) {
+		System.out.println("called ajouterNouveauPointRecuperation");
+		System.out.println("ETAT au call : " + this.etat);
 		inter.setTypeIntersection(3);
+		setNouveauPointRecuperation(inter);
+		this.textPointRecuperation.setText(this.plan.getNomRue(inter));
 		System.out.println(this.plan.getNomRue(inter));
 	}
+	
+	public void ajouterPointPrecedent(Intersection inter) {
+		System.out.println("called ajouterPointPrecedent");
+		System.out.println("ETAT au call : " + this.etat);
+		setPointPrecedent(inter);
+		this.textPointPrecedent.setText(this.plan.getNomRue(inter));
+		System.out.println(this.plan.getNomRue(inter));
+	}
+	
+	public void ajouterNouveauPointLivraison(Intersection inter) {
+		System.out.println("called ajouterNouveauPointLivraison");
+		System.out.println("ETAT au call : " + this.etat);
+		inter.setTypeIntersection(4);
+		setNouveauPointLivraison(inter);
+		this.textPointLivraison.setText(this.plan.getNomRue(inter));
+		System.out.println(this.plan.getNomRue(inter));
+	}
+	
 
 	@FXML
 	public void actionSupprimerEtape() {
@@ -314,5 +362,12 @@ public class InterfaceController {
 		this.nouveauPointLivraison = nouveauPointLivraison;
 	}
 	
+	public Intersection getPointPrecedent() {
+		return pointPrecedent;
+	}
+
+	public void setPointPrecedent(Intersection pointPrecedent) {
+		this.pointPrecedent = pointPrecedent;
+	}
 	
 }

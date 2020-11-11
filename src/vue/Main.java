@@ -13,10 +13,13 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
+			InterfaceController ui = new InterfaceController();
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/vue/ScenePlan.fxml"));
+			loader.setController(ui);
 			Parent root = loader.load();
 
-			InterfaceController ui = loader.getController();
+//			InterfaceController ui = loader.getController();
+			
 			ui.setStage(primaryStage);
 
 			//scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());

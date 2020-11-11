@@ -60,9 +60,22 @@ public class EtatAjouterEtape extends Etat{
 		
 	}
 	
-	public void ajouterPointRecuperation() {
+	public void validerAjouterEtape() {
+		this.interfaceController.validerAjouterEtape();
+	}
+	
+	/*public void ajouterPointRecuperation() {
+		System.out.println("AJOUTER ETAPE 111111");
+		this.interfaceController.ajouterPointRecuperation();
+	}
+
+	public void ajouterPointLivraison()) {
 		System.out.println("AJOUTER ETAPE 111111");
 		this.interfaceController.ajouterPointRecuperation();
 	}
 	
+	public void ajouterPointRecuperation() {
+		System.out.println("AJOUTER ETAPE 111111");
+		this.interfaceController.ajouterPointRecuperation();
+	}*/
 }

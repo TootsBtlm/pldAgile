@@ -58,6 +58,10 @@ public class Etat {
 		
 	}
 	
+	public void validerAjouterEtape() {
+		
+	}
+	
 	public void feuilleDeRoute() {
 		
 	}
