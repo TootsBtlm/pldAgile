@@ -48,6 +48,10 @@ public class EtatAjouterPointRecuperation extends Etat{
 		
 	}
 	
+	public void validerAjouterEtape() {
+		interfaceController.validerAjouterEtape();
+	}
+	
 	public void ajouterPointRecuperation() {
 	}
 	
