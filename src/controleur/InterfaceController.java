@@ -77,7 +77,7 @@ public class InterfaceController {
 	public void initialize() {
 		tsp = new TSP1();
 		etat = new EtatInitial(this);
-		mouseEvents = new MouseEvents(requeteNodeListView, this.listViewRequest);
+		mouseEvents = new MouseEvents(requeteNodeListView, this.listViewRequest, this);
 	}
 
 	@FXML
@@ -140,7 +140,7 @@ public class InterfaceController {
 			}
 
 
-			mouseEvents = new MouseEvents(this.requeteNodeListView, this.listViewRequest);
+			mouseEvents = new MouseEvents(this.requeteNodeListView, this.listViewRequest, this);
 			// Ajout d'un event handler sur les nodes correspondant aux requêtes sur la carte
 
 			//			for(int i = 0; i < this.vueGraphique.getRequetes().size(); i++) {
@@ -197,13 +197,10 @@ public class InterfaceController {
 		etat.supprimerEtape();
 	}
 
-	public void supprimerEtape() {
-
-		// demander a aurel comment obtenir la bonne intersection juste en dessous la
-		
-		this.livraison = plan.supprimerSommet(this.livraison, this.livraison.getListeItineraires().get(0).getListeIntersections().get(0));
+	public void supprimerEtape(){//Intersection inter) {
+				
+		this.livraison = plan.supprimerSommet(this.livraison,  this.livraison.getListeItineraires().get(0).getListeIntersections().get(3));
 			
-
 		this.vueGraphique.drawItineraire(this.livraison);
 		this.vueTextuelle.drawItineraire(this.livraison, this.requeteNodeListView);
 

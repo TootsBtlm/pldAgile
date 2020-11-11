@@ -17,8 +17,10 @@ public class MouseEvents {
 	private BiMap<Node, String> requeteNodeListView;
 	private ListView<String> listViewRequest;
 	private Map<Node, Intersection> nodeLinkedToIntersection;
-
-	public MouseEvents(BiMap<Node, String> requeteNodeListView, ListView<String> listViewRequest) {
+	private InterfaceController interfaceController;
+	
+	public MouseEvents(BiMap<Node, String> requeteNodeListView, ListView<String> listViewRequest, InterfaceController interfaceController) {
+		this.interfaceController = interfaceController;
 		this.requeteNodeListView = requeteNodeListView;
 		this.listViewRequest = listViewRequest;
 	}
@@ -61,6 +63,12 @@ public class MouseEvents {
 			if(event.getSource() instanceof Circle) {
 				Circle p = ((Circle)(event.getSource()));
 				Intersection inter = nodeLinkedToIntersection.get(p);
+				//if(interfaceController.etat instanceof EtatAjouterEtape) {
+				//	interfaceController.ajouterEtape(inter);
+				//}
+				//else if (interfaceController.etat instanceof EtatSupprimerEtape) {
+					//interfaceController.supprimerEtape(inter);
+				//}
 				System.out.println(inter);
 			}
 
