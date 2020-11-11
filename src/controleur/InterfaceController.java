@@ -140,11 +140,9 @@ public class InterfaceController {
 			}
 
 
-<<<<<<< HEAD
+
 			mouseEvents = new MouseEvents(this.requeteNodeListView, this.listViewRequest, this);
-=======
-			//mouseEvents = new MouseEvents(this.requeteNodeListView, this.listViewRequest);
->>>>>>> refs/remotes/origin/dev
+
 			// Ajout d'un event handler sur les nodes correspondant aux requêtes sur la carte
 
 			//			for(int i = 0; i < this.vueGraphique.getRequetes().size(); i++) {
