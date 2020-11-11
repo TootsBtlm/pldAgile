@@ -394,15 +394,20 @@ public class Plan {
 			}
 		}
 		
+		//on supprime d'abord le point de livraison
+		
 		ArrayList<Itineraire> ancienneListeItineraire = ancienneLivraison.getListeItineraires();
 		ArrayList<Itineraire> nouvelleListeItineraire = new ArrayList<Itineraire>();
 		int i = 0;
+		
+		
+// || requete.getPointDeRecuperation().getId() == ancienneListeItineraire.get(i).getListeIntersections().get(0).getId()		
 		while(i < ancienneLivraison.getListeItineraires().size()) {
 			
-			if(requete.getPointDeLivraison().getId() == ancienneListeItineraire.get(i).getListeIntersections().get(0).getId() || requete.getPointDeRecuperation().getId() == ancienneListeItineraire.get(i).getListeIntersections().get(0).getId()) {
-				Intersection intersectionPrecedente = ancienneListeItineraire.get(i).getListeIntersections().get(0);
-				Intersection intersectionSuivante = ancienneListeItineraire.get(i+1).getListeIntersections().get(ancienneListeItineraire.get(i).getListeIntersections().size()-1);
-				nouvelleListeItineraire.add(this.calcDijsktra(intersectionPrecedente, intersectionSuivante));
+			if(requete.getPointDeLivraison().getId() == ancienneListeItineraire.get(i).getListeIntersections().get(0).getId()) {
+				Intersection intersectionPrecedente = ancienneListeItineraire.get(i-1).getListeIntersections().get(0);
+				Intersection intersectionSuivante = ancienneListeItineraire.get(i).getListeIntersections().get(ancienneListeItineraire.get(i).getListeIntersections().size()-1);
+				nouvelleListeItineraire.add(this.aEtoile(intersectionPrecedente, intersectionSuivante));
 				i++;
 				i++;
 			}
@@ -411,6 +416,34 @@ public class Plan {
 				i++;
 			}
 		}
+		
+		
+		// on supprime ensuite le point de récupérations
+		
+		
+//		ancienneListeItineraire = nouvelleListeItineraire;
+//		nouvelleListeItineraire = new ArrayList<Itineraire>();
+//		i = 0;
+//		
+//		
+//		while(i < ancienneLivraison.getListeItineraires().size()) {
+//			
+//			if(requete.getPointDeRecuperation().getId() == ancienneListeItineraire.get(i).getListeIntersections().get(0).getId()	) {
+//				Intersection intersectionPrecedente = ancienneListeItineraire.get(i-1).getListeIntersections().get(0);
+//				Intersection intersectionSuivante = ancienneListeItineraire.get(i).getListeIntersections().get(ancienneListeItineraire.get(i).getListeIntersections().size()-1);
+//				nouvelleListeItineraire.add(this.aEtoile(intersectionPrecedente, intersectionSuivante));
+//				i++;
+//				i++;
+//			}
+//			else {
+//				nouvelleListeItineraire.add(ancienneListeItineraire.get(i));
+//				i++;
+//			}
+//		}
+		
+		
+
+		
 
 		System.out.println("Liste des intersections importantes du nouvel itineraire de livraison");
 		
