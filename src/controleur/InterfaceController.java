@@ -244,6 +244,7 @@ public class InterfaceController {
 //		this.livraison = plan.ajouterSommet(this.livraison, intersection, this.livraison.getListeItineraires().get(0).getListeIntersections().get(0) , duree); 
 //		this.livraison = plan.ajouterSommet(this.livraison,  intersection , intersection , duree); 
 
+
 		
 	}
 	
@@ -265,18 +266,16 @@ public class InterfaceController {
 	}
 
 	public void supprimerEtape(Intersection inter) {
-				
-		System.out.println(inter);
+
 		
 		this.livraison = plan.supprimerSommet(this.livraison,  inter);
-		for (int i=0; i<this.livraison.getListeItineraires().size(); i++) {
-			System.out.println(this.livraison.getListeItineraires().get(i).getListeIntersections().get(0));
-			System.out.println(this.livraison.getListeItineraires().get(i).getListeIntersections().get(this.livraison.getListeItineraires().get(i).getListeIntersections().size()-1));
-		}
+		
+		this.ensembleRequete = this.livraison.getRequetes();
+		this.vueGraphique.drawRequests(this.ensembleRequete);
 		this.vueGraphique.drawItineraire(this.livraison);
 		this.vueTextuelle.drawItineraire(this.livraison, this.requeteNodeListView);
 
-		etat = new EtatSupprimerEtape(this);
+		etat = new EtatItineraireCalcule(this);
 
 	}
 
@@ -286,8 +285,6 @@ public class InterfaceController {
 	}
 
 	public void feuilleDeRoute() {
-		System.out.println("tout marche");
-		// creer feuille de route au bon format
 		
 		etat = new EtatFeuilleDeRoute(this);
 
