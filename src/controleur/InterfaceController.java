@@ -66,6 +66,14 @@ public class InterfaceController {
 	@FXML
 	private Text textPointLivraison;
 	
+	@FXML
+	private Text feuilleDeRoute;
+	
+	@FXML
+	private Text feuilleDeRoute2;
+	
+	@FXML
+	private Text feuilleDeRoute3;
 	
 	@FXML
 	private Pane intersectionPane;
@@ -511,8 +519,10 @@ public class InterfaceController {
 			e.printStackTrace();
 		}
 		
-		
-
+		System.out.println(this.listViewRequest.getItems().get(0));
+		this.feuilleDeRoute.setText(this.plan.getNomRue(this.livraison.getListeItineraires().get(0).getListeIntersections().get(0)));
+		this.feuilleDeRoute2.setText(this.listViewRequest.toString());
+		this.feuilleDeRoute3.setText(this.listViewRequest.getItems().get(0));
 	}
 
 	public void setStage(Stage stage) {
