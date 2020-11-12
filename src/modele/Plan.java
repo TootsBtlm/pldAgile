@@ -370,8 +370,12 @@ public class Plan {
 		EnsembleRequete requetes = ancienneLivraison.getRequetes();
 		Requete nouvelleRequete = new Requete( pointRecuperation,  pointLivraison, dureeRecuperation, dureeLivraison );
 		ArrayList<Requete> listeRequetes = requetes.getListeRequete();
+		pointRecuperation.setIdVisible( Integer.toUnsignedLong((requetes.getListeRequete().size()+2) ));
+		pointLivraison.setIdVisible( Integer.toUnsignedLong((requetes.getListeRequete().size()+2) ));
+		
 		listeRequetes.add(nouvelleRequete);
 		requetes.setListeRequete(listeRequetes);
+		
 		this.modifierIntersectionsPertinentes(requetes);
 		Livraison livraison = new Livraison();
 		
@@ -409,6 +413,13 @@ public class Plan {
 		
 //		System.out.println("Nouvel itinéraire calculé !");
 //		System.out.println(nouvelleLivraison.getListeItineraires().size());
+		System.out.println("Affichage  de la nouvelle livraison");
+//		System.out.println(nouvelleLivraison.getListeItineraires());
+		for(int i = 0 ; i < nouvelleLivraison.getListeItineraires().size(); i++) {
+			System.out.println(nouvelleLivraison.getListeItineraires().get(i).getListeIntersections().get(0));
+			System.out.println(nouvelleLivraison.getListeItineraires().get(i).getListeIntersections().get(nouvelleLivraison.getListeItineraires().get(i).getListeIntersections().size() -1));
+			
+		}
 		
 		return nouvelleLivraison;
 		
