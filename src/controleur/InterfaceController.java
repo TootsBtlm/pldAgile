@@ -553,7 +553,7 @@ public class InterfaceController {
 			ObservableList<String> items = FXCollections.observableArrayList();
 			items.add(this.livraison.getRequetes().getLieuDepart().getPointDeDepart().getIdVisible().toString() + " Depot" + 
 					", Adresse : " + plan.getNomRue(ensembleRequete.getLieuDepart().getPointDeDepart()));
-			System.out.println(this.livraison);
+
 			for (int i = 0; i< this.livraison.getListeItineraires().get(0).getListeIntersections().size(); i++) {
 				System.out.println(this.livraison.getListeItineraires().get(0).getListeIntersections().get(i));
 				//items.add(ensembleRequete.getListeRequete().get(i).getPointDeLivraison().getIdVisible().toString() + " Point de recup" + ", Adresse : " + plan.getNomRue(ensembleRequete.getListeRequete().get(i).getPointDeRecuperation()).toString());
