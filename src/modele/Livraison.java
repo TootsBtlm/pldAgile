@@ -103,7 +103,7 @@ public class Livraison {
 		super();
 		this.listeItineraires = listeItineraires;
 		this.requetes = requetes;
-		this.heureDepart = requetes.LieuDepart.getHeureDepart();
+		this.heureDepart = requetes.getLieuDepart().getHeureDepart();
 	}
 	
 
@@ -115,8 +115,8 @@ public class Livraison {
 	public void calculArrivees() {
 		HashMap<Intersection,Long>tempsAssocieIntersection = new HashMap<Intersection,Long>();
 		for(int i=0;i<this.requetes.getListeRequete().size();i++) {
-			tempsAssocieIntersection.put(this.requetes.listeRequete.get(i).getPointDeRecuperation(), this.requetes.listeRequete.get(i).getDureeRecuperation());
-			tempsAssocieIntersection.put(this.requetes.listeRequete.get(i).getPointDeLivraison(), this.requetes.listeRequete.get(i).getDureeLivraison());
+			tempsAssocieIntersection.put(this.requetes.getListeRequete().get(i).getPointDeRecuperation(), this.requetes.getListeRequete().get(i).getDureeRecuperation());
+			tempsAssocieIntersection.put(this.requetes.getListeRequete().get(i).getPointDeLivraison(), this.requetes.getListeRequete().get(i).getDureeLivraison());
 		}
 		this.dictionnaireArriveesItineraires.put(this.listeItineraires.get(0), new Time(this.heureDepart.getTime()+this.listeItineraires.get(0).getTemps().longValue()));
 		

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.google.common.collect.BiMap;
 
+import controleur.MouseEvents;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
@@ -19,75 +20,67 @@ public class VueTextuelle {
 
 	private Plan plan;
 	private ListView<String> listViewRequest;
+	private MouseEvents mouseEvents;
 
-	public VueTextuelle(Plan plan, ListView<String> listViewRequest) {
+	public VueTextuelle(Plan plan, ListView<String> listViewRequest, MouseEvents mouseEvents) {
 		this.plan = plan;
 		this.listViewRequest = listViewRequest;
+		this.mouseEvents = mouseEvents;
 	}
 
 	public void drawText(EnsembleRequete ense, ListView<String> listViewRequest) {
 		ObservableList<String> items = FXCollections.observableArrayList();
-		items.add("Depot :" + ense.getLieuDepart().getPointDeDepart().getId().toString() + 
+		items.add(ense.getLieuDepart().getPointDeDepart().getIdVisible().toString() + " Depot" + 
 				", Adresse : " + plan.getNomRue(ense.getLieuDepart().getPointDeDepart()));
 
 		for (int i = 0; i< ense.getListeRequete().size(); i++) {
 
-			items.add("Point de recup :" + ense.getListeRequete().get(i).getPointDeLivraison().getId().toString() + 
-					", Adresse : " + plan.getNomRue(ense.getListeRequete().get(i).getPointDeLivraison()));
-			items.add("Point de livraison :" + ense.getListeRequete().get(i).getPointDeRecuperation().getId().toString() + 
-					", Adresse : " + plan.getNomRue(ense.getListeRequete().get(i).getPointDeRecuperation()));
+			items.add(ense.getListeRequete().get(i).getPointDeLivraison().getIdVisible().toString() + " Point de recup" + ", Adresse : " + plan.getNomRue(ense.getListeRequete().get(i).getPointDeRecuperation()).toString());
+			items.add(ense.getListeRequete().get(i).getPointDeRecuperation().getIdVisible().toString() + " Point de livraison" + ", Adresse : " + plan.getNomRue(ense.getListeRequete().get(i).getPointDeLivraison()).toString());
 		}
-		listViewRequest.setItems(items);
+		this.listViewRequest.setItems(items);
 	}
 
 	public void drawItineraire(Livraison livraison, BiMap<Node, String> requeteNodeListView) {
 		ObservableList<String> items = this.listViewRequest.getItems();
 		ObservableList<String> newItems = FXCollections.observableArrayList();
-		//		items.add("Depot :" + ense.get(0).getPointDeDepart().getId().toString() + 
-		//				"Lat :" + ense.getLieuDepart().getPointDeDepart().getLatitude().toString() + 
-		//				"Long :" + ense.getLieuDepart().getPointDeDepart().getLongitude().toString());
 
 		int sizeLivraison = livraison.getListeItineraires().size();
-		
-		for(int i = 0; i < livraison.getListeItineraires().size(); i++) {
-			Itineraire itineraire = livraison.getListeItineraires().get(i);
 
-			for(String str : items) {
-				if(str.equals("Point de recup :" + itineraire.getListeIntersections().get(0).getId().toString() + 
-						", Adresse : " + plan.getNomRue(itineraire.getListeIntersections().get(0)))) {
-					newItems.add(str);
-				} else if(str.equals("Point de livraison :" + itineraire.getListeIntersections().get(0).getId().toString() + 
-						", Adresse : " + plan.getNomRue(itineraire.getListeIntersections().get(0)))) {
-					newItems.add(str);
-				} else if(str.equals("Depot :" + itineraire.getListeIntersections().get(0).getId().toString() + 
-						", Adresse : " + plan.getNomRue(itineraire.getListeIntersections().get(0)))) {
-					newItems.add(str);
+		newItems.add(livraison.getListeItineraires().get(0).getListeIntersections().get(0).getIdVisible().toString() + " Depot"  + 
+				", Adresse : " + plan.getNomRue(livraison.getListeItineraires().get(0).getListeIntersections().get(0)));
+
+		for(int i = 1; i < sizeLivraison; i++) {
+
+			Itineraire itineraire = livraison.getListeItineraires().get(i);
+			Intersection inter = itineraire.getListeIntersections().get(0);
+			System.out.println("intersection : " + inter);
+			// TODO remettre le lien 
+
+			if(inter.getTypeIntersection() == 3) {
+				for(int j = 0; j < items.size(); j++) {
+					String s = items.get(j);
+					if(s.equals(inter.getIdVisible().toString() + " Point de recup"  
+							+ ", Adresse : " + plan.getNomRue(inter))) {
+						newItems.add(items.get(j).toString());
+					}
+				}
+			} else if(inter.getTypeIntersection() == 4) {
+				for(int j = 0; j < items.size(); j++) {
+					String s = items.get(j);
+					if(s.equals(inter.getIdVisible().toString() + " Point de livraison"  
+							+ ", Adresse : " + plan.getNomRue(inter))) {
+						newItems.add(items.get(j).toString());
+					}
 				}
 			}
-
-			//				if(requeteNodeListView.containsValue("Point de recup :" + itineraire.getListeIntersections().get(0).getId().toString() + 
-			//						", Adresse : " + plan.getNomRue(itineraire.getListeIntersections().get(0)))) {
-			//					newItems.add(requeteNodeListView.get)
-			//				}
-
-			//				items.add("Point de recup :" + itineraire.getListeIntersections().get(0).getId().toString() + 
-			//						", Adresse : " + plan.getNomRue(itineraire.getListeIntersections().get(0)));
-			//				items.add("Point de livraison :" + ense.getListeRequete().get(i).getPointDeRecuperation().getId().toString() + 
-			//						"Lat :" + ense.getListeRequete().get(i).getPointDeRecuperation().getLatitude().toString() + 
-			//						"Long :" + ense.getListeRequete().get(i).getPointDeRecuperation().getLongitude().toString());
-
-//			newItems.add("ID :" + itineraire.getListeIntersections().get(0).getId().toString() + 
-//					", Adresse : " + plan.getNomRue(itineraire.getListeIntersections().get(0)));
-//
-//			if(i == livraison.getListeItineraires().size()) {
-//				newItems.add("ID :" + itineraire.getListeIntersections().get(itineraire.getListeIntersections().size()-1).getId().toString() + 
-//						", Adresse : " + plan.getNomRue(itineraire.getListeIntersections().get(itineraire.getListeIntersections().size()-1)));
-//			}
 		}
+
+
 		Itineraire itineraire = livraison.getListeItineraires().get(sizeLivraison - 1);
 		int itineraireSize = itineraire.getListeIntersections().size();
-		newItems.add("Depot :" + itineraire.getListeIntersections().get(itineraireSize-1).getId().toString() + 
-						", Adresse : " + plan.getNomRue(itineraire.getListeIntersections().get(itineraireSize-1)));
-		listViewRequest.setItems(newItems);
+		newItems.add(itineraire.getListeIntersections().get(itineraireSize-1).getIdVisible().toString() + " Depot" + 
+				", Adresse : " + plan.getNomRue(itineraire.getListeIntersections().get(itineraireSize-1)));
+		this.listViewRequest.setItems(newItems);
 	}
 }

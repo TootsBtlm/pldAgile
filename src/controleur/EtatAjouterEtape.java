@@ -1,29 +1,46 @@
 package controleur;
 
 
+import modele.Intersection;
 import modele.Plan;
 
 /**
  * 
  * @author Mario
- * Représente l'état de l'application dans lequel l'utilisateur doit ajouter une étape, qui hérite de l'état général
+ * Représente l'état de l'application dans lequel l'utilisateur doit ajouter une étape, qui hérite de la classe Etat
  * 
  */
 
 
 public class EtatAjouterEtape extends Etat{
-
+	/**
+	 * 
+	 * @param interfaceController
+	 * Prend l'objet interface controleur de la classe InterfaceControleur pour modifier les attributs de l'objet interface controleur existant
+	 * 
+	 */
 	public EtatAjouterEtape(InterfaceController interfaceController) {
 		super(interfaceController);
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * 
+	 * Fait appel à la méthode chargerFichierPlan de l'objet interface controleur 
+	 * 
+	 */
+	
 	public void chargerFichierPlan() {
 		
 		this.interfaceController.chargerFichierPlan();
 		
 	}
 
+	/**
+	 * 
+	 * Fait appel à la méthode chargerFichierRequetes de l'objet interface controleur 
+	 * 
+	 */
 	
 	public void chargerFichierRequetes() {
 		
@@ -31,22 +48,58 @@ public class EtatAjouterEtape extends Etat{
 		
 	}
 
+	/**
+	 * 
+	 * Fait appel à la méthode calculerItineraire de l'objet interface controleur 
+	 * 
+	 */
+	
 	public void calculerItineraire() {
 		
 		this.interfaceController.calculerItineraire();
 	
 	}
 	
+	/**
+	 * 
+	 * Fait appel à la méthode ajouterEtape de l'objet interface controleur 
+	 * 
+	 */
+	
 	public void ajouterEtape() {
 		this.interfaceController.ajouterEtape();
 	}
 	
-	public void supprimerEtape() {
-		this.interfaceController.supprimerEtape();
+	/**
+	 * 
+	 * Fait appel à la méthode supprimerEtape de l'objet interface controleur 
+	 * 
+	 */
+	
+	public void supprimerEtape(Intersection inter) {
+		
 	}
 	
 	public void feuilleDeRoute() {
 		
 	}
 	
+	public void validerAjouterEtape() {
+		this.interfaceController.validerAjouterEtape();
+	}
+	
+	/*public void ajouterPointRecuperation() {
+		System.out.println("AJOUTER ETAPE 111111");
+		this.interfaceController.ajouterPointRecuperation();
+	}
+
+	public void ajouterPointLivraison()) {
+		System.out.println("AJOUTER ETAPE 111111");
+		this.interfaceController.ajouterPointRecuperation();
+	}
+	
+	public void ajouterPointRecuperation() {
+		System.out.println("AJOUTER ETAPE 111111");
+		this.interfaceController.ajouterPointRecuperation();
+	}*/
 }

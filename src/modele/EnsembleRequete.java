@@ -10,10 +10,10 @@ import javafx.util.Pair;
 public class EnsembleRequete {
 
 	
-	public HashMap<Long,Integer> intersectionIdRetourne = new HashMap<Long, Integer>();
+	private HashMap<Long,Integer> intersectionIdRetourne = new HashMap<Long, Integer>();
 	
-	ArrayList<Requete> listeRequete ;
-	Depot LieuDepart;
+	private ArrayList<Requete> listeRequete ;
+	private Depot LieuDepart;
 
 	
 	
@@ -65,7 +65,6 @@ public class EnsembleRequete {
 		for(int i = 0; i< this.listeRequete.size();i++) {
 			this.listeRequete.get(i).getPointDeRecuperation().setIdVisible(compteur);
 			this.listeRequete.get(i).getPointDeRecuperation().setTypeIntersection(3);
-			compteur ++;
 			this.listeRequete.get(i).getPointDeLivraison().setIdVisible(compteur);
 			this.listeRequete.get(i).getPointDeLivraison().setTypeIntersection(4);
 			compteur ++;

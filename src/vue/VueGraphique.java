@@ -25,19 +25,21 @@ import modele.Segment;
 
 public class VueGraphique {
 
-	Plan plan;
-	Canvas planCanvas;
+	private Plan plan;
+	private Canvas planCanvas;
+	private Canvas itineraireCanvas;
 
-	Pane intersectionPane;
+	private Pane intersectionPane;
 
-	List<Node> requetes = new ArrayList<>();
-	BiMap<Node, Intersection> nodeLinkedToIntersection = HashBiMap.create();
+	private List<Node> requetes = new ArrayList<>();
+	private BiMap<Node, Intersection> nodeLinkedToIntersection = HashBiMap.create();
 	private MouseEvents mouseEvents;
 
-	public VueGraphique(Plan plan, Canvas planCanvas, Pane intersectionPane, MouseEvents mouseEvents) {
+	public VueGraphique(Plan plan, Canvas planCanvas, Pane intersectionPane, Canvas itineraireCanvas, MouseEvents mouseEvents) {
 		this.plan = plan;
 		this.planCanvas = planCanvas;
 		this.intersectionPane = intersectionPane;
+		this.itineraireCanvas = itineraireCanvas;
 		this.mouseEvents = mouseEvents;
 	}
 
@@ -51,6 +53,8 @@ public class VueGraphique {
 		nodeLinkedToIntersection.clear();
 		var gc = this.planCanvas.getGraphicsContext2D();
 		gc.clearRect(0, 0, this.planCanvas.getWidth(), this.planCanvas.getHeight());
+		var gc2 = this.itineraireCanvas.getGraphicsContext2D();
+		gc2.clearRect(0, 0, this.itineraireCanvas.getWidth(), this.itineraireCanvas.getHeight());
 		//		gc.beginPath();
 		//		gc.moveTo(this.this.planCanvas.getWidth(), 0);
 		//		gc.lineTo(30.5, 30.5);
@@ -104,7 +108,8 @@ public class VueGraphique {
 				nodeLinkedToIntersection.put(c2, i2);
 				this.intersectionPane.getChildren().add(c2);
 			}
-			mouseEvents.setNodeLinkedToIntersection(nodeLinkedToIntersection);
+			
+			
 
 			gc.beginPath();
 			gc.moveTo(x1, y1);
@@ -114,6 +119,8 @@ public class VueGraphique {
 			gc.lineTo(x2, y2);
 			gc.stroke();
 		}
+		//System.out.println("NODE : " + nodeLinkedToIntersection);
+		mouseEvents.setNodeLinkedToIntersection(nodeLinkedToIntersection);
 	}
 
 	public void drawRequests(EnsembleRequete er) {
@@ -129,6 +136,8 @@ public class VueGraphique {
 		}
 		//		requetePane.getChildren().clear();
 		//		nodeLinkedToIntersection.clear();
+		var gc2 = this.itineraireCanvas.getGraphicsContext2D();
+		gc2.clearRect(0, 0, this.itineraireCanvas.getWidth(), this.itineraireCanvas.getHeight());
 
 		double latitudeMin = this.plan.latitudeMin();
 		double latitudeMax = this.plan.latitudeMax();
@@ -193,16 +202,27 @@ public class VueGraphique {
 	}
 
 	public void drawItineraire(Livraison livraison) {
-		var gc = this.planCanvas.getGraphicsContext2D();
-		gc.setFill(Color.RED);
+		var gc = this.itineraireCanvas.getGraphicsContext2D();
+
+//		gc.setFill(Color.RED);
+		
+		gc.clearRect(0, 0, this.itineraireCanvas.getWidth(), this.itineraireCanvas.getHeight());
+
 
 		double latitudeMin = this.plan.latitudeMin();
 		double latitudeMax = this.plan.latitudeMax();
 
 		double longitudeMin = this.plan.longitudeMin();
 		double longitudeMax = this.plan.longitudeMax();
+		
+		int sizeItineraire = livraison.getListeItineraires().size();
+		
 
-		for(int i = 0; i < livraison.getListeItineraires().size(); i++) {
+		for(int i = 0; i < sizeItineraire; i++) {
+			
+			double luminosite = (double)i / (double)sizeItineraire;
+//			double color = (double)i / (double)sizeItineraire;
+			gc.setFill(Color.hsb(240, 1.0, luminosite));
 			Itineraire itineraire = livraison.getListeItineraires().get(i);
 			for(int j = 0; j < itineraire.getListeIntersections().size() - 1; j++) {
 				Intersection i1 = itineraire.getListeIntersections().get(j);
@@ -218,7 +238,7 @@ public class VueGraphique {
 				gc.beginPath();
 				gc.moveTo(x1, y1);
 				gc.lineTo(x2, y2);
-				gc.setStroke(Color.RED);
+				gc.setStroke(Color.hsb(0, 1.0, luminosite));
 				gc.setLineWidth(4.0);
 				gc.stroke();
 			}
