@@ -19,7 +19,6 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
@@ -27,7 +26,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import modele.EnsembleRequete;
 import modele.Intersection;
-import modele.Itineraire;
 import modele.Lecteur;
 import modele.Livraison;
 import modele.Plan;
@@ -69,10 +67,10 @@ public class InterfaceController {
 
 	@FXML
 	private Text textPointLivraison;
-	
+
 	@FXML
 	private ListView<String> feuilleDeRoute;
-	
+
 	@FXML
 	private Pane intersectionPane;
 
@@ -128,13 +126,11 @@ public class InterfaceController {
 	 * Fait appel à la fonction polymorphe chargerFichierPlan de la classe Etat 
 	 * 
 	 */
-
 	@FXML
 	public void actionChargerFichierPlan() {
 		System.out.println("called actionChargerFichierPlan");
 		System.out.println("ETAT au call : " + this.etat);
 		etat.chargerFichierPlan();
-
 	}
 
 	/**
@@ -142,7 +138,6 @@ public class InterfaceController {
 	 *  
 	 * 
 	 */
-
 	public Etat getEtat() {
 		return this.etat;
 	}
@@ -152,7 +147,6 @@ public class InterfaceController {
 	 * Permet de charger le plan en faisant appel à la classe Lecteur
 	 * 
 	 */
-
 	public void chargerFichierPlan() {
 		FileChooser fileChooser = new FileChooser();
 		File file = fileChooser.showOpenDialog(this.stage);
@@ -226,7 +220,7 @@ public class InterfaceController {
 						//this.requeteNodes = this.vueGraphique.getIntersectionPane().getChildren();
 					}
 					System.out.println("creation mouse event : " + this.listViewRequest);
-//					mouseEvents = new MouseEvents(this.requeteNodeListView, this.listViewRequest, this);
+					//					mouseEvents = new MouseEvents(this.requeteNodeListView, this.listViewRequest, this);
 					mouseEvents.setListViewRequest(this.listViewRequest);
 
 
@@ -304,7 +298,7 @@ public class InterfaceController {
 	public void actionAjouterEtape() {
 		System.out.println("called actionAjouterEtape");
 		System.out.println("ETAT au call : " + this.etat);
-		etat = new EtatAjouterEtape(this);
+		//etat = new EtatAjouterEtape(this);
 		etat.ajouterEtape();
 	}
 
@@ -318,8 +312,7 @@ public class InterfaceController {
 	public void actionAjouterPointRecuperation() {
 		System.out.println("called actionAjouterPointRecuperation");
 		System.out.println("ETAT au call : " + this.etat);
-
-		etat = new EtatAjouterPointRecuperation(this);
+		etat.ajouterPointRecuperation();
 	}
 
 	/**
@@ -333,7 +326,7 @@ public class InterfaceController {
 		System.out.println("called actionAjouterPointPrecedentRecuperation");
 		System.out.println("ETAT au call : " + this.etat);
 
-		etat = new EtatAjouterPointPrecedentRecuperation(this);
+		etat.ajouterPointPrecedentRecuperation();
 	}
 
 	/**
@@ -347,7 +340,7 @@ public class InterfaceController {
 		System.out.println("called actionAjouterPointPrecedentLivraison");
 		System.out.println("ETAT au call : " + this.etat);
 
-		etat = new EtatAjouterPointPrecedentLivraison(this);
+		etat.ajouterPointPrecedentLivraison();
 	}
 
 	/**
@@ -361,7 +354,7 @@ public class InterfaceController {
 		System.out.println("called actionAjouterPointLivraison");
 		System.out.println("ETAT au call : " + this.etat);
 
-		etat = new EtatAjouterPointLivraison(this);
+		etat.ajouterPointLivraison();
 	}
 
 	/**
@@ -371,7 +364,7 @@ public class InterfaceController {
 	 */
 
 	public void ajouterEtape() {
-
+		etat = new EtatAjouterEtape(this);
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/vue/ajouterPopup.fxml"));
 		loader.setController(this);
 		Parent root;
@@ -380,11 +373,15 @@ public class InterfaceController {
 			this.ajouterStage.setScene(new Scene(root));
 			this.ajouterStage.setResizable(false);
 			this.ajouterStage.show();
+			this.ajouterStage.setAlwaysOnTop(true);
+			
+			// Si l'utilisateur ferme la fenetre on revient dans l'etat itineraire calculé
+			ajouterStage.setOnHidden(event -> {
+				etat = new EtatItineraireCalcule(this);
+			});
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
-
 	}
 
 	/**
@@ -394,15 +391,19 @@ public class InterfaceController {
 	 */
 
 	public void validerAjouterEtape() {
-		Long duree = (long) 10;
-		this.livraison = plan.ajouterRequete(this.livraison, this.pointPrecedentRecuperation, this.pointPrecedentLivraison, this.nouveauPointRecuperation, this.nouveauPointLivraison, duree, duree);
-		this.ensembleRequete = this.livraison.getRequetes();
-		this.vueGraphique.drawRequests(this.ensembleRequete);
-		this.vueGraphique.drawItineraire(this.livraison);
-		this.vueTextuelle.drawItineraire(this.livraison, this.requeteNodeListView);
-
-		etat = new EtatItineraireCalcule(this);
-		
+		if(this.pointPrecedentLivraison == null || this.pointPrecedentRecuperation == null || this.pointPrecedentLivraison == null || this.nouveauPointRecuperation == null || this.nouveauPointLivraison == null) {
+			this.afficherPopupErreur("Erreur lors de l'ajout d'une requete");
+			//etat = new EtatItineraireCalcule(this);
+		} else {
+			Long duree = (long) 10;
+			this.livraison = plan.ajouterRequete(this.livraison, this.pointPrecedentRecuperation, this.pointPrecedentLivraison, this.nouveauPointRecuperation, this.nouveauPointLivraison, duree, duree);
+			this.ensembleRequete = this.livraison.getRequetes();
+			this.vueGraphique.drawRequests(this.ensembleRequete);
+			this.vueGraphique.drawItineraire(this.livraison);
+			this.vueTextuelle.drawItineraire(this.livraison, this.requeteNodeListView);
+			this.ajouterStage.close();
+			etat = new EtatItineraireCalcule(this);
+		}
 	}
 
 	/**
@@ -429,6 +430,7 @@ public class InterfaceController {
 		setNouveauPointRecuperation(inter);
 		this.textPointRecuperation.setText(this.plan.getNomRue(inter));
 		System.out.println(this.plan.getNomRue(inter));
+		etat = new EtatAjouterEtape(this);
 	}
 
 	/**
@@ -443,6 +445,7 @@ public class InterfaceController {
 		setPointPrecedentRecuperation(inter);
 		this.textPointPrecedentRecuperation.setText(this.plan.getNomRue(inter));
 		System.out.println(this.plan.getNomRue(inter));
+		etat = new EtatAjouterEtape(this);
 	}
 
 	/**
@@ -457,6 +460,7 @@ public class InterfaceController {
 		setPointPrecedentLivraison(inter);
 		this.textPointPrecedentLivraison.setText(this.plan.getNomRue(inter));
 		System.out.println(this.plan.getNomRue(inter));
+		etat = new EtatAjouterEtape(this);
 	}
 
 	/**
@@ -472,6 +476,7 @@ public class InterfaceController {
 		setNouveauPointLivraison(inter);
 		this.textPointLivraison.setText(this.plan.getNomRue(inter));
 		System.out.println(this.plan.getNomRue(inter));
+		etat = new EtatAjouterEtape(this);
 	}
 
 	/**
@@ -482,7 +487,7 @@ public class InterfaceController {
 
 	@FXML
 	public void actionSupprimerEtape() {
-		etat = new EtatSupprimerEtape(this);
+		etat.supprimerEtape();
 	}
 
 	/**
@@ -493,7 +498,7 @@ public class InterfaceController {
 
 	public void supprimerEtape(Intersection inter) {
 
-				this.livraison = plan.supprimerRequete(this.livraison,  inter);
+		this.livraison = plan.supprimerRequete(this.livraison,  inter);
 		this.ensembleRequete = this.livraison.getRequetes();
 		this.vueGraphique.drawRequests(this.ensembleRequete);
 		this.vueGraphique.drawItineraire(this.livraison);
@@ -534,12 +539,10 @@ public class InterfaceController {
 	public void actionCreerFeuilleDeRoute() {
 		System.out.println("test1");
 		System.out.println(this.feuilleDeRoute);
-		this.etat = new EtatFeuilleDeRoute(this);
 		etat.construireFeuilleDeRoute();
 	}
 
 	public void construireFeuilleDeRoute() {
-		
 		System.out.println(this.feuilleDeRoute);
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/vue/feuilleDeRoutePopup.fxml"));
 		loader.setController(this);
@@ -554,10 +557,17 @@ public class InterfaceController {
 			items.add(this.livraison.getRequetes().getLieuDepart().getPointDeDepart().getIdVisible().toString() + " Depot" + 
 					", Adresse : " + plan.getNomRue(ensembleRequete.getLieuDepart().getPointDeDepart()));
 
-			for (int i = 0; i< this.livraison.getListeItineraires().get(0).getListeIntersections().size(); i++) {
-				System.out.println(this.livraison.getListeItineraires().get(0).getListeIntersections().get(i));
-				//items.add(ensembleRequete.getListeRequete().get(i).getPointDeLivraison().getIdVisible().toString() + " Point de recup" + ", Adresse : " + plan.getNomRue(ensembleRequete.getListeRequete().get(i).getPointDeRecuperation()).toString());
-				//items.add(ensembleRequete.getListeRequete().get(i).getPointDeRecuperation().getIdVisible().toString() + " Point de livraison" + ", Adresse : " + plan.getNomRue(ensembleRequete.getListeRequete().get(i).getPointDeLivraison()).toString());
+			for (int i = 1; i< this.livraison.getListeItineraires().size(); i++) {
+
+					
+					items.add("Prendre le chemin suivant :" + this.livraison.getListeItineraires().get(i).getListeNomsRue().get(0));
+					for (int k = 1; k< this.livraison.getListeItineraires().get(i).getListeNomsRue().size(); k++) {
+						if (!(this.livraison.getListeItineraires().get(i).getListeNomsRue().get(k).equals(this.livraison.getListeItineraires().get(i).getListeNomsRue().get(k-1))) && !(this.livraison.getListeItineraires().get(i).getListeNomsRue().get(k).equals(""))){
+						items.add("Prendre le chemin suivant : " + this.livraison.getListeItineraires().get(i).getListeNomsRue().get(k));
+						}
+					}
+					items.add("Livraison ici : " + this.plan.getNomRue(this.livraison.getListeItineraires().get(i).getListeIntersections().get(0)) + " à " + this.livraison.getDictionnaireArriveesItineraires().get(this.livraison.getListeItineraires().get(i)) + " heures. ");
+
 			}
 			this.feuilleDeRoute.setItems(items);
 			this.etat = new EtatItineraireCalcule(this);
@@ -599,12 +609,19 @@ public class InterfaceController {
 		return pointPrecedentLivraison;
 	}
 
+
+
+
 	public void setPointPrecedentLivraison(Intersection pointPrecedentLivraison) {
 		this.pointPrecedentLivraison = pointPrecedentLivraison;
 	}
 
 	public Stage getAjouterStage() {
 		return ajouterStage;
+	}
+
+	public void setEtat(Etat etat) {
+		this.etat = etat;
 	}
 
 	public void setAjouterStage(Stage ajouterStage) {

@@ -1,9 +1,5 @@
 package controleur;
 
-import modele.Intersection;
-import modele.Itineraire;
-import modele.Plan;
-
 /**
  * 
  * @author Mario
@@ -28,6 +24,7 @@ public class EtatListeRequeteChargee extends Etat{
 	 * Fait appel à la méthode chargerFichierPlan de l'objet interface controleur 
 	 * 
 	 */
+	@Override
 	public void chargerFichierPlan() {
 		
 		this.interfaceController.chargerFichierPlan();
@@ -39,6 +36,7 @@ public class EtatListeRequeteChargee extends Etat{
 	 * Fait appel à la méthode chargerFichierRequete de l'objet interface controleur 
 	 * 
 	 */
+	@Override
 	public void chargerFichierRequetes() {
 		
 		this.interfaceController.chargerFichierRequete();
@@ -50,6 +48,7 @@ public class EtatListeRequeteChargee extends Etat{
 	 * Fait appel à la méthode calculerItineraire de l'objet interface controleur 
 	 * 
 	 */
+	@Override
 	public void calculerItineraire() {
 		
 		this.interfaceController.calculerItineraire();
@@ -61,8 +60,9 @@ public class EtatListeRequeteChargee extends Etat{
 	 * Dans l'état liste requête chargée, la méthode ajouterEtape ne fait aucune action car aucun itinéraire n'est calculé
 	 * 
 	 */
+	@Override
 	public void ajouterEtape() {
-		System.out.println("Calculer d'abord l'itinéraire");
+		interfaceController.afficherPopupErreur("Charger d'abord l'itinéraire");
 	}
 	
 	/**
@@ -70,17 +70,23 @@ public class EtatListeRequeteChargee extends Etat{
 	 * Dans l'état liste requête chargée, la méthode supprimerEtape ne fait aucune action car aucun itinéraire n'est calculé
 	 * 
 	 */
-	public void supprimerEtape(Intersection inter) {
+
+		
+
+	@Override
+	public void supprimerEtape() {
+		interfaceController.afficherPopupErreur("Charger d'abord l'itinéraire");
 		System.out.println("Charger d'abord l'itinéraire");
 	}
 	
 	/**
-	 * 
-	 * Dans l'état liste requête chargée, la méthode feuilleDeRoute ne fait aucune action car aucun itinéraire n'est calculé
+	 * Dans l'état liste requête chargée, la méthode construireFeuilleDeRoute ne fait aucune action car aucun itinéraire n'est calculé
 	 * 
 	 */
-	public void feuilleDeRoute() {
-		System.out.println("Charger d'abord l'itinéraire");
+	@Override
+	public void construireFeuilleDeRoute() {
+		interfaceController.afficherPopupErreur("Charger d'abord l'itinéraire");
+
 	}
 	
 }

@@ -1,9 +1,5 @@
 package controleur;
 
-
-import modele.Intersection;
-import modele.Plan;
-
 /**
  * 
  * @author Mario
@@ -14,45 +10,83 @@ import modele.Plan;
 
 public class EtatAjouterPointRecuperation extends Etat{
 
+	/**
+	 * 
+	 * @param interfaceController
+	 * Prend l'objet interface controleur de la classe InterfaceControleur pour modifier les attributs de l'objet interface controleur existant
+	 * 
+	 */
 	public EtatAjouterPointRecuperation(InterfaceController interfaceController) {
 		super(interfaceController);
-		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * 
+	 * Fait appel à la méthode chargerFichierPlan de l'objet interface controleur 
+	 * 
+	 */
+	@Override
 	public void chargerFichierPlan() {
-		
-		this.interfaceController.chargerFichierPlan();
-		
+		interfaceController.afficherPopupErreur("Terminer l'ajout d'étape d'abord");
 	}
 
-	
+	/**
+	 * 
+	 * Fait appel à la méthode chargerFichierRequetes de l'objet interface controleur 
+	 * 
+	 */
+	@Override
 	public void chargerFichierRequetes() {
-		
-		this.interfaceController.chargerFichierRequete();
-		
+		interfaceController.afficherPopupErreur("Terminer l'ajout d'étape d'abord");
 	}
 
+	/**
+	 * 
+	 * Fait appel à la méthode calculerItineraire de l'objet interface controleur 
+	 * 
+	 */
+	@Override
 	public void calculerItineraire() {
-		
-		this.interfaceController.calculerItineraire();
-	
+		interfaceController.afficherPopupErreur("Terminer l'ajout d'étape d'abord");
 	}
 	
+	/**
+	 * 
+	 * Fait appel à la méthode ajouterEtape de l'objet interface controleur 
+	 * 
+	 */
+	@Override
 	public void ajouterEtape() {
+		interfaceController.afficherPopupErreur("Terminer l'ajout d'étape d'abord");
 	}
 	
-	public void supprimerEtape(Intersection inter) {
+	/**
+	 * 
+	 * Fait appel à la méthode supprimerEtape de l'objet interface controleur 
+	 * 
+	 */
+	@Override
+	public void supprimerEtape() {
+		interfaceController.afficherPopupErreur("Terminer l'ajout d'étape d'abord");
 	}
 	
-	public void feuilleDeRoute() {
-		
+	/**
+	 * 
+	 * Fait appel à la méthode construireFeuilleDeRoute de l'objet interface controleur 
+	 * 
+	 */
+	@Override
+	public void construireFeuilleDeRoute() {
+		interfaceController.afficherPopupErreur("Terminer l'ajout d'étape d'abord");
 	}
 	
+	/**
+	 * 
+	 * Fait appel à la méthode validerAjouterEtape de l'objet interface controleur 
+	 * 
+	 */
+	@Override
 	public void validerAjouterEtape() {
 		interfaceController.validerAjouterEtape();
 	}
-	
-	public void ajouterPointRecuperation() {
-	}
-	
 }

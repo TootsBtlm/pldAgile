@@ -1,9 +1,6 @@
 package controleur;
 
 
-import modele.Intersection;
-import modele.Plan;
-
 /**
  * 
  * @author Mario
@@ -29,10 +26,9 @@ public class EtatItineraireCalcule extends Etat{
 	 * Fait appel à la méthode chargerFichierPlan de l'objet interface controleur 
 	 * 
 	 */
+	@Override
 	public void chargerFichierPlan() {
-		
 		this.interfaceController.chargerFichierPlan();
-		
 	}
 
 	/**
@@ -40,10 +36,11 @@ public class EtatItineraireCalcule extends Etat{
 	 * Fait appel à la méthode chargerFichierRequete de l'objet interface controleur 
 	 * 
 	 */
+	@Override
 	public void chargerFichierRequetes() {
-		
+
 		this.interfaceController.chargerFichierRequete();
-		
+
 	}
 
 	/**
@@ -51,37 +48,41 @@ public class EtatItineraireCalcule extends Etat{
 	 * Fait appel à la méthode calculerItineraire de l'objet interface controleur 
 	 * 
 	 */
+	@Override
 	public void calculerItineraire() {
-		
+
 		this.interfaceController.calculerItineraire();
-	
+
 	}
-	
+
 	/**
 	 * 
 	 * Dans l'état itinéraire calculé, la méthode ajouterEtape ne fait aucune action 
 	 * 
 	 */
+	@Override
 	public void ajouterEtape() {
-		
+		interfaceController.ajouterEtape();
 	}
-	
+
 	/**
 	 * 
 	 * Dans l'état itinéraire calculé, la méthode supprimerEtape ne fait aucune action 
 	 * 
 	 */
-	public void supprimerEtape(Intersection inter) {
-		
+	@Override	
+	public void supprimerEtape() {
+		interfaceController.setEtat(new EtatSupprimerEtape(interfaceController));
 	}
-	
+
 	/**
 	 * 
 	 * Fait appel à la méthode feuilleDeRoute de l'objet interface controleur 
 	 * 
-	 */
-	public void feuilleDeRoute() {
-		
+	 */		
+	@Override
+	public void construireFeuilleDeRoute() {
+		this.interfaceController.construireFeuilleDeRoute();
 	}
-	
+
 }

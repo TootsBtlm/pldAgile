@@ -1,8 +1,6 @@
 package controleur;
 
 
-import modele.Intersection;
-
 /**
  * 
  * @author Mario et Jean-Jacques
@@ -27,6 +25,7 @@ public class EtatInitial extends Etat {
 	 * Fait appel à la méthode chargerFichierPlan de l'objet interface controleur 
 	 * 
 	 */
+	@Override
 	public void chargerFichierPlan() {
 		
 		this.interfaceController.chargerFichierPlan();
@@ -38,6 +37,7 @@ public class EtatInitial extends Etat {
 	 * Dans l'état initial, la méthode chargerFichierRequetes ne fait aucune action car aucun plan n'est chargé
 	 * 
 	 */
+	@Override
 	public void chargerFichierRequetes() {
 		interfaceController.afficherPopupErreur("Charger d'abord un plan");
 		System.out.println("Charger d'abord un plan");
@@ -48,6 +48,7 @@ public class EtatInitial extends Etat {
 	 * Dans l'état initial, la méthode calculerItineraire ne fait aucune action car aucun plan n'est chargé
 	 * 
 	 */
+	@Override
 	public void calculerItineraire() {
 		interfaceController.afficherPopupErreur("Charger d'abord un plan");
 		System.out.println("Charger d'abord un plan");
@@ -58,6 +59,7 @@ public class EtatInitial extends Etat {
 	 * Dans l'état initial, la méthode ajouterEtape ne fait aucune action car aucun plan n'est chargé
 	 * 
 	 */
+	@Override
 	public void ajouterEtape() {
 		interfaceController.afficherPopupErreur("Charger d'abord un plan");
 		System.out.println("Charger d'abord un plan");
@@ -68,17 +70,19 @@ public class EtatInitial extends Etat {
 	 * Dans l'état initial, la méthode supprimerEtape ne fait aucune action car aucun plan n'est chargé
 	 * 
 	 */
-	public void supprimerEtape(Intersection inter) {
+	@Override
+	public void supprimerEtape() {
 		interfaceController.afficherPopupErreur("Charger d'abord un plan");
 		System.out.println("Charger d'abord un plan");
 	}
 	
 	/**
 	 * 
-	 * Dans l'état initial, la méthode feuilleDeRoute ne fait aucune action car aucun plan n'est chargé
+	 * Dans l'état initial, la méthode construireFeuilleDeRoute ne fait aucune action car aucun plan n'est chargé
 	 * 
 	 */
-	public void feuilleDeRoute() {
+	@Override
+	public void construireFeuilleDeRoute() {
 		interfaceController.afficherPopupErreur("Charger d'abord un plan");
 		System.out.println("Charger d'abord un plan");
 	}

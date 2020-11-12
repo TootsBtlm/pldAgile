@@ -448,7 +448,6 @@ public class Plan {
 	return 	nouvelleListeItineraire;
 	}
 	
-	
 	/**
 	 * Cette fonction supprime une des requêtes traitées lors de la livraison
 	 * @param ancienneLivraison
