@@ -1,10 +1,17 @@
-package modele;
+package test;
 
 import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import modele.EnsembleRequete;
+import modele.Intersection;
+import modele.Itineraire;
+import modele.Lecteur;
+import modele.Livraison;
+import modele.Plan;
 
 public class PlanTest {
 
