@@ -7,6 +7,7 @@ import javafx.util.Pair;
 
 public class SeqIter implements Iterator<Integer> {
 	ArrayList<Integer> candidates;
+	ArrayList<Integer> neighbours;
 	private Graph g;
 
 	/**
@@ -20,8 +21,10 @@ public class SeqIter implements Iterator<Integer> {
 	public SeqIter(Collection<Integer> unvisited, Collection<Integer> visited, int currentVertex, Graph g, ArrayList<Pair<Integer, Integer>> paires){
 		this.g = g;
 		this.candidates = new ArrayList<Integer>(unvisited.size()+1);
+		this.neighbours = new ArrayList<Integer>(unvisited.size()+1);
 		for (Integer s : unvisited){
 			if (g.isArc(currentVertex, s))
+				neighbours.add(s);
 				for(Pair<Integer, Integer> p : paires) {
 					Integer key = p.getKey();
 					Integer value = p.getValue();
@@ -46,6 +49,18 @@ public class SeqIter implements Iterator<Integer> {
 	@Override
 	public Integer next() {
 		return candidates.remove(candidates.size()-1); //return and remove last element
+	}
+	
+	/*
+	 * this method is used for the bound method, which needs to analyze all neighbors
+	 * @return next neighbor, not candidate
+	 */
+	public Integer simpleNext() {
+		return neighbours.remove(neighbours.size()-1);
+	}
+	
+	public boolean hasNeighbour() {
+		return !neighbours.isEmpty();
 	}
 	
 	

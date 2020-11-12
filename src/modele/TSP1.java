@@ -10,10 +10,11 @@ public class TSP1 extends TemplateTSP {
 	@Override
 	protected double bound(Integer depart, Integer currentVertex, Collection<Integer> unvisited, Collection<Integer> visited, ArrayList<Pair<Integer, Integer>> paires) {
 		double l = cheapestNeighbour(currentVertex, unvisited, visited, paires); //l is cheapest arc from current to unvisited
-		Iterator<Integer> it = iterator(unvisited.iterator().next(), unvisited, visited, g, paires); //on cree un iterator a partir d'un element aléatoire
+		SeqIter it = new SeqIter(unvisited, visited, currentVertex, g, paires); //on cree un iterator a partir d'un element aléatoire
 		double total = 0;
-		while(it.hasNext()) {
-			int next = it.next();
+		int next=0;
+		while(it.hasNeighbour()) {
+			next = it.simpleNext();
 			double min = cheapestNeighbour(next, unvisited, visited, paires);
 			double c = g.getCost(next, depart);
 			if(c < min) min = c; // min is the cheapest arc from the current unvisited element to another unvisited or to 0
@@ -33,13 +34,13 @@ public class TSP1 extends TemplateTSP {
 	 * @param unvisited
 	 * @param visited
 	 * @param paires
-	 * @return Cost of the cheapest neighbor available in visited
+	 * @return Cost of the cheapest neighbor available in unvisited
 	 */
 	protected double cheapestNeighbour(Integer origin, Collection<Integer> unvisited, Collection<Integer> visited, ArrayList<Pair<Integer, Integer>> paires) { //origin can be or not part of the unvisited
-		Iterator<Integer> it = iterator(origin, unvisited, visited, g, paires);
+		SeqIter it = new SeqIter(unvisited, visited, origin, g, paires);
 		double min = Integer.MAX_VALUE;
-		while(it.hasNext()) {
-			int dest = it.next();
+		while(it.hasNeighbour()) {
+			int dest = it.simpleNext();
 			double c = g.getCost(origin, dest);
 			if(c != -1 && c < min) {
 				min = c;
