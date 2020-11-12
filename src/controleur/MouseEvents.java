@@ -70,6 +70,17 @@ public class MouseEvents {
 			Node n = requeteNodeListView.inverse().get(clickedString);
 			Circle p = (Circle)(n);
 			p.setRadius(12.0);
+			Intersection inter = nodeLinkedToIntersection.get(p);
+			if (interfaceController.getEtat() instanceof EtatSupprimerEtape) {
+				System.out.println("Inter : " + inter);
+				interfaceController.supprimerEtape(inter);
+			}
+			else if (interfaceController.getEtat() instanceof EtatAjouterPointPrecedentRecuperation) {
+				interfaceController.ajouterPointPrecedentRecuperation(inter);
+			}
+			else if (interfaceController.getEtat() instanceof EtatAjouterPointPrecedentLivraison) {
+				interfaceController.ajouterPointPrecedentLivraison(inter);
+			}
 		}
 	};
 	
