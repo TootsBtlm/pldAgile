@@ -400,6 +400,7 @@ public class InterfaceController {
 			this.ensembleRequete = this.livraison.getRequetes();
 			this.vueGraphique.drawRequests(this.ensembleRequete);
 			this.vueGraphique.drawItineraire(this.livraison);
+			this.vueTextuelle.drawText(livraison.getRequetes(), listViewRequest);
 			this.vueTextuelle.drawItineraire(this.livraison, this.requeteNodeListView);
 			this.ajouterStage.close();
 			etat = new EtatItineraireCalcule(this);

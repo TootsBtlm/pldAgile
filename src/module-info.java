@@ -12,5 +12,6 @@ module pldAgile {
 	exports vue;
 	exports modele;
 	exports controleur;
+	exports test;
 	opens controleur;
 }

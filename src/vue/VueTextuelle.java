@@ -34,7 +34,7 @@ public class VueTextuelle {
 				", Adresse : " + plan.getNomRue(ense.getLieuDepart().getPointDeDepart()));
 
 		for (int i = 0; i< ense.getListeRequete().size(); i++) {
-
+			System.out.println(ense);
 			items.add(ense.getListeRequete().get(i).getPointDeLivraison().getIdVisible().toString() + " Point de recup" + ", Adresse : " + plan.getNomRue(ense.getListeRequete().get(i).getPointDeRecuperation()).toString());
 			items.add(ense.getListeRequete().get(i).getPointDeRecuperation().getIdVisible().toString() + " Point de livraison" + ", Adresse : " + plan.getNomRue(ense.getListeRequete().get(i).getPointDeLivraison()).toString());
 		}
@@ -55,7 +55,6 @@ public class VueTextuelle {
 			Itineraire itineraire = livraison.getListeItineraires().get(i);
 			Intersection inter = itineraire.getListeIntersections().get(0);
 			System.out.println("intersection : " + inter);
-			// TODO remettre le lien 
 
 			if(inter.getTypeIntersection() == 3) {
 				for(int j = 0; j < items.size(); j++) {
