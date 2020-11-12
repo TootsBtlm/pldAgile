@@ -17,5 +17,4 @@ public class EtatAjouterPointPrecedentLivraison extends Etat{
 	public void validerAjouterEtape() {
 		interfaceController.validerAjouterEtape();
 	}
-	
 }

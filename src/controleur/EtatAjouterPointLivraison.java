@@ -17,5 +17,4 @@ public class EtatAjouterPointLivraison extends Etat{
 	public void validerAjouterEtape() {
 		interfaceController.validerAjouterEtape();
 	}
-	
 }

@@ -52,7 +52,7 @@ public class EtatPlanCharge extends Etat {
 	 * 
 	 */
 	public void calculerItineraire() {
-		System.out.println("Charger d'abord un fichier de requêtes");
+		interfaceController.afficherPopupErreur("Charger d'abord un fichier de requêtes");
 	}
 	
 	/**
@@ -61,7 +61,7 @@ public class EtatPlanCharge extends Etat {
 	 * 
 	 */
 	public void ajouterEtape() {
-		System.out.println("Charger d'abord un fichier de requêtes");
+		interfaceController.afficherPopupErreur("Charger d'abord un fichier de requêtes");
 	}
 	
 	/**
@@ -69,17 +69,19 @@ public class EtatPlanCharge extends Etat {
 	 * Dans l'état plan chargé, la méthode supprimerEtape ne fait aucune action car aucun fichier de requêtes n'est chargé
 	 * 
 	 */
-	public void supprimerEtape(Intersection inter) {
-		System.out.println("Charger d'abord un fichier de requêtes");
+	public void supprimerEtape() {
+		interfaceController.afficherPopupErreur("Charger d'abord un fichier de requêtes");
 	}
 	
 	/**
 	 * 
-	 * Dans l'état plan chargé, la méthode feuilleDeRoute ne fait aucune action car aucun fichier de requêtes n'est chargé
+	 * Dans l'état initial, la méthode feuilleDeRoute ne fait aucune action car aucun plan n'est chargé
 	 * 
 	 */
-	public void feuilleDeRoute() {
-		System.out.println("Charger d'abord un fichier de requêtes");
+	@Override
+	public void construireFeuilleDeRoute() {
+		interfaceController.afficherPopupErreur("Charger d'abord un fichier de requêtes");
+		System.out.println("Charger d'abord un plan");
 	}
 	
 }

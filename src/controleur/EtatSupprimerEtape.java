@@ -25,29 +25,35 @@ public class EtatSupprimerEtape extends Etat{
 
 	/**
 	 * 
-	 * Dans l'état supprimer étape, la méthode chargerFichierPlan ne fait aucune action car l'utilisateur n'a qu'une seule action possible
+	 * Fait appel à la méthode chargerFichierPlan de l'objet interface controleur 
 	 * 
 	 */
+	@Override
 	public void chargerFichierPlan() {
 		
-	}
-
-	/**
-	 * 
-	 * Dans l'état supprimer étape, la méthode chargerFichierRequetes ne fait aucune action car l'utilisateur n'a qu'une seule action possible
-	 * 
-	 */
-	public void chargerFichierRequetes() {
+		this.interfaceController.chargerFichierPlan();
 		
 	}
 
 	/**
 	 * 
-	 * Dans l'état supprimer étape, la méthode calculerItineraire ne fait aucune action car l'utilisateur n'a qu'une seule action possible
+	 * Dans l'état initial, la méthode chargerFichierRequetes ne fait aucune action car aucun plan n'est chargé
 	 * 
 	 */
+	@Override
+	public void chargerFichierRequetes() {
+		this.interfaceController.chargerFichierRequete();
+	}
+
+
+	/**
+	 * 
+	 * Dans l'état initial, la méthode calculerItineraire ne fait aucune action car aucun plan n'est chargé
+	 * 
+	 */
+	@Override
 	public void calculerItineraire() {
-	
+		this.interfaceController.calculerItineraire();
 	}
 	
 	/**
@@ -56,7 +62,7 @@ public class EtatSupprimerEtape extends Etat{
 	 * 
 	 */
 	public void ajouterEtape() {
-		
+		this.interfaceController.ajouterEtape();
 	}
 	
 	/**
@@ -64,8 +70,8 @@ public class EtatSupprimerEtape extends Etat{
 	 * Dans l'état supprimer étape, la méthode supprimerEtape fait appel à la méthode supprimerEtape de l'interface controleur
 	 * 
 	 */
-	public void supprimerEtape(Intersection inter) {
-		this.interfaceController.supprimerEtape(inter);
+	public void supprimerEtape() {
+		this.interfaceController.setEtat(new EtatSupprimerEtape(this.interfaceController));
 	}
 	
 	/**
@@ -74,7 +80,7 @@ public class EtatSupprimerEtape extends Etat{
 	 * 
 	 */
 	public void feuilleDeRoute() {
-		
+		this.interfaceController.construireFeuilleDeRoute();
 	}
 	
 }

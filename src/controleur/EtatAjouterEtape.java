@@ -76,7 +76,7 @@ public class EtatAjouterEtape extends Etat{
 	 * 
 	 */
 	
-	public void supprimerEtape(Intersection inter) {
+	public void supprimerEtape() {
 		
 	}
 	
@@ -88,18 +88,19 @@ public class EtatAjouterEtape extends Etat{
 		this.interfaceController.validerAjouterEtape();
 	}
 	
-	/*public void ajouterPointRecuperation() {
-		System.out.println("AJOUTER ETAPE 111111");
-		this.interfaceController.ajouterPointRecuperation();
+	public void ajouterPointRecuperation() {
+		interfaceController.setEtat(new EtatAjouterPointRecuperation(interfaceController));
 	}
 
-	public void ajouterPointLivraison()) {
-		System.out.println("AJOUTER ETAPE 111111");
-		this.interfaceController.ajouterPointRecuperation();
+	public void ajouterPointLivraison() {
+		interfaceController.setEtat(new EtatAjouterPointLivraison(interfaceController));
 	}
 	
-	public void ajouterPointRecuperation() {
-		System.out.println("AJOUTER ETAPE 111111");
-		this.interfaceController.ajouterPointRecuperation();
-	}*/
+	public void ajouterPointPrecedentRecuperation() {
+		interfaceController.setEtat(new EtatAjouterPointPrecedentRecuperation(interfaceController));
+	}
+
+	public void ajouterPointPrecedentLivraison() {
+		interfaceController.setEtat(new EtatAjouterPointPrecedentLivraison(interfaceController));
+	}
 }

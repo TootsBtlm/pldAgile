@@ -41,7 +41,7 @@ public class EtatAjouterPointRecuperation extends Etat{
 	public void ajouterEtape() {
 	}
 	
-	public void supprimerEtape(Intersection inter) {
+	public void supprimerEtape() {
 	}
 	
 	public void feuilleDeRoute() {
@@ -52,7 +52,5 @@ public class EtatAjouterPointRecuperation extends Etat{
 		interfaceController.validerAjouterEtape();
 	}
 	
-	public void ajouterPointRecuperation() {
-	}
 	
 }

@@ -62,7 +62,7 @@ public class EtatListeRequeteChargee extends Etat{
 	 * 
 	 */
 	public void ajouterEtape() {
-		System.out.println("Calculer d'abord l'itinéraire");
+		interfaceController.afficherPopupErreur("Charger d'abord l'itinéraire");
 	}
 	
 	/**
@@ -70,17 +70,18 @@ public class EtatListeRequeteChargee extends Etat{
 	 * Dans l'état liste requête chargée, la méthode supprimerEtape ne fait aucune action car aucun itinéraire n'est calculé
 	 * 
 	 */
-	public void supprimerEtape(Intersection inter) {
-		System.out.println("Charger d'abord l'itinéraire");
+	public void supprimerEtape() {
+		interfaceController.afficherPopupErreur("Charger d'abord l'itinéraire");
 	}
 	
 	/**
 	 * 
-	 * Dans l'état liste requête chargée, la méthode feuilleDeRoute ne fait aucune action car aucun itinéraire n'est calculé
+	 * Dans l'état initial, la méthode feuilleDeRoute ne fait aucune action car aucun plan n'est chargé
 	 * 
 	 */
-	public void feuilleDeRoute() {
-		System.out.println("Charger d'abord l'itinéraire");
+	@Override
+	public void construireFeuilleDeRoute() {
+		interfaceController.afficherPopupErreur("Charger d'abord l'itinéraire");
 	}
 	
 }

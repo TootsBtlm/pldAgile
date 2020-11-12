@@ -17,5 +17,6 @@ public class EtatAjouterPointPrecedentRecuperation extends Etat{
 	public void validerAjouterEtape() {
 		interfaceController.validerAjouterEtape();
 	}
+
 	
 }
