@@ -42,7 +42,10 @@ public class GestionnairePlanXml extends DefaultHandler{
 	}
 	
 	
-
+	/**
+	 * Méthode héritée de SAX qui se déclenche à la lecture de chaque nouvel élément xml
+	 * Elle remplit les attributs qui listent les intersections et les segments
+	 */
    
    	public void startElement(String namespaceURI, String lname, String qname, Attributes attrs) throws SAXException  {
 	   if(qname.equals("intersection")) {

@@ -415,54 +415,7 @@ public class Plan {
 		
 		
 	}
-	
-	public Livraison ajouterSommet(Livraison ancienneLivraison, Intersection nouveauSommet, Intersection intersectionPrecedente, Long duree) {
-		
-		ArrayList<Itineraire> nouvelleListeItineraire = new ArrayList<Itineraire>();
-		EnsembleRequete requetes = ancienneLivraison.getRequetes();
-		Time heureDepart = requetes.getLieuDepart().getHeureDepart();
-		HashMap<Itineraire,Time>dictionnaireArriveesItineraires = new HashMap<Itineraire,Time>();
-		
-		for(int i = 0 ; i < ancienneLivraison.getListeItineraires().size() ; i++) {
-			if(ancienneLivraison.getListeItineraires().get(i).getListeIntersections().get(0).getId() == intersectionPrecedente.getId()) {
-				Intersection depart = ancienneLivraison.getListeItineraires().get(i).getListeIntersections().get(0);
-				Intersection arrivee = ancienneLivraison.getListeItineraires().get(i).getListeIntersections().get(ancienneLivraison.getListeItineraires().get(i).getListeIntersections().size()-1);
-				Itineraire nouvelItineraire1 = this.calcDijsktra(depart, nouveauSommet);
-				Itineraire nouvelItineraire2 = this.calcDijsktra(nouveauSommet, arrivee);
-				nouvelleListeItineraire.add(nouvelItineraire1);
-				nouvelleListeItineraire.add(nouvelItineraire2);
-			}
-			else {
-				nouvelleListeItineraire.add(ancienneLivraison.getListeItineraires().get(i));
-			}
-		}
-		
-		HashMap<Intersection,Long>tempsAssocieIntersection = new HashMap<Intersection,Long>();
-		
-		for(int i=0;i<requetes.getListeRequete().size();i++) {
-			tempsAssocieIntersection.put(requetes.getListeRequete().get(i).getPointDeRecuperation(), requetes.getListeRequete().get(i).getDureeRecuperation());
-			tempsAssocieIntersection.put(requetes.getListeRequete().get(i).getPointDeLivraison(), requetes.getListeRequete().get(i).getDureeLivraison());
-		}
-		dictionnaireArriveesItineraires.put(nouvelleListeItineraire.get(0), new Time(heureDepart.getTime()+nouvelleListeItineraire.get(0).getTemps().longValue()));
-		
-		if(nouvelleListeItineraire.size() > 0) {
-			
 
-			for(int i=1;i<nouvelleListeItineraire.size()-1;i++) {
-				Time temps = new Time(
-						dictionnaireArriveesItineraires.get(nouvelleListeItineraire.get(i-1)).getTime()+
-						nouvelleListeItineraire.get(i).getTemps().longValue() + 
-						tempsAssocieIntersection.get(nouvelleListeItineraire.get(i).getListeIntersections().get(0))				
-						);
-				
-				dictionnaireArriveesItineraires.put(nouvelleListeItineraire.get(i),temps);
-			}
-		
-		}
-
-		return new Livraison(nouvelleListeItineraire, heureDepart, dictionnaireArriveesItineraires, requetes);
-		
-	}
 	/**
 	 * Cette fonction supprime un des sommets parcouru par le cycliste.
 	 * @param ancienneListeItineraire
@@ -494,6 +447,7 @@ public class Plan {
 		
 	return 	nouvelleListeItineraire;
 	}
+	
 	
 	/**
 	 * Cette fonction supprime une des requêtes traitées lors de la livraison

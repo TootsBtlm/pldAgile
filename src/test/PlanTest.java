@@ -39,15 +39,7 @@ public class PlanTest {
 	}
 
 
-	@Test
-	public void testAjouterSommet() {
-		fail("Not yet implemented");
-	}
 
-	@Test
-	public void testSupprimerSommet() {
-		fail("Not yet implemented");
-	}
 
 	@Test
 	public void testAEtoile() {
