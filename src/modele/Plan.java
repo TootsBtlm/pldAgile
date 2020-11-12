@@ -367,61 +367,82 @@ public class Plan {
 //		System.out.println("Nouvel itinéraire en cours de calcul");
 //		System.out.println(ancienneLivraison.getListeItineraires().size());
 		
-		EnsembleRequete requetes = ancienneLivraison.getRequetes();
-		Requete nouvelleRequete = new Requete( pointRecuperation,  pointLivraison, dureeRecuperation, dureeLivraison );
-		ArrayList<Requete> listeRequetes = requetes.getListeRequete();
-		pointRecuperation.setIdVisible( Integer.toUnsignedLong((requetes.getListeRequete().size()+2) ));
-		pointLivraison.setIdVisible( Integer.toUnsignedLong((requetes.getListeRequete().size()+2) ));
 		
-		listeRequetes.add(nouvelleRequete);
-		requetes.setListeRequete(listeRequetes);
+		//test d'intégrité de la demande
+		boolean integre = true;
+		boolean recupere = false;
 		
-		this.modifierIntersectionsPertinentes(requetes);
-		Livraison livraison = new Livraison();
-		
-		ArrayList<Itineraire> ancienneListeisteItineraires =  ancienneLivraison.getListeItineraires();
-		ArrayList<Itineraire> nouvelleListeisteItineraires =  new ArrayList<Itineraire>();
-		for(int i  = 0 ; i < ancienneListeisteItineraires.size() ; i++) {
-			if(ancienneListeisteItineraires.get(i).getListeIntersections().get(0).getId() == precedentRecuperation.getId() && ancienneListeisteItineraires.get(i).getListeIntersections().get(0).getId() == precedentLivraison.getId()) {
-				Intersection depart = ancienneListeisteItineraires.get(i).getListeIntersections().get(0);
-				Intersection arrivee = ancienneListeisteItineraires.get(i).getListeIntersections().get(ancienneListeisteItineraires.get(i).getListeIntersections().size()-1);
-				nouvelleListeisteItineraires.add(this.aEtoile(depart, pointRecuperation));
-				nouvelleListeisteItineraires.add(this.aEtoile(pointRecuperation, pointLivraison));
-				nouvelleListeisteItineraires.add(this.aEtoile(pointLivraison, arrivee));
+		for(int i = 1 ; i < ancienneLivraison.getListeItineraires().size()-1; i++) {
+			if(ancienneLivraison.getListeItineraires().get(i).getListeIntersections().get(0).getId() == precedentRecuperation.getId()) {
+				recupere = true;
 			}
-			else if(ancienneListeisteItineraires.get(i).getListeIntersections().get(0).getId() == precedentRecuperation.getId() ) {
-				Intersection depart = ancienneListeisteItineraires.get(i).getListeIntersections().get(0);
-				Intersection arrivee = ancienneListeisteItineraires.get(i).getListeIntersections().get(ancienneListeisteItineraires.get(i).getListeIntersections().size()-1);
-				nouvelleListeisteItineraires.add(this.aEtoile(depart, pointRecuperation));
-				nouvelleListeisteItineraires.add(this.aEtoile(pointRecuperation, arrivee));
-//				System.out.println("Calcul recup");
+			if(!recupere && ancienneLivraison.getListeItineraires().get(i).getListeIntersections().get(0).getId() == precedentLivraison.getId()) {
+				integre = false;
 			}
-			else if(ancienneListeisteItineraires.get(i).getListeIntersections().get(0).getId() == precedentLivraison.getId()){
-				Intersection depart = ancienneListeisteItineraires.get(i).getListeIntersections().get(0);
-				Intersection arrivee = ancienneListeisteItineraires.get(i).getListeIntersections().get(ancienneListeisteItineraires.get(i).getListeIntersections().size()-1);
-				nouvelleListeisteItineraires.add(this.aEtoile(depart, pointLivraison));
-				nouvelleListeisteItineraires.add(this.aEtoile(pointLivraison, arrivee));
-//				System.out.println("Calcul livraison");
-			}
-			else {
-				nouvelleListeisteItineraires.add(ancienneListeisteItineraires.get(i));
-//				System.out.println("Retranscription");
-			}
-		}
-		Livraison nouvelleLivraison = new Livraison(nouvelleListeisteItineraires, requetes);
-		nouvelleLivraison.calculArrivees();
-		
-//		System.out.println("Nouvel itinéraire calculé !");
-//		System.out.println(nouvelleLivraison.getListeItineraires().size());
-		System.out.println("Affichage  de la nouvelle livraison");
-//		System.out.println(nouvelleLivraison.getListeItineraires());
-		for(int i = 0 ; i < nouvelleLivraison.getListeItineraires().size(); i++) {
-			System.out.println(nouvelleLivraison.getListeItineraires().get(i).getListeIntersections().get(0));
-			System.out.println(nouvelleLivraison.getListeItineraires().get(i).getListeIntersections().get(nouvelleLivraison.getListeItineraires().get(i).getListeIntersections().size() -1));
 			
 		}
 		
-		return nouvelleLivraison;
+		
+		if(integre) {
+			EnsembleRequete requetes = ancienneLivraison.getRequetes();
+			Requete nouvelleRequete = new Requete( pointRecuperation,  pointLivraison, dureeRecuperation, dureeLivraison );
+			ArrayList<Requete> listeRequetes = requetes.getListeRequete();
+			pointRecuperation.setIdVisible( Integer.toUnsignedLong((requetes.getListeRequete().size()+2) ));
+			pointLivraison.setIdVisible( Integer.toUnsignedLong((requetes.getListeRequete().size()+2) ));
+			
+			listeRequetes.add(nouvelleRequete);
+			requetes.setListeRequete(listeRequetes);
+			
+			this.modifierIntersectionsPertinentes(requetes);
+			Livraison livraison = new Livraison();
+			
+			ArrayList<Itineraire> ancienneListeisteItineraires =  ancienneLivraison.getListeItineraires();
+			ArrayList<Itineraire> nouvelleListeisteItineraires =  new ArrayList<Itineraire>();
+			for(int i  = 0 ; i < ancienneListeisteItineraires.size() ; i++) {
+				if(ancienneListeisteItineraires.get(i).getListeIntersections().get(0).getId() == precedentRecuperation.getId() && ancienneListeisteItineraires.get(i).getListeIntersections().get(0).getId() == precedentLivraison.getId()) {
+					Intersection depart = ancienneListeisteItineraires.get(i).getListeIntersections().get(0);
+					Intersection arrivee = ancienneListeisteItineraires.get(i).getListeIntersections().get(ancienneListeisteItineraires.get(i).getListeIntersections().size()-1);
+					nouvelleListeisteItineraires.add(this.aEtoile(depart, pointRecuperation));
+					nouvelleListeisteItineraires.add(this.aEtoile(pointRecuperation, pointLivraison));
+					nouvelleListeisteItineraires.add(this.aEtoile(pointLivraison, arrivee));
+				}
+				else if(ancienneListeisteItineraires.get(i).getListeIntersections().get(0).getId() == precedentRecuperation.getId() ) {
+					Intersection depart = ancienneListeisteItineraires.get(i).getListeIntersections().get(0);
+					Intersection arrivee = ancienneListeisteItineraires.get(i).getListeIntersections().get(ancienneListeisteItineraires.get(i).getListeIntersections().size()-1);
+					nouvelleListeisteItineraires.add(this.aEtoile(depart, pointRecuperation));
+					nouvelleListeisteItineraires.add(this.aEtoile(pointRecuperation, arrivee));
+//					System.out.println("Calcul recup");
+				}
+				else if(ancienneListeisteItineraires.get(i).getListeIntersections().get(0).getId() == precedentLivraison.getId()){
+					Intersection depart = ancienneListeisteItineraires.get(i).getListeIntersections().get(0);
+					Intersection arrivee = ancienneListeisteItineraires.get(i).getListeIntersections().get(ancienneListeisteItineraires.get(i).getListeIntersections().size()-1);
+					nouvelleListeisteItineraires.add(this.aEtoile(depart, pointLivraison));
+					nouvelleListeisteItineraires.add(this.aEtoile(pointLivraison, arrivee));
+//					System.out.println("Calcul livraison");
+				}
+				else {
+					nouvelleListeisteItineraires.add(ancienneListeisteItineraires.get(i));
+//					System.out.println("Retranscription");
+				}
+			}
+			Livraison nouvelleLivraison = new Livraison(nouvelleListeisteItineraires, requetes);
+			nouvelleLivraison.calculArrivees();
+			
+//			System.out.println("Nouvel itinéraire calculé !");
+//			System.out.println(nouvelleLivraison.getListeItineraires().size());
+			System.out.println("Affichage  de la nouvelle livraison");
+//			System.out.println(nouvelleLivraison.getListeItineraires());
+			for(int i = 0 ; i < nouvelleLivraison.getListeItineraires().size(); i++) {
+				System.out.println(nouvelleLivraison.getListeItineraires().get(i).getListeIntersections().get(0));
+				System.out.println(nouvelleLivraison.getListeItineraires().get(i).getListeIntersections().get(nouvelleLivraison.getListeItineraires().get(i).getListeIntersections().size() -1));
+				
+			}
+			return nouvelleLivraison;
+		}else {
+			return null;
+		}
+		
+
 		
 		
 		
@@ -529,7 +550,6 @@ public class Plan {
 		
 		
 	
-	
 		HashMap<Intersection,Double> tab = new HashMap<Intersection,Double>();
 		HashMap<Intersection,Double> heuristique = new HashMap<Intersection,Double>();
 		HashMap<Intersection, ArrayList<Intersection>> tabIntersection = new HashMap<Intersection, ArrayList<Intersection>>();
@@ -576,19 +596,32 @@ public class Plan {
 		boolean arriveDepartContigue = false;
 		Segment departArrivee = new Segment();
 		for(int i=0;i<this.listeAdjacence.get(depart).size();i++) {
+			
 			Segment s = this.listeAdjacence.get(depart).get(i);
 			ArrayList<Intersection> vide = new ArrayList<Intersection>();
 			ArrayList<String> chaineVide = new ArrayList<String>();
+			
 			tab.put(s.getFin(),s.getLongueur());
 			vide.add(depart);
+			//Vide.add(departArrivee.getFin());
 			chaineVide.add(s.getNom());
+			
 			if(s.getFin().getId() == arrivee.getId()){
 				arriveDepartContigue = true;
 				departArrivee = s;
 			}
+			
 			tabIntersection.put(s.getFin(), vide);
 			tabNomRues.put(s.getFin(), chaineVide);
 		}
+		
+		
+	
+		
+		
+
+
+		
 		
 		// Si les sommets de départ et d'arrivée sont reliés, on renvoie juste le segment qui les sépare
 		
