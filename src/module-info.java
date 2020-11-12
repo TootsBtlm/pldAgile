@@ -5,6 +5,13 @@ module pldAgile {
 	requires transitive javafx.fxml;
 	requires javafx.controls;
 	requires java.base;
+	requires com.google.common;
+	requires junit;
+	requires org.junit.jupiter.api;
 	opens vue;
+	exports vue;
+	exports modele;
+	exports controleur;
+	exports test;
 	opens controleur;
 }

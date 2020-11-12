@@ -1,4 +1,4 @@
-package tsp;
+package modele;
 
 import java.util.*;
 import javafx.util.*;
@@ -81,7 +81,6 @@ public abstract class TemplateTSP implements TSP {
 	        SeqIter it = (SeqIter) iterator(currentVertex, unvisited, visited, g, paires);
 	        int pivotVertex = currentVertex;
 	        while (it.hasNext()){
-	        	//System.out.println("unvisited: "+unvisited);
 	        	Integer nextVertex = it.bestNext(pivotVertex, paires, visited);
 	        	if(nextVertex!=-1) {
 		        	pivotVertex = nextVertex;
@@ -95,5 +94,4 @@ public abstract class TemplateTSP implements TSP {
 	        }	    
 	    }
 	}
-
 }

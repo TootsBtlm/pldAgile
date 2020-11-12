@@ -42,9 +42,12 @@ public class GestionnairePlanXml extends DefaultHandler{
 	}
 	
 	
-
+	/**
+	 * Méthode héritée de SAX qui se déclenche à la lecture de chaque nouvel élément xml
+	 * Elle remplit les attributs qui listent les intersections et les segments
+	 */
    
-   	public void startElement(String namespaceURI, String lname, String qname, Attributes attrs) throws SAXException {
+   	public void startElement(String namespaceURI, String lname, String qname, Attributes attrs) throws SAXException  {
 	   if(qname.equals("intersection")) {
 
 		   Intersection nouvelleIntersection = new Intersection();
@@ -77,14 +80,29 @@ public class GestionnairePlanXml extends DefaultHandler{
 			   for (int i = 0; i < attrs.getLength(); i++) {
 
 				   String aname = attrs.getLocalName(i);
-
+				   Boolean integre = true ;
 				   if(aname.equals("destination")) {
 					   Long idDestination = Long.parseLong((attrs.getValue(i)));
-					   nouveauSegment.setFin(listeIntersection.get(listeIntersectionId.indexOf(idDestination)));
+					   
+					   if(listeIntersectionId.contains(idDestination)) {
+						   nouveauSegment.setFin(listeIntersection.get(listeIntersectionId.indexOf(idDestination)));
+					   }
+					   else {
+						   throw new SAXException("plan non intègre");
+					   }
+					   
+					   
 				   }
 				   else if(aname.equals("origin")) {
 					   Long idOrigine = Long.parseLong((attrs.getValue(i)));
-					   nouveauSegment.setOrigine(listeIntersection.get(listeIntersectionId.indexOf(idOrigine)));
+					   if(listeIntersectionId.contains(idOrigine)) {
+						   nouveauSegment.setOrigine(listeIntersection.get(listeIntersectionId.indexOf(idOrigine)));
+					   }
+					   else {
+						   throw new SAXException("plan non intègre");
+
+					   }
+					   
 				   }
 				   else if(aname.equals("length")) {
 					   nouveauSegment.setLongueur(Double.parseDouble((attrs.getValue(i))));

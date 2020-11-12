@@ -14,8 +14,28 @@ public class Testeur {
 		   Lecteur nouveauLecteur =  new Lecteur();
 		   
 		   //Pour lire un plan il faut invoquer la méthode LirePlan avec comme attribut le chemin vers le fichier
-		   Plan nouveauPlan = nouveauLecteur.LirePlan("ressources/smallMap.xml");
+		   Plan nouveauPlan = nouveauLecteur.LirePlan("ressources/testMap.xml");
+		   EnsembleRequete recap = nouveauLecteur.LireRequete("ressources/requestsTest.xml", nouveauPlan);
 		   
+//		   System.out.println("Liste des points à relier :");
+//		   for(int i = 0 ; i< recap.getListeRequete().size();i++) {
+//			   System.out.println(recap.getListeRequete().get(i).getPointDeRecuperation());
+//			   System.out.println(recap.getListeRequete().get(i).getPointDeLivraison());
+//		   }
+		   
+		   Livraison liv = nouveauPlan.getMatriceCout(recap);
+		   
+		   
+//		   System.out.println("Liste des points de l'itineraire :");
+//		   for(int i = 0 ; i< liv.getListeItineraires().size();i++) {
+//			   System.out.println(liv.getListeItineraires().get(i).getListeIntersections().get(0));
+//			   System.out.println(liv.getListeItineraires().get(i).getListeIntersections().get(liv.getListeItineraires().get(i).getListeIntersections().size()-1));
+//			    
+//		   }
+//		  System.out.println(liv.getListeItineraires().size());
+//		   System.out.println(liv.getListeItineraires().get(4).getListeIntersections().get(0));
+//		   System.out.println(liv.getListeItineraires().get(liv.getListeItineraires().size()-1).getListeIntersections().get(liv.getListeItineraires().get(liv.getListeItineraires().size()-1).getListeIntersections().size()-1));		   
+		   /**
 		   //Méthode pour récupérer la matrice
 		   Double[][] matrice = nouveauPlan.getMatrice();
 
@@ -31,14 +51,16 @@ public class Testeur {
 		   //Pour lire un fichier de requêtes, il faut invoquer la méthode LireRequete avec comme attribut le chemin vers le fichier xml et le Plan courant
 		   EnsembleRequete recap = nouveauLecteur.LireRequete("ressources/requestsSmall1.xml", nouveauPlan);
 		   System.out.println(recap.listePairesIntersections().toString());
-		   
-		   Intersection fin = nouveauPlan.getIntersectionById(Long.parseLong("26086114"));
-		   Intersection depart = nouveauPlan.getIntersectionById(Long.parseLong("25468041"));
-		
-		   
+		      
+
+		   Intersection fin = nouveauPlan.getIntersectionById(Long.parseLong("26576953"));
+		   Intersection depart = nouveauPlan.getIntersectionById(Long.parseLong("26576955"));
+		   		   
+		   System.out.println(nouveauPlan.calcDijsktra(depart, fin));
+
 		   System.out.println(recap.listePairesIntersections().toString());
 		   
-		   nouveauPlan.getMatriceCout(recap);
+		   nouveauPlan.getMatriceCout(recap);*/
 	   }
-		   
+
 }

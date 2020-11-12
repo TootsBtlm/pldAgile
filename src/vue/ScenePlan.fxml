@@ -3,14 +3,42 @@
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.InterfaceController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Canvas fx:id="planCanvas" height="713.0" width="900.0" />
-      <Button fx:id="btnOuvrirPlan" layoutX="907.0" layoutY="10.0" mnemonicParsing="false" onAction="#choisirFichierPlan" prefHeight="77.0" prefWidth="363.0" text="Charger un nouveau plan" />
-      <Button layoutX="907.0" layoutY="96.0" mnemonicParsing="false" onAction="#choisirFichierRequetes" prefHeight="77.0" prefWidth="363.0" text="Charger une liste de requêtes" />
-      <ListView fx:id="listViewRequest" layoutX="907.0" layoutY="283.0" prefHeight="431.0" prefWidth="363.0" style="-fx-border-width: 2;" />
-      <Button layoutX="907.0" layoutY="182.0" mnemonicParsing="false" onAction="#calculerItineraire" prefHeight="77.0" prefWidth="363.0" text="Calculer intin�raire" />
+      <Canvas id="PlanCanvas" fx:id="planCanvas" height="713.0" width="900.0" />
+      <Button fx:id="btnOuvrirPlan" layoutX="907.0" layoutY="58.0" mnemonicParsing="false" onAction="#actionChargerFichierPlan" prefHeight="60.0" prefWidth="180.0" text="Charger un nouveau plan" />
+      <Button layoutX="1088.0" layoutY="58.0" mnemonicParsing="false" onAction="#actionChargerFichierRequete" prefHeight="60.0" prefWidth="180.0" text="Charger une liste de requêtes" />
+      <ListView fx:id="listViewRequest" layoutX="907.0" layoutY="377.0" prefHeight="337.0" prefWidth="363.0" style="-fx-border-width: 2;" />
+      <Button layoutX="905.0" layoutY="130.0" mnemonicParsing="false" onAction="#actionCalculerItineraire" prefHeight="60.0" prefWidth="363.0" text="Calculer itineraire" />
+      <Canvas id="RequeteCanvas" fx:id="requeteCanvas" height="713.0" width="900.0" />
+      <Canvas id="RequeteCanvas" fx:id="itineraireCanvas" height="713.0" width="900.0" />
+      <Pane fx:id="intersectionPane" prefHeight="713.0" prefWidth="900.0" />
+      <Separator layoutX="940.0" layoutY="272.0" prefHeight="0.0" prefWidth="299.0" />
+      <Text layoutX="1009.0" layoutY="304.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste des requêtes">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Text fx:id="textChargerFichierRequete" fill="#727272" layoutX="971.0" layoutY="531.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Veuillez charger un fichier de requêtes">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Button layoutX="907.0" layoutY="320.0" mnemonicParsing="false" onAction="#actionAjouterEtape" prefHeight="47.0" prefWidth="169.0" text="+ Ajouter une requete" />
+      <Button layoutX="1101.0" layoutY="320.0" mnemonicParsing="false" onAction="#actionSupprimerEtape" prefHeight="47.0" prefWidth="169.0" text="- Supprimer la requete" />
+      <Circle fill="#ffec00" layoutX="920.0" layoutY="27.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
+      <Text layoutX="940.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Récuperation" />
+      <Text layoutX="1051.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Livraison" />
+      <Circle fill="#004dff" layoutX="1031.0" layoutY="28.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fill="#ff8900" layoutX="1121.0" layoutY="29.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
+      <Text layoutX="1141.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Depot" />
+      <Button layoutX="905.0" layoutY="199.0" mnemonicParsing="false" prefHeight="60.0" onAction="#actionCreerFeuilleDeRoute" prefWidth="363.0" text="Générer feuille de route" />
    </children>
 </AnchorPane>

@@ -10,10 +10,10 @@ import javafx.util.Pair;
 public class EnsembleRequete {
 
 	
-	public HashMap<Long,Integer> intersectionIdRetourne = new HashMap<Long, Integer>();
+	private HashMap<Long,Integer> intersectionIdRetourne = new HashMap<Long, Integer>();
 	
-	ArrayList<Requete> listeRequete ;
-	Depot LieuDepart;
+	private ArrayList<Requete> listeRequete ;
+	private Depot LieuDepart;
 
 	
 	
@@ -50,6 +50,25 @@ public class EnsembleRequete {
 		this.intersectionIdRetourne = intersectionIdRetourne;
 		this.listeRequete = listeRequete;
 		LieuDepart = lieuDepart;
+		this.modifierIntersections();
+	}
+	/**
+	 * Cette fonction attribut un identifiant aux intersections mentionnées dans une liste de requête 
+	 * et leur donne un type (1 : non renseigné, 2 : depot, 3 : point de recuperation, 4 point de livraison)
+	 */
+	
+	public void modifierIntersections(){
+		Long compteur = new Long(1);
+		this.LieuDepart.getPointDeDepart().setIdVisible(compteur);
+		this.LieuDepart.getPointDeDepart().setTypeIntersection(2);
+		compteur ++;
+		for(int i = 0; i< this.listeRequete.size();i++) {
+			this.listeRequete.get(i).getPointDeRecuperation().setIdVisible(compteur);
+			this.listeRequete.get(i).getPointDeRecuperation().setTypeIntersection(3);
+			this.listeRequete.get(i).getPointDeLivraison().setIdVisible(compteur);
+			this.listeRequete.get(i).getPointDeLivraison().setTypeIntersection(4);
+			compteur ++;
+		}
 	}
 	public EnsembleRequete() {
 		super();
@@ -59,49 +78,8 @@ public class EnsembleRequete {
 		return "RecapDemande [listeRequete=" + listeRequete + ", LieuDepart=" + LieuDepart + "]";
 	}
 	
-	public ArrayList<Pair<Integer, Integer>> listePairesIntersections() {
-		ArrayList<Pair<Integer, Integer>> liste = new ArrayList<Pair<Integer, Integer>>();
-		for(int i  = 0 ; i<this.listeRequete.size(); i++) {	
-			Intersection pointDeRecuperation = this.listeRequete.get(i).getPointDeRecuperation();
-			Intersection pointDeLivraison = this.listeRequete.get(i).getPointDeLivraison();			
-			
-			Pair<Integer,Integer> nouvellePaire = new Pair<Integer,Integer>(intersectionIdRetourne.get(pointDeRecuperation.getId()),intersectionIdRetourne.get(pointDeLivraison.getId()));
-			liste.add(nouvellePaire);
-		}
-		return liste;
-		
-	}
-	
-	public int indexLieuDepart() {
-		
-		return intersectionIdRetourne.get(this.getLieuDepart().getPointDeDepart().getId());
-	}
-	
-	
-	public Double[][] matriceCout() {
-		
-		int nbIntersection = this.listeRequete.size()*2 + 1;
-		ArrayList<Intersection> listeIntersections = new ArrayList<Intersection>() ;
-		for(int i = 0 ; i < this.listeRequete.size(); i++) {
-			listeIntersections.add(listeRequete.get(i).getPointDeRecuperation());
-			listeIntersections.add(listeRequete.get(i).getPointDeRecuperation());
-		}
-		Double[][] matriceCouts = new Double[nbIntersection][nbIntersection];
-		
-		for(int i = 0 ; i < nbIntersection ; i++) {
-			for(int j = 0 ; j < nbIntersection ; j++) {
-				Double longi = listeIntersections.get(i).getLongitude();
-				Double longj = listeIntersections.get(j).getLongitude();
-				Double lati = listeIntersections.get(i).getLatitude();
-				Double latj = listeIntersections.get(j).getLatitude();
-				matriceCouts[i][j] = (longi-longj)*(longi-longj) +(latj-lati)*(latj-lati) ;
-			}
-			
-		}
-		
-		return matriceCouts;		
-		
-	}
+
+
 	
 	
 }

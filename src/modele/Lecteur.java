@@ -17,22 +17,24 @@ import org.xml.sax.SAXException;
 
 	/**
 	 * 
-	 * Cette classe est l'interface de lecture des fichiers xml.
-	 * @author rfonc
+	 * Cette classe est l'interface de lecture des fichiers xml. 
+	 * @author Romain
 	 *
 	 */
 
 public class Lecteur {
+
+	
 	
 	/**
-	 * Cette méthode lit les plans contenus dans un fichier xml.
+	 * Cette méthode lit le plan contenus dans un fichier xml. Elle renvoie un Plan rempli avec toutes les intersections.
 	 * 
 	 * @param nomDeFichier
 	 * @return Plan
 	 */
 	
 	public Plan LirePlan(String nomDeFichier) {
-		Plan nouveauPlan = new Plan();
+		Plan nouveauPlan = null;
 		
 		try {
 	         SAXParserFactory factory = SAXParserFactory.newInstance();
@@ -41,8 +43,19 @@ public class Lecteur {
 	         GestionnairePlanXml nouveauGestionnaireDePlan = new GestionnairePlanXml();
 	         
 	         parser.parse(nomDeFichier, nouveauGestionnaireDePlan );
-	         Plan PlanLu = new Plan(nouveauGestionnaireDePlan.getListeIntersectionId(),nouveauGestionnaireDePlan.getListeIntersection(),nouveauGestionnaireDePlan.getListeSegment());
+	         
+	         ArrayList<Intersection> ListeIntersections = nouveauGestionnaireDePlan.getListeIntersection();
+	         ArrayList<Long> ListeIntersectionsid = nouveauGestionnaireDePlan.getListeIntersectionId();
+	         ArrayList<Segment> ListeSegments = nouveauGestionnaireDePlan.getListeSegment();
+
+	         Plan PlanLu = new Plan(ListeIntersectionsid, ListeIntersections, ListeSegments);
 	         nouveauPlan = PlanLu;
+	         
+	         if(ListeIntersections.size() <= 0) {
+	        	 nouveauPlan = null;
+	         }
+	         
+	         
 	         
 	    } catch (DOMException e) {
 	       e.printStackTrace();
@@ -53,7 +66,6 @@ public class Lecteur {
 	    } catch (SAXException e) {
 	       e.printStackTrace();
 	    } catch (IOException e) {
-	       // TODO Auto-generated catch block
 	       e.printStackTrace();
 	    }
 		return nouveauPlan;
@@ -61,7 +73,7 @@ public class Lecteur {
 
 	
 	/**
-	 * Cette méthode lit les requetes contneues dans un fichier et 
+	 * Cette méthode lit les requetes contnues dans un fichier et 
 	 * renvoie l'ensemble des ces requetes ainsi que le point de départ/arrivée
 	 * 
 	 * @param nomDeFichier
@@ -80,6 +92,10 @@ public class Lecteur {
 	         nouveauGestionnaireDeRequetes.setPlanCourant(planCourant);
 	         parser.parse(nomDeFichier, nouveauGestionnaireDeRequetes );
 	         
+	         if(nouveauGestionnaireDeRequetes.getListeRequest().size() <= 0) {
+	        	 return null;
+	         }
+	         
 	         EnsembleRequete NouveauRecapDemande = new EnsembleRequete(planCourant.getIntersectionIdRetourne(), nouveauGestionnaireDeRequetes.getListeRequest(), nouveauGestionnaireDeRequetes.getPointDepart());
 	         RecapDemande = NouveauRecapDemande;
 	         
@@ -92,7 +108,6 @@ public class Lecteur {
 	    } catch (SAXException e) {
 	       e.printStackTrace();
 	    } catch (IOException e) {
-	       // TODO Auto-generated catch block
 	       e.printStackTrace();
 	    }
 		return RecapDemande;
