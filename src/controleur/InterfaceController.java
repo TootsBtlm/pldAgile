@@ -374,6 +374,8 @@ public class InterfaceController {
 			this.ajouterStage.setResizable(false);
 			this.ajouterStage.show();
 			this.ajouterStage.setAlwaysOnTop(true);
+			this.ajouterStage.setX(0);
+			this.ajouterStage.setY(0);
 			
 			// Si l'utilisateur ferme la fenetre on revient dans l'etat itineraire calculé
 			ajouterStage.setOnHidden(event -> {
