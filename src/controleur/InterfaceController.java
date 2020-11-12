@@ -566,8 +566,12 @@ public class InterfaceController {
 						items.add("Prendre le chemin suivant : " + this.livraison.getListeItineraires().get(i).getListeNomsRue().get(k));
 						}
 					}
+					if(this.livraison.getListeItineraires().get(i).getListeIntersections().get(0).getTypeIntersection() == 3) {
+					items.add("Récupération ici : " + this.plan.getNomRue(this.livraison.getListeItineraires().get(i).getListeIntersections().get(0)) + " à " + this.livraison.getDictionnaireArriveesItineraires().get(this.livraison.getListeItineraires().get(i)) + " heures. ");
+					}
+					else if(this.livraison.getListeItineraires().get(i).getListeIntersections().get(0).getTypeIntersection() == 4) {
 					items.add("Livraison ici : " + this.plan.getNomRue(this.livraison.getListeItineraires().get(i).getListeIntersections().get(0)) + " à " + this.livraison.getDictionnaireArriveesItineraires().get(this.livraison.getListeItineraires().get(i)) + " heures. ");
-
+					}
 			}
 			this.feuilleDeRoute.setItems(items);
 			this.etat = new EtatItineraireCalcule(this);
