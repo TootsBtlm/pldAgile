@@ -554,10 +554,17 @@ public class InterfaceController {
 			items.add(this.livraison.getRequetes().getLieuDepart().getPointDeDepart().getIdVisible().toString() + " Depot" + 
 					", Adresse : " + plan.getNomRue(ensembleRequete.getLieuDepart().getPointDeDepart()));
 
-			for (int i = 0; i< this.livraison.getListeItineraires().get(0).getListeIntersections().size(); i++) {
-				System.out.println(this.livraison.getListeItineraires().get(0).getListeIntersections().get(i));
-				//items.add(ensembleRequete.getListeRequete().get(i).getPointDeLivraison().getIdVisible().toString() + " Point de recup" + ", Adresse : " + plan.getNomRue(ensembleRequete.getListeRequete().get(i).getPointDeRecuperation()).toString());
-				//items.add(ensembleRequete.getListeRequete().get(i).getPointDeRecuperation().getIdVisible().toString() + " Point de livraison" + ", Adresse : " + plan.getNomRue(ensembleRequete.getListeRequete().get(i).getPointDeLivraison()).toString());
+			for (int i = 1; i< this.livraison.getListeItineraires().size(); i++) {
+
+					
+					items.add("Prendre le chemin suivant :" + this.livraison.getListeItineraires().get(i).getListeNomsRue().get(0));
+					for (int k = 1; k< this.livraison.getListeItineraires().get(i).getListeNomsRue().size(); k++) {
+						if (!(this.livraison.getListeItineraires().get(i).getListeNomsRue().get(k).equals(this.livraison.getListeItineraires().get(i).getListeNomsRue().get(k-1))) && (this.livraison.getListeItineraires().get(i).getListeNomsRue().get(k) != null)){
+						items.add("Prendre le chemin suivant : " + this.livraison.getListeItineraires().get(i).getListeNomsRue().get(k));
+						}
+					}
+					items.add("Livraison ici : " + this.plan.getNomRue(this.livraison.getListeItineraires().get(i).getListeIntersections().get(0)) + " à " + this.livraison.getDictionnaireArriveesItineraires().get(this.livraison.getListeItineraires().get(i)) + " heures. ");
+
 			}
 			this.feuilleDeRoute.setItems(items);
 			this.etat = new EtatItineraireCalcule(this);
