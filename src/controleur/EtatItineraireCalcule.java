@@ -29,6 +29,7 @@ public class EtatItineraireCalcule extends Etat{
 	 * Fait appel à la méthode chargerFichierPlan de l'objet interface controleur 
 	 * 
 	 */
+	@Override
 	public void chargerFichierPlan() {
 		
 		this.interfaceController.chargerFichierPlan();
@@ -40,6 +41,7 @@ public class EtatItineraireCalcule extends Etat{
 	 * Fait appel à la méthode chargerFichierRequete de l'objet interface controleur 
 	 * 
 	 */
+	@Override
 	public void chargerFichierRequetes() {
 		
 		this.interfaceController.chargerFichierRequete();
@@ -51,6 +53,7 @@ public class EtatItineraireCalcule extends Etat{
 	 * Fait appel à la méthode calculerItineraire de l'objet interface controleur 
 	 * 
 	 */
+	@Override
 	public void calculerItineraire() {
 		
 		this.interfaceController.calculerItineraire();
@@ -62,6 +65,7 @@ public class EtatItineraireCalcule extends Etat{
 	 * Dans l'état itinéraire calculé, la méthode ajouterEtape ne fait aucune action 
 	 * 
 	 */
+	@Override
 	public void ajouterEtape() {
 		
 	}
@@ -71,6 +75,7 @@ public class EtatItineraireCalcule extends Etat{
 	 * Dans l'état itinéraire calculé, la méthode supprimerEtape ne fait aucune action 
 	 * 
 	 */
+	@Override
 	public void supprimerEtape(Intersection inter) {
 		
 	}
@@ -80,7 +85,8 @@ public class EtatItineraireCalcule extends Etat{
 	 * Fait appel à la méthode feuilleDeRoute de l'objet interface controleur 
 	 * 
 	 */
-	public void feuilleDeRoute() {
+	@Override
+	public void construireFeuilleDeRoute() {
 		
 	}
 	

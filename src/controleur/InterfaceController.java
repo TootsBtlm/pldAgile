@@ -559,7 +559,7 @@ public class InterfaceController {
 					
 					items.add("Prendre le chemin suivant :" + this.livraison.getListeItineraires().get(i).getListeNomsRue().get(0));
 					for (int k = 1; k< this.livraison.getListeItineraires().get(i).getListeNomsRue().size(); k++) {
-						if (!(this.livraison.getListeItineraires().get(i).getListeNomsRue().get(k).equals(this.livraison.getListeItineraires().get(i).getListeNomsRue().get(k-1))) && (this.livraison.getListeItineraires().get(i).getListeNomsRue().get(k) != null)){
+						if (!(this.livraison.getListeItineraires().get(i).getListeNomsRue().get(k).equals(this.livraison.getListeItineraires().get(i).getListeNomsRue().get(k-1))) && !(this.livraison.getListeItineraires().get(i).getListeNomsRue().get(k).equals(""))){
 						items.add("Prendre le chemin suivant : " + this.livraison.getListeItineraires().get(i).getListeNomsRue().get(k));
 						}
 					}
