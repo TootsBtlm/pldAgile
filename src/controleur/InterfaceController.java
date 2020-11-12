@@ -7,6 +7,8 @@ import java.util.List;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -67,8 +69,10 @@ public class InterfaceController {
 
 	@FXML
 	private Text textPointLivraison;
-
-
+	
+	@FXML
+	private ListView<String> feuilleDeRoute;
+	
 	@FXML
 	private Pane intersectionPane;
 
@@ -80,6 +84,7 @@ public class InterfaceController {
 	private ListView<String> listViewRequest;
 
 	private Stage stage;
+	private Stage feuilleDeRouteStage;
 	private Stage ajouterStage;
 	private Stage messageErreurStage;
 
@@ -528,27 +533,37 @@ public class InterfaceController {
 	@FXML
 	public void actionCreerFeuilleDeRoute() {
 		System.out.println("test1");
+		System.out.println(this.feuilleDeRoute);
 		this.etat = new EtatFeuilleDeRoute(this);
-		etat.feuilleDeRoute();
+		etat.construireFeuilleDeRoute();
 	}
 
-	public void feuilleDeRoute() {
-
-		etat = new EtatFeuilleDeRoute(this);
+	public void construireFeuilleDeRoute() {
 		
+		System.out.println(this.feuilleDeRoute);
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/vue/feuilleDeRoutePopup.fxml"));
 		loader.setController(this);
 		Parent root;
 		try {
+			this.feuilleDeRouteStage = new Stage();
 			root = loader.load();
-			this.ajouterStage.setScene(new Scene(root));
-			this.ajouterStage.setResizable(false);
-			this.ajouterStage.show();
+			this.feuilleDeRouteStage.setScene(new Scene(root));
+			this.feuilleDeRouteStage.setResizable(false);
+			this.feuilleDeRouteStage.show();
+			ObservableList<String> items = FXCollections.observableArrayList();
+			items.add(this.livraison.getRequetes().getLieuDepart().getPointDeDepart().getIdVisible().toString() + " Depot" + 
+					", Adresse : " + plan.getNomRue(ensembleRequete.getLieuDepart().getPointDeDepart()));
+
+			for (int i = 0; i< this.livraison.getListeItineraires().get(0).getListeIntersections().size(); i++) {
+				System.out.println(this.livraison.getListeItineraires().get(0).getListeIntersections().get(i));
+				//items.add(ensembleRequete.getListeRequete().get(i).getPointDeLivraison().getIdVisible().toString() + " Point de recup" + ", Adresse : " + plan.getNomRue(ensembleRequete.getListeRequete().get(i).getPointDeRecuperation()).toString());
+				//items.add(ensembleRequete.getListeRequete().get(i).getPointDeRecuperation().getIdVisible().toString() + " Point de livraison" + ", Adresse : " + plan.getNomRue(ensembleRequete.getListeRequete().get(i).getPointDeLivraison()).toString());
+			}
+			this.feuilleDeRoute.setItems(items);
+			this.etat = new EtatItineraireCalcule(this);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		
 
 	}
 
