@@ -18,6 +18,7 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -62,6 +63,12 @@ public class InterfaceController {
 	@FXML
 	private Text textPointPrecedentLivraison;
 
+	@FXML
+	private TextField textTempsRecuperation;
+	
+	@FXML
+	private TextField textTempsLivraison;
+	
 	@FXML
 	private Text textPointRecuperation;
 
@@ -398,8 +405,11 @@ public class InterfaceController {
 			this.afficherPopupErreur("Erreur lors de l'ajout d'une requete");
 			//etat = new EtatItineraireCalcule(this);
 		} else {
-			Long duree = (long) (Math.random() * (420-120) + 120);
-			Livraison newLivraison = plan.ajouterRequete(this.livraison, this.pointPrecedentRecuperation, this.pointPrecedentLivraison, this.nouveauPointRecuperation, this.nouveauPointLivraison, duree, duree);
+			try {
+			long dureeRecuperation = (long) Integer.parseInt(this.textTempsRecuperation.getText());
+			long dureeLivraison = (long) Integer.parseInt(this.textTempsLivraison.getText());
+			
+			Livraison newLivraison = plan.ajouterRequete(this.livraison, this.pointPrecedentRecuperation, this.pointPrecedentLivraison, this.nouveauPointRecuperation, this.nouveauPointLivraison, dureeRecuperation, dureeLivraison);
 			if(newLivraison == null ) {
 				afficherPopupErreur("Erreur ! Veuillez recommencer");
 			} else {
@@ -426,7 +436,10 @@ public class InterfaceController {
 				this.ajouterStage.close();
 				etat = new EtatItineraireCalcule(this);
 			}
-			
+			}
+			catch(Exception e){
+				afficherPopupErreur("Veuillez indiquer un temps en chiffres (en secondes)");
+			}
 		}
 	}
 
