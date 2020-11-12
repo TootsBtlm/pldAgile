@@ -550,15 +550,14 @@ public class InterfaceController {
 			this.feuilleDeRouteStage.setScene(new Scene(root));
 			this.feuilleDeRouteStage.setResizable(false);
 			this.feuilleDeRouteStage.show();
-			this.ensembleRequete = this.livraison.getRequetes();
 			ObservableList<String> items = FXCollections.observableArrayList();
-			items.add(ensembleRequete.getLieuDepart().getPointDeDepart().getIdVisible().toString() + " Depot" + 
+			items.add(this.livraison.getRequetes().getLieuDepart().getPointDeDepart().getIdVisible().toString() + " Depot" + 
 					", Adresse : " + plan.getNomRue(ensembleRequete.getLieuDepart().getPointDeDepart()));
-
-			for (int i = 0; i< ensembleRequete.getListeRequete().size(); i++) {
-
-				items.add(ensembleRequete.getListeRequete().get(i).getPointDeLivraison().getIdVisible().toString() + " Point de recup" + ", Adresse : " + plan.getNomRue(ensembleRequete.getListeRequete().get(i).getPointDeRecuperation()).toString());
-				items.add(ensembleRequete.getListeRequete().get(i).getPointDeRecuperation().getIdVisible().toString() + " Point de livraison" + ", Adresse : " + plan.getNomRue(ensembleRequete.getListeRequete().get(i).getPointDeLivraison()).toString());
+			System.out.println(this.livraison);
+			for (int i = 0; i< this.livraison.getListeItineraires().get(0).getListeIntersections().size(); i++) {
+				System.out.println(this.livraison.getListeItineraires().get(0).getListeIntersections().get(i));
+				//items.add(ensembleRequete.getListeRequete().get(i).getPointDeLivraison().getIdVisible().toString() + " Point de recup" + ", Adresse : " + plan.getNomRue(ensembleRequete.getListeRequete().get(i).getPointDeRecuperation()).toString());
+				//items.add(ensembleRequete.getListeRequete().get(i).getPointDeRecuperation().getIdVisible().toString() + " Point de livraison" + ", Adresse : " + plan.getNomRue(ensembleRequete.getListeRequete().get(i).getPointDeLivraison()).toString());
 			}
 			this.feuilleDeRoute.setItems(items);
 			this.etat = new EtatItineraireCalcule(this);
