@@ -9,7 +9,7 @@ import java.util.ArrayList;
 /************************************************************/
 /**
  * 
- * Cette classe représente un itinéraire.
+ * Cette classe reprï¿½sente un itinï¿½raire.
  * @author romain
  */
 public class Itineraire {
@@ -20,29 +20,29 @@ public class Itineraire {
 	private ArrayList<Intersection> listeIntersections = new ArrayList<Intersection>();
 	
 	/**   
-	 * Liste des noms de rue composant l'itinéraire
+	 * Liste des noms de rue composant l'itinï¿½raire
 	 */
 	private ArrayList<String> listeNomsRue = new ArrayList<String>();
 	
 	/**   
-	 * Cout de l'itinéraire (distance en mètres)
+	 * Cout de l'itinï¿½raire (distance en mï¿½tres)
 	 */
 	private Double cout = 0. ;
 	
 	/**
-	 * Temps nécessaire au livreur pour aller de la première à la denière intersection (vitesse de 15km/h)
+	 * Temps nï¿½cessaire au livreur pour aller de la premiï¿½re ï¿½ la deniï¿½re intersection (vitesse de 15km/h)
 	 */
 	private Double temps;
 	
 	/**
-	 * Vitesse du livreur en mètres par seconde
+	 * Vitesse du livreur en mï¿½tres par seconde
 	 */
 	final private Double VITESSE = 4.17; 
 	
 	/**
 	 * 
-	 * @param listeIntersections composant l'itinéraire
-	 * @param cout total de l'itinéraire
+	 * @param listeIntersections composant l'itinï¿½raire
+	 * @param cout total de l'itinï¿½raire
 	 */
 	public Itineraire(ArrayList<Intersection> listeIntersections, Double cout) {
 		super();
@@ -52,7 +52,12 @@ public class Itineraire {
 	}
 	
 	
-
+	/**
+	 * 
+	 * @param listeIntersections
+	 * @param listeNomsRue
+	 * @param cout
+	 */
 	public Itineraire(ArrayList<Intersection> listeIntersections, ArrayList<String> listeNomsRue, Double cout) {
 		super();
 		this.listeIntersections = listeIntersections;
@@ -105,15 +110,28 @@ public class Itineraire {
 		super();
 	}
 
+	/**
+	 * Cette mÃ©thode ajoute une intersection et les nom de sa rue aux listes
+	 * @param intersection
+	 * @param nomRue
+	 */
 	public void addStep(Intersection intersection, String nomRue) {
 		this.listeIntersections.add(intersection);
 		this.listeNomsRue.add(nomRue);
 	}	
-
+	
+	/**
+	 * 
+	 * @param intersection
+	 */
 	public void addIntersection(Intersection intersection) {
 		this.listeIntersections.add(intersection);
 	}
 	
+	/**
+	 * Ajout d'un itinÃ©raire
+	 * @param itineraire
+	 */
 	public void addItineraire(Itineraire itineraire) {
 		this.listeIntersections.addAll(itineraire.getListeIntersections());
 		this.cout = this.cout + itineraire.getCout();
