@@ -51,7 +51,7 @@ public class SeqIter implements Iterator<Integer> {
 		return candidates.remove(candidates.size()-1); //return and remove last element
 	}
 	
-	/*
+	/**
 	 * this method is used for the bound method, which needs to analyze all neighbors
 	 * @return next neighbor, not candidate
 	 */
