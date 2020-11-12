@@ -4,7 +4,7 @@ package modele;
 /************************************************************/
 /**
  * 
- * Cette classe représente une intersection.
+ * Cette classe représente l'intersection de deux voie (rue, avenue..)
  * @author romain
  */
 
@@ -16,11 +16,15 @@ public class Intersection {
 	private Long id;
 	
 	/**   
-	 * Id à afficher sur le plan
+	 * Id qui s'affiche sur le plan
 	 */
 	private Long idVisible;
 	/**   
-	 * Longitude de l'intersection 
+	 * Type de l'intersection:
+	 * 1 : Non défni
+	 * 2 : Dépôt
+	 * 3 : Pickup
+	 * 4 : Delivery 
 	 */	
 	private Integer typeIntersection = 1;
 	/**   
@@ -66,7 +70,7 @@ public class Intersection {
 	public void setTypeIntersection(Integer typeIntersection) {
 		this.typeIntersection = typeIntersection;
 	}
-	public Intersection(Long id, Double longitude, Double latitude, String nom) {
+	public Intersection(Long id, Double longitude, Double latitude) {
 		super();
 		this.id = id;
 		this.longitude = longitude;
