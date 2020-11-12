@@ -204,10 +204,11 @@ public class InterfaceController {
 				String path = file.getPath();
 				System.out.println(path);
 				Lecteur lecteur = new Lecteur();
-				this.ensembleRequete = lecteur.LireRequete(path, this.plan);
-				if(this.ensembleRequete == null) {
+				EnsembleRequete newRequete = lecteur.LireRequete(path, this.plan);
+				if(newRequete == null) {
 					afficherPopupErreur("Fichier incorrect ! Veuillez réessayer");
 				} else {
+					this.ensembleRequete = newRequete;
 					this.vueTextuelle = new VueTextuelle(this.plan, this.listViewRequest, this.mouseEvents);
 					this.vueTextuelle.drawText(this.ensembleRequete, this.listViewRequest);
 					this.vueGraphique.drawRequests(this.ensembleRequete);
@@ -397,29 +398,35 @@ public class InterfaceController {
 			this.afficherPopupErreur("Erreur lors de l'ajout d'une requete");
 			//etat = new EtatItineraireCalcule(this);
 		} else {
-			Long duree = (long) 10;
-			this.livraison = plan.ajouterRequete(this.livraison, this.pointPrecedentRecuperation, this.pointPrecedentLivraison, this.nouveauPointRecuperation, this.nouveauPointLivraison, duree, duree);
-			this.ensembleRequete = this.livraison.getRequetes();
-			this.vueGraphique.drawRequests(this.ensembleRequete);
-			this.vueTextuelle.drawText(livraison.getRequetes(), listViewRequest);
-			this.requeteNodeListView.clear();
-			for(int i = 0; i < this.vueGraphique.getRequetes().size(); i++) {
-				requeteNodeListView.put(this.vueGraphique.getRequetes().get(i), listViewRequest.getItems().get(i));
-				//this.requeteNodes = this.vueGraphique.getIntersectionPane().getChildren();
-			}
-			mouseEvents.setListViewRequest(this.listViewRequest);
+			Long duree = (long) (Math.random() * (420-120) + 120);
+			Livraison newLivraison = plan.ajouterRequete(this.livraison, this.pointPrecedentRecuperation, this.pointPrecedentLivraison, this.nouveauPointRecuperation, this.nouveauPointLivraison, duree, duree);
+			if(newLivraison == null ) {
+				afficherPopupErreur("Erreur ! Veuillez recommencer");
+			} else {
+				this.livraison = newLivraison;
+				this.ensembleRequete = this.livraison.getRequetes();
+				this.vueGraphique.drawRequests(this.ensembleRequete);
+				this.vueTextuelle.drawText(livraison.getRequetes(), listViewRequest);
+				this.requeteNodeListView.clear();
+				for(int i = 0; i < this.vueGraphique.getRequetes().size(); i++) {
+					requeteNodeListView.put(this.vueGraphique.getRequetes().get(i), listViewRequest.getItems().get(i));
+					//this.requeteNodes = this.vueGraphique.getIntersectionPane().getChildren();
+				}
+				mouseEvents.setListViewRequest(this.listViewRequest);
 
-			// Ajout d'un event handler sur les nodes correspondant aux requêtes sur la carte
-			for(int i = 0; i < this.vueGraphique.getRequetes().size(); i++) {
-				mouseEvents.requeteCliquable(this.vueGraphique.getRequetes().get(i));
-			}
+				// Ajout d'un event handler sur les nodes correspondant aux requêtes sur la carte
+				for(int i = 0; i < this.vueGraphique.getRequetes().size(); i++) {
+					mouseEvents.requeteCliquable(this.vueGraphique.getRequetes().get(i));
+				}
 
-			this.mouseEvents.setListeCliquable();
+				this.mouseEvents.setListeCliquable();
+				
+				this.vueGraphique.drawItineraire(this.livraison);
+				this.vueTextuelle.drawItineraire(this.livraison, this.requeteNodeListView);
+				this.ajouterStage.close();
+				etat = new EtatItineraireCalcule(this);
+			}
 			
-			this.vueGraphique.drawItineraire(this.livraison);
-			this.vueTextuelle.drawItineraire(this.livraison, this.requeteNodeListView);
-			this.ajouterStage.close();
-			etat = new EtatItineraireCalcule(this);
 		}
 	}
 

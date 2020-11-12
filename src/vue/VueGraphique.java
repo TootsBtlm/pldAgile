@@ -70,12 +70,12 @@ public class VueGraphique {
 		System.out.println(longitudeMax + " " + longitudeMin);
 
 
-		for(int i = 0; i < this.plan.getIntersection().size(); i++) {
-			double x =  this.planCanvas.getWidth() * (this.plan.getIntersection().get(i).getLongitude() - longitudeMin) / (longitudeMax - longitudeMin); 
-			double y = this.planCanvas.getHeight() - (this.planCanvas.getHeight() * (this.plan.getIntersection().get(i).getLatitude() - latitudeMin) / (latitudeMax - latitudeMin)); 
-			gc.setFill(Color.RED);
-			gc.fillRect(x-2, y-2, 2, 2);
-		}
+//		for(int i = 0; i < this.plan.getIntersection().size(); i++) {
+//			double x =  this.planCanvas.getWidth() * (this.plan.getIntersection().get(i).getLongitude() - longitudeMin) / (longitudeMax - longitudeMin); 
+//			double y = this.planCanvas.getHeight() - (this.planCanvas.getHeight() * (this.plan.getIntersection().get(i).getLatitude() - latitudeMin) / (latitudeMax - latitudeMin)); 
+//			gc.setFill(Color.RED);
+//			gc.fillRect(x-2, y-2, 2, 2);
+//		}
 
 		for(int i = 0; i < this.plan.getSegment().size(); i++) {
 			Segment s = this.plan.getSegment().get(i);
@@ -220,7 +220,7 @@ public class VueGraphique {
 
 		for(int i = 0; i < sizeItineraire; i++) {
 			
-			double luminosite = (double)i / (double)sizeItineraire;
+			double luminosite = 1.0 - ((double)i / (double)sizeItineraire);
 //			double color = (double)i / (double)sizeItineraire;
 			gc.setFill(Color.hsb(240, 1.0, luminosite));
 			Itineraire itineraire = livraison.getListeItineraires().get(i);
