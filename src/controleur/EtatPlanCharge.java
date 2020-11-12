@@ -1,9 +1,5 @@
 package controleur;
 
-import modele.Intersection;
-import modele.Itineraire;
-import modele.Plan;
-
 /**
  * 
  * @author Mario
@@ -29,6 +25,7 @@ public class EtatPlanCharge extends Etat {
 	 * Fait appel à la méthode chargerFichierPlan de l'objet interface controleur 
 	 * 
 	 */
+	@Override
 	public void chargerFichierPlan() {
 		
 		this.interfaceController.chargerFichierPlan();
@@ -40,6 +37,7 @@ public class EtatPlanCharge extends Etat {
 	 * Fait appel à la méthode chargerFichierRequete de l'objet interface controleur 
 	 * 
 	 */
+	@Override
 	public void chargerFichierRequetes() {
 		
 		this.interfaceController.chargerFichierRequete();
@@ -51,6 +49,7 @@ public class EtatPlanCharge extends Etat {
 	 * Dans l'état plan chargé, la méthode calculerItineraire ne fait aucune action car aucun fichier de requêtes n'est chargé
 	 * 
 	 */
+	@Override
 	public void calculerItineraire() {
 		interfaceController.afficherPopupErreur("Charger d'abord un fichier de requêtes");
 	}
@@ -60,6 +59,7 @@ public class EtatPlanCharge extends Etat {
 	 * Dans l'état plan chargé, la méthode ajouterEtape ne fait aucune action car aucun fichier de requêtes n'est chargé
 	 * 
 	 */
+	@Override
 	public void ajouterEtape() {
 		interfaceController.afficherPopupErreur("Charger d'abord un fichier de requêtes");
 	}
@@ -69,19 +69,19 @@ public class EtatPlanCharge extends Etat {
 	 * Dans l'état plan chargé, la méthode supprimerEtape ne fait aucune action car aucun fichier de requêtes n'est chargé
 	 * 
 	 */
+	@Override
 	public void supprimerEtape() {
 		interfaceController.afficherPopupErreur("Charger d'abord un fichier de requêtes");
 	}
 	
 	/**
 	 * 
-	 * Dans l'état initial, la méthode feuilleDeRoute ne fait aucune action car aucun plan n'est chargé
+	 * Dans l'état plan chargée, la méthode construireFeuilleDeRoute ne fait aucune action car aucun itinéraire n'est calculé
 	 * 
 	 */
 	@Override
 	public void construireFeuilleDeRoute() {
 		interfaceController.afficherPopupErreur("Charger d'abord un fichier de requêtes");
-		System.out.println("Charger d'abord un plan");
 	}
 	
 }

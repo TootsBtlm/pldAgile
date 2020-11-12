@@ -9,7 +9,6 @@ import com.google.common.collect.HashBiMap;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,16 +19,13 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import modele.EnsembleRequete;
 import modele.Intersection;
-import modele.Itineraire;
 import modele.Lecteur;
 import modele.Livraison;
 import modele.Plan;
@@ -142,7 +138,6 @@ public class InterfaceController {
 	 *  
 	 * 
 	 */
-
 	public Etat getEtat() {
 		return this.etat;
 	}
@@ -152,7 +147,6 @@ public class InterfaceController {
 	 * Permet de charger le plan en faisant appel à la classe Lecteur
 	 * 
 	 */
-
 	public void chargerFichierPlan() {
 		FileChooser fileChooser = new FileChooser();
 		File file = fileChooser.showOpenDialog(this.stage);
@@ -379,6 +373,7 @@ public class InterfaceController {
 			this.ajouterStage.setScene(new Scene(root));
 			this.ajouterStage.setResizable(false);
 			this.ajouterStage.show();
+			this.ajouterStage.setAlwaysOnTop(true);
 			
 			// Si l'utilisateur ferme la fenetre on revient dans l'etat itineraire calculé
 			ajouterStage.setOnHidden(event -> {
@@ -406,8 +401,8 @@ public class InterfaceController {
 			this.vueGraphique.drawRequests(this.ensembleRequete);
 			this.vueGraphique.drawItineraire(this.livraison);
 			this.vueTextuelle.drawItineraire(this.livraison, this.requeteNodeListView);
+			this.ajouterStage.close();
 			etat = new EtatItineraireCalcule(this);
-			this.ajouterStage.hide();
 		}
 	}
 
@@ -562,10 +557,17 @@ public class InterfaceController {
 			items.add(this.livraison.getRequetes().getLieuDepart().getPointDeDepart().getIdVisible().toString() + " Depot" + 
 					", Adresse : " + plan.getNomRue(ensembleRequete.getLieuDepart().getPointDeDepart()));
 
-			for (int i = 0; i< this.livraison.getListeItineraires().get(0).getListeIntersections().size(); i++) {
-				System.out.println(this.livraison.getListeItineraires().get(0).getListeIntersections().get(i));
-				//items.add(ensembleRequete.getListeRequete().get(i).getPointDeLivraison().getIdVisible().toString() + " Point de recup" + ", Adresse : " + plan.getNomRue(ensembleRequete.getListeRequete().get(i).getPointDeRecuperation()).toString());
-				//items.add(ensembleRequete.getListeRequete().get(i).getPointDeRecuperation().getIdVisible().toString() + " Point de livraison" + ", Adresse : " + plan.getNomRue(ensembleRequete.getListeRequete().get(i).getPointDeLivraison()).toString());
+			for (int i = 1; i< this.livraison.getListeItineraires().size(); i++) {
+
+					
+					items.add("Prendre le chemin suivant :" + this.livraison.getListeItineraires().get(i).getListeNomsRue().get(0));
+					for (int k = 1; k< this.livraison.getListeItineraires().get(i).getListeNomsRue().size(); k++) {
+						if (!(this.livraison.getListeItineraires().get(i).getListeNomsRue().get(k).equals(this.livraison.getListeItineraires().get(i).getListeNomsRue().get(k-1))) && !(this.livraison.getListeItineraires().get(i).getListeNomsRue().get(k).equals(""))){
+						items.add("Prendre le chemin suivant : " + this.livraison.getListeItineraires().get(i).getListeNomsRue().get(k));
+						}
+					}
+					items.add("Livraison ici : " + this.plan.getNomRue(this.livraison.getListeItineraires().get(i).getListeIntersections().get(0)) + " à " + this.livraison.getDictionnaireArriveesItineraires().get(this.livraison.getListeItineraires().get(i)) + " heures. ");
+
 			}
 			this.feuilleDeRoute.setItems(items);
 			this.etat = new EtatItineraireCalcule(this);

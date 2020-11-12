@@ -13,7 +13,10 @@ public class GestionnaireRequeteXml extends DefaultHandler{
 	private ArrayList<Requete> listeRequest = new ArrayList<Requete>();
 	private Plan planCourant;
 	
-
+	/**
+	 * Méthode héritée de SAX qui se déclenche à la lecture de chaque nouvel élément xml
+	 * Elle remplit la liste des requetes et le dépot
+	 */
 	   
    	public void startElement(String namespaceURI, String lname, String qname, Attributes attrs) throws SAXException {
 	   if(qname.equals("depot")) {

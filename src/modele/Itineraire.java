@@ -121,7 +121,7 @@ public class Itineraire {
 	}	
 	
 	/**
-	 * 
+	 * Ajoute une intersection à la à l'attribut listeIntersections
 	 * @param intersection
 	 */
 	public void addIntersection(Intersection intersection) {

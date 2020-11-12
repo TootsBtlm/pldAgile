@@ -1,17 +1,10 @@
-package test;
+package modele;
 
 import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import modele.EnsembleRequete;
-import modele.Intersection;
-import modele.Itineraire;
-import modele.Lecteur;
-import modele.Livraison;
-import modele.Plan;
 
 public class PlanTest {
 
@@ -26,9 +19,33 @@ public class PlanTest {
 	}
 	
 	@Test
+	public void testSupprimerRequete() {
+		Livraison livraison =  this.plan.getMatriceCout(requetes);
+		Intersection intersection = livraison.getRequetes().getListeRequete().get(0).getPointDeLivraison();
+		Livraison nouvelleLivraison = this.plan.supprimerRequete(livraison, intersection);
+		
+		assertTrue(nouvelleLivraison.getListeItineraires().size()==1);	
+	}
+
+	@Test
+	public void testAjouterRequete() {
+		Livraison livraison =  this.plan.getMatriceCout(requetes);
+
+		Intersection debut = this.plan.getIntersectionById(Integer.toUnsignedLong(2));
+		Intersection fin = this.plan.getIntersectionById(Integer.toUnsignedLong(4));
+		Intersection depot = this.plan.getIntersectionById(Integer.toUnsignedLong(1));
+		
+		Livraison nouvelleLivraison = this.plan.ajouterRequete(livraison, depot, depot, debut, fin, Integer.toUnsignedLong(100), Integer.toUnsignedLong(100));
+		
+		assertTrue(nouvelleLivraison.getListeItineraires().size()==5);	
+	}
+		
+	
+	@Test
 	public void testGetMatriceCout() {
 		
 		Livraison livraison = this.plan.getMatriceCout(requetes);
+		assertTrue(livraison.getListeItineraires().size() == 3);
 	}
 
 	@Test
@@ -39,15 +56,7 @@ public class PlanTest {
 	}
 
 
-	@Test
-	public void testAjouterSommet() {
-		fail("Not yet implemented");
-	}
 
-	@Test
-	public void testSupprimerSommet() {
-		fail("Not yet implemented");
-	}
 
 	@Test
 	public void testAEtoile() {

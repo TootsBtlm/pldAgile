@@ -127,7 +127,7 @@ public class Livraison {
 				Time temps = new Time(
 						this.dictionnaireArriveesItineraires.get(this.listeItineraires.get(i-1)).getTime()+
 						this.listeItineraires.get(i).getTemps().longValue() + 
-						tempsAssocieIntersection.get(listeItineraires.get(i).getListeIntersections().get(0))				
+						tempsAssocieIntersection.get(listeItineraires.get(i).getListeIntersections().get(0))*1000				
 						);
 				
 				this.dictionnaireArriveesItineraires.put(this.listeItineraires.get(i),temps );

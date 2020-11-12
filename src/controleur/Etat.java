@@ -1,16 +1,6 @@
 package controleur;
 
-import java.io.File;
-
-import javafx.scene.shape.Circle;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
-import modele.EnsembleRequete;
-import modele.Intersection;
-import modele.Lecteur;
-import modele.Plan;
 import vue.VueGraphique;
-import vue.VueTextuelle;
 
 /**
  * 

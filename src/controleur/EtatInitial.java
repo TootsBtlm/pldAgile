@@ -1,8 +1,6 @@
 package controleur;
 
 
-import modele.Intersection;
-
 /**
  * 
  * @author Mario et Jean-Jacques
@@ -80,7 +78,7 @@ public class EtatInitial extends Etat {
 	
 	/**
 	 * 
-	 * Dans l'état initial, la méthode feuilleDeRoute ne fait aucune action car aucun plan n'est chargé
+	 * Dans l'état initial, la méthode construireFeuilleDeRoute ne fait aucune action car aucun plan n'est chargé
 	 * 
 	 */
 	@Override
