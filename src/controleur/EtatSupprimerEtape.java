@@ -28,6 +28,7 @@ public class EtatSupprimerEtape extends Etat{
 	 * Dans l'état supprimer étape, la méthode chargerFichierPlan ne fait aucune action car l'utilisateur n'a qu'une seule action possible
 	 * 
 	 */
+	@Override
 	public void chargerFichierPlan() {
 		
 	}
@@ -37,6 +38,7 @@ public class EtatSupprimerEtape extends Etat{
 	 * Dans l'état supprimer étape, la méthode chargerFichierRequetes ne fait aucune action car l'utilisateur n'a qu'une seule action possible
 	 * 
 	 */
+	@Override
 	public void chargerFichierRequetes() {
 		
 	}
@@ -46,6 +48,7 @@ public class EtatSupprimerEtape extends Etat{
 	 * Dans l'état supprimer étape, la méthode calculerItineraire ne fait aucune action car l'utilisateur n'a qu'une seule action possible
 	 * 
 	 */
+	@Override
 	public void calculerItineraire() {
 	
 	}
@@ -55,6 +58,7 @@ public class EtatSupprimerEtape extends Etat{
 	 * Dans l'état supprimer étape, la méthode ajouterEtape ne fait aucune action car l'utilisateur n'a qu'une seule action possible
 	 * 
 	 */
+	@Override
 	public void ajouterEtape() {
 		
 	}
@@ -64,16 +68,18 @@ public class EtatSupprimerEtape extends Etat{
 	 * Dans l'état supprimer étape, la méthode supprimerEtape fait appel à la méthode supprimerEtape de l'interface controleur
 	 * 
 	 */
+	@Override
 	public void supprimerEtape(Intersection inter) {
 		this.interfaceController.supprimerEtape(inter);
 	}
 	
 	/**
 	 * 
-	 * Dans l'état supprimer étape, la méthode feuilleDeRoute ne fait aucune action car l'utilisateur n'a qu'une seule action possible
+	 * Dans l'état supprimer étape, la méthode construireFeuilleDeRoute ne fait aucune action car l'utilisateur n'a qu'une seule action possible
 	 * 
 	 */
-	public void feuilleDeRoute() {
+	@Override
+	public void construireFeuilleDeRoute() {
 		
 	}
 	

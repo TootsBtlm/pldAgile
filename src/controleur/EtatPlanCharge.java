@@ -29,6 +29,7 @@ public class EtatPlanCharge extends Etat {
 	 * Fait appel à la méthode chargerFichierPlan de l'objet interface controleur 
 	 * 
 	 */
+	@Override
 	public void chargerFichierPlan() {
 		
 		this.interfaceController.chargerFichierPlan();
@@ -40,6 +41,7 @@ public class EtatPlanCharge extends Etat {
 	 * Fait appel à la méthode chargerFichierRequete de l'objet interface controleur 
 	 * 
 	 */
+	@Override
 	public void chargerFichierRequetes() {
 		
 		this.interfaceController.chargerFichierRequete();
@@ -51,6 +53,7 @@ public class EtatPlanCharge extends Etat {
 	 * Dans l'état plan chargé, la méthode calculerItineraire ne fait aucune action car aucun fichier de requêtes n'est chargé
 	 * 
 	 */
+	@Override
 	public void calculerItineraire() {
 		System.out.println("Charger d'abord un fichier de requêtes");
 	}
@@ -60,6 +63,7 @@ public class EtatPlanCharge extends Etat {
 	 * Dans l'état plan chargé, la méthode ajouterEtape ne fait aucune action car aucun fichier de requêtes n'est chargé
 	 * 
 	 */
+	@Override
 	public void ajouterEtape() {
 		System.out.println("Charger d'abord un fichier de requêtes");
 	}
@@ -69,17 +73,19 @@ public class EtatPlanCharge extends Etat {
 	 * Dans l'état plan chargé, la méthode supprimerEtape ne fait aucune action car aucun fichier de requêtes n'est chargé
 	 * 
 	 */
+	@Override
 	public void supprimerEtape(Intersection inter) {
 		System.out.println("Charger d'abord un fichier de requêtes");
 	}
 	
 	/**
 	 * 
-	 * Dans l'état plan chargé, la méthode feuilleDeRoute ne fait aucune action car aucun fichier de requêtes n'est chargé
+	 * Dans l'état liste requête chargée, la méthode construireFeuilleDeRoute ne fait aucune action car aucun itinéraire n'est calculé
 	 * 
 	 */
-	public void feuilleDeRoute() {
-		System.out.println("Charger d'abord un fichier de requêtes");
+	@Override
+	public void construireFeuilleDeRoute() {
+		System.out.println("Charger d'abord l'itinéraire");
 	}
 	
 }

@@ -29,7 +29,7 @@ public class EtatAjouterEtape extends Etat{
 	 * Fait appel à la méthode chargerFichierPlan de l'objet interface controleur 
 	 * 
 	 */
-	
+	@Override
 	public void chargerFichierPlan() {
 		
 		this.interfaceController.chargerFichierPlan();
@@ -41,7 +41,7 @@ public class EtatAjouterEtape extends Etat{
 	 * Fait appel à la méthode chargerFichierRequetes de l'objet interface controleur 
 	 * 
 	 */
-	
+	@Override
 	public void chargerFichierRequetes() {
 		
 		this.interfaceController.chargerFichierRequete();
@@ -53,7 +53,7 @@ public class EtatAjouterEtape extends Etat{
 	 * Fait appel à la méthode calculerItineraire de l'objet interface controleur 
 	 * 
 	 */
-	
+	@Override
 	public void calculerItineraire() {
 		
 		this.interfaceController.calculerItineraire();
@@ -65,7 +65,7 @@ public class EtatAjouterEtape extends Etat{
 	 * Fait appel à la méthode ajouterEtape de l'objet interface controleur 
 	 * 
 	 */
-	
+	@Override
 	public void ajouterEtape() {
 		this.interfaceController.ajouterEtape();
 	}
@@ -75,15 +75,17 @@ public class EtatAjouterEtape extends Etat{
 	 * Fait appel à la méthode supprimerEtape de l'objet interface controleur 
 	 * 
 	 */
-	
+	@Override
 	public void supprimerEtape(Intersection inter) {
 		
 	}
 	
-	public void feuilleDeRoute() {
-		
-	}
-	
+	/**
+	 * 
+	 * Fait appel à la méthode validerAjouterEtape de l'objet interface controleur 
+	 * 
+	 */
+	@Override
 	public void validerAjouterEtape() {
 		this.interfaceController.validerAjouterEtape();
 	}

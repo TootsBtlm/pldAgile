@@ -11,6 +11,7 @@ import modele.Plan;
  */
 
 public class EtatFeuilleDeRoute extends Etat{
+	
 	/**
 	 * 
 	 * @param interfaceController
@@ -75,7 +76,7 @@ public class EtatFeuilleDeRoute extends Etat{
 	
 	/**
 	 * 
-	 * Fait appel à la méthode feuilleDeRoute de l'objet interface controleur 
+	 * Fait appel à la méthode construireFeuilleDeRoute de l'objet interface controleur 
 	 * 
 	 */
 	public void construireFeuilleDeRoute() {
