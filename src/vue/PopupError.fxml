@@ -15,7 +15,7 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <Text id="messageErreur" fx:id="messageErreur" layoutX="170.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Message" textAlignment="CENTER" AnchorPane.leftAnchor="170.0" AnchorPane.rightAnchor="171.318359375" />
+      <Text id="messageErreur" fx:id="messageErreur" layoutX="75.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Message" />
       <Button id="boutonErreurFermer" fx:id="boutonFermerErreur" layoutX="168.0" layoutY="103.0" mnemonicParsing="false" text="Fermer" />
    </children>
 </AnchorPane>
