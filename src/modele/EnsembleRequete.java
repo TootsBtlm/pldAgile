@@ -78,11 +78,7 @@ public class EnsembleRequete {
 		return "RecapDemande [listeRequete=" + listeRequete + ", LieuDepart=" + LieuDepart + "]";
 	}
 	
-	public int indexLieuDepart() {
-		
-		return intersectionIdRetourne.get(this.getLieuDepart().getPointDeDepart().getId());
-	}
-	
+
 
 	
 	
