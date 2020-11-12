@@ -1,27 +1,27 @@
 package test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import modele.EnsembleRequete;
 import modele.Lecteur;
 import modele.Plan;
 
-public class LecteurTest {
+class LecteurTest {
 
 	private Lecteur lecteur ;
 	
-	@Before
-	public void initialisation() {
+	@BeforeEach
+	void initialisation() {
 		lecteur = new Lecteur(); 
 	}
 	/**
 	 * Test de la méthode lirePlan
 	 */
 	@Test
-	public void testLirePlan() {
+	void testLirePlan() {
 		Plan plan = lecteur.LirePlan("ressources/testMap.xml");
 		
 		assertEquals(plan.getIntersection().size(), 4);
@@ -54,7 +54,7 @@ public class LecteurTest {
 	}
 
 	@Test
-	public void testLireRequete() {
+	void testLireRequete() {
 		Plan plan = lecteur.LirePlan("ressources/testMap.xml");
 		EnsembleRequete ensembleRequete = lecteur.LireRequete("ressources/requestsTest.xml", plan);
 		
