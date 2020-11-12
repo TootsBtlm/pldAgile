@@ -14,7 +14,7 @@
             <Font size="20.0" />
          </font>
       </Text>
-      <Button layoutX="14.0" layoutY="211.0" mnemonicParsing="false" onAction="#actionAjouterPointPrecedentRecuperation" prefHeight="31.0" prefWidth="271.0" text="SÃ©lectionner le point qui précède le point de récupération">
+      <Button layoutX="14.0" layoutY="211.0" mnemonicParsing="false" onAction="#actionAjouterPointPrecedentRecuperation" prefHeight="31.0" prefWidth="271.0" text="SÃ©lectionner le point avant rÃ©cupÃ©ration">
          <font>
             <Font size="15.0" />
          </font>
@@ -29,7 +29,7 @@
             <Font size="15.0" />
          </font>
       </Button>
-      <Button layoutX="14.0" layoutY="280.0" mnemonicParsing="false" onAction="#actionAjouterPointPrecedentLivraison" prefHeight="31.0" prefWidth="271.0" text="SÃ©lectionner le point qui précède le point de livraison">
+      <Button layoutX="14.0" layoutY="280.0" mnemonicParsing="false" onAction="#actionAjouterPointPrecedentLivraison" prefHeight="31.0" prefWidth="271.0" text="SÃ©lectionner le point avant livraison">
          <font>
             <Font size="15.0" />
          </font>
@@ -44,17 +44,17 @@
             <Font size="15.0" />
          </font>
       </Text>
-      <Text fx:id="textPointPrecedentRecuperation" layoutX="308.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Aucun point qui prÃ©cÃ©de le point de récupération">
+      <Text fx:id="textPointPrecedentRecuperation" layoutX="308.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Aucun point avant le point de rÃ©cupÃ©ration">
          <font>
             <Font size="15.0" />
          </font>
       </Text>
-      <Text fx:id="textPointPrecedentLivraison" layoutX="308.0" layoutY="300.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Aucun point qui prÃ©cÃ©de le point de livraison">
+      <Text fx:id="textPointPrecedentLivraison" layoutX="308.0" layoutY="300.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Aucun point avant le point de livraison">
          <font>
             <Font size="15.0" />
          </font>
       </Text>
-      <Button layoutX="274.0" layoutY="350.0" mnemonicParsing="false" onAction="#actionValiderAjouterEtape" text="Valider">
+      <Button layoutX="274.0" layoutY="335.0" mnemonicParsing="false" onAction="#actionValiderAjouterEtape" text="Valider">
          <font>
             <Font size="15.0" />
          </font>

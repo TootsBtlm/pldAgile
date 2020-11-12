@@ -78,9 +78,9 @@ public class EtatFeuilleDeRoute extends Etat{
 	 * Fait appel à la méthode feuilleDeRoute de l'objet interface controleur 
 	 * 
 	 */
-	public void feuilleDeRoute() {
+	public void construireFeuilleDeRoute() {
 		System.out.println("test2");
-		this.interfaceController.feuilleDeRoute();
+		this.interfaceController.construireFeuilleDeRoute();
 	}
 	
 }
