@@ -15,11 +15,11 @@ import vue.VueTextuelle;
 /**
  * 
  * @author Mario
- * Représente un état général de l'application
+ * Représente la classe mère de tous les états
  * 
  */
 
-public class Etat {
+public abstract class Etat {
 	
 
 	protected VueGraphique vue;
@@ -28,7 +28,9 @@ public class Etat {
 	
 	
 	/**
-	 * @param 
+	 * 
+	 * @param interfaceController
+	 * Prend l'objet interface controleur de la classe InterfaceControleur pour modifier les attributs de l'objet interface controleur existant
 	 * 
 	 */
 	
@@ -36,37 +38,74 @@ public class Etat {
 		this.interfaceController = interfaceController;
 	}
 	
-
+	/**
+	 * 
+	 * Méthode surchargée sur chacune des classes filles de Etat
+	 * 
+	 */
 	public void chargerFichierPlan() {
-		
 		
 	}
 	
+	/**
+	 * 
+	 * Méthode surchargée sur chacune des classes filles de Etat
+	 * 
+	 */
 	public void chargerFichierRequetes() {
 		
 	}
 	
+	/**
+	 * 
+	 * Méthode surchargée sur chacune des classes filles de Etat
+	 * 
+	 */
 	public void calculerItineraire() {
 		
 	}
 	
+	/**
+	 * 
+	 * Méthode surchargée sur chacune des classes filles de Etat
+	 * 
+	 */
 	public void ajouterEtape() {
 		
 	}
 	
+	/**
+	 * 
+	 * Méthode surchargée sur chacune des classes filles de Etat
+	 * 
+	 */
 	public void supprimerEtape(Intersection inter) {
 		
 	}
 	
+	/**
+	 * 
+	 * Méthode surchargée sur chacune des classes filles de Etat
+	 * 
+	 */
 	public void validerAjouterEtape() {
 		
 	}
 	
+	/**
+	 * 
+	 * Méthode surchargée sur chacune des classes filles de Etat
+	 * 
+	 */
 	public void feuilleDeRoute() {
 		
 	}
 
-
+	/**
+	 * 
+	 * Méthode surchargée sur chacune des classes filles de Etat
+	 * 
+	 */
 	public void ajouterPointRecuperation() {
 		
 	}
