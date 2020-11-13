@@ -15,21 +15,13 @@ import javafx.util.Pair;
  * 
  */
 public class Plan {
-	/**
-	 * 
-	 */
+
 	private ArrayList<Long> intersectionId;	
-	/**
-	 * 
-	 */
+
 	private HashMap<Long,Integer> intersectionIdRetourne = new HashMap<Long, Integer>();
-	/**
-	 * 
-	 */
+
 	private ArrayList<Intersection> intersection;
-	/**
-	 * 
-	 */
+
 	private ArrayList<Segment> segment;
 	
 	private HashMap<Intersection, ArrayList<Segment>> listeAdjacence = new HashMap<Intersection, ArrayList<Segment>>();
@@ -78,6 +70,7 @@ public class Plan {
 	this.intersection.set(positionPointDeDepart, pointDeDepart);
 	
 	}
+	
 	/**
 	 *  Cette fonction prend en paramètre une requête qu'elle traite, c'est à dire qu'elle calcule l'ordre dans lequel les intersections seront parcourues, par quel itinéraire, et a quel moment. 
 	 *  Elle utilise le TSP et l'algorithme A* pour établire la livraison optimale. 
@@ -165,7 +158,6 @@ public class Plan {
 	 * Cette fonction va permettre d'ajouter une requete au parcours du cycliste
 	 * @return Livraison
 	 */
-	
 	public Livraison ajouterRequete(Livraison ancienneLivraison, Intersection precedentRecuperation, Intersection precedentLivraison, Intersection pointRecuperation, Intersection pointLivraison,  Long dureeRecuperation, Long dureeLivraison) {
 		
 		
@@ -398,14 +390,6 @@ public class Plan {
 			tabNomRues.put(s.getFin(), chaineVide);
 		}
 		
-		
-	
-		
-		
-
-
-		
-		
 		// Si les sommets de départ et d'arrivée sont reliés, on renvoie juste le segment qui les sépare
 		
 		if(arriveDepartContigue) {
@@ -509,13 +493,13 @@ public class Plan {
 	public void setIntersectionIdRetourne(HashMap<Long, Integer> intersectionIdRetourne) {
 		this.intersectionIdRetourne = intersectionIdRetourne;
 	}
+	
 	/** on construit un objet plan et toutes les structures de données qui facilitent son utilisation
 	 * 
 	 * @param intersectionId
 	 * @param intersection
 	 * @param segment
 	 */
-	
 	public Plan(ArrayList<Long> intersectionId, ArrayList<Intersection> intersection, ArrayList<Segment> segment) {
 		super();
 
@@ -610,7 +594,6 @@ public class Plan {
 	 * Cette méthode renvoie la longitude minimale de tout les sommets du graphe.
 	 * @return Double 
 	 */
-	
 	public Double longitudeMin(){
 		Double min = this.intersection.get(0).getLongitude();
 		for(int i = 0; i < this.intersectionId.size(); i++) {
