@@ -6,7 +6,6 @@ package controleur;
  * Représente l'état de l'application dans lequel la liste des requêtes vient d'être chargée, qui hérite de la classe Etat
  * 
  */
-
 public class EtatListeRequeteChargee extends Etat{
 	/**
 	 * Constructeur

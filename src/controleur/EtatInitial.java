@@ -7,7 +7,6 @@ package controleur;
  * Représente l'état initial de l'application, qui hérite de la classe Etat
  * 
  */
-
 public class EtatInitial extends Etat {
 
 	/**

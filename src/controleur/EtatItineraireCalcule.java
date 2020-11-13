@@ -7,8 +7,6 @@ package controleur;
  * Représente l'état de l'application dans lequel l'itinéraire vient d'être calculé, qui hérite de la classe Etat
  * 
  */
-
-
 public class EtatItineraireCalcule extends Etat{
 	/**
 	 * Constructeur
