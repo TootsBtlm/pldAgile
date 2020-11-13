@@ -161,12 +161,12 @@ public class InterfaceController {
 			String path = file.getPath();
 			System.out.println(path);
 			Lecteur lecteur = new Lecteur();
-			this.plan = lecteur.LirePlan(path);
-			if(this.plan == null) {
+			Plan newPlan = lecteur.LirePlan(path);
+			if(newPlan == null) {
 				afficherPopupErreur("Fichier incorrect ! Veuillez réessayer");
 				//System.out.println("Fichier incorrect");
 			} else {
-				System.out.println(intersectionPane);
+				this.plan = newPlan;
 				this.vueGraphique = new VueGraphique(this.plan, this.planCanvas, this.intersectionPane, this.itineraireCanvas, mouseEvents);
 				this.vueGraphique.drawPlan();
 				for(int i = 0; i < this.vueGraphique.getIntersectionPane().getChildren().size(); i++) {
