@@ -61,7 +61,6 @@ public class TSP1Test {
 		paires.add(new Pair<Integer, Integer>(2, 4));
 		Integer[] bestSol = tsp.searchSolution(30000, cost, paires, 0);
 		for(int i = 0; i< bestSol.length; ++i) {
-			System.out.println(bestSol[i]);
 			assertEquals((Integer)i, bestSol[i]);
 		}
 	}
@@ -72,7 +71,6 @@ public class TSP1Test {
 		paires.add(new Pair<Integer, Integer>(2, 0));
 		Integer[] bestSol = tsp.searchSolution(30000, cost, paires, 4);
 		for(int i = 0; i< bestSol.length; ++i) {
-			System.out.println(bestSol[i]);
 			assertEquals(nbVertices-i-1, (int)bestSol[i]);
 		}
 	}
@@ -88,7 +86,6 @@ public class TSP1Test {
 		unvisited.add(3);
 		unvisited.add(4);
 		double bound = tsp.bound(0, 1, unvisited, visited, paires);
-		System.out.println("\nlower bound: "+bound);
 		assertTrue(bound <= 4.0);
 	}
 	
@@ -103,7 +100,6 @@ public class TSP1Test {
 		unvisited.add(3);
 		unvisited.add(4);
 		double bound = tsp.bound(0, 0, unvisited, visited, paires);
-		System.out.println("\nlower bound: "+bound);
 		assertTrue(bound <= 5.0);
 	}
 }
