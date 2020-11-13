@@ -116,7 +116,7 @@ public class InterfaceController {
 
 	/**
 	 * 
-	 * Créer une instance de la classe InterfaceController, et initialise les attributs tsp, etat, ajouterStage et mouseEvents de l'instance
+	 * Crée une instance de la classe InterfaceController, et initialise les attributs tsp, etat, ajouterStage et mouseEvents de l'instance
 	 * 
 	 */
 
@@ -409,7 +409,7 @@ public class InterfaceController {
 	}
 
 	/**
-	 * 
+	 * @param inter
 	 * Ajoute le point de récupération dans la fenêtre de gestion d'ajout d'une étape
 	 * 
 	 */
@@ -422,7 +422,7 @@ public class InterfaceController {
 	}
 
 	/**
-	 * 
+	 * @param inter
 	 * Ajoute le point qui précède le point de récupération dans la fenêtre de gestion d'ajout d'une étape
 	 * 
 	 */
@@ -434,7 +434,7 @@ public class InterfaceController {
 	}
 
 	/**
-	 * 
+	 * @param inter
 	 * Ajoute le point qui précède le point de livraison dans la fenêtre de gestion d'ajout d'une étape
 	 * 
 	 */
@@ -446,7 +446,7 @@ public class InterfaceController {
 	}
 
 	/**
-	 * 
+	 * @param inter
 	 * Ajoute le point de livraison dans la fenêtre de gestion d'ajout d'une étape
 	 * 
 	 */
@@ -470,7 +470,7 @@ public class InterfaceController {
 	}
 
 	/**
-	 * 
+	 * @param inter
 	 * Supprime une étape, calcule la portion d'itinéraire à modifier et l'affiche
 	 * 
 	 */
@@ -488,7 +488,7 @@ public class InterfaceController {
 	}
 
 	/**
-	 * 
+	 * @param message
 	 * Affiche une popup d'erreur dont le message change selon le cas d'erreur déclenché
 	 * 
 	 */
