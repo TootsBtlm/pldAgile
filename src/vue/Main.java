@@ -9,7 +9,9 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-
+	/**
+	 * Méthode permettant de créer la fenêtre principale
+	 */
 	@Override
 	public void start(Stage primaryStage) {
 		try {
@@ -17,12 +19,9 @@ public class Main extends Application {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/vue/ScenePlan.fxml"));
 			loader.setController(ui);
 			Parent root = loader.load();
-
-//			InterfaceController ui = loader.getController();
 			
 			ui.setStage(primaryStage);
 
-			//scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(new Scene(root));
 			primaryStage.setResizable(false);
 			primaryStage.show();
@@ -32,6 +31,10 @@ public class Main extends Application {
 		}
 	}
 
+	/**
+	 * Méthode permettant de lancer JavaFX
+	 * @param args Tableau de chaine de caractères
+	 */
 	public static void main(String[] args) {
 		launch(args);
 	}
