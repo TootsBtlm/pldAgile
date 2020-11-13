@@ -593,7 +593,7 @@ public class InterfaceController {
 			this.feuilleDeRouteStage.show();
 			ObservableList<String> items = FXCollections.observableArrayList();
 			items.add(this.livraison.getRequetes().getLieuDepart().getPointDeDepart().getIdVisible().toString() + " Depot" + 
-					", Adresse : " + plan.getNomRue(ensembleRequete.getLieuDepart().getPointDeDepart()));
+					", Adresse : " + plan.getNomRue(ensembleRequete.getLieuDepart().getPointDeDepart()) + " à " + this.livraison.getDictionnaireArriveesItineraires().get(this.livraison.getListeItineraires().get(0)) + " heures. ");
 
 			for (int i = 1; i< this.livraison.getListeItineraires().size(); i++) {
 
