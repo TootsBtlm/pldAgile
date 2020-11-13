@@ -9,10 +9,15 @@ import javafx.util.Pair;
 
 public class EnsembleRequete {
 
-	
+
 	private HashMap<Long,Integer> intersectionIdRetourne = new HashMap<Long, Integer>();
-	
+	/**
+	 * Cet attribut liste toutes les requetes que le livreur doit effectuer.
+	 */
 	private ArrayList<Requete> listeRequete ;
+	/**
+	 * Lieu de départ de la livraison.
+	 */
 	private Depot LieuDepart;
 
 	

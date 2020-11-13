@@ -64,7 +64,13 @@ public class Segment {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-	public boolean isSegment(Intersection depart, Intersection arrivee) { //regarde si une paire d'untersections est un segment
+	/**
+	 * Teste si la paire d'intersection envoyée constitue un segment.
+	 * @param depart
+	 * @param arrivee
+	 * @return boolean
+	 */
+	public boolean isSegment(Intersection depart, Intersection arrivee) { 
 		if(this.origine == depart && this.fin == arrivee)
 			return true;
 		return false;
