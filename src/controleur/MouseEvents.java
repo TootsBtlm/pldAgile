@@ -1,6 +1,5 @@
 package controleur;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import com.google.common.collect.BiMap;
@@ -15,10 +14,9 @@ import modele.Intersection;
 /**
  * 
  * @author Hexanome4103
- * Représente la classe controleur de l'application, qui fait appel aux classes états pour gérer les différentes actions possibles
+ * Réprésente la classe contenant toutes les intéractions entre la vue graphique, la vue textuelle et l'utilisateur
  *
  */
-
 public class MouseEvents {
 
 	private BiMap<Node, String> requeteNodeListView;
@@ -27,17 +25,19 @@ public class MouseEvents {
 	private InterfaceController interfaceController;
 	
 	/**
+	 * Constructeur de la classe MouseEvents
 	 * @param requeteNodeListView, listViewRequest, interfaceController
-	 * Crée une instance de la classe MouseEvents, et initialise les attributs interfaceController, requeteNodeListView et listViewRequest de l'instance
 	 * 
 	 */
-	
 	public MouseEvents(BiMap<Node, String> requeteNodeListView, ListView<String> listViewRequest, InterfaceController interfaceController) {
 		this.interfaceController = interfaceController;
 		this.requeteNodeListView = requeteNodeListView;
 		this.listViewRequest = listViewRequest;
 	}
-
+	
+	/**
+	 * Evenement déclenché lorsque l'utilisateur clique sur une requête sur la vue graphique
+	 */
 	EventHandler<MouseEvent> clickRequeteNode = new EventHandler<MouseEvent>() {
 		@Override
 		public void handle(MouseEvent event) {
@@ -66,6 +66,9 @@ public class MouseEvents {
 		}
 	};
 
+	/**
+	 * Evènement déclenché lorsque l'utilisateur clique sur un élément de la vue textuelle
+	 */
 	EventHandler<MouseEvent> clickRequeteListeTextuelle = new EventHandler<MouseEvent>() {
 		@Override
 		public void handle(MouseEvent event) {
@@ -90,6 +93,9 @@ public class MouseEvents {
 		}
 	};
 	
+	/**
+	 * Evènement déclenché lorsque l'utilisateur clique sur une intersection de la vue graphique
+	 */
 	EventHandler<MouseEvent> clickIntersection = new EventHandler<MouseEvent>() {
 		@Override
 		public void handle(MouseEvent event) {
