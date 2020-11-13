@@ -3,27 +3,21 @@ package controleur;
 /**
  * 
  * @author Hexanome4103
- * Représente l'état de l'application dans lequel l'utilisateur doit ajouter une étape, qui hérite de l'état général
+ * Représente l'état de l'application dans lequel l'utilisateur doit ajouter nouveau point de récupération, qui hérite de l'état général
  * 
  */
-
-
 public class EtatAjouterPointRecuperation extends Etat{
 
 	/**
-	 * 
-	 * @param interfaceController
-	 * Prend l'objet interface controleur de la classe InterfaceControleur pour modifier les attributs de l'objet interface controleur existant
-	 * 
+	 * Constructeur
+	 * @param interfaceController Objet InterfaceController
 	 */
 	public EtatAjouterPointRecuperation(InterfaceController interfaceController) {
 		super(interfaceController);
 	}
 
 	/**
-	 * 
-	 * Fait appel à la méthode chargerFichierPlan de l'objet interface controleur 
-	 * 
+	 * Méthode surchargée pour afficher une popup d'erreur indiquant que l'utilisateur doit terminer l'ajout d'étape
 	 */
 	@Override
 	public void chargerFichierPlan() {
@@ -31,9 +25,7 @@ public class EtatAjouterPointRecuperation extends Etat{
 	}
 
 	/**
-	 * 
-	 * Fait appel à la méthode chargerFichierRequetes de l'objet interface controleur 
-	 * 
+	 * Méthode surchargée pour afficher une popup d'erreur indiquant que l'utilisateur doit terminer l'ajout d'étape
 	 */
 	@Override
 	public void chargerFichierRequetes() {
@@ -41,9 +33,7 @@ public class EtatAjouterPointRecuperation extends Etat{
 	}
 
 	/**
-	 * 
-	 * Fait appel à la méthode calculerItineraire de l'objet interface controleur 
-	 * 
+	 * Méthode surchargée pour afficher une popup d'erreur indiquant que l'utilisateur doit terminer l'ajout d'étape
 	 */
 	@Override
 	public void calculerItineraire() {
@@ -51,9 +41,7 @@ public class EtatAjouterPointRecuperation extends Etat{
 	}
 	
 	/**
-	 * 
-	 * Fait appel à la méthode ajouterEtape de l'objet interface controleur 
-	 * 
+	 * Méthode surchargée pour afficher une popup d'erreur indiquant que l'utilisateur doit terminer l'ajout d'étape
 	 */
 	@Override
 	public void ajouterEtape() {
@@ -61,9 +49,7 @@ public class EtatAjouterPointRecuperation extends Etat{
 	}
 	
 	/**
-	 * 
-	 * Fait appel à la méthode supprimerEtape de l'objet interface controleur 
-	 * 
+	 * Méthode surchargée pour afficher une popup d'erreur indiquant que l'utilisateur doit terminer l'ajout d'étape
 	 */
 	@Override
 	public void supprimerEtape() {
@@ -71,9 +57,7 @@ public class EtatAjouterPointRecuperation extends Etat{
 	}
 	
 	/**
-	 * 
-	 * Fait appel à la méthode construireFeuilleDeRoute de l'objet interface controleur 
-	 * 
+	 * Méthode surchargée pour afficher une popup d'erreur indiquant que l'utilisateur doit terminer l'ajout d'étape
 	 */
 	@Override
 	public void construireFeuilleDeRoute() {
@@ -81,9 +65,7 @@ public class EtatAjouterPointRecuperation extends Etat{
 	}
 	
 	/**
-	 * 
-	 * Fait appel à la méthode validerAjouterEtape de l'objet interface controleur 
-	 * 
+	 * Méthode permettant d'appeler la méthode validerAjouterEtape d'interfaceController
 	 */
 	@Override
 	public void validerAjouterEtape() {

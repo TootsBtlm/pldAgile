@@ -6,24 +6,18 @@ package controleur;
  * Représente l'état de l'application dans lequel l'utilisateur doit ajouter un point précédent le nouveau point de livraison, qui hérite de l'état général
  * 
  */
-
 public class EtatAjouterPointPrecedentLivraison extends Etat{
 
 	/**
-	 * 
-	 * @param interfaceController
-	 * Prend l'objet interface controleur de la classe InterfaceControleur pour modifier les attributs de l'objet interface controleur existant
-	 * 
+	 * Constructeur
+	 * @param interfaceController Objet InterfaceController
 	 */
 	public EtatAjouterPointPrecedentLivraison(InterfaceController interfaceController) {
 		super(interfaceController);
-		// TODO Auto-generated constructor stub
 	}
 	
 	/**
-	 * 
-	 * Fait appel à la méthode chargerFichierPlan de l'objet interface controleur 
-	 * 
+	 * Méthode surchargée pour afficher une popup d'erreur indiquant que l'utilisateur doit terminer l'ajout d'étape
 	 */
 	@Override
 	public void chargerFichierPlan() {
@@ -31,9 +25,7 @@ public class EtatAjouterPointPrecedentLivraison extends Etat{
 	}
 
 	/**
-	 * 
-	 * Fait appel à la méthode chargerFichierRequetes de l'objet interface controleur 
-	 * 
+	 * Méthode surchargée pour afficher une popup d'erreur indiquant que l'utilisateur doit terminer l'ajout d'étape
 	 */
 	@Override
 	public void chargerFichierRequetes() {
@@ -41,9 +33,7 @@ public class EtatAjouterPointPrecedentLivraison extends Etat{
 	}
 
 	/**
-	 * 
-	 * Fait appel à la méthode calculerItineraire de l'objet interface controleur 
-	 * 
+	 * Méthode surchargée pour afficher une popup d'erreur indiquant que l'utilisateur doit terminer l'ajout d'étape
 	 */
 	@Override
 	public void calculerItineraire() {
@@ -51,9 +41,7 @@ public class EtatAjouterPointPrecedentLivraison extends Etat{
 	}
 	
 	/**
-	 * 
-	 * Fait appel à la méthode supprimerEtape de l'objet interface controleur 
-	 * 
+	 * Méthode surchargée pour afficher une popup d'erreur indiquant que l'utilisateur doit terminer l'ajout d'étape
 	 */
 	@Override
 	public void supprimerEtape() {
@@ -61,9 +49,7 @@ public class EtatAjouterPointPrecedentLivraison extends Etat{
 	}
 	
 	/**
-	 * 
-	 * Fait appel à la méthode construireFeuilleDeRoute de l'objet interface controleur 
-	 * 
+	 * Méthode surchargée pour afficher une popup d'erreur indiquant que l'utilisateur doit terminer l'ajout d'étape
 	 */
 	@Override
 	public void construireFeuilleDeRoute() {
@@ -71,9 +57,7 @@ public class EtatAjouterPointPrecedentLivraison extends Etat{
 	}
 	
 	/**
-	 * 
-	 * Fait appel à la méthode validerAjouterEtape de l'objet interface controleur 
-	 * 
+	 * Méthode permettant d'appeler la méthode validerAjouterEtape d'interfaceController
 	 */
 	@Override
 	public void validerAjouterEtape() {

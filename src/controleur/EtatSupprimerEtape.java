@@ -6,35 +6,26 @@ package controleur;
  * Représente l'état de l'application dans lequel l'utilisateur doit supprimer une etape, qui hérite de la classe Etat
  * 
  */
-
 public class EtatSupprimerEtape extends Etat{
 
 	/**
-	 * 
-	 * @param interfaceController
-	 * Prend l'objet interface controleur de la classe InterfaceControleur pour modifier les attributs de l'objet interface controleur existant
-	 * 
+	 * Constructeur
+	 * @param interfaceController Objet InterfaceController
 	 */
 	public EtatSupprimerEtape(InterfaceController interfaceController) {
 		super(interfaceController);
 	}
 
 	/**
-	 * 
-	 * Fait appel à la méthode chargerFichierPlan de l'objet interface controleur 
-	 * 
+	 * Fait appel à la méthode chargerFichierPlan de l'objet interfaceController
 	 */
 	@Override
 	public void chargerFichierPlan() {
-		
 		this.interfaceController.chargerFichierPlan();
-		
 	}
 
 	/**
-	 * 
 	 * Dans l'état initial, la méthode chargerFichierRequetes ne fait aucune action car aucun plan n'est chargé
-	 * 
 	 */
 	@Override
 	public void chargerFichierRequetes() {
@@ -43,9 +34,7 @@ public class EtatSupprimerEtape extends Etat{
 
 
 	/**
-	 * 
 	 * Dans l'état initial, la méthode calculerItineraire ne fait aucune action car aucun plan n'est chargé
-	 * 
 	 */
 	@Override
 	public void calculerItineraire() {
@@ -53,9 +42,7 @@ public class EtatSupprimerEtape extends Etat{
 	}
 	
 	/**
-	 * 
 	 * Dans l'état supprimer étape, la méthode ajouterEtape ne fait aucune action car l'utilisateur n'a qu'une seule action possible
-	 * 
 	 */
 	@Override
 	public void ajouterEtape() {
@@ -63,9 +50,7 @@ public class EtatSupprimerEtape extends Etat{
 	}
 	
 	/**
-	 * 
-	 * Dans l'état supprimer étape, la méthode supprimerEtape fait appel à la méthode supprimerEtape de l'interface controleur
-	 * 
+	 * Dans l'état supprimer étape, la méthode supprimerEtape change l'état d'interfaceController
 	 */
 	@Override
 	public void supprimerEtape() {
@@ -73,9 +58,7 @@ public class EtatSupprimerEtape extends Etat{
 	}
 	
 	/**
-	 * 
-	 * Dans l'état supprimer étape, la méthode construireFeuilleDeRoute ne fait aucune action car l'utilisateur n'a qu'une seule action possible
-	 * 
+	 * Fait appel à la méthode construireFeuilleDeRoute de l'objet interfaceController 
 	 */
 	@Override
 	public void construireFeuilleDeRoute() {

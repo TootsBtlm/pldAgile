@@ -6,48 +6,33 @@ package controleur;
  * Représente l'état de l'application suivant dans lequel le nouveau plan vient d'être chargé, qui hérite de la classe Etat
  * 
  */
-
-
 public class EtatPlanCharge extends Etat {
 	/**
-	 * 
-	 * @param interfaceController
-	 * Prend l'objet interface controleur de la classe InterfaceControleur pour modifier les attributs de l'objet interface controleur existant
-	 * 
+	 * Constructeur
+	 * @param interfaceController Objet InterfaceController
 	 */
 	public EtatPlanCharge(InterfaceController interfaceController) {
 		super(interfaceController);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * 
-	 * Fait appel à la méthode chargerFichierPlan de l'objet interface controleur 
-	 * 
+	 * Fait appel à la méthode chargerFichierPlan de l'objet interfaceController
 	 */
 	@Override
 	public void chargerFichierPlan() {
-		
 		this.interfaceController.chargerFichierPlan();
-		
 	}
 
 	/**
-	 * 
-	 * Fait appel à la méthode chargerFichierRequete de l'objet interface controleur 
-	 * 
+	 * Fait appel à la méthode chargerFichierRequete de l'objet interfaceController
 	 */
 	@Override
 	public void chargerFichierRequetes() {
-		
 		this.interfaceController.chargerFichierRequete();
-		
 	}
 
 	/**
-	 * 
-	 * Dans l'état plan chargé, la méthode calculerItineraire ne fait aucune action car aucun fichier de requêtes n'est chargé
-	 * 
+	 * Dans l'état plan chargé, la méthode calculerItineraire affiche une popup indiquant qu'il faut d'abord charger un fichier de requêtes
 	 */
 	@Override
 	public void calculerItineraire() {
@@ -55,9 +40,7 @@ public class EtatPlanCharge extends Etat {
 	}
 	
 	/**
-	 * 
-	 * Dans l'état plan chargé, la méthode ajouterEtape ne fait aucune action car aucun fichier de requêtes n'est chargé
-	 * 
+	 * Dans l'état plan chargé, la méthode ajouterEtape affiche une popup indiquant qu'il faut d'abord charger un fichier de requêtes
 	 */
 	@Override
 	public void ajouterEtape() {
@@ -65,9 +48,7 @@ public class EtatPlanCharge extends Etat {
 	}
 	
 	/**
-	 * 
-	 * Dans l'état plan chargé, la méthode supprimerEtape ne fait aucune action car aucun fichier de requêtes n'est chargé
-	 * 
+	 * Dans l'état plan chargé, la méthode supprimerEtape affiche une popup indiquant qu'il faut d'abord charger un fichier de requêtes
 	 */
 	@Override
 	public void supprimerEtape() {
@@ -75,13 +56,10 @@ public class EtatPlanCharge extends Etat {
 	}
 	
 	/**
-	 * 
-	 * Dans l'état plan chargée, la méthode construireFeuilleDeRoute ne fait aucune action car aucun itinéraire n'est calculé
-	 * 
+	 * Dans l'état plan chargé, la méthode construireFeuilleDeRoute affiche une popup indiquant qu'il faut d'abord charger un fichier de requêtes
 	 */
 	@Override
 	public void construireFeuilleDeRoute() {
 		interfaceController.afficherPopupErreur("Charger d'abord un fichier de requêtes");
 	}
-	
 }
