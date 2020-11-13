@@ -1,4 +1,4 @@
-package modele;
+package test;
 
 import static org.junit.Assert.*;
 
@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import javafx.util.Pair;
+import modele.TSP1;
 
 public class TSP1Test {
 	TSP1 tsp;
