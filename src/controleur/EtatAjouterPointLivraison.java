@@ -10,20 +10,15 @@ package controleur;
 public class EtatAjouterPointLivraison extends Etat{
 
 	/**
-	 * 
-	 * @param interfaceController
-	 * Prend l'objet interface controleur de la classe InterfaceControleur pour modifier les attributs de l'objet interface controleur existant
-	 * 
+	 * Constructeur de EtatAjouterPointLivraison
+	 * @param interfaceController Objet InterfaceController
 	 */
 	public EtatAjouterPointLivraison(InterfaceController interfaceController) {
 		super(interfaceController);
-		// TODO Auto-generated constructor stub
 	}
 	
 	/**
-	 * 
-	 * Fait appel à la méthode chargerFichierPlan de l'objet interface controleur 
-	 * 
+	 * Méthode surchargée pour afficher une popup d'erreur
 	 */
 	@Override
 	public void chargerFichierPlan() {
@@ -31,9 +26,7 @@ public class EtatAjouterPointLivraison extends Etat{
 	}
 
 	/**
-	 * 
-	 * Fait appel à la méthode chargerFichierRequetes de l'objet interface controleur 
-	 * 
+	 * Méthode surchargée pour afficher une popup d'erreur
 	 */
 	@Override
 	public void chargerFichierRequetes() {
@@ -41,9 +34,7 @@ public class EtatAjouterPointLivraison extends Etat{
 	}
 
 	/**
-	 * 
-	 * Fait appel à la méthode calculerItineraire de l'objet interface controleur 
-	 * 
+	 * Méthode surchargée pour afficher une popup d'erreur
 	 */
 	@Override
 	public void calculerItineraire() {
@@ -51,9 +42,7 @@ public class EtatAjouterPointLivraison extends Etat{
 	}
 
 	/**
-	 * 
-	 * Fait appel à la méthode supprimerEtape de l'objet interface controleur 
-	 * 
+	 * Méthode surchargée pour afficher une popup d'erreur
 	 */
 	@Override
 	public void supprimerEtape() {
@@ -61,9 +50,7 @@ public class EtatAjouterPointLivraison extends Etat{
 	}
 
 	/**
-	 * 
-	 * Fait appel à la méthode construireFeuilleDeRoute de l'objet interface controleur 
-	 * 
+	 * Méthode surchargée pour afficher une popup d'erreur
 	 */
 	@Override
 	public void construireFeuilleDeRoute() {
@@ -71,9 +58,7 @@ public class EtatAjouterPointLivraison extends Etat{
 	}
 
 	/**
-	 * 
-	 * Fait appel à la méthode validerAjouterEtape de l'objet interface controleur 
-	 * 
+	 * Méthode permettant de lancer la méthode validerAjouterEtape de interfaceController
 	 */
 	@Override
 	public void validerAjouterEtape() {

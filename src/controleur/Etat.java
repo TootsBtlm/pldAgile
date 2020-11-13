@@ -5,25 +5,20 @@ import vue.VueGraphique;
 /**
  * 
  * @author Hexanome4103
- * Représente la classe mère de tous les états
+ * Classe mère représentant l'implémentation du design pattern Etat
  * 
  */
 
 public abstract class Etat {
 
-
 	protected VueGraphique vue;
 
 	protected InterfaceController interfaceController;
 
-
 	/**
-	 * 
-	 * @param interfaceController
-	 * Prend l'objet interface controleur de la classe InterfaceControleur pour modifier les attributs de l'objet interface controleur existant
-	 * 
+	 * Constructeur
+	 * @param interfaceController Objet InterfaceController
 	 */
-
 	public Etat(InterfaceController interfaceController) {
 		this.interfaceController = interfaceController;
 	}

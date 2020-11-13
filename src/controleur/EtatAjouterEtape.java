@@ -10,20 +10,17 @@ package controleur;
 
 
 public class EtatAjouterEtape extends Etat{
+	
 	/**
-	 * 
-	 * @param interfaceController
-	 * Prend l'objet interface controleur de la classe InterfaceControleur pour modifier les attributs de l'objet interface controleur existant
-	 * 
+	 * Constructeur
+	 * @param interfaceController Objet InterfaceController
 	 */
 	public EtatAjouterEtape(InterfaceController interfaceController) {
 		super(interfaceController);
 	}
 
 	/**
-	 * 
-	 * Fait appel à la méthode chargerFichierPlan de l'objet interface controleur 
-	 * 
+	 * Méthode surchargée pour afficher une popup d'erreur
 	 */
 	@Override
 	public void chargerFichierPlan() {
@@ -31,9 +28,7 @@ public class EtatAjouterEtape extends Etat{
 	}
 
 	/**
-	 * 
-	 * Fait appel à la méthode chargerFichierRequetes de l'objet interface controleur 
-	 * 
+	 * Méthode surchargée pour afficher une popup d'erreur
 	 */
 	@Override
 	public void chargerFichierRequetes() {
@@ -41,9 +36,7 @@ public class EtatAjouterEtape extends Etat{
 	}
 
 	/**
-	 * 
-	 * Fait appel à la méthode calculerItineraire de l'objet interface controleur 
-	 * 
+	 * Méthode surchargée pour afficher une popup d'erreur
 	 */
 	@Override
 	public void calculerItineraire() {
@@ -61,16 +54,16 @@ public class EtatAjouterEtape extends Etat{
 	}
 	
 	/**
-	 * 
-	 * Fait appel à la méthode supprimerEtape de l'objet interface controleur 
-	 * 
+	 * Méthode surchargée pour afficher une popup d'erreur
 	 */
-
 	@Override
 	public void supprimerEtape() {
 		interfaceController.afficherPopupErreur("Terminer l'ajout d'etape avant");
 	}
 	
+	/**
+	 * Méthode surchargée pour afficher une popup d'erreur
+	 */
 	@Override
 	public void construireFeuilleDeRoute() {
 		interfaceController.afficherPopupErreur("Terminer l'ajout d'etape avant");
@@ -86,21 +79,33 @@ public class EtatAjouterEtape extends Etat{
 		this.interfaceController.validerAjouterEtape();
 	}
 	
+	/**
+	 * Méthode permettant de changer l'état de l'interfaceController en EtatAjouterPointRecuperation
+	 */
 	@Override
 	public void ajouterPointRecuperation() {
 		interfaceController.setEtat(new EtatAjouterPointRecuperation(interfaceController));
 	}
 
+	/**
+	 * Méthode permettant de changer l'état de l'interfaceController en EtatAjouterPointLivraison
+	 */
 	@Override
 	public void ajouterPointLivraison() {
 		interfaceController.setEtat(new EtatAjouterPointLivraison(interfaceController));
 	}
 	
+	/**
+	 * Méthode permettant de changer l'état de l'interfaceController en EtatAjouterPointPrecedentRecuperation
+	 */
 	@Override
 	public void ajouterPointPrecedentRecuperation() {
 		interfaceController.setEtat(new EtatAjouterPointPrecedentRecuperation(interfaceController));
 	}
 
+	/**
+	 * Méthode permettant de changer l'état de l'interfaceController en EtatAjouterPointPrecedentLivraison
+	 */
 	@Override
 	public void ajouterPointPrecedentLivraison() {
 		interfaceController.setEtat(new EtatAjouterPointPrecedentLivraison(interfaceController));

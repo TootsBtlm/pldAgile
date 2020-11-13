@@ -3,7 +3,7 @@ package controleur;
 /**
  * 
  * @author Hexanome4103
- * Représente l'état de l'application dans lequel l'utilisateur doit ajouter une étape, qui hérite de l'état général
+ * Représente l'état de l'application dans lequel l'utilisateur doit ajouter un point précédent le nouveau point de livraison, qui hérite de l'état général
  * 
  */
 
