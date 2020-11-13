@@ -226,12 +226,6 @@ public class Plan {
 			Livraison nouvelleLivraison = new Livraison(nouvelleListeisteItineraires, requetes);
 			nouvelleLivraison.calculArrivees();
 			
-			System.out.println("Affichage  de la nouvelle livraison");
-			for(int i = 0 ; i < nouvelleLivraison.getListeItineraires().size(); i++) {
-				System.out.println(nouvelleLivraison.getListeItineraires().get(i).getListeIntersections().get(0));
-				System.out.println(nouvelleLivraison.getListeItineraires().get(i).getListeIntersections().get(nouvelleLivraison.getListeItineraires().get(i).getListeIntersections().size() -1));
-				
-			}
 			return nouvelleLivraison;
 		}else {
 			return null;
