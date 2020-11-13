@@ -1,7 +1,5 @@
 package vue;
 
-import java.util.List;
-
 import com.google.common.collect.BiMap;
 
 import controleur.MouseEvents;
@@ -20,14 +18,17 @@ public class VueTextuelle {
 
 	private Plan plan;
 	private ListView<String> listViewRequest;
-	private MouseEvents mouseEvents;
 
 	public VueTextuelle(Plan plan, ListView<String> listViewRequest, MouseEvents mouseEvents) {
 		this.plan = plan;
 		this.listViewRequest = listViewRequest;
-		this.mouseEvents = mouseEvents;
 	}
 
+	/**
+	 * Méthode permettant d'ajouter les requêtes dans la liste textuelle
+	 * @param ense Ensemble des requêtes à ajouter
+	 * @param listViewRequest Objet dans lequel les requêtes sont ajoutées
+	 */
 	public void drawText(EnsembleRequete ense, ListView<String> listViewRequest) {
 		ObservableList<String> items = FXCollections.observableArrayList();
 		items.add(ense.getLieuDepart().getPointDeDepart().getIdVisible().toString() + " Depot" + 
@@ -41,6 +42,11 @@ public class VueTextuelle {
 		this.listViewRequest.setItems(items);
 	}
 
+	/**
+	 * Méthode permettant de mettre à jour la liste textuelle pour afficher l'itinéraire
+	 * @param livraison L'itinéraire à ajouter dans la liste textuelle
+	 * @param requeteNodeListView Objet BiMap contenant les relations entre les objets de la liste textuelle et de la vue graphique
+	 */
 	public void drawItineraire(Livraison livraison, BiMap<Node, String> requeteNodeListView) {
 		ObservableList<String> items = this.listViewRequest.getItems();
 		ObservableList<String> newItems = FXCollections.observableArrayList();
