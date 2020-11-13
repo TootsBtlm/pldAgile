@@ -8,7 +8,7 @@ import javafx.util.Pair;
 
 public class TSP1 extends TemplateTSP {
 	@Override
-	protected double bound(Integer depart, Integer currentVertex, Collection<Integer> unvisited, Collection<Integer> visited, ArrayList<Pair<Integer, Integer>> paires) {
+	public double bound(Integer depart, Integer currentVertex, Collection<Integer> unvisited, Collection<Integer> visited, ArrayList<Pair<Integer, Integer>> paires) {
 		double l = cheapestNeighbour(currentVertex, unvisited, visited, paires); //l is cheapest arc from current to unvisited
 		SeqIter it = new SeqIter(unvisited, visited, currentVertex, g, paires); //on cree un iterator a partir d'un element aléatoire
 		double total = 0;
