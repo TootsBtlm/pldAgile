@@ -41,7 +41,6 @@ import vue.VueTextuelle;
  * Représente la classe controleur de l'application, qui fait appel aux classes états pour gérer les différentes actions possibles
  *
  */
-
 public class InterfaceController {
 
 
@@ -119,7 +118,6 @@ public class InterfaceController {
 	 * Crée une instance de la classe InterfaceController, et initialise les attributs tsp, etat, ajouterStage et mouseEvents de l'instance
 	 * 
 	 */
-
 	public InterfaceController() {
 		tsp = new TSP1();
 		etat = new EtatInitial(this);
@@ -133,7 +131,6 @@ public class InterfaceController {
 	 * Permet à l'utilisateur de charger le fichier du plan en faisant appel à la fonction polymorphe chargerFichierPlan de la classe Etat 
 	 * 
 	 */
-	
 	@FXML
 	public void actionChargerFichierPlan() {
 		etat.chargerFichierPlan();
@@ -144,7 +141,6 @@ public class InterfaceController {
 	 *  
 	 * 
 	 */
-	
 	public Etat getEtat() {
 		return this.etat;
 	}
@@ -154,7 +150,6 @@ public class InterfaceController {
 	 * Charge le plan en faisant appel à la classe Lecteur du package modèle
 	 * 
 	 */
-	
 	public void chargerFichierPlan() {
 		FileChooser fileChooser = new FileChooser();
 		File file = fileChooser.showOpenDialog(this.stage);
@@ -185,7 +180,6 @@ public class InterfaceController {
 	 * Permet à l'utilisateur de charger le fichier de requêtes en faisant appel à la fonction polymorphe chargerFichierRequetes de la classe Etat 
 	 * 
 	 */
-
 	@FXML
 	public void actionChargerFichierRequete() {
 		etat.chargerFichierRequetes();
@@ -196,7 +190,6 @@ public class InterfaceController {
 	 * Charge le fichier de requêtes en faisant appel à la classe Lecteur du package modèle
 	 * 
 	 */
-
 	public void chargerFichierRequete() {
 		if(this.vueGraphique == null) {
 		} else {
@@ -241,7 +234,6 @@ public class InterfaceController {
 	 * Permet à l'utilisateur de calculer l'itinéraire en faisant appel à la fonction polymorphe calculerItineraire de la classe Etat 
 	 * 
 	 */
-
 	@FXML
 	public void actionCalculerItineraire() {
 		etat.calculerItineraire();
@@ -253,7 +245,6 @@ public class InterfaceController {
 	 * Charge et affiche l'itinéraire calculé en faisant appel à la méthode getMatriceCout de la classe Plan
 	 * 
 	 */
-
 	public void calculerItineraire() {
 
 		this.livraison = plan.getMatriceCout(this.ensembleRequete);
@@ -268,7 +259,6 @@ public class InterfaceController {
 	 * Fait appel à la fonction polymorphe ajouterEtape de la classe Etat ce qui lance une autre fenêtre de gestion de l'ajout d'une étape
 	 * 
 	 */
-
 	@FXML
 	public void actionAjouterEtape() {
 		etat.ajouterEtape();
@@ -279,7 +269,6 @@ public class InterfaceController {
 	 * Déclenchée lorsque l'utilisateur appuie sur le bouton ajouter un point de récupération, permet à l'utilisateur de sélectionner le point de récupération à ajouter
 	 * 
 	 */
-
 	@FXML
 	public void actionAjouterPointRecuperation() {
 		etat.ajouterPointRecuperation();
@@ -290,7 +279,6 @@ public class InterfaceController {
 	 * Déclenchée lorsque l'utilisateur appuie sur le bouton ajouter le point qui précède le point de récupération, permet à l'utilisateur de sélectionner le point précédent à ajouter
 	 * 
 	 */
-
 	@FXML
 	public void actionAjouterPointPrecedentRecuperation() {
 		etat.ajouterPointPrecedentRecuperation();
@@ -301,7 +289,6 @@ public class InterfaceController {
 	 * Déclenchée lorsque l'utilisateur appuie sur le bouton ajouter le point qui précède le point de livraison, permet à l'utilisateur de sélectionner le point précédent à ajouter
 	 * 
 	 */
-
 	@FXML
 	public void actionAjouterPointPrecedentLivraison() {
 		etat.ajouterPointPrecedentLivraison();
@@ -312,7 +299,6 @@ public class InterfaceController {
 	 * Déclenchée lorsque l'utilisateur appuie sur le bouton ajouter le point de livraison, permet à l'utilisateur de sélectionner le point de livraison à ajouter
 	 * 
 	 */
-
 	@FXML
 	public void actionAjouterPointLivraison() {
 		etat.ajouterPointLivraison();
@@ -323,7 +309,6 @@ public class InterfaceController {
 	 * Lance une nouvelle fenêtre qui permet à l'utilisateur de gérer l'ajout d'une nouvelle étape
 	 * 
 	 */
-
 	public void ajouterEtape() {
 		etat = new EtatAjouterEtape(this);
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/vue/ajouterPopup.fxml"));
@@ -353,11 +338,9 @@ public class InterfaceController {
 	 * Valide l'ajout de l'étape, calcule la portion d'itinéraire à modifier et l'affiche
 	 * 
 	 */
-
 	public void validerAjouterEtape() {
 		if(this.pointPrecedentLivraison == null || this.pointPrecedentRecuperation == null || this.pointPrecedentLivraison == null || this.nouveauPointRecuperation == null || this.nouveauPointLivraison == null) {
 			this.afficherPopupErreur("Erreur lors de l'ajout d'une requete");
-			//etat = new EtatItineraireCalcule(this);
 		} else {
 			try {
 			long dureeRecuperation = (long) Integer.parseInt(this.textTempsRecuperation.getText());
@@ -374,10 +357,8 @@ public class InterfaceController {
 				this.requeteNodeListView.clear();
 				for(int i = 0; i < this.vueGraphique.getRequetes().size(); i++) {
 					requeteNodeListView.put(this.vueGraphique.getRequetes().get(i), listViewRequest.getItems().get(i));
-					//this.requeteNodes = this.vueGraphique.getIntersectionPane().getChildren();
 				}
 				mouseEvents.setListViewRequest(this.listViewRequest);
-
 				// Ajout d'un event handler sur les nodes correspondant aux requêtes sur la carte
 				for(int i = 0; i < this.vueGraphique.getRequetes().size(); i++) {
 					mouseEvents.requeteCliquable(this.vueGraphique.getRequetes().get(i));
@@ -402,7 +383,6 @@ public class InterfaceController {
 	 * Permet à l'utilisateur de valider l'ajout d'une étape en faisant appel à la fonction polymorphe validerAjouterEtape de la classe Etat
 	 * 
 	 */
-
 	@FXML
 	public void actionValiderAjouterEtape() {
 		etat.validerAjouterEtape();
@@ -413,7 +393,6 @@ public class InterfaceController {
 	 * Ajoute le point de récupération dans la fenêtre de gestion d'ajout d'une étape
 	 * 
 	 */
-
 	public void ajouterNouveauPointRecuperation(Intersection inter) {
 		inter.setTypeIntersection(3);
 		setNouveauPointRecuperation(inter);
@@ -426,7 +405,6 @@ public class InterfaceController {
 	 * Ajoute le point qui précède le point de récupération dans la fenêtre de gestion d'ajout d'une étape
 	 * 
 	 */
-
 	public void ajouterPointPrecedentRecuperation(Intersection inter) {
 		setPointPrecedentRecuperation(inter);
 		this.textPointPrecedentRecuperation.setText(this.plan.getNomRue(inter));
@@ -438,7 +416,6 @@ public class InterfaceController {
 	 * Ajoute le point qui précède le point de livraison dans la fenêtre de gestion d'ajout d'une étape
 	 * 
 	 */
-
 	public void ajouterPointPrecedentLivraison(Intersection inter) {
 		setPointPrecedentLivraison(inter);
 		this.textPointPrecedentLivraison.setText(this.plan.getNomRue(inter));
@@ -450,7 +427,6 @@ public class InterfaceController {
 	 * Ajoute le point de livraison dans la fenêtre de gestion d'ajout d'une étape
 	 * 
 	 */
-
 	public void ajouterNouveauPointLivraison(Intersection inter) {
 		inter.setTypeIntersection(4);
 		setNouveauPointLivraison(inter);
@@ -463,7 +439,6 @@ public class InterfaceController {
 	 * Permet à l'utilisateur de supprimer une étape en faisant appel à la fonction polymorphe supprimerEtape de la classe Etat
 	 * 
 	 */
-
 	@FXML
 	public void actionSupprimerEtape() {
 		etat.supprimerEtape();
@@ -474,7 +449,6 @@ public class InterfaceController {
 	 * Supprime une étape, calcule la portion d'itinéraire à modifier et l'affiche
 	 * 
 	 */
-
 	public void supprimerEtape(Intersection inter) {
 
 		this.livraison = plan.supprimerRequete(this.livraison,  inter);
@@ -492,7 +466,6 @@ public class InterfaceController {
 	 * Affiche une popup d'erreur dont le message change selon le cas d'erreur déclenché
 	 * 
 	 */
-	
 	public void afficherPopupErreur(String message) {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/vue/PopupError.fxml"));
 		loader.setController(this);
@@ -525,7 +498,6 @@ public class InterfaceController {
 	 * Permet à l'utilisateur de générer une feuille de route en faisant appel à la fonction polymorphe construireFeuilleDeRoute de la classe Etat
 	 * 
 	 */
-	
 	@FXML
 	public void actionCreerFeuilleDeRoute() {
 		etat.construireFeuilleDeRoute();
@@ -536,7 +508,6 @@ public class InterfaceController {
 	 * Génère une feuille de route et l'affiche
 	 * 
 	 */
-	
 	public void construireFeuilleDeRoute() {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/vue/feuilleDeRoutePopup.fxml"));
 		loader.setController(this);
@@ -580,7 +551,6 @@ public class InterfaceController {
 	 *  
 	 * 
 	 */
-	
 	public void setStage(Stage stage) {
 		this.stage = stage;
 	}
@@ -590,7 +560,6 @@ public class InterfaceController {
 	 *  
 	 * 
 	 */
-	
 	public Intersection getNouveauPointRecuperation() {
 		return nouveauPointRecuperation;
 	}
@@ -600,7 +569,6 @@ public class InterfaceController {
 	 *  
 	 * 
 	 */
-	
 	public void setNouveauPointRecuperation(Intersection nouveauPointRecuperation) {
 		this.nouveauPointRecuperation = nouveauPointRecuperation;
 	}
@@ -610,7 +578,6 @@ public class InterfaceController {
 	 *  
 	 * 
 	 */
-	
 	public Intersection getNouveauPointLivraison() {
 		return nouveauPointLivraison;
 	}
@@ -620,7 +587,6 @@ public class InterfaceController {
 	 *  
 	 * 
 	 */
-	
 	public void setNouveauPointLivraison(Intersection nouveauPointLivraison) {
 		this.nouveauPointLivraison = nouveauPointLivraison;
 	}
@@ -630,7 +596,6 @@ public class InterfaceController {
 	 *  
 	 * 
 	 */
-	
 	public Intersection getPointPrecedentRecuperation() {
 		return pointPrecedentRecuperation;
 	}
@@ -640,7 +605,6 @@ public class InterfaceController {
 	 *  
 	 * 
 	 */
-	
 	public void setPointPrecedentRecuperation(Intersection pointPrecedentRecuperation) {
 		this.pointPrecedentRecuperation = pointPrecedentRecuperation;
 	}
@@ -650,7 +614,6 @@ public class InterfaceController {
 	 *  
 	 * 
 	 */
-	
 	public Intersection getPointPrecedentLivraison() {
 		return pointPrecedentLivraison;
 	}
@@ -660,7 +623,6 @@ public class InterfaceController {
 	 *  
 	 * 
 	 */
-	
 	public void setPointPrecedentLivraison(Intersection pointPrecedentLivraison) {
 		this.pointPrecedentLivraison = pointPrecedentLivraison;
 	}
@@ -670,7 +632,6 @@ public class InterfaceController {
 	 *  
 	 * 
 	 */
-	
 	public Stage getAjouterStage() {
 		return ajouterStage;
 	}
@@ -680,7 +641,6 @@ public class InterfaceController {
 	 *  
 	 * 
 	 */
-	
 	public void setEtat(Etat etat) {
 		this.etat = etat;
 	}
@@ -690,7 +650,6 @@ public class InterfaceController {
 	 *  
 	 * 
 	 */
-	
 	public void setAjouterStage(Stage ajouterStage) {
 		this.ajouterStage = ajouterStage;
 	}
@@ -700,7 +659,6 @@ public class InterfaceController {
 	 *  
 	 * 
 	 */
-	
 	public Stage getMessageErreurStage() {
 		return messageErreurStage;
 	}
@@ -710,8 +668,43 @@ public class InterfaceController {
 	 *  
 	 * 
 	 */
-	
 	public void setMessageErreurStage(Stage messageErreurStage) {
 		this.messageErreurStage = messageErreurStage;
+	}
+	
+	/**
+	 * 
+	 *  
+	 * 
+	 */
+	public void setPlan(Plan plan) {
+		this.plan = plan ;
+	}
+	
+	/**
+	 * 
+	 *  
+	 * 
+	 */
+	public void setEnsembleRequete(EnsembleRequete ensembleRequete) {
+		this.ensembleRequete = ensembleRequete;
+	}
+	
+	/**
+	 * 
+	 *  
+	 * 
+	 */
+	public void setRequeteNodeListView(BiMap<Node,String> requeteNodeListView) {
+		this.requeteNodeListView = requeteNodeListView;
+	}
+	
+	/**
+	 * 
+	 *  
+	 * 
+	 */
+	public Livraison getLivraison() {
+		return this.livraison;
 	}
 }
