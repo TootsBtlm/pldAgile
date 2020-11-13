@@ -12,12 +12,25 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Circle;
 import modele.Intersection;
 
+/**
+ * 
+ * @author Hexanome4103
+ * Représente la classe controleur de l'application, qui fait appel aux classes états pour gérer les différentes actions possibles
+ *
+ */
+
 public class MouseEvents {
 
 	private BiMap<Node, String> requeteNodeListView;
 	private ListView<String> listViewRequest;
 	private Map<Node, Intersection> nodeLinkedToIntersection;
 	private InterfaceController interfaceController;
+	
+	/**
+	 * @param requeteNodeListView, listViewRequest, interfaceController
+	 * Crée une instance de la classe MouseEvents, et initialise les attributs interfaceController, requeteNodeListView et listViewRequest de l'instance
+	 * 
+	 */
 	
 	public MouseEvents(BiMap<Node, String> requeteNodeListView, ListView<String> listViewRequest, InterfaceController interfaceController) {
 		this.interfaceController = interfaceController;
@@ -29,9 +42,7 @@ public class MouseEvents {
 		@Override
 		public void handle(MouseEvent event) {
 			if(event.getSource() instanceof Circle) {
-				System.out.println("click requetenode");
 				Circle p = ((Circle)(event.getSource()));
-				System.out.println(listViewRequest);
 				listViewRequest.getSelectionModel().select(requeteNodeListView.get(p));
 				for(Node key : requeteNodeListView.keySet()) {
 					Circle nodeC = (Circle)(key);
@@ -39,11 +50,9 @@ public class MouseEvents {
 				}
 				p.setRadius(12.0);
 				
-				System.out.println(nodeLinkedToIntersection);
 				Intersection inter = nodeLinkedToIntersection.get(p);
 				
 				if (interfaceController.getEtat() instanceof EtatSupprimerEtape) {
-					System.out.println("Inter : " + inter);
 					interfaceController.supprimerEtape(inter);
 				}
 				else if (interfaceController.getEtat() instanceof EtatAjouterPointPrecedentRecuperation) {
@@ -60,19 +69,16 @@ public class MouseEvents {
 	EventHandler<MouseEvent> clickRequeteListeTextuelle = new EventHandler<MouseEvent>() {
 		@Override
 		public void handle(MouseEvent event) {
-//			System.out.println(requeteNodeListView);
 			for(Node key : requeteNodeListView.keySet()) {
 				Circle nodeC = (Circle)(key);
 				nodeC.setRadius(8.0);
 			}
 			String clickedString = listViewRequest.getSelectionModel().getSelectedItem();
-			System.out.println("Clicked string : " + clickedString);
 			Node n = requeteNodeListView.inverse().get(clickedString);
 			Circle p = (Circle)(n);
 			p.setRadius(12.0);
 			Intersection inter = nodeLinkedToIntersection.get(p);
 			if (interfaceController.getEtat() instanceof EtatSupprimerEtape) {
-				System.out.println("Inter : " + inter);
 				interfaceController.supprimerEtape(inter);
 			}
 			else if (interfaceController.getEtat() instanceof EtatAjouterPointPrecedentRecuperation) {
@@ -90,16 +96,13 @@ public class MouseEvents {
 			if(event.getSource() instanceof Circle) {
 				Circle p = ((Circle)(event.getSource()));
 				Intersection inter = nodeLinkedToIntersection.get(p);
-				System.out.println("MOUSE EVENTS : " + interfaceController.getEtat());
 				if (interfaceController.getEtat() instanceof EtatSupprimerEtape) {
 					interfaceController.supprimerEtape(inter);
 				} else if(interfaceController.getEtat() instanceof EtatAjouterPointRecuperation) {
-					//System.out.println("clique pendant etat point recuperation");
 					interfaceController.ajouterNouveauPointRecuperation(inter);
 				} else if(interfaceController.getEtat() instanceof EtatAjouterPointLivraison) {
 					interfaceController.ajouterNouveauPointLivraison(inter);
 				}
-				System.out.println(inter);
 			}
 
 		}
@@ -118,7 +121,6 @@ public class MouseEvents {
 	}
 
 	public void setNodeLinkedToIntersection(Map<Node, Intersection> nodeLinkedToIntersection) {
-		System.out.println(nodeLinkedToIntersection);
 		this.nodeLinkedToIntersection = nodeLinkedToIntersection;
 	}
 	

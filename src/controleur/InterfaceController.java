@@ -38,7 +38,7 @@ import vue.VueTextuelle;
 /**
  * 
  * @author Hexanome4103
- * Représente 
+ * Représente la classe controleur de l'application, qui fait appel aux classes états pour gérer les différentes actions possibles
  *
  */
 
@@ -116,7 +116,7 @@ public class InterfaceController {
 
 	/**
 	 * 
-	 * Créer une instance de la classe InterfaceController. Initialise les attributs tsp, etat, ajouterStage et mouseEvents de l'instance.
+	 * Crée une instance de la classe InterfaceController, et initialise les attributs tsp, etat, ajouterStage et mouseEvents de l'instance
 	 * 
 	 */
 
@@ -130,13 +130,12 @@ public class InterfaceController {
 
 	/**
 	 * 
-	 * Fait appel à la fonction polymorphe chargerFichierPlan de la classe Etat 
+	 * Permet à l'utilisateur de charger le fichier du plan en faisant appel à la fonction polymorphe chargerFichierPlan de la classe Etat 
 	 * 
 	 */
+	
 	@FXML
 	public void actionChargerFichierPlan() {
-		System.out.println("called actionChargerFichierPlan");
-		System.out.println("ETAT au call : " + this.etat);
 		etat.chargerFichierPlan();
 	}
 
@@ -145,26 +144,26 @@ public class InterfaceController {
 	 *  
 	 * 
 	 */
+	
 	public Etat getEtat() {
 		return this.etat;
 	}
 
 	/**
 	 * 
-	 * Permet de charger le plan en faisant appel à la classe Lecteur
+	 * Charge le plan en faisant appel à la classe Lecteur du package modèle
 	 * 
 	 */
+	
 	public void chargerFichierPlan() {
 		FileChooser fileChooser = new FileChooser();
 		File file = fileChooser.showOpenDialog(this.stage);
 		if(file != null) {
 			String path = file.getPath();
-			System.out.println(path);
 			Lecteur lecteur = new Lecteur();
 			Plan newPlan = lecteur.LirePlan(path);
 			if(newPlan == null) {
 				afficherPopupErreur("Fichier incorrect ! Veuillez réessayer");
-				//System.out.println("Fichier incorrect");
 			} else {
 				this.plan = newPlan;
 				this.vueGraphique = new VueGraphique(this.plan, this.planCanvas, this.intersectionPane, this.itineraireCanvas, mouseEvents);
@@ -178,38 +177,33 @@ public class InterfaceController {
 				etat = new EtatPlanCharge(this);
 			}
 		} else {
-			System.out.println("Fichier incorrect");
 		}
 	}
 
 	/**
 	 * 
-	 * Fait appel à la fonction polymorphe chargerFichierRequetes de la classe Etat 
+	 * Permet à l'utilisateur de charger le fichier de requêtes en faisant appel à la fonction polymorphe chargerFichierRequetes de la classe Etat 
 	 * 
 	 */
 
 	@FXML
 	public void actionChargerFichierRequete() {
-		System.out.println("called actionChargerFichierRequete");
-		System.out.println("ETAT au call : " + this.etat);
 		etat.chargerFichierRequetes();
 	}
 
 	/**
 	 * 
-	 * Permet de charger le fichier de requêtes en faisant appel à la classe Lecteur
+	 * Charge le fichier de requêtes en faisant appel à la classe Lecteur du package modèle
 	 * 
 	 */
 
 	public void chargerFichierRequete() {
 		if(this.vueGraphique == null) {
-			System.out.println("Charger d'abord un plan");
 		} else {
 			FileChooser fileChooser = new FileChooser();
 			File file = fileChooser.showOpenDialog(this.stage);
 			if(file != null) {
 				String path = file.getPath();
-				System.out.println(path);
 				Lecteur lecteur = new Lecteur();
 				EnsembleRequete newRequete = lecteur.LireRequete(path, this.plan);
 				if(newRequete == null) {
@@ -225,73 +219,46 @@ public class InterfaceController {
 					this.requeteNodeListView.clear();
 					for(int i = 0; i < this.vueGraphique.getRequetes().size(); i++) {
 						requeteNodeListView.put(this.vueGraphique.getRequetes().get(i), listViewRequest.getItems().get(i));
-						//this.requeteNodes = this.vueGraphique.getIntersectionPane().getChildren();
 					}
-					System.out.println("creation mouse event : " + this.listViewRequest);
-					//					mouseEvents = new MouseEvents(this.requeteNodeListView, this.listViewRequest, this);
 					mouseEvents.setListViewRequest(this.listViewRequest);
-
 
 					// Ajout d'un event handler sur les nodes correspondant aux requêtes sur la carte
 
 					for(int i = 0; i < this.vueGraphique.getRequetes().size(); i++) {
 						mouseEvents.requeteCliquable(this.vueGraphique.getRequetes().get(i));
 					}
-
 					this.mouseEvents.setListeCliquable();
 					this.textChargerFichierRequete.setVisible(false);;
-
-					//System.out.println("test");
 					etat = new EtatListeRequeteChargee(this);
 				}
 			} else {
-				System.out.println("fichier incorrect");
 			}
 		}
 	}
 
 	/**
 	 * 
-	 * Fait appel à la fonction polymorphe calculerItineraire de la classe Etat 
+	 * Permet à l'utilisateur de calculer l'itinéraire en faisant appel à la fonction polymorphe calculerItineraire de la classe Etat 
 	 * 
 	 */
 
 	@FXML
 	public void actionCalculerItineraire() {
-		System.out.println("called actionCalculerItineraire");
-		System.out.println("ETAT au actionCalculerItineraire : " + this.etat);
 		etat.calculerItineraire();
 	}
 
 
 	/**
 	 * 
-	 * Permet de charger l'itinéraire calculé en faisant appel à la méthode getMatriceCout de la classe Plan
+	 * Charge et affiche l'itinéraire calculé en faisant appel à la méthode getMatriceCout de la classe Plan
 	 * 
 	 */
 
 	public void calculerItineraire() {
 
 		this.livraison = plan.getMatriceCout(this.ensembleRequete);
-		//		for(int i = 0; i < livraison.getListeItineraires().size(); i++) {
-		//			Itineraire iti = livraison.getListeItineraires().get(i);
-		//			System.out.println("itineraire " + i);
-		//			System.out.println(iti.getListeIntersections().get(0));
-		//			System.out.println(iti.getListeIntersections().get(iti.getListeIntersections().size()-1));
-		//			System.out.println(" ");
-		//		}
-
-		//System.out.println("Size itineraire : " + this.livraison.getListeItineraires().get(0).getListeIntersections().get(0).getId());
-
 		this.vueGraphique.drawItineraire(this.livraison);
-
-		//System.out.println("BEFORE : " + listViewRequest.getItems());
 		this.vueTextuelle.drawItineraire(this.livraison, this.requeteNodeListView);
-		//System.out.println("AFTER : " + listViewRequest.getItems());
-
-		//mouseEvents.setListeCliquable();
-		//System.out.println(this.requeteNodeListView);
-
 		etat = new EtatItineraireCalcule(this);
 
 	}
@@ -304,64 +271,50 @@ public class InterfaceController {
 
 	@FXML
 	public void actionAjouterEtape() {
-		System.out.println("called actionAjouterEtape");
-		System.out.println("ETAT au call : " + this.etat);
-		//etat = new EtatAjouterEtape(this);
 		etat.ajouterEtape();
 	}
 
 	/**
 	 * 
-	 * Déclenchée lorsque l'utilisateur appuie sur le bouton ajouter un point de récupération. Permet à l'utilisateur de sélectionner le point de récupération à ajouter
+	 * Déclenchée lorsque l'utilisateur appuie sur le bouton ajouter un point de récupération, permet à l'utilisateur de sélectionner le point de récupération à ajouter
 	 * 
 	 */
 
 	@FXML
 	public void actionAjouterPointRecuperation() {
-		System.out.println("called actionAjouterPointRecuperation");
-		System.out.println("ETAT au call : " + this.etat);
 		etat.ajouterPointRecuperation();
 	}
 
 	/**
 	 * 
-	 * Déclenchée lorsque l'utilisateur appuie sur le bouton ajouter le point qui précède le point de récupération. Permet à l'utilisateur de sélectionner le point précédent à ajouter
+	 * Déclenchée lorsque l'utilisateur appuie sur le bouton ajouter le point qui précède le point de récupération, permet à l'utilisateur de sélectionner le point précédent à ajouter
 	 * 
 	 */
 
 	@FXML
 	public void actionAjouterPointPrecedentRecuperation() {
-		System.out.println("called actionAjouterPointPrecedentRecuperation");
-		System.out.println("ETAT au call : " + this.etat);
-
 		etat.ajouterPointPrecedentRecuperation();
 	}
 
 	/**
 	 * 
-	 * Déclenchée lorsque l'utilisateur appuie sur le bouton ajouter le point qui précède le point de livraison. Permet à l'utilisateur de sélectionner le point précédent à ajouter
+	 * Déclenchée lorsque l'utilisateur appuie sur le bouton ajouter le point qui précède le point de livraison, permet à l'utilisateur de sélectionner le point précédent à ajouter
 	 * 
 	 */
 
 	@FXML
 	public void actionAjouterPointPrecedentLivraison() {
-		System.out.println("called actionAjouterPointPrecedentLivraison");
-		System.out.println("ETAT au call : " + this.etat);
-
 		etat.ajouterPointPrecedentLivraison();
 	}
 
 	/**
 	 * 
-	 * Déclenchée lorsque l'utilisateur appuie sur le bouton ajouter le point de livraison. Permet à l'utilisateur de sélectionner le point de livraison à ajouter
+	 * Déclenchée lorsque l'utilisateur appuie sur le bouton ajouter le point de livraison, permet à l'utilisateur de sélectionner le point de livraison à ajouter
 	 * 
 	 */
 
 	@FXML
 	public void actionAjouterPointLivraison() {
-		System.out.println("called actionAjouterPointLivraison");
-		System.out.println("ETAT au call : " + this.etat);
-
 		etat.ajouterPointLivraison();
 	}
 
@@ -397,7 +350,7 @@ public class InterfaceController {
 
 	/**
 	 * 
-	 * Valide l'ajout de l'étape en calculant le nouvel itinéraire
+	 * Valide l'ajout de l'étape, calcule la portion d'itinéraire à modifier et l'affiche
 	 * 
 	 */
 
@@ -456,70 +409,58 @@ public class InterfaceController {
 	}
 
 	/**
-	 * 
+	 * @param inter
 	 * Ajoute le point de récupération dans la fenêtre de gestion d'ajout d'une étape
 	 * 
 	 */
 
 	public void ajouterNouveauPointRecuperation(Intersection inter) {
-		System.out.println("called ajouterNouveauPointRecuperation");
-		System.out.println("ETAT au call : " + this.etat);
 		inter.setTypeIntersection(3);
 		setNouveauPointRecuperation(inter);
 		this.textPointRecuperation.setText(this.plan.getNomRue(inter));
-		System.out.println(this.plan.getNomRue(inter));
 		etat = new EtatAjouterEtape(this);
 	}
 
 	/**
-	 * 
-	 * Ajoute le point qui précède point de récupération dans la fenêtre de gestion d'ajout d'une étape
+	 * @param inter
+	 * Ajoute le point qui précède le point de récupération dans la fenêtre de gestion d'ajout d'une étape
 	 * 
 	 */
 
 	public void ajouterPointPrecedentRecuperation(Intersection inter) {
-		System.out.println("called ajouterPointPrecedentRecuperation");
-		System.out.println("ETAT au call : " + this.etat);
 		setPointPrecedentRecuperation(inter);
 		this.textPointPrecedentRecuperation.setText(this.plan.getNomRue(inter));
-		System.out.println(this.plan.getNomRue(inter));
 		etat = new EtatAjouterEtape(this);
 	}
 
 	/**
-	 * 
-	 * Ajoute le point qui précède point de livraison dans la fenêtre de gestion d'ajout d'une étape
+	 * @param inter
+	 * Ajoute le point qui précède le point de livraison dans la fenêtre de gestion d'ajout d'une étape
 	 * 
 	 */
 
 	public void ajouterPointPrecedentLivraison(Intersection inter) {
-		System.out.println("called ajouterPointPrecedentLivraison");
-		System.out.println("ETAT au call : " + this.etat);
 		setPointPrecedentLivraison(inter);
 		this.textPointPrecedentLivraison.setText(this.plan.getNomRue(inter));
-		System.out.println(this.plan.getNomRue(inter));
 		etat = new EtatAjouterEtape(this);
 	}
 
 	/**
-	 * 
+	 * @param inter
 	 * Ajoute le point de livraison dans la fenêtre de gestion d'ajout d'une étape
 	 * 
 	 */
 
 	public void ajouterNouveauPointLivraison(Intersection inter) {
-		System.out.println("called ajouterNouveauPointLivraison");
-		System.out.println("ETAT au call : " + this.etat);
 		inter.setTypeIntersection(4);
 		setNouveauPointLivraison(inter);
 		this.textPointLivraison.setText(this.plan.getNomRue(inter));
-		System.out.println(this.plan.getNomRue(inter));
 		etat = new EtatAjouterEtape(this);
 	}
 
 	/**
 	 * 
-	 * 
+	 * Permet à l'utilisateur de supprimer une étape en faisant appel à la fonction polymorphe supprimerEtape de la classe Etat
 	 * 
 	 */
 
@@ -529,8 +470,8 @@ public class InterfaceController {
 	}
 
 	/**
-	 * 
-	 * 
+	 * @param inter
+	 * Supprime une étape, calcule la portion d'itinéraire à modifier et l'affiche
 	 * 
 	 */
 
@@ -546,6 +487,12 @@ public class InterfaceController {
 
 	}
 
+	/**
+	 * @param message
+	 * Affiche une popup d'erreur dont le message change selon le cas d'erreur déclenché
+	 * 
+	 */
+	
 	public void afficherPopupErreur(String message) {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/vue/PopupError.fxml"));
 		loader.setController(this);
@@ -573,15 +520,24 @@ public class InterfaceController {
 		}
 	}
 
+	/**
+	 * 
+	 * Permet à l'utilisateur de générer une feuille de route en faisant appel à la fonction polymorphe construireFeuilleDeRoute de la classe Etat
+	 * 
+	 */
+	
 	@FXML
 	public void actionCreerFeuilleDeRoute() {
-		System.out.println("test1");
-		System.out.println(this.feuilleDeRoute);
 		etat.construireFeuilleDeRoute();
 	}
 
+	/**
+	 * 
+	 * Génère une feuille de route et l'affiche
+	 * 
+	 */
+	
 	public void construireFeuilleDeRoute() {
-		System.out.println(this.feuilleDeRoute);
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/vue/feuilleDeRoutePopup.fxml"));
 		loader.setController(this);
 		Parent root;
@@ -619,61 +575,142 @@ public class InterfaceController {
 
 	}
 
+	/**
+	 * 
+	 *  
+	 * 
+	 */
+	
 	public void setStage(Stage stage) {
 		this.stage = stage;
 	}
 
+	/**
+	 * 
+	 *  
+	 * 
+	 */
+	
 	public Intersection getNouveauPointRecuperation() {
 		return nouveauPointRecuperation;
 	}
 
+	/**
+	 * 
+	 *  
+	 * 
+	 */
+	
 	public void setNouveauPointRecuperation(Intersection nouveauPointRecuperation) {
 		this.nouveauPointRecuperation = nouveauPointRecuperation;
 	}
 
+	/**
+	 * 
+	 *  
+	 * 
+	 */
+	
 	public Intersection getNouveauPointLivraison() {
 		return nouveauPointLivraison;
 	}
 
+	/**
+	 * 
+	 *  
+	 * 
+	 */
+	
 	public void setNouveauPointLivraison(Intersection nouveauPointLivraison) {
 		this.nouveauPointLivraison = nouveauPointLivraison;
 	}
 
+	/**
+	 * 
+	 *  
+	 * 
+	 */
+	
 	public Intersection getPointPrecedentRecuperation() {
 		return pointPrecedentRecuperation;
 	}
 
+	/**
+	 * 
+	 *  
+	 * 
+	 */
+	
 	public void setPointPrecedentRecuperation(Intersection pointPrecedentRecuperation) {
 		this.pointPrecedentRecuperation = pointPrecedentRecuperation;
 	}
 
+	/**
+	 * 
+	 *  
+	 * 
+	 */
+	
 	public Intersection getPointPrecedentLivraison() {
 		return pointPrecedentLivraison;
 	}
 
-
-
-
+	/**
+	 * 
+	 *  
+	 * 
+	 */
+	
 	public void setPointPrecedentLivraison(Intersection pointPrecedentLivraison) {
 		this.pointPrecedentLivraison = pointPrecedentLivraison;
 	}
 
+	/**
+	 * 
+	 *  
+	 * 
+	 */
+	
 	public Stage getAjouterStage() {
 		return ajouterStage;
 	}
 
+	/**
+	 * 
+	 *  
+	 * 
+	 */
+	
 	public void setEtat(Etat etat) {
 		this.etat = etat;
 	}
 
+	/**
+	 * 
+	 *  
+	 * 
+	 */
+	
 	public void setAjouterStage(Stage ajouterStage) {
 		this.ajouterStage = ajouterStage;
 	}
 
+	/**
+	 * 
+	 *  
+	 * 
+	 */
+	
 	public Stage getMessageErreurStage() {
 		return messageErreurStage;
 	}
 
+	/**
+	 * 
+	 *  
+	 * 
+	 */
+	
 	public void setMessageErreurStage(Stage messageErreurStage) {
 		this.messageErreurStage = messageErreurStage;
 	}
