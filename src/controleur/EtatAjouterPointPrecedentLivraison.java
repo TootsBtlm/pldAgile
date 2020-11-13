@@ -2,7 +2,7 @@ package controleur;
 
 /**
  * 
- * @author Mario
+ * @author Hexanome4103
  * Représente l'état de l'application dans lequel l'utilisateur doit ajouter une étape, qui hérite de l'état général
  * 
  */

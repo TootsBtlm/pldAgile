@@ -2,7 +2,7 @@ package controleur;
 
 /**
  * 
- * @author Mario
+ * @author Hexanome4103
  * Représente l'état de l'application dans lequel la liste des requêtes vient d'être chargée, qui hérite de la classe Etat
  * 
  */
@@ -62,7 +62,7 @@ public class EtatListeRequeteChargee extends Etat{
 	 */
 	@Override
 	public void ajouterEtape() {
-		interfaceController.afficherPopupErreur("Charger d'abord l'itinéraire");
+		interfaceController.afficherPopupErreur("Calculer d'abord l'itinéraire");
 	}
 	
 	/**
@@ -75,8 +75,8 @@ public class EtatListeRequeteChargee extends Etat{
 
 	@Override
 	public void supprimerEtape() {
-		interfaceController.afficherPopupErreur("Charger d'abord l'itinéraire");
-		System.out.println("Charger d'abord l'itinéraire");
+		interfaceController.afficherPopupErreur("Calculer d'abord l'itinéraire");
+		System.out.println("Calculer d'abord l'itinéraire");
 	}
 	
 	/**
@@ -85,7 +85,7 @@ public class EtatListeRequeteChargee extends Etat{
 	 */
 	@Override
 	public void construireFeuilleDeRoute() {
-		interfaceController.afficherPopupErreur("Charger d'abord l'itinéraire");
+		interfaceController.afficherPopupErreur("Calculer d'abord l'itinéraire");
 
 	}
 	

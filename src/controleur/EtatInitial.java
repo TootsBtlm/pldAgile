@@ -3,7 +3,7 @@ package controleur;
 
 /**
  * 
- * @author Mario et Jean-Jacques
+ * @author Hexanome4103
  * Représente l'état initial de l'application, qui hérite de la classe Etat
  * 
  */

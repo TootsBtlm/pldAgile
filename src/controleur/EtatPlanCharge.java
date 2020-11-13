@@ -2,7 +2,7 @@ package controleur;
 
 /**
  * 
- * @author Mario
+ * @author Hexanome4103
  * Représente l'état de l'application suivant dans lequel le nouveau plan vient d'être chargé, qui hérite de la classe Etat
  * 
  */

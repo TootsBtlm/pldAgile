@@ -4,7 +4,7 @@ import vue.VueGraphique;
 
 /**
  * 
- * @author Mario
+ * @author Hexanome4103
  * Représente la classe mère de tous les états
  * 
  */

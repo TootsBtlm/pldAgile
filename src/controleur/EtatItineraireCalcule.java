@@ -3,7 +3,7 @@ package controleur;
 
 /**
  * 
- * @author Mario
+ * @author Hexanome4103
  * Représente l'état de l'application dans lequel l'itinéraire vient d'être calculé, qui hérite de la classe Etat
  * 
  */
