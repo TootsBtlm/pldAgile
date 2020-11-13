@@ -384,7 +384,8 @@ public class InterfaceController {
 			this.ajouterStage.setAlwaysOnTop(true);
 			this.ajouterStage.setX(0);
 			this.ajouterStage.setY(0);
-			
+			this.textTempsRecuperation.setPromptText("Veuillez indiquer le temps de recuperation en secondes");
+			this.textTempsLivraison.setPromptText("Veuillez indiquer le temps de livraison en secondes");
 			// Si l'utilisateur ferme la fenetre on revient dans l'etat itineraire calculé
 			ajouterStage.setOnHidden(event -> {
 				etat = new EtatItineraireCalcule(this);
