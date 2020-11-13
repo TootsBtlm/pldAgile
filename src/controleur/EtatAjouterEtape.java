@@ -7,8 +7,6 @@ package controleur;
  * Représente l'état de l'application dans lequel l'utilisateur doit ajouter une étape, qui hérite de la classe Etat
  * 
  */
-
-
 public class EtatAjouterEtape extends Etat{
 	
 	/**

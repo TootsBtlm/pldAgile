@@ -11,20 +11,15 @@ package controleur;
 
 public class EtatItineraireCalcule extends Etat{
 	/**
-	 * 
-	 * @param interfaceController
-	 * Prend l'objet interface controleur de la classe InterfaceControleur pour modifier les attributs de l'objet interface controleur existant
-	 * 
+	 * Constructeur
+	 * @param interfaceController Objet InterfaceController
 	 */
 	public EtatItineraireCalcule(InterfaceController interfaceController) {
 		super(interfaceController);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * 
-	 * Fait appel à la méthode chargerFichierPlan de l'objet interface controleur 
-	 * 
+	 * Fait appel à la méthode chargerFichierPlan de l'objet interfaceController
 	 */
 	@Override
 	public void chargerFichierPlan() {
@@ -32,33 +27,23 @@ public class EtatItineraireCalcule extends Etat{
 	}
 
 	/**
-	 * 
-	 * Fait appel à la méthode chargerFichierRequete de l'objet interface controleur 
-	 * 
+	 * Fait appel à la méthode chargerFichierRequete de l'objet interfaceController
 	 */
 	@Override
 	public void chargerFichierRequetes() {
-
 		this.interfaceController.chargerFichierRequete();
-
 	}
 
 	/**
-	 * 
-	 * Fait appel à la méthode calculerItineraire de l'objet interface controleur 
-	 * 
+	 * Fait appel à la méthode calculerItineraire de l'objet interfaceController
 	 */
 	@Override
 	public void calculerItineraire() {
-
 		this.interfaceController.calculerItineraire();
-
 	}
 
 	/**
-	 * 
-	 * Dans l'état itinéraire calculé, la méthode ajouterEtape ne fait aucune action 
-	 * 
+	 * Fait appel à la méthode ajouterEtape de l'objet interfaceController
 	 */
 	@Override
 	public void ajouterEtape() {
@@ -66,9 +51,7 @@ public class EtatItineraireCalcule extends Etat{
 	}
 
 	/**
-	 * 
-	 * Dans l'état itinéraire calculé, la méthode supprimerEtape ne fait aucune action 
-	 * 
+	 * Dans l'état itinéraire calculé, la méthode supprimerEtape change l'état d'interfaceController
 	 */
 	@Override	
 	public void supprimerEtape() {
@@ -76,13 +59,10 @@ public class EtatItineraireCalcule extends Etat{
 	}
 
 	/**
-	 * 
-	 * Fait appel à la méthode feuilleDeRoute de l'objet interface controleur 
-	 * 
+	 * Fait appel à la méthode construireFeuilleDeRoute de l'objet interfaceController
 	 */		
 	@Override
 	public void construireFeuilleDeRoute() {
 		this.interfaceController.construireFeuilleDeRoute();
 	}
-
 }

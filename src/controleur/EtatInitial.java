@@ -11,80 +11,59 @@ package controleur;
 public class EtatInitial extends Etat {
 
 	/**
-	 * 
-	 * @param interfaceController
-	 * Prend l'objet interface controleur de la classe InterfaceControleur pour modifier les attributs de l'objet interface controleur existant
-	 * 
+	 * Constructeur
+	 * @param interfaceController Objet InterfaceController
 	 */
 	public EtatInitial(InterfaceController interfaceController) {
 		super(interfaceController);
 	}
 	
 	/**
-	 * 
-	 * Fait appel à la méthode chargerFichierPlan de l'objet interface controleur 
-	 * 
+	 * Fait appel à la méthode chargerFichierPlan de l'objet interfaceController
 	 */
 	@Override
 	public void chargerFichierPlan() {
-		
 		this.interfaceController.chargerFichierPlan();
-		
 	}
 
 	/**
-	 * 
-	 * Dans l'état initial, la méthode chargerFichierRequetes ne fait aucune action car aucun plan n'est chargé
-	 * 
+	 * Dans l'état initial, la méthode chargerFichierRequetes affiche une popup indiquant qu'il faut d'abord charger un plan
 	 */
 	@Override
 	public void chargerFichierRequetes() {
 		interfaceController.afficherPopupErreur("Charger d'abord un plan");
-		System.out.println("Charger d'abord un plan");
 	}
 
 	/**
-	 * 
-	 * Dans l'état initial, la méthode calculerItineraire ne fait aucune action car aucun plan n'est chargé
-	 * 
+	 * Dans l'état initial, la méthode calculerItineraire affiche une popup indiquant qu'il faut d'abord charger un plan
 	 */
 	@Override
 	public void calculerItineraire() {
 		interfaceController.afficherPopupErreur("Charger d'abord un plan");
-		System.out.println("Charger d'abord un plan");
 	}
 	
 	/**
-	 * 
-	 * Dans l'état initial, la méthode ajouterEtape ne fait aucune action car aucun plan n'est chargé
-	 * 
+	 * Dans l'état initial, la méthode ajouterEtape affiche une popup indiquant qu'il faut d'abord charger un plan
 	 */
 	@Override
 	public void ajouterEtape() {
 		interfaceController.afficherPopupErreur("Charger d'abord un plan");
-		System.out.println("Charger d'abord un plan");
 	}
 	
 	/**
-	 * 
-	 * Dans l'état initial, la méthode supprimerEtape ne fait aucune action car aucun plan n'est chargé
-	 * 
+	 * Dans l'état initial, la méthode supprimerEtape affiche une popup indiquant qu'il faut d'abord charger un plan
 	 */
 	@Override
 	public void supprimerEtape() {
 		interfaceController.afficherPopupErreur("Charger d'abord un plan");
-		System.out.println("Charger d'abord un plan");
 	}
 	
 	/**
-	 * 
-	 * Dans l'état initial, la méthode construireFeuilleDeRoute ne fait aucune action car aucun plan n'est chargé
-	 * 
+	 * Dans l'état initial, la méthode construireFeuilleDeRoute affiche une popup indiquant qu'il faut d'abord charger un plan
 	 */
 	@Override
 	public void construireFeuilleDeRoute() {
 		interfaceController.afficherPopupErreur("Charger d'abord un plan");
-		System.out.println("Charger d'abord un plan");
 	}
 	
 }
